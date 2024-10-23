@@ -1,0 +1,35 @@
+{
+    "name": "vrpay/sdk",
+    "version": "4.6.0",
+	"description": "VR pay SDK for PHP",
+	"keywords": [
+		"vrpay",
+		"payment",
+		"php",
+		"sdk",
+		"api"
+	],
+	"homepage": "http://github.com/vr-payment/php-sdk",
+	"license": "Apache-2.0",
+	"authors": [
+		{
+			"name": "VR pay",
+			"email": "ecommerce@vr-payment.de",
+			"homepage": "https://www.vr-payment.de/"
+		}
+	],
+	"require": {
+		"php": ">=5.6",
+		"ext-json": "*",
+		"ext-mbstring": "*"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "~8"
+	},
+	"autoload": {
+		"psr-4": { "VRPay\\Sdk\\" : "lib/" }
+	},
+	"autoload-dev": {
+		"psr-4": { "VRPay\\Sdk\\" : "test/" }
+	}
+}
