@@ -24,7 +24,7 @@ use \ArrayAccess;
 use \VRPay\Sdk\ObjectSerializer;
 
 /**
- * PaymentTerminalConfigurationVersion model
+ * WebhookListener model
  *
  * @category    Class
  * @description 
@@ -32,7 +32,7 @@ use \VRPay\Sdk\ObjectSerializer;
  * @author      VR pay
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
+class WebhookListener implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'PaymentTerminalConfigurationVersion';
+    protected static $swaggerModelName = 'WebhookListener';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,20 +49,18 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'configuration' => '\VRPay\Sdk\Model\PaymentTerminalConfiguration',
-        'connector_configurations' => 'int[]',
-        'created_by' => 'int',
-        'created_on' => '\DateTime',
-        'default_currency' => 'string',
+        'enable_payload_signature_and_state' => 'bool',
+        'entity' => 'int',
+        'entity_states' => 'string[]',
         'id' => 'int',
+        'identity' => '\VRPay\Sdk\Model\WebhookIdentity',
         'linked_space_id' => 'int',
-        'maintenance_window_duration' => 'string',
-        'maintenance_window_start' => 'string',
+        'name' => 'string',
+        'notify_every_change' => 'bool',
         'planned_purge_date' => '\DateTime',
-        'state' => '\VRPay\Sdk\Model\PaymentTerminalConfigurationVersionState',
-        'time_zone' => 'string',
-        'version' => 'int',
-        'version_applied_immediately' => 'bool'
+        'state' => '\VRPay\Sdk\Model\CreationEntityState',
+        'url' => '\VRPay\Sdk\Model\WebhookUrl',
+        'version' => 'int'
     ];
 
     /**
@@ -71,20 +69,18 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'configuration' => null,
-        'connector_configurations' => 'int64',
-        'created_by' => 'int64',
-        'created_on' => 'date-time',
-        'default_currency' => null,
+        'enable_payload_signature_and_state' => null,
+        'entity' => 'int64',
+        'entity_states' => null,
         'id' => 'int64',
+        'identity' => null,
         'linked_space_id' => 'int64',
-        'maintenance_window_duration' => null,
-        'maintenance_window_start' => null,
+        'name' => null,
+        'notify_every_change' => null,
         'planned_purge_date' => 'date-time',
         'state' => null,
-        'time_zone' => null,
-        'version' => 'int32',
-        'version_applied_immediately' => null
+        'url' => null,
+        'version' => 'int32'
     ];
 
     /**
@@ -94,20 +90,18 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'configuration' => 'configuration',
-        'connector_configurations' => 'connectorConfigurations',
-        'created_by' => 'createdBy',
-        'created_on' => 'createdOn',
-        'default_currency' => 'defaultCurrency',
+        'enable_payload_signature_and_state' => 'enablePayloadSignatureAndState',
+        'entity' => 'entity',
+        'entity_states' => 'entityStates',
         'id' => 'id',
+        'identity' => 'identity',
         'linked_space_id' => 'linkedSpaceId',
-        'maintenance_window_duration' => 'maintenanceWindowDuration',
-        'maintenance_window_start' => 'maintenanceWindowStart',
+        'name' => 'name',
+        'notify_every_change' => 'notifyEveryChange',
         'planned_purge_date' => 'plannedPurgeDate',
         'state' => 'state',
-        'time_zone' => 'timeZone',
-        'version' => 'version',
-        'version_applied_immediately' => 'versionAppliedImmediately'
+        'url' => 'url',
+        'version' => 'version'
     ];
 
     /**
@@ -116,20 +110,18 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'configuration' => 'setConfiguration',
-        'connector_configurations' => 'setConnectorConfigurations',
-        'created_by' => 'setCreatedBy',
-        'created_on' => 'setCreatedOn',
-        'default_currency' => 'setDefaultCurrency',
+        'enable_payload_signature_and_state' => 'setEnablePayloadSignatureAndState',
+        'entity' => 'setEntity',
+        'entity_states' => 'setEntityStates',
         'id' => 'setId',
+        'identity' => 'setIdentity',
         'linked_space_id' => 'setLinkedSpaceId',
-        'maintenance_window_duration' => 'setMaintenanceWindowDuration',
-        'maintenance_window_start' => 'setMaintenanceWindowStart',
+        'name' => 'setName',
+        'notify_every_change' => 'setNotifyEveryChange',
         'planned_purge_date' => 'setPlannedPurgeDate',
         'state' => 'setState',
-        'time_zone' => 'setTimeZone',
-        'version' => 'setVersion',
-        'version_applied_immediately' => 'setVersionAppliedImmediately'
+        'url' => 'setUrl',
+        'version' => 'setVersion'
     ];
 
     /**
@@ -138,20 +130,18 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'configuration' => 'getConfiguration',
-        'connector_configurations' => 'getConnectorConfigurations',
-        'created_by' => 'getCreatedBy',
-        'created_on' => 'getCreatedOn',
-        'default_currency' => 'getDefaultCurrency',
+        'enable_payload_signature_and_state' => 'getEnablePayloadSignatureAndState',
+        'entity' => 'getEntity',
+        'entity_states' => 'getEntityStates',
         'id' => 'getId',
+        'identity' => 'getIdentity',
         'linked_space_id' => 'getLinkedSpaceId',
-        'maintenance_window_duration' => 'getMaintenanceWindowDuration',
-        'maintenance_window_start' => 'getMaintenanceWindowStart',
+        'name' => 'getName',
+        'notify_every_change' => 'getNotifyEveryChange',
         'planned_purge_date' => 'getPlannedPurgeDate',
         'state' => 'getState',
-        'time_zone' => 'getTimeZone',
-        'version' => 'getVersion',
-        'version_applied_immediately' => 'getVersionAppliedImmediately'
+        'url' => 'getUrl',
+        'version' => 'getVersion'
     ];
 
     
@@ -172,33 +162,29 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['configuration'] = isset($data['configuration']) ? $data['configuration'] : null;
+        $this->container['enable_payload_signature_and_state'] = isset($data['enable_payload_signature_and_state']) ? $data['enable_payload_signature_and_state'] : null;
         
-        $this->container['connector_configurations'] = isset($data['connector_configurations']) ? $data['connector_configurations'] : null;
+        $this->container['entity'] = isset($data['entity']) ? $data['entity'] : null;
         
-        $this->container['created_by'] = isset($data['created_by']) ? $data['created_by'] : null;
-        
-        $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
-        
-        $this->container['default_currency'] = isset($data['default_currency']) ? $data['default_currency'] : null;
+        $this->container['entity_states'] = isset($data['entity_states']) ? $data['entity_states'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
+        $this->container['identity'] = isset($data['identity']) ? $data['identity'] : null;
+        
         $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
         
-        $this->container['maintenance_window_duration'] = isset($data['maintenance_window_duration']) ? $data['maintenance_window_duration'] : null;
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         
-        $this->container['maintenance_window_start'] = isset($data['maintenance_window_start']) ? $data['maintenance_window_start'] : null;
+        $this->container['notify_every_change'] = isset($data['notify_every_change']) ? $data['notify_every_change'] : null;
         
         $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
         
         $this->container['state'] = isset($data['state']) ? $data['state'] : null;
         
-        $this->container['time_zone'] = isset($data['time_zone']) ? $data['time_zone'] : null;
+        $this->container['url'] = isset($data['url']) ? $data['url'] : null;
         
         $this->container['version'] = isset($data['version']) ? $data['version'] : null;
-        
-        $this->container['version_applied_immediately'] = isset($data['version_applied_immediately']) ? $data['version_applied_immediately'] : null;
         
     }
 
@@ -210,6 +196,10 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 50)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 50.";
+        }
 
         return $invalidProperties;
     }
@@ -292,125 +282,75 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets configuration
+     * Gets enable_payload_signature_and_state
      *
-     * @return \VRPay\Sdk\Model\PaymentTerminalConfiguration
+     * @return bool
      */
-    public function getConfiguration()
+    public function getEnablePayloadSignatureAndState()
     {
-        return $this->container['configuration'];
+        return $this->container['enable_payload_signature_and_state'];
     }
 
     /**
-     * Sets configuration
+     * Sets enable_payload_signature_and_state
      *
-     * @param \VRPay\Sdk\Model\PaymentTerminalConfiguration $configuration The payment terminal configuration that the version belongs to.
+     * @param bool $enable_payload_signature_and_state Whether signature header and 'state' property are enabled in webhook payload.
      *
      * @return $this
      */
-    public function setConfiguration($configuration)
+    public function setEnablePayloadSignatureAndState($enable_payload_signature_and_state)
     {
-        $this->container['configuration'] = $configuration;
+        $this->container['enable_payload_signature_and_state'] = $enable_payload_signature_and_state;
 
         return $this;
     }
     
 
     /**
-     * Gets connector_configurations
-     *
-     * @return int[]
-     */
-    public function getConnectorConfigurations()
-    {
-        return $this->container['connector_configurations'];
-    }
-
-    /**
-     * Sets connector_configurations
-     *
-     * @param int[] $connector_configurations The payment connector configurations that are available on the payment terminal.
-     *
-     * @return $this
-     */
-    public function setConnectorConfigurations($connector_configurations)
-    {
-        $this->container['connector_configurations'] = $connector_configurations;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets created_by
+     * Gets entity
      *
      * @return int
      */
-    public function getCreatedBy()
+    public function getEntity()
     {
-        return $this->container['created_by'];
+        return $this->container['entity'];
     }
 
     /**
-     * Sets created_by
+     * Sets entity
      *
-     * @param int $created_by The ID of the user the payment terminal configuration version was created by.
+     * @param int $entity The entity that is to be monitored.
      *
      * @return $this
      */
-    public function setCreatedBy($created_by)
+    public function setEntity($entity)
     {
-        $this->container['created_by'] = $created_by;
+        $this->container['entity'] = $entity;
 
         return $this;
     }
     
 
     /**
-     * Gets created_on
+     * Gets entity_states
      *
-     * @return \DateTime
+     * @return string[]
      */
-    public function getCreatedOn()
+    public function getEntityStates()
     {
-        return $this->container['created_on'];
+        return $this->container['entity_states'];
     }
 
     /**
-     * Sets created_on
+     * Sets entity_states
      *
-     * @param \DateTime $created_on The date and time when the object was created.
+     * @param string[] $entity_states The entity's target states that are to be monitored.
      *
      * @return $this
      */
-    public function setCreatedOn($created_on)
+    public function setEntityStates($entity_states)
     {
-        $this->container['created_on'] = $created_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets default_currency
-     *
-     * @return string
-     */
-    public function getDefaultCurrency()
-    {
-        return $this->container['default_currency'];
-    }
-
-    /**
-     * Sets default_currency
-     *
-     * @param string $default_currency The default currency that is used if none is set on the payment terminal itself. If it is empty, the currency is derived from the location of the terminal.
-     *
-     * @return $this
-     */
-    public function setDefaultCurrency($default_currency)
-    {
-        $this->container['default_currency'] = $default_currency;
+        $this->container['entity_states'] = $entity_states;
 
         return $this;
     }
@@ -442,6 +382,31 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
     
 
     /**
+     * Gets identity
+     *
+     * @return \VRPay\Sdk\Model\WebhookIdentity
+     */
+    public function getIdentity()
+    {
+        return $this->container['identity'];
+    }
+
+    /**
+     * Sets identity
+     *
+     * @param \VRPay\Sdk\Model\WebhookIdentity $identity The identity used to sign messages.
+     *
+     * @return $this
+     */
+    public function setIdentity($identity)
+    {
+        $this->container['identity'] = $identity;
+
+        return $this;
+    }
+    
+
+    /**
      * Gets linked_space_id
      *
      * @return int
@@ -467,50 +432,54 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets maintenance_window_duration
+     * Gets name
      *
      * @return string
      */
-    public function getMaintenanceWindowDuration()
+    public function getName()
     {
-        return $this->container['maintenance_window_duration'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets maintenance_window_duration
+     * Sets name
      *
-     * @param string $maintenance_window_duration The permitted duration of the terminal's maintenance window.
+     * @param string $name The name used to identify the webhook listener.
      *
      * @return $this
      */
-    public function setMaintenanceWindowDuration($maintenance_window_duration)
+    public function setName($name)
     {
-        $this->container['maintenance_window_duration'] = $maintenance_window_duration;
+        if (!is_null($name) && (mb_strlen($name) > 50)) {
+            throw new \InvalidArgumentException('invalid length for $name when calling WebhookListener., must be smaller than or equal to 50.');
+        }
+
+        $this->container['name'] = $name;
 
         return $this;
     }
     
 
     /**
-     * Gets maintenance_window_start
+     * Gets notify_every_change
      *
-     * @return string
+     * @return bool
      */
-    public function getMaintenanceWindowStart()
+    public function getNotifyEveryChange()
     {
-        return $this->container['maintenance_window_start'];
+        return $this->container['notify_every_change'];
     }
 
     /**
-     * Sets maintenance_window_start
+     * Sets notify_every_change
      *
-     * @param string $maintenance_window_start The start time of the terminal's maintenance window.
+     * @param bool $notify_every_change Whether every update of the entity or only state changes are to be monitored.
      *
      * @return $this
      */
-    public function setMaintenanceWindowStart($maintenance_window_start)
+    public function setNotifyEveryChange($notify_every_change)
     {
-        $this->container['maintenance_window_start'] = $maintenance_window_start;
+        $this->container['notify_every_change'] = $notify_every_change;
 
         return $this;
     }
@@ -544,7 +513,7 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
     /**
      * Gets state
      *
-     * @return \VRPay\Sdk\Model\PaymentTerminalConfigurationVersionState
+     * @return \VRPay\Sdk\Model\CreationEntityState
      */
     public function getState()
     {
@@ -554,7 +523,7 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \VRPay\Sdk\Model\PaymentTerminalConfigurationVersionState $state The object's current state.
+     * @param \VRPay\Sdk\Model\CreationEntityState $state The object's current state.
      *
      * @return $this
      */
@@ -567,25 +536,25 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets time_zone
+     * Gets url
      *
-     * @return string
+     * @return \VRPay\Sdk\Model\WebhookUrl
      */
-    public function getTimeZone()
+    public function getUrl()
     {
-        return $this->container['time_zone'];
+        return $this->container['url'];
     }
 
     /**
-     * Sets time_zone
+     * Sets url
      *
-     * @param string $time_zone The time zone of the payment terminal used to determine the maintenance window.
+     * @param \VRPay\Sdk\Model\WebhookUrl $url The URL where notifications about entity changes are sent to.
      *
      * @return $this
      */
-    public function setTimeZone($time_zone)
+    public function setUrl($url)
     {
-        $this->container['time_zone'] = $time_zone;
+        $this->container['url'] = $url;
 
         return $this;
     }
@@ -611,31 +580,6 @@ class PaymentTerminalConfigurationVersion implements ModelInterface, ArrayAccess
     public function setVersion($version)
     {
         $this->container['version'] = $version;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets version_applied_immediately
-     *
-     * @return bool
-     */
-    public function getVersionAppliedImmediately()
-    {
-        return $this->container['version_applied_immediately'];
-    }
-
-    /**
-     * Sets version_applied_immediately
-     *
-     * @param bool $version_applied_immediately Whether payment terminals are immediately updated to this configuration version. If not, it will be applied during the maintenance window.
-     *
-     * @return $this
-     */
-    public function setVersionAppliedImmediately($version_applied_immediately)
-    {
-        $this->container['version_applied_immediately'] = $version_applied_immediately;
 
         return $this;
     }

@@ -1005,6 +1005,18 @@ final class ApiClient {
         return $this->transactionCompletionService;
     }
     
+    protected $transactionIframeService;
+
+    /**
+     * @return \VRPay\Sdk\Service\TransactionIframeService
+     */
+    public function getTransactionIframeService() {
+        if(is_null($this->transactionIframeService)){
+            $this->transactionIframeService = new \VRPay\Sdk\Service\TransactionIframeService($this);
+        }
+        return $this->transactionIframeService;
+    }
+    
     protected $transactionInvoiceCommentService;
 
     /**
@@ -1111,6 +1123,30 @@ final class ApiClient {
             $this->webhookEncryptionService = new \VRPay\Sdk\Service\WebhookEncryptionService($this);
         }
         return $this->webhookEncryptionService;
+    }
+    
+    protected $webhookListenerService;
+
+    /**
+     * @return \VRPay\Sdk\Service\WebhookListenerService
+     */
+    public function getWebhookListenerService() {
+        if(is_null($this->webhookListenerService)){
+            $this->webhookListenerService = new \VRPay\Sdk\Service\WebhookListenerService($this);
+        }
+        return $this->webhookListenerService;
+    }
+    
+    protected $webhookUrlService;
+
+    /**
+     * @return \VRPay\Sdk\Service\WebhookUrlService
+     */
+    public function getWebhookUrlService() {
+        if(is_null($this->webhookUrlService)){
+            $this->webhookUrlService = new \VRPay\Sdk\Service\WebhookUrlService($this);
+        }
+        return $this->webhookUrlService;
     }
     
 
