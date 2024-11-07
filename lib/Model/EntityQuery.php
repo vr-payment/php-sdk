@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * EntityQuery model
  *
  * @category    Class
  * @description The entity query allows to search for specific entities by providing filters. This is similar to a SQL query.
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class EntityQuery implements ModelInterface, ArrayAccess
@@ -49,10 +49,10 @@ class EntityQuery implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'filter' => '\VRPay\Sdk\Model\EntityQueryFilter',
+        'filter' => '\VRPayment\Sdk\Model\EntityQueryFilter',
         'language' => 'string',
         'number_of_entities' => 'int',
-        'order_bys' => '\VRPay\Sdk\Model\EntityQueryOrderBy[]',
+        'order_bys' => '\VRPayment\Sdk\Model\EntityQueryOrderBy[]',
         'starting_entity' => 'int'
     ];
 
@@ -231,7 +231,7 @@ class EntityQuery implements ModelInterface, ArrayAccess
     /**
      * Gets filter
      *
-     * @return \VRPay\Sdk\Model\EntityQueryFilter
+     * @return \VRPayment\Sdk\Model\EntityQueryFilter
      */
     public function getFilter()
     {
@@ -241,7 +241,7 @@ class EntityQuery implements ModelInterface, ArrayAccess
     /**
      * Sets filter
      *
-     * @param \VRPay\Sdk\Model\EntityQueryFilter $filter The filter node defines the root filter node of the query. The root node may contain multiple sub nodes with different filters in it.
+     * @param \VRPayment\Sdk\Model\EntityQueryFilter $filter The filter node defines the root filter node of the query. The root node may contain multiple sub nodes with different filters in it.
      *
      * @return $this
      */
@@ -306,7 +306,7 @@ class EntityQuery implements ModelInterface, ArrayAccess
     /**
      * Gets order_bys
      *
-     * @return \VRPay\Sdk\Model\EntityQueryOrderBy[]
+     * @return \VRPayment\Sdk\Model\EntityQueryOrderBy[]
      */
     public function getOrderBys()
     {
@@ -316,7 +316,7 @@ class EntityQuery implements ModelInterface, ArrayAccess
     /**
      * Sets order_bys
      *
-     * @param \VRPay\Sdk\Model\EntityQueryOrderBy[] $order_bys The order bys allows to define the ordering of the entities returned by the search.
+     * @param \VRPayment\Sdk\Model\EntityQueryOrderBy[] $order_bys The order bys allows to define the ordering of the entities returned by the search.
      *
      * @return $this
      */

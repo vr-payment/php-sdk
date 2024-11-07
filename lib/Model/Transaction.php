@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * Transaction model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class Transaction implements ModelInterface, ArrayAccess
@@ -54,16 +54,16 @@ class Transaction implements ModelInterface, ArrayAccess
         'allowed_payment_method_brands' => 'int[]',
         'allowed_payment_method_configurations' => 'int[]',
         'authorization_amount' => 'float',
-        'authorization_environment' => '\VRPay\Sdk\Model\ChargeAttemptEnvironment',
+        'authorization_environment' => '\VRPayment\Sdk\Model\ChargeAttemptEnvironment',
         'authorization_sales_channel' => 'int',
         'authorization_timeout_on' => '\DateTime',
         'authorized_on' => '\DateTime',
         'auto_confirmation_enabled' => 'bool',
-        'billing_address' => '\VRPay\Sdk\Model\Address',
+        'billing_address' => '\VRPayment\Sdk\Model\Address',
         'charge_retry_enabled' => 'bool',
         'completed_amount' => 'float',
         'completed_on' => '\DateTime',
-        'completion_behavior' => '\VRPay\Sdk\Model\TransactionCompletionBehavior',
+        'completion_behavior' => '\VRPayment\Sdk\Model\TransactionCompletionBehavior',
         'completion_timeout_on' => '\DateTime',
         'confirmed_by' => 'int',
         'confirmed_on' => '\DateTime',
@@ -72,49 +72,49 @@ class Transaction implements ModelInterface, ArrayAccess
         'currency' => 'string',
         'customer_email_address' => 'string',
         'customer_id' => 'string',
-        'customers_presence' => '\VRPay\Sdk\Model\CustomersPresence',
+        'customers_presence' => '\VRPayment\Sdk\Model\CustomersPresence',
         'delivery_decision_made_on' => '\DateTime',
         'device_session_identifier' => 'string',
         'emails_disabled' => 'bool',
         'end_of_life' => '\DateTime',
-        'environment' => '\VRPay\Sdk\Model\Environment',
-        'environment_selection_strategy' => '\VRPay\Sdk\Model\TransactionEnvironmentSelectionStrategy',
+        'environment' => '\VRPayment\Sdk\Model\Environment',
+        'environment_selection_strategy' => '\VRPayment\Sdk\Model\TransactionEnvironmentSelectionStrategy',
         'failed_on' => '\DateTime',
         'failed_url' => 'string',
-        'failure_reason' => '\VRPay\Sdk\Model\FailureReason',
-        'group' => '\VRPay\Sdk\Model\TransactionGroup',
+        'failure_reason' => '\VRPayment\Sdk\Model\FailureReason',
+        'group' => '\VRPayment\Sdk\Model\TransactionGroup',
         'id' => 'int',
         'internet_protocol_address' => 'string',
         'internet_protocol_address_country' => 'string',
         'invoice_merchant_reference' => 'string',
         'java_enabled' => 'bool',
         'language' => 'string',
-        'line_items' => '\VRPay\Sdk\Model\LineItem[]',
+        'line_items' => '\VRPayment\Sdk\Model\LineItem[]',
         'linked_space_id' => 'int',
         'merchant_reference' => 'string',
         'meta_data' => 'map[string,string]',
         'parent' => 'int',
-        'payment_connector_configuration' => '\VRPay\Sdk\Model\PaymentConnectorConfiguration',
+        'payment_connector_configuration' => '\VRPayment\Sdk\Model\PaymentConnectorConfiguration',
         'planned_purge_date' => '\DateTime',
         'processing_on' => '\DateTime',
         'refunded_amount' => 'float',
         'screen_color_depth' => 'string',
         'screen_height' => 'string',
         'screen_width' => 'string',
-        'shipping_address' => '\VRPay\Sdk\Model\Address',
+        'shipping_address' => '\VRPayment\Sdk\Model\Address',
         'shipping_method' => 'string',
         'space_view_id' => 'int',
-        'state' => '\VRPay\Sdk\Model\TransactionState',
+        'state' => '\VRPayment\Sdk\Model\TransactionState',
         'success_url' => 'string',
-        'terminal' => '\VRPay\Sdk\Model\PaymentTerminal',
+        'terminal' => '\VRPayment\Sdk\Model\PaymentTerminal',
         'time_zone' => 'string',
-        'token' => '\VRPay\Sdk\Model\Token',
-        'tokenization_mode' => '\VRPay\Sdk\Model\TokenizationMode',
+        'token' => '\VRPayment\Sdk\Model\Token',
+        'tokenization_mode' => '\VRPayment\Sdk\Model\TokenizationMode',
         'total_applied_fees' => 'float',
         'total_settled_amount' => 'float',
         'user_agent_header' => 'string',
         'user_failure_message' => 'string',
-        'user_interface_type' => '\VRPay\Sdk\Model\TransactionUserInterfaceType',
+        'user_interface_type' => '\VRPayment\Sdk\Model\TransactionUserInterfaceType',
         'version' => 'int',
         'window_height' => 'string',
         'window_width' => 'string',
@@ -851,7 +851,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Gets authorization_environment
      *
-     * @return \VRPay\Sdk\Model\ChargeAttemptEnvironment
+     * @return \VRPayment\Sdk\Model\ChargeAttemptEnvironment
      */
     public function getAuthorizationEnvironment()
     {
@@ -861,7 +861,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets authorization_environment
      *
-     * @param \VRPay\Sdk\Model\ChargeAttemptEnvironment $authorization_environment The environment in which the transaction was authorized.
+     * @param \VRPayment\Sdk\Model\ChargeAttemptEnvironment $authorization_environment The environment in which the transaction was authorized.
      *
      * @return $this
      */
@@ -976,7 +976,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Gets billing_address
      *
-     * @return \VRPay\Sdk\Model\Address
+     * @return \VRPayment\Sdk\Model\Address
      */
     public function getBillingAddress()
     {
@@ -986,7 +986,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets billing_address
      *
-     * @param \VRPay\Sdk\Model\Address $billing_address The address associated with the payment method for invoicing and transaction processing purposes.
+     * @param \VRPayment\Sdk\Model\Address $billing_address The address associated with the payment method for invoicing and transaction processing purposes.
      *
      * @return $this
      */
@@ -1076,7 +1076,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Gets completion_behavior
      *
-     * @return \VRPay\Sdk\Model\TransactionCompletionBehavior
+     * @return \VRPayment\Sdk\Model\TransactionCompletionBehavior
      */
     public function getCompletionBehavior()
     {
@@ -1086,7 +1086,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets completion_behavior
      *
-     * @param \VRPay\Sdk\Model\TransactionCompletionBehavior $completion_behavior The behavior that controls when the transaction is completed.
+     * @param \VRPayment\Sdk\Model\TransactionCompletionBehavior $completion_behavior The behavior that controls when the transaction is completed.
      *
      * @return $this
      */
@@ -1305,7 +1305,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Gets customers_presence
      *
-     * @return \VRPay\Sdk\Model\CustomersPresence
+     * @return \VRPayment\Sdk\Model\CustomersPresence
      */
     public function getCustomersPresence()
     {
@@ -1315,7 +1315,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets customers_presence
      *
-     * @param \VRPay\Sdk\Model\CustomersPresence $customers_presence The customer's presence indicates whether and in what way the transaction's customer is present. Default is VIRTUAL_PRESENT.
+     * @param \VRPayment\Sdk\Model\CustomersPresence $customers_presence The customer's presence indicates whether and in what way the transaction's customer is present. Default is VIRTUAL_PRESENT.
      *
      * @return $this
      */
@@ -1437,7 +1437,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Gets environment
      *
-     * @return \VRPay\Sdk\Model\Environment
+     * @return \VRPayment\Sdk\Model\Environment
      */
     public function getEnvironment()
     {
@@ -1447,7 +1447,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets environment
      *
-     * @param \VRPay\Sdk\Model\Environment $environment 
+     * @param \VRPayment\Sdk\Model\Environment $environment 
      *
      * @return $this
      */
@@ -1462,7 +1462,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Gets environment_selection_strategy
      *
-     * @return \VRPay\Sdk\Model\TransactionEnvironmentSelectionStrategy
+     * @return \VRPayment\Sdk\Model\TransactionEnvironmentSelectionStrategy
      */
     public function getEnvironmentSelectionStrategy()
     {
@@ -1472,7 +1472,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets environment_selection_strategy
      *
-     * @param \VRPay\Sdk\Model\TransactionEnvironmentSelectionStrategy $environment_selection_strategy The strategy for determining whether the transaction is to be processed in the test or production environment.
+     * @param \VRPayment\Sdk\Model\TransactionEnvironmentSelectionStrategy $environment_selection_strategy The strategy for determining whether the transaction is to be processed in the test or production environment.
      *
      * @return $this
      */
@@ -1544,7 +1544,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Gets failure_reason
      *
-     * @return \VRPay\Sdk\Model\FailureReason
+     * @return \VRPayment\Sdk\Model\FailureReason
      */
     public function getFailureReason()
     {
@@ -1554,7 +1554,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets failure_reason
      *
-     * @param \VRPay\Sdk\Model\FailureReason $failure_reason The reason for the failure of the transaction.
+     * @param \VRPayment\Sdk\Model\FailureReason $failure_reason The reason for the failure of the transaction.
      *
      * @return $this
      */
@@ -1569,7 +1569,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Gets group
      *
-     * @return \VRPay\Sdk\Model\TransactionGroup
+     * @return \VRPayment\Sdk\Model\TransactionGroup
      */
     public function getGroup()
     {
@@ -1579,7 +1579,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets group
      *
-     * @param \VRPay\Sdk\Model\TransactionGroup $group The group that the transaction belongs to.
+     * @param \VRPayment\Sdk\Model\TransactionGroup $group The group that the transaction belongs to.
      *
      * @return $this
      */
@@ -1748,7 +1748,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Gets line_items
      *
-     * @return \VRPay\Sdk\Model\LineItem[]
+     * @return \VRPayment\Sdk\Model\LineItem[]
      */
     public function getLineItems()
     {
@@ -1758,7 +1758,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets line_items
      *
-     * @param \VRPay\Sdk\Model\LineItem[] $line_items The line items purchased by the customer.
+     * @param \VRPayment\Sdk\Model\LineItem[] $line_items The line items purchased by the customer.
      *
      * @return $this
      */
@@ -1877,7 +1877,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Gets payment_connector_configuration
      *
-     * @return \VRPay\Sdk\Model\PaymentConnectorConfiguration
+     * @return \VRPayment\Sdk\Model\PaymentConnectorConfiguration
      */
     public function getPaymentConnectorConfiguration()
     {
@@ -1887,7 +1887,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets payment_connector_configuration
      *
-     * @param \VRPay\Sdk\Model\PaymentConnectorConfiguration $payment_connector_configuration The payment connector configuration that was used to authorize the transaction.
+     * @param \VRPayment\Sdk\Model\PaymentConnectorConfiguration $payment_connector_configuration The payment connector configuration that was used to authorize the transaction.
      *
      * @return $this
      */
@@ -2052,7 +2052,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Gets shipping_address
      *
-     * @return \VRPay\Sdk\Model\Address
+     * @return \VRPayment\Sdk\Model\Address
      */
     public function getShippingAddress()
     {
@@ -2062,7 +2062,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets shipping_address
      *
-     * @param \VRPay\Sdk\Model\Address $shipping_address The address to where the order will be shipped.
+     * @param \VRPayment\Sdk\Model\Address $shipping_address The address to where the order will be shipped.
      *
      * @return $this
      */
@@ -2131,7 +2131,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Gets state
      *
-     * @return \VRPay\Sdk\Model\TransactionState
+     * @return \VRPayment\Sdk\Model\TransactionState
      */
     public function getState()
     {
@@ -2141,7 +2141,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \VRPay\Sdk\Model\TransactionState $state The object's current state.
+     * @param \VRPayment\Sdk\Model\TransactionState $state The object's current state.
      *
      * @return $this
      */
@@ -2188,7 +2188,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Gets terminal
      *
-     * @return \VRPay\Sdk\Model\PaymentTerminal
+     * @return \VRPayment\Sdk\Model\PaymentTerminal
      */
     public function getTerminal()
     {
@@ -2198,7 +2198,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets terminal
      *
-     * @param \VRPay\Sdk\Model\PaymentTerminal $terminal The payment terminal through which the payment was processed.
+     * @param \VRPayment\Sdk\Model\PaymentTerminal $terminal The payment terminal through which the payment was processed.
      *
      * @return $this
      */
@@ -2238,7 +2238,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Gets token
      *
-     * @return \VRPay\Sdk\Model\Token
+     * @return \VRPayment\Sdk\Model\Token
      */
     public function getToken()
     {
@@ -2248,7 +2248,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets token
      *
-     * @param \VRPay\Sdk\Model\Token $token The payment token that should be used to charge the customer.
+     * @param \VRPayment\Sdk\Model\Token $token The payment token that should be used to charge the customer.
      *
      * @return $this
      */
@@ -2263,7 +2263,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Gets tokenization_mode
      *
-     * @return \VRPay\Sdk\Model\TokenizationMode
+     * @return \VRPayment\Sdk\Model\TokenizationMode
      */
     public function getTokenizationMode()
     {
@@ -2273,7 +2273,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets tokenization_mode
      *
-     * @param \VRPay\Sdk\Model\TokenizationMode $tokenization_mode The tokenization mode specifies whether and how the tokenization of payment information is applied to the transaction.
+     * @param \VRPayment\Sdk\Model\TokenizationMode $tokenization_mode The tokenization mode specifies whether and how the tokenization of payment information is applied to the transaction.
      *
      * @return $this
      */
@@ -2388,7 +2388,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Gets user_interface_type
      *
-     * @return \VRPay\Sdk\Model\TransactionUserInterfaceType
+     * @return \VRPayment\Sdk\Model\TransactionUserInterfaceType
      */
     public function getUserInterfaceType()
     {
@@ -2398,7 +2398,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets user_interface_type
      *
-     * @param \VRPay\Sdk\Model\TransactionUserInterfaceType $user_interface_type The type of user interface the customer used to provide the payment information.
+     * @param \VRPayment\Sdk\Model\TransactionUserInterfaceType $user_interface_type The type of user interface the customer used to provide the payment information.
      *
      * @return $this
      */

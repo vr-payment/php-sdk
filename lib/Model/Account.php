@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * Account model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class Account implements ModelInterface, ArrayAccess
@@ -58,13 +58,13 @@ class Account implements ModelInterface, ArrayAccess
         'id' => 'int',
         'last_modified_date' => '\DateTime',
         'name' => 'string',
-        'parent_account' => '\VRPay\Sdk\Model\Account',
+        'parent_account' => '\VRPayment\Sdk\Model\Account',
         'planned_purge_date' => '\DateTime',
         'restricted_active' => 'bool',
         'scope' => 'int',
-        'state' => '\VRPay\Sdk\Model\AccountState',
+        'state' => '\VRPayment\Sdk\Model\AccountState',
         'subaccount_limit' => 'int',
-        'type' => '\VRPay\Sdk\Model\AccountType',
+        'type' => '\VRPayment\Sdk\Model\AccountType',
         'version' => 'int'
     ];
 
@@ -555,7 +555,7 @@ class Account implements ModelInterface, ArrayAccess
     /**
      * Gets parent_account
      *
-     * @return \VRPay\Sdk\Model\Account
+     * @return \VRPayment\Sdk\Model\Account
      */
     public function getParentAccount()
     {
@@ -565,7 +565,7 @@ class Account implements ModelInterface, ArrayAccess
     /**
      * Sets parent_account
      *
-     * @param \VRPay\Sdk\Model\Account $parent_account The parent account responsible for administering this account.
+     * @param \VRPayment\Sdk\Model\Account $parent_account The parent account responsible for administering this account.
      *
      * @return $this
      */
@@ -655,7 +655,7 @@ class Account implements ModelInterface, ArrayAccess
     /**
      * Gets state
      *
-     * @return \VRPay\Sdk\Model\AccountState
+     * @return \VRPayment\Sdk\Model\AccountState
      */
     public function getState()
     {
@@ -665,7 +665,7 @@ class Account implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \VRPay\Sdk\Model\AccountState $state The object's current state.
+     * @param \VRPayment\Sdk\Model\AccountState $state The object's current state.
      *
      * @return $this
      */
@@ -705,7 +705,7 @@ class Account implements ModelInterface, ArrayAccess
     /**
      * Gets type
      *
-     * @return \VRPay\Sdk\Model\AccountType
+     * @return \VRPayment\Sdk\Model\AccountType
      */
     public function getType()
     {
@@ -715,7 +715,7 @@ class Account implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param \VRPay\Sdk\Model\AccountType $type The account's type which defines its role and capabilities.
+     * @param \VRPayment\Sdk\Model\AccountType $type The account's type which defines its role and capabilities.
      *
      * @return $this
      */

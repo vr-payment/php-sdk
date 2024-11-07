@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * PaymentTerminal model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class PaymentTerminal implements ModelInterface, ArrayAccess
@@ -49,7 +49,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'configuration_version' => '\VRPay\Sdk\Model\PaymentTerminalConfigurationVersion',
+        'configuration_version' => '\VRPayment\Sdk\Model\PaymentTerminalConfigurationVersion',
         'default_currency' => 'string',
         'device_name' => 'string',
         'device_serial_number' => 'string',
@@ -57,11 +57,11 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
         'id' => 'int',
         'identifier' => 'string',
         'linked_space_id' => 'int',
-        'location_version' => '\VRPay\Sdk\Model\PaymentTerminalLocationVersion',
+        'location_version' => '\VRPayment\Sdk\Model\PaymentTerminalLocationVersion',
         'name' => 'string',
         'planned_purge_date' => '\DateTime',
-        'state' => '\VRPay\Sdk\Model\PaymentTerminalState',
-        'type' => '\VRPay\Sdk\Model\PaymentTerminalType',
+        'state' => '\VRPayment\Sdk\Model\PaymentTerminalState',
+        'type' => '\VRPayment\Sdk\Model\PaymentTerminalType',
         'version' => 'int'
     ];
 
@@ -298,7 +298,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     /**
      * Gets configuration_version
      *
-     * @return \VRPay\Sdk\Model\PaymentTerminalConfigurationVersion
+     * @return \VRPayment\Sdk\Model\PaymentTerminalConfigurationVersion
      */
     public function getConfigurationVersion()
     {
@@ -308,7 +308,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     /**
      * Sets configuration_version
      *
-     * @param \VRPay\Sdk\Model\PaymentTerminalConfigurationVersion $configuration_version The configuration that is assigned to the terminal and determines how it works.
+     * @param \VRPayment\Sdk\Model\PaymentTerminalConfigurationVersion $configuration_version The configuration that is assigned to the terminal and determines how it works.
      *
      * @return $this
      */
@@ -498,7 +498,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     /**
      * Gets location_version
      *
-     * @return \VRPay\Sdk\Model\PaymentTerminalLocationVersion
+     * @return \VRPayment\Sdk\Model\PaymentTerminalLocationVersion
      */
     public function getLocationVersion()
     {
@@ -508,7 +508,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     /**
      * Sets location_version
      *
-     * @param \VRPay\Sdk\Model\PaymentTerminalLocationVersion $location_version The physical location where the terminal is used.
+     * @param \VRPayment\Sdk\Model\PaymentTerminalLocationVersion $location_version The physical location where the terminal is used.
      *
      * @return $this
      */
@@ -577,7 +577,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     /**
      * Gets state
      *
-     * @return \VRPay\Sdk\Model\PaymentTerminalState
+     * @return \VRPayment\Sdk\Model\PaymentTerminalState
      */
     public function getState()
     {
@@ -587,7 +587,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \VRPay\Sdk\Model\PaymentTerminalState $state The object's current state.
+     * @param \VRPayment\Sdk\Model\PaymentTerminalState $state The object's current state.
      *
      * @return $this
      */
@@ -602,7 +602,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     /**
      * Gets type
      *
-     * @return \VRPay\Sdk\Model\PaymentTerminalType
+     * @return \VRPayment\Sdk\Model\PaymentTerminalType
      */
     public function getType()
     {
@@ -612,7 +612,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param \VRPay\Sdk\Model\PaymentTerminalType $type The type of the payment terminal.
+     * @param \VRPayment\Sdk\Model\PaymentTerminalType $type The type of the payment terminal.
      *
      * @return $this
      */

@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * User model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class User implements ModelInterface, ArrayAccess
@@ -52,8 +52,8 @@ class User implements ModelInterface, ArrayAccess
         'id' => 'int',
         'planned_purge_date' => '\DateTime',
         'scope' => 'int',
-        'state' => '\VRPay\Sdk\Model\CreationEntityState',
-        'user_type' => '\VRPay\Sdk\Model\UserType',
+        'state' => '\VRPayment\Sdk\Model\CreationEntityState',
+        'user_type' => '\VRPayment\Sdk\Model\UserType',
         'version' => 'int'
     ];
 
@@ -313,7 +313,7 @@ class User implements ModelInterface, ArrayAccess
     /**
      * Gets state
      *
-     * @return \VRPay\Sdk\Model\CreationEntityState
+     * @return \VRPayment\Sdk\Model\CreationEntityState
      */
     public function getState()
     {
@@ -323,7 +323,7 @@ class User implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \VRPay\Sdk\Model\CreationEntityState $state The object's current state.
+     * @param \VRPayment\Sdk\Model\CreationEntityState $state The object's current state.
      *
      * @return $this
      */
@@ -338,7 +338,7 @@ class User implements ModelInterface, ArrayAccess
     /**
      * Gets user_type
      *
-     * @return \VRPay\Sdk\Model\UserType
+     * @return \VRPayment\Sdk\Model\UserType
      */
     public function getUserType()
     {
@@ -348,7 +348,7 @@ class User implements ModelInterface, ArrayAccess
     /**
      * Sets user_type
      *
-     * @param \VRPay\Sdk\Model\UserType $user_type The user's type which defines its role and capabilities.
+     * @param \VRPayment\Sdk\Model\UserType $user_type The user's type which defines its role and capabilities.
      *
      * @return $this
      */

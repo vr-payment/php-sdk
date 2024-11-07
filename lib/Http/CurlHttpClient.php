@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,17 +20,17 @@
 
 declare(strict_types=1);
 
-namespace VRPay\Sdk\Http;
+namespace VRPayment\Sdk\Http;
 
-use VRPay\Sdk\Http\ConnectionException;
-use VRPay\Sdk\ApiClient;
+use VRPayment\Sdk\Http\ConnectionException;
+use VRPayment\Sdk\ApiClient;
 
 /**
  * This class sends API calls via cURL.
  *
  * @category Class
- * @package  VRPay\Sdk\Http
- * @author   VR pay
+ * @package  VRPayment\Sdk\Http
+ * @author   VR Payment GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 final class CurlHttpClient implements IHttpClient {

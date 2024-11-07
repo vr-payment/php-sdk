@@ -1,9 +1,9 @@
 <?php
 
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,14 +19,14 @@
  */
 
 
-namespace VRPay\Sdk;
+namespace VRPayment\Sdk;
 
 /**
  * Configuration Class Doc Comment
  *
  * @category    Class
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class Configuration
@@ -73,14 +73,14 @@ class Configuration
      *
      * @var string
      */
-    protected $host = 'https://vrp.app-wallee.com:443/api';
+    protected $host = 'https://gateway.vr-payment.de:443/api';
 
     /**
-     * User agent of the HTTP request, set to "VRPay\Sdk" by default
+     * User agent of the HTTP request, set to "VRPayment\Sdk" by default
      *
      * @var string
      */
-    protected $userAgent = 'VRPay\Sdk/4.6.0/php';
+    protected $userAgent = 'VRPayment\Sdk/4.6.0/php';
 
     /**
      * Debug switch (default set to false)
@@ -385,7 +385,7 @@ class Configuration
      */
     public static function toDebugReport()
     {
-        $report  = 'PHP SDK (VRPay\Sdk) Debug Report:' . PHP_EOL;
+        $report  = 'PHP SDK (VRPayment\Sdk) Debug Report:' . PHP_EOL;
         $report .= '    OS: ' . php_uname() . PHP_EOL;
         $report .= '    PHP Version: ' . PHP_VERSION . PHP_EOL;
         $report .= '    OpenAPI Spec Version: 4.6.0' . PHP_EOL;

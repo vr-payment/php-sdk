@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * PaymentConnector model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class PaymentConnector implements ModelInterface, ArrayAccess
@@ -49,18 +49,18 @@ class PaymentConnector implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'data_collection_type' => '\VRPay\Sdk\Model\DataCollectionType',
+        'data_collection_type' => '\VRPayment\Sdk\Model\DataCollectionType',
         'deprecated' => 'bool',
         'deprecation_reason' => 'map[string,string]',
         'description' => 'map[string,string]',
         'id' => 'int',
         'name' => 'map[string,string]',
         'payment_method' => 'int',
-        'payment_method_brand' => '\VRPay\Sdk\Model\PaymentMethodBrand',
-        'primary_risk_taker' => '\VRPay\Sdk\Model\PaymentPrimaryRiskTaker',
+        'payment_method_brand' => '\VRPayment\Sdk\Model\PaymentMethodBrand',
+        'primary_risk_taker' => '\VRPayment\Sdk\Model\PaymentPrimaryRiskTaker',
         'processor' => 'int',
         'supported_currencies' => 'string[]',
-        'supported_customers_presences' => '\VRPay\Sdk\Model\CustomersPresence[]',
+        'supported_customers_presences' => '\VRPayment\Sdk\Model\CustomersPresence[]',
         'supported_features' => 'int[]'
     ];
 
@@ -287,7 +287,7 @@ class PaymentConnector implements ModelInterface, ArrayAccess
     /**
      * Gets data_collection_type
      *
-     * @return \VRPay\Sdk\Model\DataCollectionType
+     * @return \VRPayment\Sdk\Model\DataCollectionType
      */
     public function getDataCollectionType()
     {
@@ -297,7 +297,7 @@ class PaymentConnector implements ModelInterface, ArrayAccess
     /**
      * Sets data_collection_type
      *
-     * @param \VRPay\Sdk\Model\DataCollectionType $data_collection_type The data collection type specifies how the payment information is collected.
+     * @param \VRPayment\Sdk\Model\DataCollectionType $data_collection_type The data collection type specifies how the payment information is collected.
      *
      * @return $this
      */
@@ -462,7 +462,7 @@ class PaymentConnector implements ModelInterface, ArrayAccess
     /**
      * Gets payment_method_brand
      *
-     * @return \VRPay\Sdk\Model\PaymentMethodBrand
+     * @return \VRPayment\Sdk\Model\PaymentMethodBrand
      */
     public function getPaymentMethodBrand()
     {
@@ -472,7 +472,7 @@ class PaymentConnector implements ModelInterface, ArrayAccess
     /**
      * Sets payment_method_brand
      *
-     * @param \VRPay\Sdk\Model\PaymentMethodBrand $payment_method_brand The specific brand that this payment connector supports.
+     * @param \VRPayment\Sdk\Model\PaymentMethodBrand $payment_method_brand The specific brand that this payment connector supports.
      *
      * @return $this
      */
@@ -487,7 +487,7 @@ class PaymentConnector implements ModelInterface, ArrayAccess
     /**
      * Gets primary_risk_taker
      *
-     * @return \VRPay\Sdk\Model\PaymentPrimaryRiskTaker
+     * @return \VRPayment\Sdk\Model\PaymentPrimaryRiskTaker
      */
     public function getPrimaryRiskTaker()
     {
@@ -497,7 +497,7 @@ class PaymentConnector implements ModelInterface, ArrayAccess
     /**
      * Sets primary_risk_taker
      *
-     * @param \VRPay\Sdk\Model\PaymentPrimaryRiskTaker $primary_risk_taker The entity that bears the main risk in the event that a contracting party fails to meet its obligations.
+     * @param \VRPayment\Sdk\Model\PaymentPrimaryRiskTaker $primary_risk_taker The entity that bears the main risk in the event that a contracting party fails to meet its obligations.
      *
      * @return $this
      */
@@ -562,7 +562,7 @@ class PaymentConnector implements ModelInterface, ArrayAccess
     /**
      * Gets supported_customers_presences
      *
-     * @return \VRPay\Sdk\Model\CustomersPresence[]
+     * @return \VRPayment\Sdk\Model\CustomersPresence[]
      */
     public function getSupportedCustomersPresences()
     {
@@ -572,7 +572,7 @@ class PaymentConnector implements ModelInterface, ArrayAccess
     /**
      * Sets supported_customers_presences
      *
-     * @param \VRPay\Sdk\Model\CustomersPresence[] $supported_customers_presences The types of customer's presence that are supported by the connector.
+     * @param \VRPayment\Sdk\Model\CustomersPresence[] $supported_customers_presences The types of customer's presence that are supported by the connector.
      *
      * @return $this
      */

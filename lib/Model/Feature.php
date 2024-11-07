@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * Feature model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class Feature implements ModelInterface, ArrayAccess
@@ -50,7 +50,7 @@ class Feature implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'beta' => 'bool',
-        'category' => '\VRPay\Sdk\Model\FeatureCategory',
+        'category' => '\VRPayment\Sdk\Model\FeatureCategory',
         'description' => 'map[string,string]',
         'id' => 'int',
         'logo_path' => 'string',
@@ -284,7 +284,7 @@ class Feature implements ModelInterface, ArrayAccess
     /**
      * Gets category
      *
-     * @return \VRPay\Sdk\Model\FeatureCategory
+     * @return \VRPayment\Sdk\Model\FeatureCategory
      */
     public function getCategory()
     {
@@ -294,7 +294,7 @@ class Feature implements ModelInterface, ArrayAccess
     /**
      * Sets category
      *
-     * @param \VRPay\Sdk\Model\FeatureCategory $category The category that the feature belongs to.
+     * @param \VRPayment\Sdk\Model\FeatureCategory $category The category that the feature belongs to.
      *
      * @return $this
      */

@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * FailureReason model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class FailureReason implements ModelInterface, ArrayAccess
@@ -49,7 +49,7 @@ class FailureReason implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'category' => '\VRPay\Sdk\Model\FailureCategory',
+        'category' => '\VRPayment\Sdk\Model\FailureCategory',
         'description' => 'map[string,string]',
         'id' => 'int',
         'name' => 'map[string,string]'
@@ -224,7 +224,7 @@ class FailureReason implements ModelInterface, ArrayAccess
     /**
      * Gets category
      *
-     * @return \VRPay\Sdk\Model\FailureCategory
+     * @return \VRPayment\Sdk\Model\FailureCategory
      */
     public function getCategory()
     {
@@ -234,7 +234,7 @@ class FailureReason implements ModelInterface, ArrayAccess
     /**
      * Sets category
      *
-     * @param \VRPay\Sdk\Model\FailureCategory $category The category that the failure reason belongs to.
+     * @param \VRPayment\Sdk\Model\FailureCategory $category The category that the failure reason belongs to.
      *
      * @return $this
      */

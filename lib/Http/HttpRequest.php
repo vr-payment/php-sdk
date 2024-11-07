@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,16 +18,16 @@
  */
 
 
-namespace VRPay\Sdk\Http;
+namespace VRPayment\Sdk\Http;
 
-use VRPay\Sdk\ObjectSerializer;
+use VRPayment\Sdk\ObjectSerializer;
 
 /**
  * This class represents an HTTP request.
  *
  * @category Class
- * @package  VRPay\Sdk\Http
- * @author   VR pay
+ * @package  VRPayment\Sdk\Http
+ * @author   VR Payment GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 final class HttpRequest {
@@ -76,11 +76,11 @@ final class HttpRequest {
 	const HEADER_KEY_ACCEPT = 'accept';
 	
 	/**
-	 * The key of the 'x-vrpay-logtoken' header.
+	 * The key of the 'x-vrpayment-logtoken' header.
 	 *
 	 * @var string
 	 */
-	const HEADER_LOG_TOKEN = 'x-vrpay-logtoken';
+	const HEADER_LOG_TOKEN = 'x-vrpayment-logtoken';
 
 	/**
 	 * The object serializer.

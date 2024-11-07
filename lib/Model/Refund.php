@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * Refund model
  *
  * @category    Class
  * @description The refund represents a credit back to the customer. It can be issued by the merchant or by the customer (reversal).
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class Refund implements ModelInterface, ArrayAccess
@@ -50,35 +50,35 @@ class Refund implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'amount' => 'float',
-        'base_line_items' => '\VRPay\Sdk\Model\LineItem[]',
+        'base_line_items' => '\VRPayment\Sdk\Model\LineItem[]',
         'completion' => 'int',
         'created_by' => 'int',
         'created_on' => '\DateTime',
-        'environment' => '\VRPay\Sdk\Model\Environment',
+        'environment' => '\VRPayment\Sdk\Model\Environment',
         'external_id' => 'string',
         'failed_on' => '\DateTime',
-        'failure_reason' => '\VRPay\Sdk\Model\FailureReason',
+        'failure_reason' => '\VRPayment\Sdk\Model\FailureReason',
         'id' => 'int',
-        'labels' => '\VRPay\Sdk\Model\Label[]',
+        'labels' => '\VRPayment\Sdk\Model\Label[]',
         'language' => 'string',
-        'line_items' => '\VRPay\Sdk\Model\LineItem[]',
+        'line_items' => '\VRPayment\Sdk\Model\LineItem[]',
         'linked_space_id' => 'int',
         'merchant_reference' => 'string',
         'next_update_on' => '\DateTime',
         'planned_purge_date' => '\DateTime',
         'processing_on' => '\DateTime',
         'processor_reference' => 'string',
-        'reduced_line_items' => '\VRPay\Sdk\Model\LineItem[]',
-        'reductions' => '\VRPay\Sdk\Model\LineItemReduction[]',
-        'state' => '\VRPay\Sdk\Model\RefundState',
+        'reduced_line_items' => '\VRPayment\Sdk\Model\LineItem[]',
+        'reductions' => '\VRPayment\Sdk\Model\LineItemReduction[]',
+        'state' => '\VRPayment\Sdk\Model\RefundState',
         'succeeded_on' => '\DateTime',
-        'taxes' => '\VRPay\Sdk\Model\Tax[]',
+        'taxes' => '\VRPayment\Sdk\Model\Tax[]',
         'time_zone' => 'string',
         'timeout_on' => '\DateTime',
         'total_applied_fees' => 'float',
         'total_settled_amount' => 'float',
-        'transaction' => '\VRPay\Sdk\Model\Transaction',
-        'type' => '\VRPay\Sdk\Model\RefundType',
+        'transaction' => '\VRPayment\Sdk\Model\Transaction',
+        'type' => '\VRPayment\Sdk\Model\RefundType',
         'updated_invoice' => 'int',
         'version' => 'int'
     ];
@@ -461,7 +461,7 @@ class Refund implements ModelInterface, ArrayAccess
     /**
      * Gets base_line_items
      *
-     * @return \VRPay\Sdk\Model\LineItem[]
+     * @return \VRPayment\Sdk\Model\LineItem[]
      */
     public function getBaseLineItems()
     {
@@ -471,7 +471,7 @@ class Refund implements ModelInterface, ArrayAccess
     /**
      * Sets base_line_items
      *
-     * @param \VRPay\Sdk\Model\LineItem[] $base_line_items 
+     * @param \VRPayment\Sdk\Model\LineItem[] $base_line_items 
      *
      * @return $this
      */
@@ -561,7 +561,7 @@ class Refund implements ModelInterface, ArrayAccess
     /**
      * Gets environment
      *
-     * @return \VRPay\Sdk\Model\Environment
+     * @return \VRPayment\Sdk\Model\Environment
      */
     public function getEnvironment()
     {
@@ -571,7 +571,7 @@ class Refund implements ModelInterface, ArrayAccess
     /**
      * Sets environment
      *
-     * @param \VRPay\Sdk\Model\Environment $environment 
+     * @param \VRPayment\Sdk\Model\Environment $environment 
      *
      * @return $this
      */
@@ -643,7 +643,7 @@ class Refund implements ModelInterface, ArrayAccess
     /**
      * Gets failure_reason
      *
-     * @return \VRPay\Sdk\Model\FailureReason
+     * @return \VRPayment\Sdk\Model\FailureReason
      */
     public function getFailureReason()
     {
@@ -653,7 +653,7 @@ class Refund implements ModelInterface, ArrayAccess
     /**
      * Sets failure_reason
      *
-     * @param \VRPay\Sdk\Model\FailureReason $failure_reason 
+     * @param \VRPayment\Sdk\Model\FailureReason $failure_reason 
      *
      * @return $this
      */
@@ -693,7 +693,7 @@ class Refund implements ModelInterface, ArrayAccess
     /**
      * Gets labels
      *
-     * @return \VRPay\Sdk\Model\Label[]
+     * @return \VRPayment\Sdk\Model\Label[]
      */
     public function getLabels()
     {
@@ -703,7 +703,7 @@ class Refund implements ModelInterface, ArrayAccess
     /**
      * Sets labels
      *
-     * @param \VRPay\Sdk\Model\Label[] $labels The labels providing additional information about the object.
+     * @param \VRPayment\Sdk\Model\Label[] $labels The labels providing additional information about the object.
      *
      * @return $this
      */
@@ -743,7 +743,7 @@ class Refund implements ModelInterface, ArrayAccess
     /**
      * Gets line_items
      *
-     * @return \VRPay\Sdk\Model\LineItem[]
+     * @return \VRPayment\Sdk\Model\LineItem[]
      */
     public function getLineItems()
     {
@@ -753,7 +753,7 @@ class Refund implements ModelInterface, ArrayAccess
     /**
      * Sets line_items
      *
-     * @param \VRPay\Sdk\Model\LineItem[] $line_items 
+     * @param \VRPayment\Sdk\Model\LineItem[] $line_items 
      *
      * @return $this
      */
@@ -926,7 +926,7 @@ class Refund implements ModelInterface, ArrayAccess
     /**
      * Gets reduced_line_items
      *
-     * @return \VRPay\Sdk\Model\LineItem[]
+     * @return \VRPayment\Sdk\Model\LineItem[]
      */
     public function getReducedLineItems()
     {
@@ -936,7 +936,7 @@ class Refund implements ModelInterface, ArrayAccess
     /**
      * Sets reduced_line_items
      *
-     * @param \VRPay\Sdk\Model\LineItem[] $reduced_line_items 
+     * @param \VRPayment\Sdk\Model\LineItem[] $reduced_line_items 
      *
      * @return $this
      */
@@ -951,7 +951,7 @@ class Refund implements ModelInterface, ArrayAccess
     /**
      * Gets reductions
      *
-     * @return \VRPay\Sdk\Model\LineItemReduction[]
+     * @return \VRPayment\Sdk\Model\LineItemReduction[]
      */
     public function getReductions()
     {
@@ -961,7 +961,7 @@ class Refund implements ModelInterface, ArrayAccess
     /**
      * Sets reductions
      *
-     * @param \VRPay\Sdk\Model\LineItemReduction[] $reductions 
+     * @param \VRPayment\Sdk\Model\LineItemReduction[] $reductions 
      *
      * @return $this
      */
@@ -976,7 +976,7 @@ class Refund implements ModelInterface, ArrayAccess
     /**
      * Gets state
      *
-     * @return \VRPay\Sdk\Model\RefundState
+     * @return \VRPayment\Sdk\Model\RefundState
      */
     public function getState()
     {
@@ -986,7 +986,7 @@ class Refund implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \VRPay\Sdk\Model\RefundState $state The object's current state.
+     * @param \VRPayment\Sdk\Model\RefundState $state The object's current state.
      *
      * @return $this
      */
@@ -1026,7 +1026,7 @@ class Refund implements ModelInterface, ArrayAccess
     /**
      * Gets taxes
      *
-     * @return \VRPay\Sdk\Model\Tax[]
+     * @return \VRPayment\Sdk\Model\Tax[]
      */
     public function getTaxes()
     {
@@ -1036,7 +1036,7 @@ class Refund implements ModelInterface, ArrayAccess
     /**
      * Sets taxes
      *
-     * @param \VRPay\Sdk\Model\Tax[] $taxes 
+     * @param \VRPayment\Sdk\Model\Tax[] $taxes 
      *
      * @return $this
      */
@@ -1151,7 +1151,7 @@ class Refund implements ModelInterface, ArrayAccess
     /**
      * Gets transaction
      *
-     * @return \VRPay\Sdk\Model\Transaction
+     * @return \VRPayment\Sdk\Model\Transaction
      */
     public function getTransaction()
     {
@@ -1161,7 +1161,7 @@ class Refund implements ModelInterface, ArrayAccess
     /**
      * Sets transaction
      *
-     * @param \VRPay\Sdk\Model\Transaction $transaction 
+     * @param \VRPayment\Sdk\Model\Transaction $transaction 
      *
      * @return $this
      */
@@ -1176,7 +1176,7 @@ class Refund implements ModelInterface, ArrayAccess
     /**
      * Gets type
      *
-     * @return \VRPay\Sdk\Model\RefundType
+     * @return \VRPayment\Sdk\Model\RefundType
      */
     public function getType()
     {
@@ -1186,7 +1186,7 @@ class Refund implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param \VRPay\Sdk\Model\RefundType $type 
+     * @param \VRPayment\Sdk\Model\RefundType $type 
      *
      * @return $this
      */

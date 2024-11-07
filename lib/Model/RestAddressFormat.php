@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * RestAddressFormat model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class RestAddressFormat implements ModelInterface, ArrayAccess
@@ -51,8 +51,8 @@ class RestAddressFormat implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'post_code_examples' => 'string[]',
         'post_code_regex' => 'string',
-        'required_fields' => '\VRPay\Sdk\Model\RestAddressFormatField[]',
-        'used_fields' => '\VRPay\Sdk\Model\RestAddressFormatField[]'
+        'required_fields' => '\VRPayment\Sdk\Model\RestAddressFormatField[]',
+        'used_fields' => '\VRPayment\Sdk\Model\RestAddressFormatField[]'
     ];
 
     /**
@@ -274,7 +274,7 @@ class RestAddressFormat implements ModelInterface, ArrayAccess
     /**
      * Gets required_fields
      *
-     * @return \VRPay\Sdk\Model\RestAddressFormatField[]
+     * @return \VRPayment\Sdk\Model\RestAddressFormatField[]
      */
     public function getRequiredFields()
     {
@@ -284,7 +284,7 @@ class RestAddressFormat implements ModelInterface, ArrayAccess
     /**
      * Sets required_fields
      *
-     * @param \VRPay\Sdk\Model\RestAddressFormatField[] $required_fields The fields that are required in the address format.
+     * @param \VRPayment\Sdk\Model\RestAddressFormatField[] $required_fields The fields that are required in the address format.
      *
      * @return $this
      */
@@ -299,7 +299,7 @@ class RestAddressFormat implements ModelInterface, ArrayAccess
     /**
      * Gets used_fields
      *
-     * @return \VRPay\Sdk\Model\RestAddressFormatField[]
+     * @return \VRPayment\Sdk\Model\RestAddressFormatField[]
      */
     public function getUsedFields()
     {
@@ -309,7 +309,7 @@ class RestAddressFormat implements ModelInterface, ArrayAccess
     /**
      * Sets used_fields
      *
-     * @param \VRPay\Sdk\Model\RestAddressFormatField[] $used_fields The fields that are used in the address format.
+     * @param \VRPayment\Sdk\Model\RestAddressFormatField[] $used_fields The fields that are used in the address format.
      *
      * @return $this
      */

@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,20 +18,20 @@
  */
 
 
-namespace VRPay\Sdk\Service;
+namespace VRPayment\Sdk\Service;
 
-use VRPay\Sdk\ApiClient;
-use VRPay\Sdk\ApiException;
-use VRPay\Sdk\ApiResponse;
-use VRPay\Sdk\Http\HttpRequest;
-use VRPay\Sdk\ObjectSerializer;
+use VRPayment\Sdk\ApiClient;
+use VRPayment\Sdk\ApiException;
+use VRPayment\Sdk\ApiResponse;
+use VRPayment\Sdk\Http\HttpRequest;
+use VRPayment\Sdk\ObjectSerializer;
 
 /**
  * HumanUserService service
  *
  * @category Class
- * @package  VRPay\Sdk
- * @author   VR pay
+ * @package  VRPayment\Sdk
+ * @author   VR Payment GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class HumanUserService {
@@ -71,10 +71,10 @@ class HumanUserService {
 	 *
 	 * Count
 	 *
-	 * @param \VRPay\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @param \VRPayment\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return int
 	 */
 	public function count($filter = null) {
@@ -87,10 +87,10 @@ class HumanUserService {
 	 * Count
      
      *
-	 * @param \VRPay\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @param \VRPayment\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function countWithHttpInfo($filter = null) {
@@ -150,7 +150,7 @@ class HumanUserService {
                 case 442:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -158,7 +158,7 @@ class HumanUserService {
                 case 542:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ServerError',
+                        '\VRPayment\Sdk\Model\ServerError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -173,11 +173,11 @@ class HumanUserService {
 	 *
 	 * Create
 	 *
-	 * @param \VRPay\Sdk\Model\HumanUserCreate $entity The human user object with the properties which should be created. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
-	 * @return \VRPay\Sdk\Model\HumanUser
+	 * @param \VRPayment\Sdk\Model\HumanUserCreate $entity The human user object with the properties which should be created. (required)
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
+	 * @return \VRPayment\Sdk\Model\HumanUser
 	 */
 	public function create($entity) {
 		return $this->createWithHttpInfo($entity)->getData();
@@ -189,10 +189,10 @@ class HumanUserService {
 	 * Create
      
      *
-	 * @param \VRPay\Sdk\Model\HumanUserCreate $entity The human user object with the properties which should be created. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @param \VRPayment\Sdk\Model\HumanUserCreate $entity The human user object with the properties which should be created. (required)
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function createWithHttpInfo($entity) {
@@ -239,16 +239,16 @@ class HumanUserService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\VRPay\Sdk\Model\HumanUser',
+				'\VRPayment\Sdk\Model\HumanUser',
 				'/human-user/create'
             );
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPay\Sdk\Model\HumanUser', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPayment\Sdk\Model\HumanUser', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\HumanUser',
+                        '\VRPayment\Sdk\Model\HumanUser',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -256,7 +256,7 @@ class HumanUserService {
                 case 442:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -264,7 +264,7 @@ class HumanUserService {
                 case 542:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ServerError',
+                        '\VRPayment\Sdk\Model\ServerError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -280,9 +280,9 @@ class HumanUserService {
 	 * Delete
 	 *
 	 * @param int $id  (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return void
 	 */
 	public function delete($id) {
@@ -296,9 +296,9 @@ class HumanUserService {
      
      *
 	 * @param int $id  (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function deleteWithHttpInfo($id) {
@@ -354,7 +354,7 @@ class HumanUserService {
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -362,7 +362,7 @@ class HumanUserService {
                 case 442:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -370,7 +370,7 @@ class HumanUserService {
                 case 542:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ServerError',
+                        '\VRPayment\Sdk\Model\ServerError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -385,10 +385,10 @@ class HumanUserService {
 	 *
 	 * Export
 	 *
-	 * @param \VRPay\Sdk\Model\EntityExportRequest $request The request controls the entries which are exported. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @param \VRPayment\Sdk\Model\EntityExportRequest $request The request controls the entries which are exported. (required)
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return string
 	 */
 	public function export($request) {
@@ -401,10 +401,10 @@ class HumanUserService {
 	 * Export
      
      *
-	 * @param \VRPay\Sdk\Model\EntityExportRequest $request The request controls the entries which are exported. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @param \VRPayment\Sdk\Model\EntityExportRequest $request The request controls the entries which are exported. (required)
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function exportWithHttpInfo($request) {
@@ -468,7 +468,7 @@ class HumanUserService {
                 case 442:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -476,7 +476,7 @@ class HumanUserService {
                 case 542:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ServerError',
+                        '\VRPayment\Sdk\Model\ServerError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -492,10 +492,10 @@ class HumanUserService {
 	 * Read
 	 *
 	 * @param int $id The id of the human user which should be returned. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
-	 * @return \VRPay\Sdk\Model\HumanUser
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
+	 * @return \VRPayment\Sdk\Model\HumanUser
 	 */
 	public function read($id) {
 		return $this->readWithHttpInfo($id)->getData();
@@ -508,9 +508,9 @@ class HumanUserService {
      
      *
 	 * @param int $id The id of the human user which should be returned. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function readWithHttpInfo($id) {
@@ -555,16 +555,16 @@ class HumanUserService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\VRPay\Sdk\Model\HumanUser',
+				'\VRPayment\Sdk\Model\HumanUser',
 				'/human-user/read'
             );
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPay\Sdk\Model\HumanUser', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPayment\Sdk\Model\HumanUser', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\HumanUser',
+                        '\VRPayment\Sdk\Model\HumanUser',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -572,7 +572,7 @@ class HumanUserService {
                 case 442:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -580,7 +580,7 @@ class HumanUserService {
                 case 542:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ServerError',
+                        '\VRPayment\Sdk\Model\ServerError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -595,11 +595,11 @@ class HumanUserService {
 	 *
 	 * Search
 	 *
-	 * @param \VRPay\Sdk\Model\EntityQuery $query The query restricts the human users which are returned by the search. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
-	 * @return \VRPay\Sdk\Model\HumanUser[]
+	 * @param \VRPayment\Sdk\Model\EntityQuery $query The query restricts the human users which are returned by the search. (required)
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
+	 * @return \VRPayment\Sdk\Model\HumanUser[]
 	 */
 	public function search($query) {
 		return $this->searchWithHttpInfo($query)->getData();
@@ -611,10 +611,10 @@ class HumanUserService {
 	 * Search
      
      *
-	 * @param \VRPay\Sdk\Model\EntityQuery $query The query restricts the human users which are returned by the search. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @param \VRPayment\Sdk\Model\EntityQuery $query The query restricts the human users which are returned by the search. (required)
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function searchWithHttpInfo($query) {
@@ -661,16 +661,16 @@ class HumanUserService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\VRPay\Sdk\Model\HumanUser[]',
+				'\VRPayment\Sdk\Model\HumanUser[]',
 				'/human-user/search'
             );
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPay\Sdk\Model\HumanUser[]', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPayment\Sdk\Model\HumanUser[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\HumanUser[]',
+                        '\VRPayment\Sdk\Model\HumanUser[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -678,7 +678,7 @@ class HumanUserService {
                 case 442:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -686,7 +686,7 @@ class HumanUserService {
                 case 542:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ServerError',
+                        '\VRPayment\Sdk\Model\ServerError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -701,11 +701,11 @@ class HumanUserService {
 	 *
 	 * Update
 	 *
-	 * @param \VRPay\Sdk\Model\HumanUserUpdate $entity The object with all the properties which should be updated. The id and the version are required properties. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
-	 * @return \VRPay\Sdk\Model\HumanUser
+	 * @param \VRPayment\Sdk\Model\HumanUserUpdate $entity The object with all the properties which should be updated. The id and the version are required properties. (required)
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
+	 * @return \VRPayment\Sdk\Model\HumanUser
 	 */
 	public function update($entity) {
 		return $this->updateWithHttpInfo($entity)->getData();
@@ -717,10 +717,10 @@ class HumanUserService {
 	 * Update
      
      *
-	 * @param \VRPay\Sdk\Model\HumanUserUpdate $entity The object with all the properties which should be updated. The id and the version are required properties. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @param \VRPayment\Sdk\Model\HumanUserUpdate $entity The object with all the properties which should be updated. The id and the version are required properties. (required)
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function updateWithHttpInfo($entity) {
@@ -767,16 +767,16 @@ class HumanUserService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\VRPay\Sdk\Model\HumanUser',
+				'\VRPayment\Sdk\Model\HumanUser',
 				'/human-user/update'
             );
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPay\Sdk\Model\HumanUser', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPayment\Sdk\Model\HumanUser', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\HumanUser',
+                        '\VRPayment\Sdk\Model\HumanUser',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -784,7 +784,7 @@ class HumanUserService {
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -792,7 +792,7 @@ class HumanUserService {
                 case 442:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -800,7 +800,7 @@ class HumanUserService {
                 case 542:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ServerError',
+                        '\VRPayment\Sdk\Model\ServerError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

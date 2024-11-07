@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,21 +18,21 @@
  */
 
 
-namespace VRPay\Sdk\Service;
+namespace VRPayment\Sdk\Service;
 
-use VRPay\Sdk\ApiClient;
-use VRPay\Sdk\ApiException;
-use VRPay\Sdk\ApiResponse;
-use VRPay\Sdk\Http\HttpRequest;
-use VRPay\Sdk\ObjectSerializer;
-use VRPay\Sdk\EncryptionUtil;
+use VRPayment\Sdk\ApiClient;
+use VRPayment\Sdk\ApiException;
+use VRPayment\Sdk\ApiResponse;
+use VRPayment\Sdk\Http\HttpRequest;
+use VRPayment\Sdk\ObjectSerializer;
+use VRPayment\Sdk\EncryptionUtil;
 
 /**
  * WebhookEncryptionService service
  *
  * @category Class
- * @package  VRPay\Sdk
- * @author   VR pay
+ * @package  VRPayment\Sdk
+ * @author   VR Payment GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class WebhookEncryptionService {
@@ -73,10 +73,10 @@ class WebhookEncryptionService {
 	 * Read
 	 *
 	 * @param string $id The ID of the key version. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
-	 * @return \VRPay\Sdk\Model\WebhookEncryptionPublicKey
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
+	 * @return \VRPayment\Sdk\Model\WebhookEncryptionPublicKey
 	 */
 	public function read($id) {
 		return $this->readWithHttpInfo($id)->getData();
@@ -89,9 +89,9 @@ class WebhookEncryptionService {
      
      *
 	 * @param string $id The ID of the key version. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function readWithHttpInfo($id) {
@@ -136,16 +136,16 @@ class WebhookEncryptionService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\VRPay\Sdk\Model\WebhookEncryptionPublicKey',
+				'\VRPayment\Sdk\Model\WebhookEncryptionPublicKey',
 				'/webhook-encryption/read'
             );
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPay\Sdk\Model\WebhookEncryptionPublicKey', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPayment\Sdk\Model\WebhookEncryptionPublicKey', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\WebhookEncryptionPublicKey',
+                        '\VRPayment\Sdk\Model\WebhookEncryptionPublicKey',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -153,7 +153,7 @@ class WebhookEncryptionService {
                 case 442:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -161,7 +161,7 @@ class WebhookEncryptionService {
                 case 542:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ServerError',
+                        '\VRPayment\Sdk\Model\ServerError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

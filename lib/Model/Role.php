@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * Role model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class Role implements ModelInterface, ArrayAccess
@@ -49,12 +49,12 @@ class Role implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'account' => '\VRPay\Sdk\Model\Account',
+        'account' => '\VRPayment\Sdk\Model\Account',
         'id' => 'int',
         'name' => 'map[string,string]',
-        'permissions' => '\VRPay\Sdk\Model\Permission[]',
+        'permissions' => '\VRPayment\Sdk\Model\Permission[]',
         'planned_purge_date' => '\DateTime',
-        'state' => '\VRPay\Sdk\Model\RoleState',
+        'state' => '\VRPayment\Sdk\Model\RoleState',
         'two_factor_required' => 'bool',
         'version' => 'int'
     ];
@@ -252,7 +252,7 @@ class Role implements ModelInterface, ArrayAccess
     /**
      * Gets account
      *
-     * @return \VRPay\Sdk\Model\Account
+     * @return \VRPayment\Sdk\Model\Account
      */
     public function getAccount()
     {
@@ -262,7 +262,7 @@ class Role implements ModelInterface, ArrayAccess
     /**
      * Sets account
      *
-     * @param \VRPay\Sdk\Model\Account $account The account the role belongs to. The role can only be assigned within this account.
+     * @param \VRPayment\Sdk\Model\Account $account The account the role belongs to. The role can only be assigned within this account.
      *
      * @return $this
      */
@@ -327,7 +327,7 @@ class Role implements ModelInterface, ArrayAccess
     /**
      * Gets permissions
      *
-     * @return \VRPay\Sdk\Model\Permission[]
+     * @return \VRPayment\Sdk\Model\Permission[]
      */
     public function getPermissions()
     {
@@ -337,7 +337,7 @@ class Role implements ModelInterface, ArrayAccess
     /**
      * Sets permissions
      *
-     * @param \VRPay\Sdk\Model\Permission[] $permissions The permissions granted to users with this role.
+     * @param \VRPayment\Sdk\Model\Permission[] $permissions The permissions granted to users with this role.
      *
      * @return $this
      */
@@ -377,7 +377,7 @@ class Role implements ModelInterface, ArrayAccess
     /**
      * Gets state
      *
-     * @return \VRPay\Sdk\Model\RoleState
+     * @return \VRPayment\Sdk\Model\RoleState
      */
     public function getState()
     {
@@ -387,7 +387,7 @@ class Role implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \VRPay\Sdk\Model\RoleState $state The object's current state.
+     * @param \VRPayment\Sdk\Model\RoleState $state The object's current state.
      *
      * @return $this
      */

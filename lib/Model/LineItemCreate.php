@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * LineItemCreate model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class LineItemCreate implements ModelInterface, ArrayAccess
@@ -50,14 +50,14 @@ class LineItemCreate implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'amount_including_tax' => 'float',
-        'attributes' => 'map[string,\VRPay\Sdk\Model\LineItemAttributeCreate]',
+        'attributes' => 'map[string,\VRPayment\Sdk\Model\LineItemAttributeCreate]',
         'discount_including_tax' => 'float',
         'name' => 'string',
         'quantity' => 'float',
         'shipping_required' => 'bool',
         'sku' => 'string',
-        'taxes' => '\VRPay\Sdk\Model\TaxCreate[]',
-        'type' => '\VRPay\Sdk\Model\LineItemType',
+        'taxes' => '\VRPayment\Sdk\Model\TaxCreate[]',
+        'type' => '\VRPayment\Sdk\Model\LineItemType',
         'unique_id' => 'string'
     ];
 
@@ -322,7 +322,7 @@ class LineItemCreate implements ModelInterface, ArrayAccess
     /**
      * Gets attributes
      *
-     * @return map[string,\VRPay\Sdk\Model\LineItemAttributeCreate]
+     * @return map[string,\VRPayment\Sdk\Model\LineItemAttributeCreate]
      */
     public function getAttributes()
     {
@@ -332,7 +332,7 @@ class LineItemCreate implements ModelInterface, ArrayAccess
     /**
      * Sets attributes
      *
-     * @param map[string,\VRPay\Sdk\Model\LineItemAttributeCreate] $attributes A map of custom information for the item.
+     * @param map[string,\VRPayment\Sdk\Model\LineItemAttributeCreate] $attributes A map of custom information for the item.
      *
      * @return $this
      */
@@ -483,7 +483,7 @@ class LineItemCreate implements ModelInterface, ArrayAccess
     /**
      * Gets taxes
      *
-     * @return \VRPay\Sdk\Model\TaxCreate[]
+     * @return \VRPayment\Sdk\Model\TaxCreate[]
      */
     public function getTaxes()
     {
@@ -493,7 +493,7 @@ class LineItemCreate implements ModelInterface, ArrayAccess
     /**
      * Sets taxes
      *
-     * @param \VRPay\Sdk\Model\TaxCreate[] $taxes A set of tax lines, each of which specifies a tax applied to the item.
+     * @param \VRPayment\Sdk\Model\TaxCreate[] $taxes A set of tax lines, each of which specifies a tax applied to the item.
      *
      * @return $this
      */
@@ -508,7 +508,7 @@ class LineItemCreate implements ModelInterface, ArrayAccess
     /**
      * Gets type
      *
-     * @return \VRPay\Sdk\Model\LineItemType
+     * @return \VRPayment\Sdk\Model\LineItemType
      */
     public function getType()
     {
@@ -518,7 +518,7 @@ class LineItemCreate implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param \VRPay\Sdk\Model\LineItemType $type The type of the line item.
+     * @param \VRPayment\Sdk\Model\LineItemType $type The type of the line item.
      *
      * @return $this
      */

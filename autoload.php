@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,20 +21,20 @@
 /**
  * Autoload function.
  *
- * @author   VR pay
+ * @author   VR Payment GmbH
  
  * After registering this autoload function with SPL, the following line
- * would cause the function to attempt to load the \VRPay\Sdk\Baz\Qux class
+ * would cause the function to attempt to load the \VRPayment\Sdk\Baz\Qux class
  * from /path/to/project/lib/Baz/Qux.php:
  *
- *	  new \VRPay\Sdk\Baz\Qux;
+ *	  new \VRPayment\Sdk\Baz\Qux;
  *
  * @param string $class the fully-qualified class name.
  */
 spl_autoload_register(function ($class) {
 
 	// project-specific namespace prefix
-	$prefix = 'VRPay\\Sdk\\';
+	$prefix = 'VRPayment\\Sdk\\';
 
 	// base directory for the namespace prefix
 	$baseDir = __DIR__ . '/lib/';

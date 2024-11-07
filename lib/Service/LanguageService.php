@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,20 +18,20 @@
  */
 
 
-namespace VRPay\Sdk\Service;
+namespace VRPayment\Sdk\Service;
 
-use VRPay\Sdk\ApiClient;
-use VRPay\Sdk\ApiException;
-use VRPay\Sdk\ApiResponse;
-use VRPay\Sdk\Http\HttpRequest;
-use VRPay\Sdk\ObjectSerializer;
+use VRPayment\Sdk\ApiClient;
+use VRPayment\Sdk\ApiException;
+use VRPayment\Sdk\ApiResponse;
+use VRPayment\Sdk\Http\HttpRequest;
+use VRPayment\Sdk\ObjectSerializer;
 
 /**
  * LanguageService service
  *
  * @category Class
- * @package  VRPay\Sdk
- * @author   VR pay
+ * @package  VRPayment\Sdk
+ * @author   VR Payment GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class LanguageService {
@@ -71,10 +71,10 @@ class LanguageService {
 	 *
 	 * All
 	 *
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
-	 * @return \VRPay\Sdk\Model\RestLanguage[]
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
+	 * @return \VRPayment\Sdk\Model\RestLanguage[]
 	 */
 	public function all() {
 		return $this->allWithHttpInfo()->getData();
@@ -86,9 +86,9 @@ class LanguageService {
 	 * All
      
      *
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function allWithHttpInfo() {
@@ -126,16 +126,16 @@ class LanguageService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\VRPay\Sdk\Model\RestLanguage[]',
+				'\VRPayment\Sdk\Model\RestLanguage[]',
 				'/language/all'
             );
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPay\Sdk\Model\RestLanguage[]', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPayment\Sdk\Model\RestLanguage[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\RestLanguage[]',
+                        '\VRPayment\Sdk\Model\RestLanguage[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -143,7 +143,7 @@ class LanguageService {
                 case 442:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -151,7 +151,7 @@ class LanguageService {
                 case 542:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ServerError',
+                        '\VRPayment\Sdk\Model\ServerError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

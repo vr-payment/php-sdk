@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * RefundCreate model
  *
  * @category    Class
  * @description The refund represents a credit back to the customer. It can be issued by the merchant or by the customer (reversal).
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class RefundCreate implements ModelInterface, ArrayAccess
@@ -53,9 +53,9 @@ class RefundCreate implements ModelInterface, ArrayAccess
         'completion' => 'int',
         'external_id' => 'string',
         'merchant_reference' => 'string',
-        'reductions' => '\VRPay\Sdk\Model\LineItemReductionCreate[]',
+        'reductions' => '\VRPayment\Sdk\Model\LineItemReductionCreate[]',
         'transaction' => 'int',
-        'type' => '\VRPay\Sdk\Model\RefundType'
+        'type' => '\VRPayment\Sdk\Model\RefundType'
     ];
 
     /**
@@ -374,7 +374,7 @@ class RefundCreate implements ModelInterface, ArrayAccess
     /**
      * Gets reductions
      *
-     * @return \VRPay\Sdk\Model\LineItemReductionCreate[]
+     * @return \VRPayment\Sdk\Model\LineItemReductionCreate[]
      */
     public function getReductions()
     {
@@ -384,7 +384,7 @@ class RefundCreate implements ModelInterface, ArrayAccess
     /**
      * Sets reductions
      *
-     * @param \VRPay\Sdk\Model\LineItemReductionCreate[] $reductions 
+     * @param \VRPayment\Sdk\Model\LineItemReductionCreate[] $reductions 
      *
      * @return $this
      */
@@ -424,7 +424,7 @@ class RefundCreate implements ModelInterface, ArrayAccess
     /**
      * Gets type
      *
-     * @return \VRPay\Sdk\Model\RefundType
+     * @return \VRPayment\Sdk\Model\RefundType
      */
     public function getType()
     {
@@ -434,7 +434,7 @@ class RefundCreate implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param \VRPay\Sdk\Model\RefundType $type 
+     * @param \VRPayment\Sdk\Model\RefundType $type 
      *
      * @return $this
      */

@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,20 +18,20 @@
  */
 
 
-namespace VRPay\Sdk\Service;
+namespace VRPayment\Sdk\Service;
 
-use VRPay\Sdk\ApiClient;
-use VRPay\Sdk\ApiException;
-use VRPay\Sdk\ApiResponse;
-use VRPay\Sdk\Http\HttpRequest;
-use VRPay\Sdk\ObjectSerializer;
+use VRPayment\Sdk\ApiClient;
+use VRPayment\Sdk\ApiException;
+use VRPayment\Sdk\ApiResponse;
+use VRPayment\Sdk\Http\HttpRequest;
+use VRPayment\Sdk\ObjectSerializer;
 
 /**
  * TokenService service
  *
  * @category Class
- * @package  VRPay\Sdk
- * @author   VR pay
+ * @package  VRPayment\Sdk
+ * @author   VR Payment GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class TokenService {
@@ -73,9 +73,9 @@ class TokenService {
 	 *
 	 * @param int $space_id  (required)
 	 * @param int $transaction_id The id of the transaction for which we want to check if the token can be created or not. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return bool
 	 */
 	public function checkTokenCreationPossible($space_id, $transaction_id) {
@@ -90,9 +90,9 @@ class TokenService {
      *
 	 * @param int $space_id  (required)
 	 * @param int $transaction_id The id of the transaction for which we want to check if the token can be created or not. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function checkTokenCreationPossibleWithHttpInfo($space_id, $transaction_id) {
@@ -161,7 +161,7 @@ class TokenService {
                 case 442:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -169,7 +169,7 @@ class TokenService {
                 case 542:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ServerError',
+                        '\VRPayment\Sdk\Model\ServerError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -185,10 +185,10 @@ class TokenService {
 	 * Count
 	 *
 	 * @param int $space_id  (required)
-	 * @param \VRPay\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @param \VRPayment\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return int
 	 */
 	public function count($space_id, $filter = null) {
@@ -202,10 +202,10 @@ class TokenService {
      
      *
 	 * @param int $space_id  (required)
-	 * @param \VRPay\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @param \VRPayment\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function countWithHttpInfo($space_id, $filter = null) {
@@ -272,7 +272,7 @@ class TokenService {
                 case 442:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -280,7 +280,7 @@ class TokenService {
                 case 542:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ServerError',
+                        '\VRPayment\Sdk\Model\ServerError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -296,11 +296,11 @@ class TokenService {
 	 * Create
 	 *
 	 * @param int $space_id  (required)
-	 * @param \VRPay\Sdk\Model\TokenCreate $entity The token object with the properties which should be created. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
-	 * @return \VRPay\Sdk\Model\Token
+	 * @param \VRPayment\Sdk\Model\TokenCreate $entity The token object with the properties which should be created. (required)
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
+	 * @return \VRPayment\Sdk\Model\Token
 	 */
 	public function create($space_id, $entity) {
 		return $this->createWithHttpInfo($space_id, $entity)->getData();
@@ -313,10 +313,10 @@ class TokenService {
      
      *
 	 * @param int $space_id  (required)
-	 * @param \VRPay\Sdk\Model\TokenCreate $entity The token object with the properties which should be created. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @param \VRPayment\Sdk\Model\TokenCreate $entity The token object with the properties which should be created. (required)
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function createWithHttpInfo($space_id, $entity) {
@@ -370,16 +370,16 @@ class TokenService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\VRPay\Sdk\Model\Token',
+				'\VRPayment\Sdk\Model\Token',
 				'/token/create'
             );
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPay\Sdk\Model\Token', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPayment\Sdk\Model\Token', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\Token',
+                        '\VRPayment\Sdk\Model\Token',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -387,7 +387,7 @@ class TokenService {
                 case 442:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -395,7 +395,7 @@ class TokenService {
                 case 542:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ServerError',
+                        '\VRPayment\Sdk\Model\ServerError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -412,10 +412,10 @@ class TokenService {
 	 *
 	 * @param int $space_id  (required)
 	 * @param int $transaction_id The id of the transaction for which we want to create the token. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
-	 * @return \VRPay\Sdk\Model\Token
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
+	 * @return \VRPayment\Sdk\Model\Token
 	 */
 	public function createToken($space_id, $transaction_id) {
 		return $this->createTokenWithHttpInfo($space_id, $transaction_id)->getData();
@@ -429,9 +429,9 @@ class TokenService {
      *
 	 * @param int $space_id  (required)
 	 * @param int $transaction_id The id of the transaction for which we want to create the token. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function createTokenWithHttpInfo($space_id, $transaction_id) {
@@ -483,16 +483,16 @@ class TokenService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\VRPay\Sdk\Model\Token',
+				'\VRPayment\Sdk\Model\Token',
 				'/token/create-token'
             );
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPay\Sdk\Model\Token', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPayment\Sdk\Model\Token', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\Token',
+                        '\VRPayment\Sdk\Model\Token',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -500,7 +500,7 @@ class TokenService {
                 case 442:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -508,7 +508,7 @@ class TokenService {
                 case 542:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ServerError',
+                        '\VRPayment\Sdk\Model\ServerError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -525,10 +525,10 @@ class TokenService {
 	 *
 	 * @param int $space_id  (required)
 	 * @param int $transaction_id The id of the transaction for which we want to create the token. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
-	 * @return \VRPay\Sdk\Model\TokenVersion
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
+	 * @return \VRPayment\Sdk\Model\TokenVersion
 	 */
 	public function createTokenBasedOnTransaction($space_id, $transaction_id) {
 		return $this->createTokenBasedOnTransactionWithHttpInfo($space_id, $transaction_id)->getData();
@@ -542,9 +542,9 @@ class TokenService {
      *
 	 * @param int $space_id  (required)
 	 * @param int $transaction_id The id of the transaction for which we want to create the token. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function createTokenBasedOnTransactionWithHttpInfo($space_id, $transaction_id) {
@@ -596,16 +596,16 @@ class TokenService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\VRPay\Sdk\Model\TokenVersion',
+				'\VRPayment\Sdk\Model\TokenVersion',
 				'/token/create-token-based-on-transaction'
             );
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPay\Sdk\Model\TokenVersion', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPayment\Sdk\Model\TokenVersion', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\TokenVersion',
+                        '\VRPayment\Sdk\Model\TokenVersion',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -613,7 +613,7 @@ class TokenService {
                 case 442:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -621,7 +621,7 @@ class TokenService {
                 case 542:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ServerError',
+                        '\VRPayment\Sdk\Model\ServerError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -638,10 +638,10 @@ class TokenService {
 	 *
 	 * @param int $space_id  (required)
 	 * @param int $token_id The id of the token which should be updated. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
-	 * @return \VRPay\Sdk\Model\Transaction
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
+	 * @return \VRPayment\Sdk\Model\Transaction
 	 */
 	public function createTransactionForTokenUpdate($space_id, $token_id) {
 		return $this->createTransactionForTokenUpdateWithHttpInfo($space_id, $token_id)->getData();
@@ -655,9 +655,9 @@ class TokenService {
      *
 	 * @param int $space_id  (required)
 	 * @param int $token_id The id of the token which should be updated. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function createTransactionForTokenUpdateWithHttpInfo($space_id, $token_id) {
@@ -709,16 +709,16 @@ class TokenService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\VRPay\Sdk\Model\Transaction',
+				'\VRPayment\Sdk\Model\Transaction',
 				'/token/createTransactionForTokenUpdate'
             );
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPay\Sdk\Model\Transaction', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPayment\Sdk\Model\Transaction', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\Transaction',
+                        '\VRPayment\Sdk\Model\Transaction',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -726,7 +726,7 @@ class TokenService {
                 case 442:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -734,7 +734,7 @@ class TokenService {
                 case 542:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ServerError',
+                        '\VRPayment\Sdk\Model\ServerError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -751,9 +751,9 @@ class TokenService {
 	 *
 	 * @param int $space_id  (required)
 	 * @param int $id  (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return void
 	 */
 	public function delete($space_id, $id) {
@@ -768,9 +768,9 @@ class TokenService {
      *
 	 * @param int $space_id  (required)
 	 * @param int $id  (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function deleteWithHttpInfo($space_id, $id) {
@@ -833,7 +833,7 @@ class TokenService {
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -841,7 +841,7 @@ class TokenService {
                 case 442:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -849,7 +849,7 @@ class TokenService {
                 case 542:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ServerError',
+                        '\VRPayment\Sdk\Model\ServerError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -866,10 +866,10 @@ class TokenService {
 	 *
 	 * @param int $space_id  (required)
 	 * @param int $transaction_id The id of the transaction for which we want to check if the token can be created or not. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
-	 * @return \VRPay\Sdk\Model\Charge
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
+	 * @return \VRPayment\Sdk\Model\Charge
 	 */
 	public function processTransaction($space_id, $transaction_id) {
 		return $this->processTransactionWithHttpInfo($space_id, $transaction_id)->getData();
@@ -883,9 +883,9 @@ class TokenService {
      *
 	 * @param int $space_id  (required)
 	 * @param int $transaction_id The id of the transaction for which we want to check if the token can be created or not. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function processTransactionWithHttpInfo($space_id, $transaction_id) {
@@ -937,16 +937,16 @@ class TokenService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\VRPay\Sdk\Model\Charge',
+				'\VRPayment\Sdk\Model\Charge',
 				'/token/process-transaction'
             );
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPay\Sdk\Model\Charge', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPayment\Sdk\Model\Charge', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\Charge',
+                        '\VRPayment\Sdk\Model\Charge',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -954,7 +954,7 @@ class TokenService {
                 case 442:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -962,7 +962,7 @@ class TokenService {
                 case 542:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ServerError',
+                        '\VRPayment\Sdk\Model\ServerError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -979,10 +979,10 @@ class TokenService {
 	 *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the token which should be returned. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
-	 * @return \VRPay\Sdk\Model\Token
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
+	 * @return \VRPayment\Sdk\Model\Token
 	 */
 	public function read($space_id, $id) {
 		return $this->readWithHttpInfo($space_id, $id)->getData();
@@ -996,9 +996,9 @@ class TokenService {
      *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the token which should be returned. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function readWithHttpInfo($space_id, $id) {
@@ -1050,16 +1050,16 @@ class TokenService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\VRPay\Sdk\Model\Token',
+				'\VRPayment\Sdk\Model\Token',
 				'/token/read'
             );
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPay\Sdk\Model\Token', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPayment\Sdk\Model\Token', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\Token',
+                        '\VRPayment\Sdk\Model\Token',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1067,7 +1067,7 @@ class TokenService {
                 case 442:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1075,7 +1075,7 @@ class TokenService {
                 case 542:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ServerError',
+                        '\VRPayment\Sdk\Model\ServerError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1091,11 +1091,11 @@ class TokenService {
 	 * Search
 	 *
 	 * @param int $space_id  (required)
-	 * @param \VRPay\Sdk\Model\EntityQuery $query The query restricts the tokens which are returned by the search. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
-	 * @return \VRPay\Sdk\Model\Token[]
+	 * @param \VRPayment\Sdk\Model\EntityQuery $query The query restricts the tokens which are returned by the search. (required)
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
+	 * @return \VRPayment\Sdk\Model\Token[]
 	 */
 	public function search($space_id, $query) {
 		return $this->searchWithHttpInfo($space_id, $query)->getData();
@@ -1108,10 +1108,10 @@ class TokenService {
      
      *
 	 * @param int $space_id  (required)
-	 * @param \VRPay\Sdk\Model\EntityQuery $query The query restricts the tokens which are returned by the search. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @param \VRPayment\Sdk\Model\EntityQuery $query The query restricts the tokens which are returned by the search. (required)
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function searchWithHttpInfo($space_id, $query) {
@@ -1165,16 +1165,16 @@ class TokenService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\VRPay\Sdk\Model\Token[]',
+				'\VRPayment\Sdk\Model\Token[]',
 				'/token/search'
             );
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPay\Sdk\Model\Token[]', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPayment\Sdk\Model\Token[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\Token[]',
+                        '\VRPayment\Sdk\Model\Token[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1182,7 +1182,7 @@ class TokenService {
                 case 442:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1190,7 +1190,7 @@ class TokenService {
                 case 542:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ServerError',
+                        '\VRPayment\Sdk\Model\ServerError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1206,11 +1206,11 @@ class TokenService {
 	 * Update
 	 *
 	 * @param int $space_id  (required)
-	 * @param \VRPay\Sdk\Model\TokenUpdate $entity The object with all the properties which should be updated. The id and the version are required properties. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
-	 * @return \VRPay\Sdk\Model\Token
+	 * @param \VRPayment\Sdk\Model\TokenUpdate $entity The object with all the properties which should be updated. The id and the version are required properties. (required)
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
+	 * @return \VRPayment\Sdk\Model\Token
 	 */
 	public function update($space_id, $entity) {
 		return $this->updateWithHttpInfo($space_id, $entity)->getData();
@@ -1223,10 +1223,10 @@ class TokenService {
      
      *
 	 * @param int $space_id  (required)
-	 * @param \VRPay\Sdk\Model\TokenUpdate $entity The object with all the properties which should be updated. The id and the version are required properties. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @param \VRPayment\Sdk\Model\TokenUpdate $entity The object with all the properties which should be updated. The id and the version are required properties. (required)
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function updateWithHttpInfo($space_id, $entity) {
@@ -1280,16 +1280,16 @@ class TokenService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\VRPay\Sdk\Model\Token',
+				'\VRPayment\Sdk\Model\Token',
 				'/token/update'
             );
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPay\Sdk\Model\Token', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPayment\Sdk\Model\Token', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\Token',
+                        '\VRPayment\Sdk\Model\Token',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1297,7 +1297,7 @@ class TokenService {
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1305,7 +1305,7 @@ class TokenService {
                 case 442:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1313,7 +1313,7 @@ class TokenService {
                 case 542:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ServerError',
+                        '\VRPayment\Sdk\Model\ServerError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

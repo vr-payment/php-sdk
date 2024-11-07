@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * TokenVersion model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class TokenVersion implements ModelInterface, ArrayAccess
@@ -50,27 +50,27 @@ class TokenVersion implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'activated_on' => '\DateTime',
-        'billing_address' => '\VRPay\Sdk\Model\Address',
+        'billing_address' => '\VRPayment\Sdk\Model\Address',
         'created_on' => '\DateTime',
-        'environment' => '\VRPay\Sdk\Model\ChargeAttemptEnvironment',
+        'environment' => '\VRPayment\Sdk\Model\ChargeAttemptEnvironment',
         'expires_on' => '\DateTime',
         'icon_url' => 'string',
         'id' => 'int',
-        'labels' => '\VRPay\Sdk\Model\Label[]',
+        'labels' => '\VRPayment\Sdk\Model\Label[]',
         'language' => 'string',
         'linked_space_id' => 'int',
         'name' => 'string',
         'obsoleted_on' => '\DateTime',
-        'payment_connector_configuration' => '\VRPay\Sdk\Model\PaymentConnectorConfiguration',
-        'payment_information_hashes' => '\VRPay\Sdk\Model\PaymentInformationHash[]',
+        'payment_connector_configuration' => '\VRPayment\Sdk\Model\PaymentConnectorConfiguration',
+        'payment_information_hashes' => '\VRPayment\Sdk\Model\PaymentInformationHash[]',
         'payment_method' => 'int',
         'payment_method_brand' => 'int',
         'planned_purge_date' => '\DateTime',
         'processor_token' => 'string',
-        'shipping_address' => '\VRPay\Sdk\Model\Address',
-        'state' => '\VRPay\Sdk\Model\TokenVersionState',
-        'token' => '\VRPay\Sdk\Model\Token',
-        'type' => '\VRPay\Sdk\Model\TokenVersionType',
+        'shipping_address' => '\VRPayment\Sdk\Model\Address',
+        'state' => '\VRPayment\Sdk\Model\TokenVersionState',
+        'token' => '\VRPayment\Sdk\Model\Token',
+        'type' => '\VRPayment\Sdk\Model\TokenVersionType',
         'version' => 'int'
     ];
 
@@ -390,7 +390,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Gets billing_address
      *
-     * @return \VRPay\Sdk\Model\Address
+     * @return \VRPayment\Sdk\Model\Address
      */
     public function getBillingAddress()
     {
@@ -400,7 +400,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Sets billing_address
      *
-     * @param \VRPay\Sdk\Model\Address $billing_address 
+     * @param \VRPayment\Sdk\Model\Address $billing_address 
      *
      * @return $this
      */
@@ -440,7 +440,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Gets environment
      *
-     * @return \VRPay\Sdk\Model\ChargeAttemptEnvironment
+     * @return \VRPayment\Sdk\Model\ChargeAttemptEnvironment
      */
     public function getEnvironment()
     {
@@ -450,7 +450,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Sets environment
      *
-     * @param \VRPay\Sdk\Model\ChargeAttemptEnvironment $environment 
+     * @param \VRPayment\Sdk\Model\ChargeAttemptEnvironment $environment 
      *
      * @return $this
      */
@@ -540,7 +540,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Gets labels
      *
-     * @return \VRPay\Sdk\Model\Label[]
+     * @return \VRPayment\Sdk\Model\Label[]
      */
     public function getLabels()
     {
@@ -550,7 +550,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Sets labels
      *
-     * @param \VRPay\Sdk\Model\Label[] $labels The labels providing additional information about the object.
+     * @param \VRPayment\Sdk\Model\Label[] $labels The labels providing additional information about the object.
      *
      * @return $this
      */
@@ -669,7 +669,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Gets payment_connector_configuration
      *
-     * @return \VRPay\Sdk\Model\PaymentConnectorConfiguration
+     * @return \VRPayment\Sdk\Model\PaymentConnectorConfiguration
      */
     public function getPaymentConnectorConfiguration()
     {
@@ -679,7 +679,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Sets payment_connector_configuration
      *
-     * @param \VRPay\Sdk\Model\PaymentConnectorConfiguration $payment_connector_configuration 
+     * @param \VRPayment\Sdk\Model\PaymentConnectorConfiguration $payment_connector_configuration 
      *
      * @return $this
      */
@@ -694,7 +694,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Gets payment_information_hashes
      *
-     * @return \VRPay\Sdk\Model\PaymentInformationHash[]
+     * @return \VRPayment\Sdk\Model\PaymentInformationHash[]
      */
     public function getPaymentInformationHashes()
     {
@@ -704,7 +704,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Sets payment_information_hashes
      *
-     * @param \VRPay\Sdk\Model\PaymentInformationHash[] $payment_information_hashes The payment information hash set contains hashes of the payment information represented by this token version.
+     * @param \VRPayment\Sdk\Model\PaymentInformationHash[] $payment_information_hashes The payment information hash set contains hashes of the payment information represented by this token version.
      *
      * @return $this
      */
@@ -823,7 +823,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Gets shipping_address
      *
-     * @return \VRPay\Sdk\Model\Address
+     * @return \VRPayment\Sdk\Model\Address
      */
     public function getShippingAddress()
     {
@@ -833,7 +833,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Sets shipping_address
      *
-     * @param \VRPay\Sdk\Model\Address $shipping_address 
+     * @param \VRPayment\Sdk\Model\Address $shipping_address 
      *
      * @return $this
      */
@@ -848,7 +848,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Gets state
      *
-     * @return \VRPay\Sdk\Model\TokenVersionState
+     * @return \VRPayment\Sdk\Model\TokenVersionState
      */
     public function getState()
     {
@@ -858,7 +858,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \VRPay\Sdk\Model\TokenVersionState $state The object's current state.
+     * @param \VRPayment\Sdk\Model\TokenVersionState $state The object's current state.
      *
      * @return $this
      */
@@ -873,7 +873,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Gets token
      *
-     * @return \VRPay\Sdk\Model\Token
+     * @return \VRPayment\Sdk\Model\Token
      */
     public function getToken()
     {
@@ -883,7 +883,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Sets token
      *
-     * @param \VRPay\Sdk\Model\Token $token 
+     * @param \VRPayment\Sdk\Model\Token $token 
      *
      * @return $this
      */
@@ -898,7 +898,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Gets type
      *
-     * @return \VRPay\Sdk\Model\TokenVersionType
+     * @return \VRPayment\Sdk\Model\TokenVersionType
      */
     public function getType()
     {
@@ -908,7 +908,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param \VRPay\Sdk\Model\TokenVersionType $type The token version type determines what kind of token it is and by which payment connector the token can be processed by.
+     * @param \VRPayment\Sdk\Model\TokenVersionType $type The token version type determines what kind of token it is and by which payment connector the token can be processed by.
      *
      * @return $this
      */

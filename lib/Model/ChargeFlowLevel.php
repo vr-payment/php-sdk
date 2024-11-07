@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,16 +18,16 @@
  */
 
 
-namespace VRPay\Sdk\Model;
-use \VRPay\Sdk\ObjectSerializer;
+namespace VRPayment\Sdk\Model;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * ChargeFlowLevel model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class ChargeFlowLevel extends TransactionAwareEntity 
@@ -48,14 +48,14 @@ class ChargeFlowLevel extends TransactionAwareEntity
       */
     protected static $swaggerTypes = [
         'asynchronous_charge' => 'int',
-        'configuration' => '\VRPay\Sdk\Model\ChargeFlowLevelConfiguration',
+        'configuration' => '\VRPayment\Sdk\Model\ChargeFlowLevelConfiguration',
         'created_on' => '\DateTime',
         'planned_purge_date' => '\DateTime',
-        'state' => '\VRPay\Sdk\Model\ChargeFlowLevelState',
+        'state' => '\VRPayment\Sdk\Model\ChargeFlowLevelState',
         'synchronous_charge' => 'int',
         'timeout_on' => '\DateTime',
         'token_charge' => 'int',
-        'transaction' => '\VRPay\Sdk\Model\Transaction',
+        'transaction' => '\VRPayment\Sdk\Model\Transaction',
         'version' => 'int'
     ];
 
@@ -285,7 +285,7 @@ class ChargeFlowLevel extends TransactionAwareEntity
     /**
      * Gets configuration
      *
-     * @return \VRPay\Sdk\Model\ChargeFlowLevelConfiguration
+     * @return \VRPayment\Sdk\Model\ChargeFlowLevelConfiguration
      */
     public function getConfiguration()
     {
@@ -295,7 +295,7 @@ class ChargeFlowLevel extends TransactionAwareEntity
     /**
      * Sets configuration
      *
-     * @param \VRPay\Sdk\Model\ChargeFlowLevelConfiguration $configuration 
+     * @param \VRPayment\Sdk\Model\ChargeFlowLevelConfiguration $configuration 
      *
      * @return $this
      */
@@ -360,7 +360,7 @@ class ChargeFlowLevel extends TransactionAwareEntity
     /**
      * Gets state
      *
-     * @return \VRPay\Sdk\Model\ChargeFlowLevelState
+     * @return \VRPayment\Sdk\Model\ChargeFlowLevelState
      */
     public function getState()
     {
@@ -370,7 +370,7 @@ class ChargeFlowLevel extends TransactionAwareEntity
     /**
      * Sets state
      *
-     * @param \VRPay\Sdk\Model\ChargeFlowLevelState $state The object's current state.
+     * @param \VRPayment\Sdk\Model\ChargeFlowLevelState $state The object's current state.
      *
      * @return $this
      */
@@ -460,7 +460,7 @@ class ChargeFlowLevel extends TransactionAwareEntity
     /**
      * Gets transaction
      *
-     * @return \VRPay\Sdk\Model\Transaction
+     * @return \VRPayment\Sdk\Model\Transaction
      */
     public function getTransaction()
     {
@@ -470,7 +470,7 @@ class ChargeFlowLevel extends TransactionAwareEntity
     /**
      * Sets transaction
      *
-     * @param \VRPay\Sdk\Model\Transaction $transaction 
+     * @param \VRPayment\Sdk\Model\Transaction $transaction 
      *
      * @return $this
      */

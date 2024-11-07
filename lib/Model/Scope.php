@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * Scope model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class Scope implements ModelInterface, ArrayAccess
@@ -50,14 +50,14 @@ class Scope implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'domain_name' => 'string',
-        'features' => '\VRPay\Sdk\Model\Feature[]',
+        'features' => '\VRPayment\Sdk\Model\Feature[]',
         'id' => 'int',
         'machine_name' => 'string',
         'name' => 'string',
         'planned_purge_date' => '\DateTime',
         'port' => 'int',
         'ssl_active' => 'bool',
-        'state' => '\VRPay\Sdk\Model\CreationEntityState',
+        'state' => '\VRPayment\Sdk\Model\CreationEntityState',
         'themes' => 'string[]',
         'url' => 'string',
         'version' => 'int'
@@ -321,7 +321,7 @@ class Scope implements ModelInterface, ArrayAccess
     /**
      * Gets features
      *
-     * @return \VRPay\Sdk\Model\Feature[]
+     * @return \VRPayment\Sdk\Model\Feature[]
      */
     public function getFeatures()
     {
@@ -331,7 +331,7 @@ class Scope implements ModelInterface, ArrayAccess
     /**
      * Sets features
      *
-     * @param \VRPay\Sdk\Model\Feature[] $features The list of features that are active in the scope.
+     * @param \VRPayment\Sdk\Model\Feature[] $features The list of features that are active in the scope.
      *
      * @return $this
      */
@@ -504,7 +504,7 @@ class Scope implements ModelInterface, ArrayAccess
     /**
      * Gets state
      *
-     * @return \VRPay\Sdk\Model\CreationEntityState
+     * @return \VRPayment\Sdk\Model\CreationEntityState
      */
     public function getState()
     {
@@ -514,7 +514,7 @@ class Scope implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \VRPay\Sdk\Model\CreationEntityState $state The object's current state.
+     * @param \VRPayment\Sdk\Model\CreationEntityState $state The object's current state.
      *
      * @return $this
      */

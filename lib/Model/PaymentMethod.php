@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * PaymentMethod model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class PaymentMethod implements ModelInterface, ArrayAccess
@@ -49,7 +49,7 @@ class PaymentMethod implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'data_collection_types' => '\VRPay\Sdk\Model\DataCollectionType[]',
+        'data_collection_types' => '\VRPayment\Sdk\Model\DataCollectionType[]',
         'description' => 'map[string,string]',
         'id' => 'int',
         'image_path' => 'string',
@@ -245,7 +245,7 @@ class PaymentMethod implements ModelInterface, ArrayAccess
     /**
      * Gets data_collection_types
      *
-     * @return \VRPay\Sdk\Model\DataCollectionType[]
+     * @return \VRPayment\Sdk\Model\DataCollectionType[]
      */
     public function getDataCollectionTypes()
     {
@@ -255,7 +255,7 @@ class PaymentMethod implements ModelInterface, ArrayAccess
     /**
      * Sets data_collection_types
      *
-     * @param \VRPay\Sdk\Model\DataCollectionType[] $data_collection_types The data collection types that are supported by the payment method.
+     * @param \VRPayment\Sdk\Model\DataCollectionType[] $data_collection_types The data collection types that are supported by the payment method.
      *
      * @return $this
      */

@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,17 +18,17 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * AbstractTransactionPending model
  *
  * @category    Class
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class AbstractTransactionPending implements ModelInterface, ArrayAccess
@@ -50,23 +50,23 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'allowed_payment_method_brands' => 'int[]',
         'allowed_payment_method_configurations' => 'int[]',
-        'billing_address' => '\VRPay\Sdk\Model\AddressCreate',
-        'completion_behavior' => '\VRPay\Sdk\Model\TransactionCompletionBehavior',
+        'billing_address' => '\VRPayment\Sdk\Model\AddressCreate',
+        'completion_behavior' => '\VRPayment\Sdk\Model\TransactionCompletionBehavior',
         'currency' => 'string',
         'customer_email_address' => 'string',
         'customer_id' => 'string',
         'failed_url' => 'string',
         'invoice_merchant_reference' => 'string',
         'language' => 'string',
-        'line_items' => '\VRPay\Sdk\Model\LineItemCreate[]',
+        'line_items' => '\VRPayment\Sdk\Model\LineItemCreate[]',
         'merchant_reference' => 'string',
         'meta_data' => 'map[string,string]',
-        'shipping_address' => '\VRPay\Sdk\Model\AddressCreate',
+        'shipping_address' => '\VRPayment\Sdk\Model\AddressCreate',
         'shipping_method' => 'string',
         'success_url' => 'string',
         'time_zone' => 'string',
         'token' => 'int',
-        'tokenization_mode' => '\VRPay\Sdk\Model\TokenizationMode'
+        'tokenization_mode' => '\VRPayment\Sdk\Model\TokenizationMode'
     ];
 
     /**
@@ -410,7 +410,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     /**
      * Gets billing_address
      *
-     * @return \VRPay\Sdk\Model\AddressCreate
+     * @return \VRPayment\Sdk\Model\AddressCreate
      */
     public function getBillingAddress()
     {
@@ -420,7 +420,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     /**
      * Sets billing_address
      *
-     * @param \VRPay\Sdk\Model\AddressCreate $billing_address The address associated with the payment method for invoicing and transaction processing purposes.
+     * @param \VRPayment\Sdk\Model\AddressCreate $billing_address The address associated with the payment method for invoicing and transaction processing purposes.
      *
      * @return $this
      */
@@ -435,7 +435,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     /**
      * Gets completion_behavior
      *
-     * @return \VRPay\Sdk\Model\TransactionCompletionBehavior
+     * @return \VRPayment\Sdk\Model\TransactionCompletionBehavior
      */
     public function getCompletionBehavior()
     {
@@ -445,7 +445,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     /**
      * Sets completion_behavior
      *
-     * @param \VRPay\Sdk\Model\TransactionCompletionBehavior $completion_behavior The behavior that controls when the transaction is completed.
+     * @param \VRPayment\Sdk\Model\TransactionCompletionBehavior $completion_behavior The behavior that controls when the transaction is completed.
      *
      * @return $this
      */
@@ -625,7 +625,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     /**
      * Gets line_items
      *
-     * @return \VRPay\Sdk\Model\LineItemCreate[]
+     * @return \VRPayment\Sdk\Model\LineItemCreate[]
      */
     public function getLineItems()
     {
@@ -635,7 +635,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     /**
      * Sets line_items
      *
-     * @param \VRPay\Sdk\Model\LineItemCreate[] $line_items The line items purchased by the customer.
+     * @param \VRPayment\Sdk\Model\LineItemCreate[] $line_items The line items purchased by the customer.
      *
      * @return $this
      */
@@ -704,7 +704,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     /**
      * Gets shipping_address
      *
-     * @return \VRPay\Sdk\Model\AddressCreate
+     * @return \VRPayment\Sdk\Model\AddressCreate
      */
     public function getShippingAddress()
     {
@@ -714,7 +714,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     /**
      * Sets shipping_address
      *
-     * @param \VRPay\Sdk\Model\AddressCreate $shipping_address The address to where the order will be shipped.
+     * @param \VRPayment\Sdk\Model\AddressCreate $shipping_address The address to where the order will be shipped.
      *
      * @return $this
      */
@@ -840,7 +840,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     /**
      * Gets tokenization_mode
      *
-     * @return \VRPay\Sdk\Model\TokenizationMode
+     * @return \VRPayment\Sdk\Model\TokenizationMode
      */
     public function getTokenizationMode()
     {
@@ -850,7 +850,7 @@ class AbstractTransactionPending implements ModelInterface, ArrayAccess
     /**
      * Sets tokenization_mode
      *
-     * @param \VRPay\Sdk\Model\TokenizationMode $tokenization_mode The tokenization mode specifies whether and how the tokenization of payment information is applied to the transaction.
+     * @param \VRPayment\Sdk\Model\TokenizationMode $tokenization_mode The tokenization mode specifies whether and how the tokenization of payment information is applied to the transaction.
      *
      * @return $this
      */

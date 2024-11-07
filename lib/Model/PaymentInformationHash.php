@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * PaymentInformationHash model
  *
  * @category    Class
  * @description A payment information hash is calculated based on the information entered by the user. The same input leads to the same hash. The hash is collision free.
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class PaymentInformationHash implements ModelInterface, ArrayAccess
@@ -50,7 +50,7 @@ class PaymentInformationHash implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'id' => 'int',
-        'type' => '\VRPay\Sdk\Model\PaymentInformationHashType',
+        'type' => '\VRPayment\Sdk\Model\PaymentInformationHashType',
         'value' => 'string'
     ];
 
@@ -242,7 +242,7 @@ class PaymentInformationHash implements ModelInterface, ArrayAccess
     /**
      * Gets type
      *
-     * @return \VRPay\Sdk\Model\PaymentInformationHashType
+     * @return \VRPayment\Sdk\Model\PaymentInformationHashType
      */
     public function getType()
     {
@@ -252,7 +252,7 @@ class PaymentInformationHash implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param \VRPay\Sdk\Model\PaymentInformationHashType $type 
+     * @param \VRPayment\Sdk\Model\PaymentInformationHashType $type 
      *
      * @return $this
      */

@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,20 +18,20 @@
  */
 
 
-namespace VRPay\Sdk\Service;
+namespace VRPayment\Sdk\Service;
 
-use VRPay\Sdk\ApiClient;
-use VRPay\Sdk\ApiException;
-use VRPay\Sdk\ApiResponse;
-use VRPay\Sdk\Http\HttpRequest;
-use VRPay\Sdk\ObjectSerializer;
+use VRPayment\Sdk\ApiClient;
+use VRPayment\Sdk\ApiException;
+use VRPayment\Sdk\ApiResponse;
+use VRPayment\Sdk\Http\HttpRequest;
+use VRPayment\Sdk\ObjectSerializer;
 
 /**
  * TransactionInvoiceCommentService service
  *
  * @category Class
- * @package  VRPay\Sdk
- * @author   VR pay
+ * @package  VRPayment\Sdk
+ * @author   VR Payment GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class TransactionInvoiceCommentService {
@@ -73,10 +73,10 @@ class TransactionInvoiceCommentService {
 	 *
 	 * @param int $space_id  (required)
 	 * @param int $invoice_id  (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
-	 * @return \VRPay\Sdk\Model\TransactionInvoiceComment[]
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
+	 * @return \VRPayment\Sdk\Model\TransactionInvoiceComment[]
 	 */
 	public function all($space_id, $invoice_id) {
 		return $this->allWithHttpInfo($space_id, $invoice_id)->getData();
@@ -90,9 +90,9 @@ class TransactionInvoiceCommentService {
      *
 	 * @param int $space_id  (required)
 	 * @param int $invoice_id  (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function allWithHttpInfo($space_id, $invoice_id) {
@@ -144,16 +144,16 @@ class TransactionInvoiceCommentService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\VRPay\Sdk\Model\TransactionInvoiceComment[]',
+				'\VRPayment\Sdk\Model\TransactionInvoiceComment[]',
 				'/transaction-invoice-comment/all'
             );
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPay\Sdk\Model\TransactionInvoiceComment[]', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPayment\Sdk\Model\TransactionInvoiceComment[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\TransactionInvoiceComment[]',
+                        '\VRPayment\Sdk\Model\TransactionInvoiceComment[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -161,7 +161,7 @@ class TransactionInvoiceCommentService {
                 case 442:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -169,7 +169,7 @@ class TransactionInvoiceCommentService {
                 case 542:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ServerError',
+                        '\VRPayment\Sdk\Model\ServerError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -185,11 +185,11 @@ class TransactionInvoiceCommentService {
 	 * Create
 	 *
 	 * @param int $space_id  (required)
-	 * @param \VRPay\Sdk\Model\TransactionInvoiceCommentCreate $entity The comment object which should be created. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
-	 * @return \VRPay\Sdk\Model\TransactionInvoiceComment
+	 * @param \VRPayment\Sdk\Model\TransactionInvoiceCommentCreate $entity The comment object which should be created. (required)
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
+	 * @return \VRPayment\Sdk\Model\TransactionInvoiceComment
 	 */
 	public function create($space_id, $entity) {
 		return $this->createWithHttpInfo($space_id, $entity)->getData();
@@ -202,10 +202,10 @@ class TransactionInvoiceCommentService {
      
      *
 	 * @param int $space_id  (required)
-	 * @param \VRPay\Sdk\Model\TransactionInvoiceCommentCreate $entity The comment object which should be created. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @param \VRPayment\Sdk\Model\TransactionInvoiceCommentCreate $entity The comment object which should be created. (required)
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function createWithHttpInfo($space_id, $entity) {
@@ -259,16 +259,16 @@ class TransactionInvoiceCommentService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\VRPay\Sdk\Model\TransactionInvoiceComment',
+				'\VRPayment\Sdk\Model\TransactionInvoiceComment',
 				'/transaction-invoice-comment/create'
             );
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPay\Sdk\Model\TransactionInvoiceComment', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPayment\Sdk\Model\TransactionInvoiceComment', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\TransactionInvoiceComment',
+                        '\VRPayment\Sdk\Model\TransactionInvoiceComment',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -276,7 +276,7 @@ class TransactionInvoiceCommentService {
                 case 442:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -284,7 +284,7 @@ class TransactionInvoiceCommentService {
                 case 542:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ServerError',
+                        '\VRPayment\Sdk\Model\ServerError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -301,9 +301,9 @@ class TransactionInvoiceCommentService {
 	 *
 	 * @param int $space_id  (required)
 	 * @param int $id  (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return void
 	 */
 	public function delete($space_id, $id) {
@@ -318,9 +318,9 @@ class TransactionInvoiceCommentService {
      *
 	 * @param int $space_id  (required)
 	 * @param int $id  (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function deleteWithHttpInfo($space_id, $id) {
@@ -383,7 +383,7 @@ class TransactionInvoiceCommentService {
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -391,7 +391,7 @@ class TransactionInvoiceCommentService {
                 case 442:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -399,7 +399,7 @@ class TransactionInvoiceCommentService {
                 case 542:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ServerError',
+                        '\VRPayment\Sdk\Model\ServerError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -416,9 +416,9 @@ class TransactionInvoiceCommentService {
 	 *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the comment to pin to the top. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return void
 	 */
 	public function pin($space_id, $id) {
@@ -433,9 +433,9 @@ class TransactionInvoiceCommentService {
      *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the comment to pin to the top. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function pinWithHttpInfo($space_id, $id) {
@@ -496,7 +496,7 @@ class TransactionInvoiceCommentService {
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -504,7 +504,7 @@ class TransactionInvoiceCommentService {
                 case 442:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -512,7 +512,7 @@ class TransactionInvoiceCommentService {
                 case 542:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ServerError',
+                        '\VRPayment\Sdk\Model\ServerError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -529,10 +529,10 @@ class TransactionInvoiceCommentService {
 	 *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the comment which should be returned. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
-	 * @return \VRPay\Sdk\Model\TransactionInvoiceComment
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
+	 * @return \VRPayment\Sdk\Model\TransactionInvoiceComment
 	 */
 	public function read($space_id, $id) {
 		return $this->readWithHttpInfo($space_id, $id)->getData();
@@ -546,9 +546,9 @@ class TransactionInvoiceCommentService {
      *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the comment which should be returned. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function readWithHttpInfo($space_id, $id) {
@@ -600,16 +600,16 @@ class TransactionInvoiceCommentService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\VRPay\Sdk\Model\TransactionInvoiceComment',
+				'\VRPayment\Sdk\Model\TransactionInvoiceComment',
 				'/transaction-invoice-comment/read'
             );
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPay\Sdk\Model\TransactionInvoiceComment', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPayment\Sdk\Model\TransactionInvoiceComment', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\TransactionInvoiceComment',
+                        '\VRPayment\Sdk\Model\TransactionInvoiceComment',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -617,7 +617,7 @@ class TransactionInvoiceCommentService {
                 case 442:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -625,7 +625,7 @@ class TransactionInvoiceCommentService {
                 case 542:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ServerError',
+                        '\VRPayment\Sdk\Model\ServerError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -642,9 +642,9 @@ class TransactionInvoiceCommentService {
 	 *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the comment to unpin. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return void
 	 */
 	public function unpin($space_id, $id) {
@@ -659,9 +659,9 @@ class TransactionInvoiceCommentService {
      *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the comment to unpin. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function unpinWithHttpInfo($space_id, $id) {
@@ -722,7 +722,7 @@ class TransactionInvoiceCommentService {
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -730,7 +730,7 @@ class TransactionInvoiceCommentService {
                 case 442:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -738,7 +738,7 @@ class TransactionInvoiceCommentService {
                 case 542:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ServerError',
+                        '\VRPayment\Sdk\Model\ServerError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -754,11 +754,11 @@ class TransactionInvoiceCommentService {
 	 * Update
 	 *
 	 * @param int $space_id  (required)
-	 * @param \VRPay\Sdk\Model\TransactionInvoiceCommentActive $entity The comment object with the properties which should be updated. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
-	 * @return \VRPay\Sdk\Model\TransactionInvoiceComment
+	 * @param \VRPayment\Sdk\Model\TransactionInvoiceCommentActive $entity The comment object with the properties which should be updated. (required)
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
+	 * @return \VRPayment\Sdk\Model\TransactionInvoiceComment
 	 */
 	public function update($space_id, $entity) {
 		return $this->updateWithHttpInfo($space_id, $entity)->getData();
@@ -771,10 +771,10 @@ class TransactionInvoiceCommentService {
      
      *
 	 * @param int $space_id  (required)
-	 * @param \VRPay\Sdk\Model\TransactionInvoiceCommentActive $entity The comment object with the properties which should be updated. (required)
-	 * @throws \VRPay\Sdk\ApiException
-	 * @throws \VRPay\Sdk\VersioningException
-	 * @throws \VRPay\Sdk\Http\ConnectionException
+	 * @param \VRPayment\Sdk\Model\TransactionInvoiceCommentActive $entity The comment object with the properties which should be updated. (required)
+	 * @throws \VRPayment\Sdk\ApiException
+	 * @throws \VRPayment\Sdk\VersioningException
+	 * @throws \VRPayment\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function updateWithHttpInfo($space_id, $entity) {
@@ -828,16 +828,16 @@ class TransactionInvoiceCommentService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\VRPay\Sdk\Model\TransactionInvoiceComment',
+				'\VRPayment\Sdk\Model\TransactionInvoiceComment',
 				'/transaction-invoice-comment/update'
             );
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPay\Sdk\Model\TransactionInvoiceComment', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\VRPayment\Sdk\Model\TransactionInvoiceComment', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\TransactionInvoiceComment',
+                        '\VRPayment\Sdk\Model\TransactionInvoiceComment',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -845,7 +845,7 @@ class TransactionInvoiceCommentService {
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -853,7 +853,7 @@ class TransactionInvoiceCommentService {
                 case 442:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ClientError',
+                        '\VRPayment\Sdk\Model\ClientError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -861,7 +861,7 @@ class TransactionInvoiceCommentService {
                 case 542:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPay\Sdk\Model\ServerError',
+                        '\VRPayment\Sdk\Model\ServerError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

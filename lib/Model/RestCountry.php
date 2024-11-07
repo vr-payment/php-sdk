@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * RestCountry model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class RestCountry implements ModelInterface, ArrayAccess
@@ -49,7 +49,7 @@ class RestCountry implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'address_format' => '\VRPay\Sdk\Model\RestAddressFormat',
+        'address_format' => '\VRPayment\Sdk\Model\RestAddressFormat',
         'iso_code2' => 'string',
         'iso_code3' => 'string',
         'name' => 'string',
@@ -238,7 +238,7 @@ class RestCountry implements ModelInterface, ArrayAccess
     /**
      * Gets address_format
      *
-     * @return \VRPay\Sdk\Model\RestAddressFormat
+     * @return \VRPayment\Sdk\Model\RestAddressFormat
      */
     public function getAddressFormat()
     {
@@ -248,7 +248,7 @@ class RestCountry implements ModelInterface, ArrayAccess
     /**
      * Sets address_format
      *
-     * @param \VRPay\Sdk\Model\RestAddressFormat $address_format Specifies the country's way of formatting addresses.
+     * @param \VRPayment\Sdk\Model\RestAddressFormat $address_format Specifies the country's way of formatting addresses.
      *
      * @return $this
      */

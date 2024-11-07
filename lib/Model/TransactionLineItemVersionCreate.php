@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * TransactionLineItemVersionCreate model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class TransactionLineItemVersionCreate implements ModelInterface, ArrayAccess
@@ -50,7 +50,7 @@ class TransactionLineItemVersionCreate implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'external_id' => 'string',
-        'line_items' => '\VRPay\Sdk\Model\LineItemCreate[]',
+        'line_items' => '\VRPayment\Sdk\Model\LineItemCreate[]',
         'transaction' => 'int'
     ];
 
@@ -251,7 +251,7 @@ class TransactionLineItemVersionCreate implements ModelInterface, ArrayAccess
     /**
      * Gets line_items
      *
-     * @return \VRPay\Sdk\Model\LineItemCreate[]
+     * @return \VRPayment\Sdk\Model\LineItemCreate[]
      */
     public function getLineItems()
     {
@@ -261,7 +261,7 @@ class TransactionLineItemVersionCreate implements ModelInterface, ArrayAccess
     /**
      * Sets line_items
      *
-     * @param \VRPay\Sdk\Model\LineItemCreate[] $line_items 
+     * @param \VRPayment\Sdk\Model\LineItemCreate[] $line_items 
      *
      * @return $this
      */

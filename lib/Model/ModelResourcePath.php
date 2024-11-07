@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * ModelResourcePath model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class ModelResourcePath implements ModelInterface, ArrayAccess
@@ -54,7 +54,7 @@ class ModelResourcePath implements ModelInterface, ArrayAccess
         'path' => 'string',
         'planned_purge_date' => '\DateTime',
         'space_id' => 'int',
-        'state' => '\VRPay\Sdk\Model\ResourceState',
+        'state' => '\VRPayment\Sdk\Model\ResourceState',
         'version' => 'int'
     ];
 
@@ -385,7 +385,7 @@ class ModelResourcePath implements ModelInterface, ArrayAccess
     /**
      * Gets state
      *
-     * @return \VRPay\Sdk\Model\ResourceState
+     * @return \VRPayment\Sdk\Model\ResourceState
      */
     public function getState()
     {
@@ -395,7 +395,7 @@ class ModelResourcePath implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \VRPay\Sdk\Model\ResourceState $state The object's current state.
+     * @param \VRPayment\Sdk\Model\ResourceState $state The object's current state.
      *
      * @return $this
      */

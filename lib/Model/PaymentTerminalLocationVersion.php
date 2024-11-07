@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * PaymentTerminalLocationVersion model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
@@ -49,15 +49,15 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'address' => '\VRPay\Sdk\Model\PaymentTerminalAddress',
-        'contact_address' => '\VRPay\Sdk\Model\PaymentTerminalAddress',
+        'address' => '\VRPayment\Sdk\Model\PaymentTerminalAddress',
+        'contact_address' => '\VRPayment\Sdk\Model\PaymentTerminalAddress',
         'created_by' => 'int',
         'created_on' => '\DateTime',
         'id' => 'int',
         'linked_space_id' => 'int',
-        'location' => '\VRPay\Sdk\Model\PaymentTerminalLocation',
+        'location' => '\VRPayment\Sdk\Model\PaymentTerminalLocation',
         'planned_purge_date' => '\DateTime',
-        'state' => '\VRPay\Sdk\Model\PaymentTerminalLocationVersionState',
+        'state' => '\VRPayment\Sdk\Model\PaymentTerminalLocationVersionState',
         'version' => 'int',
         'version_applied_immediately' => 'bool'
     ];
@@ -273,7 +273,7 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     /**
      * Gets address
      *
-     * @return \VRPay\Sdk\Model\PaymentTerminalAddress
+     * @return \VRPayment\Sdk\Model\PaymentTerminalAddress
      */
     public function getAddress()
     {
@@ -283,7 +283,7 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     /**
      * Sets address
      *
-     * @param \VRPay\Sdk\Model\PaymentTerminalAddress $address The postal address of the location where the payment terminals are used.
+     * @param \VRPayment\Sdk\Model\PaymentTerminalAddress $address The postal address of the location where the payment terminals are used.
      *
      * @return $this
      */
@@ -298,7 +298,7 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     /**
      * Gets contact_address
      *
-     * @return \VRPay\Sdk\Model\PaymentTerminalAddress
+     * @return \VRPayment\Sdk\Model\PaymentTerminalAddress
      */
     public function getContactAddress()
     {
@@ -308,7 +308,7 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     /**
      * Sets contact_address
      *
-     * @param \VRPay\Sdk\Model\PaymentTerminalAddress $contact_address The contact details if the person responsible for the payment terminals at this location.
+     * @param \VRPayment\Sdk\Model\PaymentTerminalAddress $contact_address The contact details if the person responsible for the payment terminals at this location.
      *
      * @return $this
      */
@@ -423,7 +423,7 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     /**
      * Gets location
      *
-     * @return \VRPay\Sdk\Model\PaymentTerminalLocation
+     * @return \VRPayment\Sdk\Model\PaymentTerminalLocation
      */
     public function getLocation()
     {
@@ -433,7 +433,7 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     /**
      * Sets location
      *
-     * @param \VRPay\Sdk\Model\PaymentTerminalLocation $location The payment terminal location that the version belongs to.
+     * @param \VRPayment\Sdk\Model\PaymentTerminalLocation $location The payment terminal location that the version belongs to.
      *
      * @return $this
      */
@@ -473,7 +473,7 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     /**
      * Gets state
      *
-     * @return \VRPay\Sdk\Model\PaymentTerminalLocationVersionState
+     * @return \VRPayment\Sdk\Model\PaymentTerminalLocationVersionState
      */
     public function getState()
     {
@@ -483,7 +483,7 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \VRPay\Sdk\Model\PaymentTerminalLocationVersionState $state The object's current state.
+     * @param \VRPayment\Sdk\Model\PaymentTerminalLocationVersionState $state The object's current state.
      *
      * @return $this
      */

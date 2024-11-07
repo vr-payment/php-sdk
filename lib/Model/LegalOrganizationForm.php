@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * LegalOrganizationForm model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class LegalOrganizationForm implements ModelInterface, ArrayAccess
@@ -50,10 +50,10 @@ class LegalOrganizationForm implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'country' => 'string',
-        'description' => '\VRPay\Sdk\Model\LocalizedString[]',
+        'description' => '\VRPayment\Sdk\Model\LocalizedString[]',
         'english_description' => 'string',
         'id' => 'int',
-        'shortcut' => '\VRPay\Sdk\Model\LocalizedString[]'
+        'shortcut' => '\VRPayment\Sdk\Model\LocalizedString[]'
     ];
 
     /**
@@ -256,7 +256,7 @@ class LegalOrganizationForm implements ModelInterface, ArrayAccess
     /**
      * Gets description
      *
-     * @return \VRPay\Sdk\Model\LocalizedString[]
+     * @return \VRPayment\Sdk\Model\LocalizedString[]
      */
     public function getDescription()
     {
@@ -266,7 +266,7 @@ class LegalOrganizationForm implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param \VRPay\Sdk\Model\LocalizedString[] $description The localized descriptions of the legal organization form.
+     * @param \VRPayment\Sdk\Model\LocalizedString[] $description The localized descriptions of the legal organization form.
      *
      * @return $this
      */
@@ -331,7 +331,7 @@ class LegalOrganizationForm implements ModelInterface, ArrayAccess
     /**
      * Gets shortcut
      *
-     * @return \VRPay\Sdk\Model\LocalizedString[]
+     * @return \VRPayment\Sdk\Model\LocalizedString[]
      */
     public function getShortcut()
     {
@@ -341,7 +341,7 @@ class LegalOrganizationForm implements ModelInterface, ArrayAccess
     /**
      * Sets shortcut
      *
-     * @param \VRPay\Sdk\Model\LocalizedString[] $shortcut The localized shortcuts of the legal organization form.
+     * @param \VRPayment\Sdk\Model\LocalizedString[] $shortcut The localized shortcuts of the legal organization form.
      *
      * @return $this
      */

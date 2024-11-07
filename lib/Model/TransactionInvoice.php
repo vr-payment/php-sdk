@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,16 +18,16 @@
  */
 
 
-namespace VRPay\Sdk\Model;
-use \VRPay\Sdk\ObjectSerializer;
+namespace VRPayment\Sdk\Model;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * TransactionInvoice model
  *
  * @category    Class
  * @description The transaction invoice represents the invoice document for a particular transaction.
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class TransactionInvoice extends TransactionAwareEntity 
@@ -48,22 +48,22 @@ class TransactionInvoice extends TransactionAwareEntity
       */
     protected static $swaggerTypes = [
         'amount' => 'float',
-        'billing_address' => '\VRPay\Sdk\Model\Address',
-        'completion' => '\VRPay\Sdk\Model\TransactionCompletion',
+        'billing_address' => '\VRPayment\Sdk\Model\Address',
+        'completion' => '\VRPayment\Sdk\Model\TransactionCompletion',
         'created_on' => '\DateTime',
         'derecognized_by' => 'int',
         'derecognized_on' => '\DateTime',
         'due_on' => '\DateTime',
-        'environment' => '\VRPay\Sdk\Model\Environment',
+        'environment' => '\VRPayment\Sdk\Model\Environment',
         'external_id' => 'string',
         'language' => 'string',
-        'line_items' => '\VRPay\Sdk\Model\LineItem[]',
+        'line_items' => '\VRPayment\Sdk\Model\LineItem[]',
         'merchant_reference' => 'string',
         'outstanding_amount' => 'float',
         'paid_on' => '\DateTime',
         'planned_purge_date' => '\DateTime',
         'space_view_id' => 'int',
-        'state' => '\VRPay\Sdk\Model\TransactionInvoiceState',
+        'state' => '\VRPayment\Sdk\Model\TransactionInvoiceState',
         'tax_amount' => 'float',
         'time_zone' => 'string',
         'version' => 'int'
@@ -367,7 +367,7 @@ class TransactionInvoice extends TransactionAwareEntity
     /**
      * Gets billing_address
      *
-     * @return \VRPay\Sdk\Model\Address
+     * @return \VRPayment\Sdk\Model\Address
      */
     public function getBillingAddress()
     {
@@ -377,7 +377,7 @@ class TransactionInvoice extends TransactionAwareEntity
     /**
      * Sets billing_address
      *
-     * @param \VRPay\Sdk\Model\Address $billing_address 
+     * @param \VRPayment\Sdk\Model\Address $billing_address 
      *
      * @return $this
      */
@@ -392,7 +392,7 @@ class TransactionInvoice extends TransactionAwareEntity
     /**
      * Gets completion
      *
-     * @return \VRPay\Sdk\Model\TransactionCompletion
+     * @return \VRPayment\Sdk\Model\TransactionCompletion
      */
     public function getCompletion()
     {
@@ -402,7 +402,7 @@ class TransactionInvoice extends TransactionAwareEntity
     /**
      * Sets completion
      *
-     * @param \VRPay\Sdk\Model\TransactionCompletion $completion 
+     * @param \VRPayment\Sdk\Model\TransactionCompletion $completion 
      *
      * @return $this
      */
@@ -517,7 +517,7 @@ class TransactionInvoice extends TransactionAwareEntity
     /**
      * Gets environment
      *
-     * @return \VRPay\Sdk\Model\Environment
+     * @return \VRPayment\Sdk\Model\Environment
      */
     public function getEnvironment()
     {
@@ -527,7 +527,7 @@ class TransactionInvoice extends TransactionAwareEntity
     /**
      * Sets environment
      *
-     * @param \VRPay\Sdk\Model\Environment $environment 
+     * @param \VRPayment\Sdk\Model\Environment $environment 
      *
      * @return $this
      */
@@ -599,7 +599,7 @@ class TransactionInvoice extends TransactionAwareEntity
     /**
      * Gets line_items
      *
-     * @return \VRPay\Sdk\Model\LineItem[]
+     * @return \VRPayment\Sdk\Model\LineItem[]
      */
     public function getLineItems()
     {
@@ -609,7 +609,7 @@ class TransactionInvoice extends TransactionAwareEntity
     /**
      * Sets line_items
      *
-     * @param \VRPay\Sdk\Model\LineItem[] $line_items 
+     * @param \VRPayment\Sdk\Model\LineItem[] $line_items 
      *
      * @return $this
      */
@@ -753,7 +753,7 @@ class TransactionInvoice extends TransactionAwareEntity
     /**
      * Gets state
      *
-     * @return \VRPay\Sdk\Model\TransactionInvoiceState
+     * @return \VRPayment\Sdk\Model\TransactionInvoiceState
      */
     public function getState()
     {
@@ -763,7 +763,7 @@ class TransactionInvoice extends TransactionAwareEntity
     /**
      * Sets state
      *
-     * @param \VRPay\Sdk\Model\TransactionInvoiceState $state The object's current state.
+     * @param \VRPayment\Sdk\Model\TransactionInvoiceState $state The object's current state.
      *
      * @return $this
      */

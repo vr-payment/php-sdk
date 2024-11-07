@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * EntityQueryFilter model
  *
  * @category    Class
  * @description The query filter allows to restrict the entities which are returned.
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class EntityQueryFilter implements ModelInterface, ArrayAccess
@@ -49,10 +49,10 @@ class EntityQueryFilter implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'children' => '\VRPay\Sdk\Model\EntityQueryFilter[]',
+        'children' => '\VRPayment\Sdk\Model\EntityQueryFilter[]',
         'field_name' => 'string',
-        'operator' => '\VRPay\Sdk\Model\CriteriaOperator',
-        'type' => '\VRPay\Sdk\Model\EntityQueryFilterType',
+        'operator' => '\VRPayment\Sdk\Model\CriteriaOperator',
+        'type' => '\VRPayment\Sdk\Model\EntityQueryFilterType',
         'value' => 'object'
     ];
 
@@ -234,7 +234,7 @@ class EntityQueryFilter implements ModelInterface, ArrayAccess
     /**
      * Gets children
      *
-     * @return \VRPay\Sdk\Model\EntityQueryFilter[]
+     * @return \VRPayment\Sdk\Model\EntityQueryFilter[]
      */
     public function getChildren()
     {
@@ -244,7 +244,7 @@ class EntityQueryFilter implements ModelInterface, ArrayAccess
     /**
      * Sets children
      *
-     * @param \VRPay\Sdk\Model\EntityQueryFilter[] $children The 'children' can contain other filter nodes which are applied to the query. This property is only applicable on filter types 'OR' and 'AND'.
+     * @param \VRPayment\Sdk\Model\EntityQueryFilter[] $children The 'children' can contain other filter nodes which are applied to the query. This property is only applicable on filter types 'OR' and 'AND'.
      *
      * @return $this
      */
@@ -284,7 +284,7 @@ class EntityQueryFilter implements ModelInterface, ArrayAccess
     /**
      * Gets operator
      *
-     * @return \VRPay\Sdk\Model\CriteriaOperator
+     * @return \VRPayment\Sdk\Model\CriteriaOperator
      */
     public function getOperator()
     {
@@ -294,7 +294,7 @@ class EntityQueryFilter implements ModelInterface, ArrayAccess
     /**
      * Sets operator
      *
-     * @param \VRPay\Sdk\Model\CriteriaOperator $operator The 'operator' indicates what kind of filtering on the 'fieldName' is executed on. This property is only applicable on filter type 'LEAF'.
+     * @param \VRPayment\Sdk\Model\CriteriaOperator $operator The 'operator' indicates what kind of filtering on the 'fieldName' is executed on. This property is only applicable on filter type 'LEAF'.
      *
      * @return $this
      */
@@ -309,7 +309,7 @@ class EntityQueryFilter implements ModelInterface, ArrayAccess
     /**
      * Gets type
      *
-     * @return \VRPay\Sdk\Model\EntityQueryFilterType
+     * @return \VRPayment\Sdk\Model\EntityQueryFilterType
      */
     public function getType()
     {
@@ -319,7 +319,7 @@ class EntityQueryFilter implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param \VRPay\Sdk\Model\EntityQueryFilterType $type The filter type controls how the query node is interpreted. I.e. if the node acts as leaf node or as a filter group.
+     * @param \VRPayment\Sdk\Model\EntityQueryFilterType $type The filter type controls how the query node is interpreted. I.e. if the node acts as leaf node or as a filter group.
      *
      * @return $this
      */

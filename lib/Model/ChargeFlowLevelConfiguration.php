@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * ChargeFlowLevelConfiguration model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class ChargeFlowLevelConfiguration implements ModelInterface, ArrayAccess
@@ -49,14 +49,14 @@ class ChargeFlowLevelConfiguration implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'flow' => '\VRPay\Sdk\Model\ChargeFlow',
+        'flow' => '\VRPayment\Sdk\Model\ChargeFlow',
         'id' => 'int',
         'linked_space_id' => 'int',
         'name' => 'string',
         'period' => 'string',
         'planned_purge_date' => '\DateTime',
         'priority' => 'int',
-        'state' => '\VRPay\Sdk\Model\CreationEntityState',
+        'state' => '\VRPayment\Sdk\Model\CreationEntityState',
         'type' => 'int',
         'version' => 'int'
     ];
@@ -270,7 +270,7 @@ class ChargeFlowLevelConfiguration implements ModelInterface, ArrayAccess
     /**
      * Gets flow
      *
-     * @return \VRPay\Sdk\Model\ChargeFlow
+     * @return \VRPayment\Sdk\Model\ChargeFlow
      */
     public function getFlow()
     {
@@ -280,7 +280,7 @@ class ChargeFlowLevelConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets flow
      *
-     * @param \VRPay\Sdk\Model\ChargeFlow $flow The charge flow level configuration to which the flow is associated.
+     * @param \VRPayment\Sdk\Model\ChargeFlow $flow The charge flow level configuration to which the flow is associated.
      *
      * @return $this
      */
@@ -449,7 +449,7 @@ class ChargeFlowLevelConfiguration implements ModelInterface, ArrayAccess
     /**
      * Gets state
      *
-     * @return \VRPay\Sdk\Model\CreationEntityState
+     * @return \VRPayment\Sdk\Model\CreationEntityState
      */
     public function getState()
     {
@@ -459,7 +459,7 @@ class ChargeFlowLevelConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \VRPay\Sdk\Model\CreationEntityState $state The object's current state.
+     * @param \VRPayment\Sdk\Model\CreationEntityState $state The object's current state.
      *
      * @return $this
      */

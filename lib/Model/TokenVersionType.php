@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * TokenVersionType model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class TokenVersionType implements ModelInterface, ArrayAccess
@@ -50,7 +50,7 @@ class TokenVersionType implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'description' => 'map[string,string]',
-        'feature' => '\VRPay\Sdk\Model\Feature',
+        'feature' => '\VRPayment\Sdk\Model\Feature',
         'id' => 'int',
         'name' => 'map[string,string]'
     ];
@@ -249,7 +249,7 @@ class TokenVersionType implements ModelInterface, ArrayAccess
     /**
      * Gets feature
      *
-     * @return \VRPay\Sdk\Model\Feature
+     * @return \VRPayment\Sdk\Model\Feature
      */
     public function getFeature()
     {
@@ -259,7 +259,7 @@ class TokenVersionType implements ModelInterface, ArrayAccess
     /**
      * Sets feature
      *
-     * @param \VRPay\Sdk\Model\Feature $feature 
+     * @param \VRPayment\Sdk\Model\Feature $feature 
      *
      * @return $this
      */

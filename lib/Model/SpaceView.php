@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * SpaceView model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class SpaceView implements ModelInterface, ArrayAccess
@@ -53,8 +53,8 @@ class SpaceView implements ModelInterface, ArrayAccess
         'linked_space_id' => 'int',
         'name' => 'string',
         'planned_purge_date' => '\DateTime',
-        'space' => '\VRPay\Sdk\Model\Space',
-        'state' => '\VRPay\Sdk\Model\CreationEntityState',
+        'space' => '\VRPayment\Sdk\Model\Space',
+        'state' => '\VRPayment\Sdk\Model\CreationEntityState',
         'version' => 'int'
     ];
 
@@ -360,7 +360,7 @@ class SpaceView implements ModelInterface, ArrayAccess
     /**
      * Gets space
      *
-     * @return \VRPay\Sdk\Model\Space
+     * @return \VRPayment\Sdk\Model\Space
      */
     public function getSpace()
     {
@@ -370,7 +370,7 @@ class SpaceView implements ModelInterface, ArrayAccess
     /**
      * Sets space
      *
-     * @param \VRPay\Sdk\Model\Space $space The space that the space view belongs to.
+     * @param \VRPayment\Sdk\Model\Space $space The space that the space view belongs to.
      *
      * @return $this
      */
@@ -385,7 +385,7 @@ class SpaceView implements ModelInterface, ArrayAccess
     /**
      * Gets state
      *
-     * @return \VRPay\Sdk\Model\CreationEntityState
+     * @return \VRPayment\Sdk\Model\CreationEntityState
      */
     public function getState()
     {
@@ -395,7 +395,7 @@ class SpaceView implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \VRPay\Sdk\Model\CreationEntityState $state The object's current state.
+     * @param \VRPayment\Sdk\Model\CreationEntityState $state The object's current state.
      *
      * @return $this
      */

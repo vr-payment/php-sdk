@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * PaymentTerminalLocation model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class PaymentTerminalLocation implements ModelInterface, ArrayAccess
@@ -54,7 +54,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
         'linked_space_id' => 'int',
         'name' => 'string',
         'planned_purge_date' => '\DateTime',
-        'state' => '\VRPay\Sdk\Model\PaymentTerminalLocationState',
+        'state' => '\VRPayment\Sdk\Model\PaymentTerminalLocationState',
         'version' => 'int'
     ];
 
@@ -378,7 +378,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     /**
      * Gets state
      *
-     * @return \VRPay\Sdk\Model\PaymentTerminalLocationState
+     * @return \VRPayment\Sdk\Model\PaymentTerminalLocationState
      */
     public function getState()
     {
@@ -388,7 +388,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \VRPay\Sdk\Model\PaymentTerminalLocationState $state The object's current state.
+     * @param \VRPayment\Sdk\Model\PaymentTerminalLocationState $state The object's current state.
      *
      * @return $this
      */

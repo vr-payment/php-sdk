@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * ClientError model
  *
  * @category    Class
  * @description An error that is returned as the result of a bad user request or a misconfiguration.
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class ClientError implements ModelInterface, ArrayAccess
@@ -53,7 +53,7 @@ class ClientError implements ModelInterface, ArrayAccess
         'default_message' => 'string',
         'id' => 'string',
         'message' => 'string',
-        'type' => '\VRPay\Sdk\Model\ClientErrorType'
+        'type' => '\VRPayment\Sdk\Model\ClientErrorType'
     ];
 
     /**
@@ -331,7 +331,7 @@ class ClientError implements ModelInterface, ArrayAccess
     /**
      * Gets type
      *
-     * @return \VRPay\Sdk\Model\ClientErrorType
+     * @return \VRPayment\Sdk\Model\ClientErrorType
      */
     public function getType()
     {
@@ -341,7 +341,7 @@ class ClientError implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param \VRPay\Sdk\Model\ClientErrorType $type The type of the client error.
+     * @param \VRPayment\Sdk\Model\ClientErrorType $type The type of the client error.
      *
      * @return $this
      */

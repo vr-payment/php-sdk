@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,16 +18,16 @@
  */
 
 
-namespace VRPay\Sdk\Model;
-use \VRPay\Sdk\ObjectSerializer;
+namespace VRPayment\Sdk\Model;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * ChargeAttempt model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class ChargeAttempt extends TransactionAwareEntity 
@@ -47,32 +47,32 @@ class ChargeAttempt extends TransactionAwareEntity
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'charge' => '\VRPay\Sdk\Model\Charge',
-        'completion_behavior' => '\VRPay\Sdk\Model\TransactionCompletionBehavior',
-        'connector_configuration' => '\VRPay\Sdk\Model\PaymentConnectorConfiguration',
+        'charge' => '\VRPayment\Sdk\Model\Charge',
+        'completion_behavior' => '\VRPayment\Sdk\Model\TransactionCompletionBehavior',
+        'connector_configuration' => '\VRPayment\Sdk\Model\PaymentConnectorConfiguration',
         'created_on' => '\DateTime',
-        'customers_presence' => '\VRPay\Sdk\Model\CustomersPresence',
-        'environment' => '\VRPay\Sdk\Model\ChargeAttemptEnvironment',
+        'customers_presence' => '\VRPayment\Sdk\Model\CustomersPresence',
+        'environment' => '\VRPayment\Sdk\Model\ChargeAttemptEnvironment',
         'failed_on' => '\DateTime',
-        'failure_reason' => '\VRPay\Sdk\Model\FailureReason',
+        'failure_reason' => '\VRPayment\Sdk\Model\FailureReason',
         'initializing_token_version' => 'bool',
-        'invocation' => '\VRPay\Sdk\Model\ConnectorInvocation',
-        'labels' => '\VRPay\Sdk\Model\Label[]',
+        'invocation' => '\VRPayment\Sdk\Model\ConnectorInvocation',
+        'labels' => '\VRPayment\Sdk\Model\Label[]',
         'language' => 'string',
         'next_update_on' => '\DateTime',
         'planned_purge_date' => '\DateTime',
         'redirection_url' => 'string',
         'sales_channel' => 'int',
         'space_view_id' => 'int',
-        'state' => '\VRPay\Sdk\Model\ChargeAttemptState',
+        'state' => '\VRPayment\Sdk\Model\ChargeAttemptState',
         'succeeded_on' => '\DateTime',
-        'terminal' => '\VRPay\Sdk\Model\PaymentTerminal',
+        'terminal' => '\VRPayment\Sdk\Model\PaymentTerminal',
         'time_zone' => 'string',
         'timeout_on' => '\DateTime',
-        'token_version' => '\VRPay\Sdk\Model\TokenVersion',
+        'token_version' => '\VRPayment\Sdk\Model\TokenVersion',
         'user_failure_message' => 'string',
         'version' => 'int',
-        'wallet' => '\VRPay\Sdk\Model\WalletType'
+        'wallet' => '\VRPayment\Sdk\Model\WalletType'
     ];
 
     /**
@@ -376,7 +376,7 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Gets charge
      *
-     * @return \VRPay\Sdk\Model\Charge
+     * @return \VRPayment\Sdk\Model\Charge
      */
     public function getCharge()
     {
@@ -386,7 +386,7 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Sets charge
      *
-     * @param \VRPay\Sdk\Model\Charge $charge 
+     * @param \VRPayment\Sdk\Model\Charge $charge 
      *
      * @return $this
      */
@@ -401,7 +401,7 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Gets completion_behavior
      *
-     * @return \VRPay\Sdk\Model\TransactionCompletionBehavior
+     * @return \VRPayment\Sdk\Model\TransactionCompletionBehavior
      */
     public function getCompletionBehavior()
     {
@@ -411,7 +411,7 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Sets completion_behavior
      *
-     * @param \VRPay\Sdk\Model\TransactionCompletionBehavior $completion_behavior 
+     * @param \VRPayment\Sdk\Model\TransactionCompletionBehavior $completion_behavior 
      *
      * @return $this
      */
@@ -426,7 +426,7 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Gets connector_configuration
      *
-     * @return \VRPay\Sdk\Model\PaymentConnectorConfiguration
+     * @return \VRPayment\Sdk\Model\PaymentConnectorConfiguration
      */
     public function getConnectorConfiguration()
     {
@@ -436,7 +436,7 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Sets connector_configuration
      *
-     * @param \VRPay\Sdk\Model\PaymentConnectorConfiguration $connector_configuration 
+     * @param \VRPayment\Sdk\Model\PaymentConnectorConfiguration $connector_configuration 
      *
      * @return $this
      */
@@ -476,7 +476,7 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Gets customers_presence
      *
-     * @return \VRPay\Sdk\Model\CustomersPresence
+     * @return \VRPayment\Sdk\Model\CustomersPresence
      */
     public function getCustomersPresence()
     {
@@ -486,7 +486,7 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Sets customers_presence
      *
-     * @param \VRPay\Sdk\Model\CustomersPresence $customers_presence The customers presence indicates which kind of customer interaction was used during the charge attempt.
+     * @param \VRPayment\Sdk\Model\CustomersPresence $customers_presence The customer's presence indicates which kind of customer interaction was used during the charge attempt.
      *
      * @return $this
      */
@@ -501,7 +501,7 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Gets environment
      *
-     * @return \VRPay\Sdk\Model\ChargeAttemptEnvironment
+     * @return \VRPayment\Sdk\Model\ChargeAttemptEnvironment
      */
     public function getEnvironment()
     {
@@ -511,7 +511,7 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Sets environment
      *
-     * @param \VRPay\Sdk\Model\ChargeAttemptEnvironment $environment 
+     * @param \VRPayment\Sdk\Model\ChargeAttemptEnvironment $environment 
      *
      * @return $this
      */
@@ -551,7 +551,7 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Gets failure_reason
      *
-     * @return \VRPay\Sdk\Model\FailureReason
+     * @return \VRPayment\Sdk\Model\FailureReason
      */
     public function getFailureReason()
     {
@@ -561,7 +561,7 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Sets failure_reason
      *
-     * @param \VRPay\Sdk\Model\FailureReason $failure_reason 
+     * @param \VRPayment\Sdk\Model\FailureReason $failure_reason 
      *
      * @return $this
      */
@@ -601,7 +601,7 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Gets invocation
      *
-     * @return \VRPay\Sdk\Model\ConnectorInvocation
+     * @return \VRPayment\Sdk\Model\ConnectorInvocation
      */
     public function getInvocation()
     {
@@ -611,7 +611,7 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Sets invocation
      *
-     * @param \VRPay\Sdk\Model\ConnectorInvocation $invocation 
+     * @param \VRPayment\Sdk\Model\ConnectorInvocation $invocation 
      *
      * @return $this
      */
@@ -626,7 +626,7 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Gets labels
      *
-     * @return \VRPay\Sdk\Model\Label[]
+     * @return \VRPayment\Sdk\Model\Label[]
      */
     public function getLabels()
     {
@@ -636,7 +636,7 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Sets labels
      *
-     * @param \VRPay\Sdk\Model\Label[] $labels The labels providing additional information about the object.
+     * @param \VRPayment\Sdk\Model\Label[] $labels The labels providing additional information about the object.
      *
      * @return $this
      */
@@ -801,7 +801,7 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Gets state
      *
-     * @return \VRPay\Sdk\Model\ChargeAttemptState
+     * @return \VRPayment\Sdk\Model\ChargeAttemptState
      */
     public function getState()
     {
@@ -811,7 +811,7 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Sets state
      *
-     * @param \VRPay\Sdk\Model\ChargeAttemptState $state The object's current state.
+     * @param \VRPayment\Sdk\Model\ChargeAttemptState $state The object's current state.
      *
      * @return $this
      */
@@ -851,7 +851,7 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Gets terminal
      *
-     * @return \VRPay\Sdk\Model\PaymentTerminal
+     * @return \VRPayment\Sdk\Model\PaymentTerminal
      */
     public function getTerminal()
     {
@@ -861,7 +861,7 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Sets terminal
      *
-     * @param \VRPay\Sdk\Model\PaymentTerminal $terminal 
+     * @param \VRPayment\Sdk\Model\PaymentTerminal $terminal 
      *
      * @return $this
      */
@@ -926,7 +926,7 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Gets token_version
      *
-     * @return \VRPay\Sdk\Model\TokenVersion
+     * @return \VRPayment\Sdk\Model\TokenVersion
      */
     public function getTokenVersion()
     {
@@ -936,7 +936,7 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Sets token_version
      *
-     * @param \VRPay\Sdk\Model\TokenVersion $token_version 
+     * @param \VRPayment\Sdk\Model\TokenVersion $token_version 
      *
      * @return $this
      */
@@ -1005,7 +1005,7 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Gets wallet
      *
-     * @return \VRPay\Sdk\Model\WalletType
+     * @return \VRPayment\Sdk\Model\WalletType
      */
     public function getWallet()
     {
@@ -1015,7 +1015,7 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Sets wallet
      *
-     * @param \VRPay\Sdk\Model\WalletType $wallet 
+     * @param \VRPayment\Sdk\Model\WalletType $wallet 
      *
      * @return $this
      */

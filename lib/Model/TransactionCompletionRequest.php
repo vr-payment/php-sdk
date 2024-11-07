@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * TransactionCompletionRequest model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class TransactionCompletionRequest implements ModelInterface, ArrayAccess
@@ -52,7 +52,7 @@ class TransactionCompletionRequest implements ModelInterface, ArrayAccess
         'external_id' => 'string',
         'invoice_merchant_reference' => 'string',
         'last_completion' => 'bool',
-        'line_items' => '\VRPay\Sdk\Model\CompletionLineItemCreate[]',
+        'line_items' => '\VRPayment\Sdk\Model\CompletionLineItemCreate[]',
         'statement_descriptor' => 'string',
         'transaction_id' => 'int'
     ];
@@ -349,7 +349,7 @@ class TransactionCompletionRequest implements ModelInterface, ArrayAccess
     /**
      * Gets line_items
      *
-     * @return \VRPay\Sdk\Model\CompletionLineItemCreate[]
+     * @return \VRPayment\Sdk\Model\CompletionLineItemCreate[]
      */
     public function getLineItems()
     {
@@ -359,7 +359,7 @@ class TransactionCompletionRequest implements ModelInterface, ArrayAccess
     /**
      * Sets line_items
      *
-     * @param \VRPay\Sdk\Model\CompletionLineItemCreate[] $line_items The line items which will be used to complete the transaction.
+     * @param \VRPayment\Sdk\Model\CompletionLineItemCreate[] $line_items The line items which will be used to complete the transaction.
      *
      * @return $this
      */

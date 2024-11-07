@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * ManualTaskAction model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class ManualTaskAction implements ModelInterface, ArrayAccess
@@ -51,7 +51,7 @@ class ManualTaskAction implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'id' => 'int',
         'label' => 'map[string,string]',
-        'style' => '\VRPay\Sdk\Model\ManualTaskActionStyle',
+        'style' => '\VRPayment\Sdk\Model\ManualTaskActionStyle',
         'task_type' => 'int'
     ];
 
@@ -274,7 +274,7 @@ class ManualTaskAction implements ModelInterface, ArrayAccess
     /**
      * Gets style
      *
-     * @return \VRPay\Sdk\Model\ManualTaskActionStyle
+     * @return \VRPayment\Sdk\Model\ManualTaskActionStyle
      */
     public function getStyle()
     {
@@ -284,7 +284,7 @@ class ManualTaskAction implements ModelInterface, ArrayAccess
     /**
      * Sets style
      *
-     * @param \VRPay\Sdk\Model\ManualTaskActionStyle $style The action's style.
+     * @param \VRPayment\Sdk\Model\ManualTaskActionStyle $style The action's style.
      *
      * @return $this
      */

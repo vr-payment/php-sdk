@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * Label model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class Label implements ModelInterface, ArrayAccess
@@ -51,7 +51,7 @@ class Label implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'content' => 'object',
         'content_as_string' => 'string',
-        'descriptor' => '\VRPay\Sdk\Model\LabelDescriptor',
+        'descriptor' => '\VRPayment\Sdk\Model\LabelDescriptor',
         'id' => 'int',
         'version' => 'int'
     ];
@@ -281,7 +281,7 @@ class Label implements ModelInterface, ArrayAccess
     /**
      * Gets descriptor
      *
-     * @return \VRPay\Sdk\Model\LabelDescriptor
+     * @return \VRPayment\Sdk\Model\LabelDescriptor
      */
     public function getDescriptor()
     {
@@ -291,7 +291,7 @@ class Label implements ModelInterface, ArrayAccess
     /**
      * Sets descriptor
      *
-     * @param \VRPay\Sdk\Model\LabelDescriptor $descriptor The descriptor that describes what information the label provides.
+     * @param \VRPayment\Sdk\Model\LabelDescriptor $descriptor The descriptor that describes what information the label provides.
      *
      * @return $this
      */

@@ -5,15 +5,15 @@
  * PHP version 5
  *
  * @category Class
- * @package  VRPay\Sdk\Model
+ * @package  VRPayment\Sdk\Model
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
 
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,12 +34,12 @@
  * Do not edit the class manually.
  */
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 /**
  * Interface abstracting model access.
  *
- * @package VRPay\Sdk\Model
+ * @package VRPayment\Sdk\Model
  * @author  Swagger Codegen team
  */
 interface ModelInterface

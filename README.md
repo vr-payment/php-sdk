@@ -1,11 +1,11 @@
-# VR pay PHP Library
+# VR payment PHP Library
 
-The VR pay PHP library wraps around the VR pay API. This library facilitates your interaction with various services such as transactions, accounts, and subscriptions.
+The VR payment PHP library wraps around the VR payment API. This library facilitates your interaction with various services such as transactions, accounts, and subscriptions.
 
 
 ## Documentation
 
-[VR pay Web Service API](https://vrp.app-wallee.com/doc/api/web-service)
+[VR payment Web Service API](https://gateway.vr-payment.de/doc/api/web-service)
 
 ## Requirements
 
@@ -24,7 +24,7 @@ composer installed.
 Once composer is installed, execute the following command in your project root to install this library:
 
 ```sh
-composer require vrpay/sdk
+composer require vrpayment/sdk
 ```
 
 ### Manual Installation
@@ -38,8 +38,8 @@ require_once '/path/to/php-sdk/autoload.php';
 ```
 
 ## Usage
-The library needs to be configured with your account's space id, user id, and secret key which are available in your [VR pay
-account dashboard](https://vrp.app-wallee.com/account/select). Set `space_id`, `user_id`, and `api_secret` to their values.
+The library needs to be configured with your account's space id, user id, and secret key which are available in your [VR payment
+account dashboard](https://gateway.vr-payment.de/account/select). Set `space_id`, `user_id`, and `api_secret` to their values.
 
 ### Configuring a Service
 
@@ -52,7 +52,7 @@ $userId = 512;
 $secret = 'FKrO76r5VwJtBrqZawBspljbBNOxp5veKQQkOnZxucQ=';
 
 // Setup API client
-$client = new \VRPay\Sdk\ApiClient($userId, $secret);
+$client = new \VRPayment\Sdk\ApiClient($userId, $secret);
 
 // Get API service instance
 $client->getTransactionService();
@@ -71,19 +71,19 @@ $userId = 512;
 $secret = 'FKrO76r5VwJtBrqZawBspljbBNOxp5veKQQkOnZxucQ=';
 
 // Setup API client
-$client = new \VRPay\Sdk\ApiClient($userId, $secret);
+$client = new \VRPayment\Sdk\ApiClient($userId, $secret);
 
 // Create transaction
-$lineItem = new \VRPay\Sdk\Model\LineItemCreate();
+$lineItem = new \VRPayment\Sdk\Model\LineItemCreate();
 $lineItem->setName('Red T-Shirt');
 $lineItem->setUniqueId('5412');
 $lineItem->setSku('red-t-shirt-123');
 $lineItem->setQuantity(1);
 $lineItem->setAmountIncludingTax(29.95);
-$lineItem->setType(\VRPay\Sdk\Model\LineItemType::PRODUCT);
+$lineItem->setType(\VRPayment\Sdk\Model\LineItemType::PRODUCT);
 
 
-$transactionPayload = new \VRPay\Sdk\Model\TransactionCreate();
+$transactionPayload = new \VRPayment\Sdk\Model\TransactionCreate();
 $transactionPayload->setCurrency('EUR');
 $transactionPayload->setLineItems(array($lineItem));
 $transactionPayload->setAutoConfirmationEnabled(true);
@@ -106,9 +106,9 @@ $userId = 512;
 $secret = 'FKrO76r5VwJtBrqZawBspljbBNOxp5veKQQkOnZxucQ=';
 
 // Setup API client
-$client = new \VRPay\Sdk\ApiClient($userId, $secret);
+$client = new \VRPayment\Sdk\ApiClient($userId, $secret);
 
-$httpClientType = \VRPay\Sdk\Http\HttpClientFactory::TYPE_CURL; // or \VRPay\Sdk\Http\HttpClientFactory::TYPE_SOCKET
+$httpClientType = \VRPayment\Sdk\Http\HttpClientFactory::TYPE_CURL; // or \VRPayment\Sdk\Http\HttpClientFactory::TYPE_SOCKET
 
 $client->setHttpClientType($httpClientType);
 
@@ -137,7 +137,7 @@ Payload field `state` provides direct information about the state update of the 
 >
 > Please ensure that you adapt and extend this code to meet the specific needs of your application, including appropriate security measures and error handling.
 For a detailed webhook payload signing mechanism understanding we highly recommend referring to our comprehensive
-[Webhook Payload Signing Documentation](https://vrp.app-wallee.com/doc/webhooks#_webhook_payload_signing_mechanism).
+[Webhook Payload Signing Documentation](https://gateway.vr-payment.de/doc/webhooks#_webhook_payload_signing_mechanism).
 
 ```php
 public function handleWebhook() {

@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * DocumentTemplateType model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class DocumentTemplateType implements ModelInterface, ArrayAccess
@@ -51,7 +51,7 @@ class DocumentTemplateType implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'description' => 'map[string,string]',
         'feature' => 'int',
-        'group' => '\VRPay\Sdk\Model\DocumentTemplateTypeGroup',
+        'group' => '\VRPayment\Sdk\Model\DocumentTemplateTypeGroup',
         'id' => 'int',
         'title' => 'map[string,string]'
     ];
@@ -281,7 +281,7 @@ class DocumentTemplateType implements ModelInterface, ArrayAccess
     /**
      * Gets group
      *
-     * @return \VRPay\Sdk\Model\DocumentTemplateTypeGroup
+     * @return \VRPayment\Sdk\Model\DocumentTemplateTypeGroup
      */
     public function getGroup()
     {
@@ -291,7 +291,7 @@ class DocumentTemplateType implements ModelInterface, ArrayAccess
     /**
      * Sets group
      *
-     * @param \VRPay\Sdk\Model\DocumentTemplateTypeGroup $group The group that this document template type belongs to.
+     * @param \VRPayment\Sdk\Model\DocumentTemplateTypeGroup $group The group that this document template type belongs to.
      *
      * @return $this
      */

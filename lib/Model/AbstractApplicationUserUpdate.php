@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,17 +18,17 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * AbstractApplicationUserUpdate model
  *
  * @category    Class
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class AbstractApplicationUserUpdate implements ModelInterface, ArrayAccess
@@ -50,7 +50,7 @@ class AbstractApplicationUserUpdate implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'name' => 'string',
         'request_limit' => 'int',
-        'state' => '\VRPay\Sdk\Model\CreationEntityState'
+        'state' => '\VRPayment\Sdk\Model\CreationEntityState'
     ];
 
     /**
@@ -274,7 +274,7 @@ class AbstractApplicationUserUpdate implements ModelInterface, ArrayAccess
     /**
      * Gets state
      *
-     * @return \VRPay\Sdk\Model\CreationEntityState
+     * @return \VRPayment\Sdk\Model\CreationEntityState
      */
     public function getState()
     {
@@ -284,7 +284,7 @@ class AbstractApplicationUserUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \VRPay\Sdk\Model\CreationEntityState $state The object's current state.
+     * @param \VRPayment\Sdk\Model\CreationEntityState $state The object's current state.
      *
      * @return $this
      */

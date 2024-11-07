@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,16 +18,16 @@
  */
 
 
-namespace VRPay\Sdk\Model;
-use \VRPay\Sdk\ObjectSerializer;
+namespace VRPayment\Sdk\Model;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * TransactionCreate model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class TransactionCreate extends AbstractTransactionPending 
@@ -49,11 +49,11 @@ class TransactionCreate extends AbstractTransactionPending
     protected static $swaggerTypes = [
         'auto_confirmation_enabled' => 'bool',
         'charge_retry_enabled' => 'bool',
-        'customers_presence' => '\VRPay\Sdk\Model\CustomersPresence',
+        'customers_presence' => '\VRPayment\Sdk\Model\CustomersPresence',
         'device_session_identifier' => 'string',
         'emails_disabled' => 'bool',
-        'environment' => '\VRPay\Sdk\Model\Environment',
-        'environment_selection_strategy' => '\VRPay\Sdk\Model\TransactionEnvironmentSelectionStrategy',
+        'environment' => '\VRPayment\Sdk\Model\Environment',
+        'environment_selection_strategy' => '\VRPayment\Sdk\Model\TransactionEnvironmentSelectionStrategy',
         'space_view_id' => 'int'
     ];
 
@@ -339,7 +339,7 @@ class TransactionCreate extends AbstractTransactionPending
     /**
      * Gets customers_presence
      *
-     * @return \VRPay\Sdk\Model\CustomersPresence
+     * @return \VRPayment\Sdk\Model\CustomersPresence
      */
     public function getCustomersPresence()
     {
@@ -349,7 +349,7 @@ class TransactionCreate extends AbstractTransactionPending
     /**
      * Sets customers_presence
      *
-     * @param \VRPay\Sdk\Model\CustomersPresence $customers_presence The customer's presence indicates whether and in what way the transaction's customer is present. Default is VIRTUAL_PRESENT.
+     * @param \VRPayment\Sdk\Model\CustomersPresence $customers_presence The customer's presence indicates whether and in what way the transaction's customer is present. Default is VIRTUAL_PRESENT.
      *
      * @return $this
      */
@@ -421,7 +421,7 @@ class TransactionCreate extends AbstractTransactionPending
     /**
      * Gets environment
      *
-     * @return \VRPay\Sdk\Model\Environment
+     * @return \VRPayment\Sdk\Model\Environment
      */
     public function getEnvironment()
     {
@@ -431,7 +431,7 @@ class TransactionCreate extends AbstractTransactionPending
     /**
      * Sets environment
      *
-     * @param \VRPay\Sdk\Model\Environment $environment 
+     * @param \VRPayment\Sdk\Model\Environment $environment 
      *
      * @return $this
      */
@@ -446,7 +446,7 @@ class TransactionCreate extends AbstractTransactionPending
     /**
      * Gets environment_selection_strategy
      *
-     * @return \VRPay\Sdk\Model\TransactionEnvironmentSelectionStrategy
+     * @return \VRPayment\Sdk\Model\TransactionEnvironmentSelectionStrategy
      */
     public function getEnvironmentSelectionStrategy()
     {
@@ -456,7 +456,7 @@ class TransactionCreate extends AbstractTransactionPending
     /**
      * Sets environment_selection_strategy
      *
-     * @param \VRPay\Sdk\Model\TransactionEnvironmentSelectionStrategy $environment_selection_strategy The strategy for determining whether the transaction is to be processed in the test or production environment.
+     * @param \VRPayment\Sdk\Model\TransactionEnvironmentSelectionStrategy $environment_selection_strategy The strategy for determining whether the transaction is to be processed in the test or production environment.
      *
      * @return $this
      */

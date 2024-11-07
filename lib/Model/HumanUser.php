@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * HumanUser model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class HumanUser implements ModelInterface, ArrayAccess
@@ -60,7 +60,7 @@ class HumanUser implements ModelInterface, ArrayAccess
         'scope' => 'int',
         'time_zone' => 'string',
         'two_factor_enabled' => 'bool',
-        'two_factor_type' => '\VRPay\Sdk\Model\TwoFactorAuthenticationType'
+        'two_factor_type' => '\VRPayment\Sdk\Model\TwoFactorAuthenticationType'
     ];
 
     /**
@@ -587,7 +587,7 @@ class HumanUser implements ModelInterface, ArrayAccess
     /**
      * Gets two_factor_type
      *
-     * @return \VRPay\Sdk\Model\TwoFactorAuthenticationType
+     * @return \VRPayment\Sdk\Model\TwoFactorAuthenticationType
      */
     public function getTwoFactorType()
     {
@@ -597,7 +597,7 @@ class HumanUser implements ModelInterface, ArrayAccess
     /**
      * Sets two_factor_type
      *
-     * @param \VRPay\Sdk\Model\TwoFactorAuthenticationType $two_factor_type The type of two-factor authentication that is enabled for the user.
+     * @param \VRPayment\Sdk\Model\TwoFactorAuthenticationType $two_factor_type The type of two-factor authentication that is enabled for the user.
      *
      * @return $this
      */

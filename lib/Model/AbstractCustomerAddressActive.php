@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,17 +18,17 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * AbstractCustomerAddressActive model
  *
  * @category    Class
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class AbstractCustomerAddressActive implements ModelInterface, ArrayAccess
@@ -48,8 +48,8 @@ class AbstractCustomerAddressActive implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'address' => '\VRPay\Sdk\Model\CustomerPostalAddressCreate',
-        'address_type' => '\VRPay\Sdk\Model\CustomerAddressType'
+        'address' => '\VRPayment\Sdk\Model\CustomerPostalAddressCreate',
+        'address_type' => '\VRPayment\Sdk\Model\CustomerAddressType'
     ];
 
     /**
@@ -209,7 +209,7 @@ class AbstractCustomerAddressActive implements ModelInterface, ArrayAccess
     /**
      * Gets address
      *
-     * @return \VRPay\Sdk\Model\CustomerPostalAddressCreate
+     * @return \VRPayment\Sdk\Model\CustomerPostalAddressCreate
      */
     public function getAddress()
     {
@@ -219,7 +219,7 @@ class AbstractCustomerAddressActive implements ModelInterface, ArrayAccess
     /**
      * Sets address
      *
-     * @param \VRPay\Sdk\Model\CustomerPostalAddressCreate $address The actual postal address.
+     * @param \VRPayment\Sdk\Model\CustomerPostalAddressCreate $address The actual postal address.
      *
      * @return $this
      */
@@ -234,7 +234,7 @@ class AbstractCustomerAddressActive implements ModelInterface, ArrayAccess
     /**
      * Gets address_type
      *
-     * @return \VRPay\Sdk\Model\CustomerAddressType
+     * @return \VRPayment\Sdk\Model\CustomerAddressType
      */
     public function getAddressType()
     {
@@ -244,7 +244,7 @@ class AbstractCustomerAddressActive implements ModelInterface, ArrayAccess
     /**
      * Sets address_type
      *
-     * @param \VRPay\Sdk\Model\CustomerAddressType $address_type Whether the address is for billing or shipping or both.
+     * @param \VRPayment\Sdk\Model\CustomerAddressType $address_type Whether the address is for billing or shipping or both.
      *
      * @return $this
      */

@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,16 +18,16 @@
  */
 
 
-namespace VRPay\Sdk\Model;
-use \VRPay\Sdk\ObjectSerializer;
+namespace VRPayment\Sdk\Model;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * Charge model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class Charge extends TransactionAwareEntity 
@@ -48,15 +48,15 @@ class Charge extends TransactionAwareEntity
       */
     protected static $swaggerTypes = [
         'created_on' => '\DateTime',
-        'failure_reason' => '\VRPay\Sdk\Model\FailureReason',
+        'failure_reason' => '\VRPayment\Sdk\Model\FailureReason',
         'language' => 'string',
         'planned_purge_date' => '\DateTime',
         'space_view_id' => 'int',
-        'state' => '\VRPay\Sdk\Model\ChargeState',
+        'state' => '\VRPayment\Sdk\Model\ChargeState',
         'time_zone' => 'string',
         'timeout_on' => '\DateTime',
-        'transaction' => '\VRPay\Sdk\Model\Transaction',
-        'type' => '\VRPay\Sdk\Model\ChargeType',
+        'transaction' => '\VRPayment\Sdk\Model\Transaction',
+        'type' => '\VRPayment\Sdk\Model\ChargeType',
         'user_failure_message' => 'string',
         'version' => 'int'
     ];
@@ -299,7 +299,7 @@ class Charge extends TransactionAwareEntity
     /**
      * Gets failure_reason
      *
-     * @return \VRPay\Sdk\Model\FailureReason
+     * @return \VRPayment\Sdk\Model\FailureReason
      */
     public function getFailureReason()
     {
@@ -309,7 +309,7 @@ class Charge extends TransactionAwareEntity
     /**
      * Sets failure_reason
      *
-     * @param \VRPay\Sdk\Model\FailureReason $failure_reason 
+     * @param \VRPayment\Sdk\Model\FailureReason $failure_reason 
      *
      * @return $this
      */
@@ -399,7 +399,7 @@ class Charge extends TransactionAwareEntity
     /**
      * Gets state
      *
-     * @return \VRPay\Sdk\Model\ChargeState
+     * @return \VRPayment\Sdk\Model\ChargeState
      */
     public function getState()
     {
@@ -409,7 +409,7 @@ class Charge extends TransactionAwareEntity
     /**
      * Sets state
      *
-     * @param \VRPay\Sdk\Model\ChargeState $state The object's current state.
+     * @param \VRPayment\Sdk\Model\ChargeState $state The object's current state.
      *
      * @return $this
      */
@@ -474,7 +474,7 @@ class Charge extends TransactionAwareEntity
     /**
      * Gets transaction
      *
-     * @return \VRPay\Sdk\Model\Transaction
+     * @return \VRPayment\Sdk\Model\Transaction
      */
     public function getTransaction()
     {
@@ -484,7 +484,7 @@ class Charge extends TransactionAwareEntity
     /**
      * Sets transaction
      *
-     * @param \VRPay\Sdk\Model\Transaction $transaction 
+     * @param \VRPayment\Sdk\Model\Transaction $transaction 
      *
      * @return $this
      */
@@ -499,7 +499,7 @@ class Charge extends TransactionAwareEntity
     /**
      * Gets type
      *
-     * @return \VRPay\Sdk\Model\ChargeType
+     * @return \VRPayment\Sdk\Model\ChargeType
      */
     public function getType()
     {
@@ -509,7 +509,7 @@ class Charge extends TransactionAwareEntity
     /**
      * Sets type
      *
-     * @param \VRPay\Sdk\Model\ChargeType $type 
+     * @param \VRPayment\Sdk\Model\ChargeType $type 
      *
      * @return $this
      */

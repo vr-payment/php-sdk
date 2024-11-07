@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * EntityQueryOrderBy model
  *
  * @category    Class
  * @description The 'order by' allows to order the returned entities.
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class EntityQueryOrderBy implements ModelInterface, ArrayAccess
@@ -50,7 +50,7 @@ class EntityQueryOrderBy implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'field_name' => 'string',
-        'sorting' => '\VRPay\Sdk\Model\EntityQueryOrderByType'
+        'sorting' => '\VRPayment\Sdk\Model\EntityQueryOrderByType'
     ];
 
     /**
@@ -241,7 +241,7 @@ class EntityQueryOrderBy implements ModelInterface, ArrayAccess
     /**
      * Gets sorting
      *
-     * @return \VRPay\Sdk\Model\EntityQueryOrderByType
+     * @return \VRPayment\Sdk\Model\EntityQueryOrderByType
      */
     public function getSorting()
     {
@@ -251,7 +251,7 @@ class EntityQueryOrderBy implements ModelInterface, ArrayAccess
     /**
      * Sets sorting
      *
-     * @param \VRPay\Sdk\Model\EntityQueryOrderByType $sorting 
+     * @param \VRPayment\Sdk\Model\EntityQueryOrderByType $sorting 
      *
      * @return $this
      */

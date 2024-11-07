@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,16 +18,16 @@
  */
 
 
-namespace VRPay\Sdk\Model;
-use \VRPay\Sdk\ObjectSerializer;
+namespace VRPayment\Sdk\Model;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * ChargeFlowLevelPaymentLink model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class ChargeFlowLevelPaymentLink extends TransactionAwareEntity 
@@ -47,7 +47,7 @@ class ChargeFlowLevelPaymentLink extends TransactionAwareEntity
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'charge_flow_level' => '\VRPay\Sdk\Model\ChargeFlowLevel',
+        'charge_flow_level' => '\VRPayment\Sdk\Model\ChargeFlowLevel',
         'payment_link' => 'string'
     ];
 
@@ -204,7 +204,7 @@ class ChargeFlowLevelPaymentLink extends TransactionAwareEntity
     /**
      * Gets charge_flow_level
      *
-     * @return \VRPay\Sdk\Model\ChargeFlowLevel
+     * @return \VRPayment\Sdk\Model\ChargeFlowLevel
      */
     public function getChargeFlowLevel()
     {
@@ -214,7 +214,7 @@ class ChargeFlowLevelPaymentLink extends TransactionAwareEntity
     /**
      * Sets charge_flow_level
      *
-     * @param \VRPay\Sdk\Model\ChargeFlowLevel $charge_flow_level 
+     * @param \VRPayment\Sdk\Model\ChargeFlowLevel $charge_flow_level 
      *
      * @return $this
      */

@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * EntityExportRequest model
  *
  * @category    Class
  * @description The entity property export request contains the information required to create an export of a list of entities.
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class EntityExportRequest implements ModelInterface, ArrayAccess
@@ -50,7 +50,7 @@ class EntityExportRequest implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'properties' => 'string[]',
-        'query' => '\VRPay\Sdk\Model\EntityQuery'
+        'query' => '\VRPayment\Sdk\Model\EntityQuery'
     ];
 
     /**
@@ -238,7 +238,7 @@ class EntityExportRequest implements ModelInterface, ArrayAccess
     /**
      * Gets query
      *
-     * @return \VRPay\Sdk\Model\EntityQuery
+     * @return \VRPayment\Sdk\Model\EntityQuery
      */
     public function getQuery()
     {
@@ -248,7 +248,7 @@ class EntityExportRequest implements ModelInterface, ArrayAccess
     /**
      * Sets query
      *
-     * @param \VRPay\Sdk\Model\EntityQuery $query The query limits the returned entries. The query allows to restrict the entries to return and it allows to control the order of them.
+     * @param \VRPayment\Sdk\Model\EntityQuery $query The query limits the returned entries. The query allows to restrict the entries to return and it allows to control the order of them.
      *
      * @return $this
      */

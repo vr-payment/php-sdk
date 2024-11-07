@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,26 +18,26 @@
  */
 
 
-namespace VRPay\Sdk\Test;
+namespace VRPayment\Sdk\Test;
 
 use PHPUnit\Framework\TestCase;
-use VRPay\Sdk\ApiClient;
-use VRPay\Sdk\Http\HttpClientFactory;
-use VRPay\Sdk\Service\PaymentMethodService;
+use VRPayment\Sdk\ApiClient;
+use VRPayment\Sdk\Http\HttpClientFactory;
+use VRPayment\Sdk\Service\PaymentMethodService;
 
 /**
  * This class tests the basic functionality of the SDK.
  *
  * @category Class
- * @package  VRPay\Sdk
- * @author   VR pay
+ * @package  VRPayment\Sdk
+ * @author   VR Payment GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 final class ApiClientTest extends TestCase
 {
 
     /**
-     * @var VRPay\Sdk\ApiClient
+     * @var VRPayment\Sdk\ApiClient
      */
     protected $apiClient;
     
@@ -146,7 +146,7 @@ final class ApiClientTest extends TestCase
         // Check SDK default header values.
         $this->assertEquals($headers['x-meta-sdk-version'], "4.6.0");
         $this->assertEquals($headers['x-meta-sdk-language'], 'php');
-        $this->assertEquals($headers['x-meta-sdk-provider'], "VR pay");
+        $this->assertEquals($headers['x-meta-sdk-provider'], "VR payment");
         $this->assertEquals($headers['x-meta-sdk-language-version'], phpversion());
     }
 

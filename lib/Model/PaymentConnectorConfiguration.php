@@ -1,8 +1,8 @@
 <?php
 /**
- * VR pay SDK
+ * VR payment SDK
  *
- * This library allows to interact with the VR pay payment service.
+ * This library allows to interact with the VR payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,18 @@
  */
 
 
-namespace VRPay\Sdk\Model;
+namespace VRPayment\Sdk\Model;
 
 use \ArrayAccess;
-use \VRPay\Sdk\ObjectSerializer;
+use \VRPayment\Sdk\ObjectSerializer;
 
 /**
  * PaymentConnectorConfiguration model
  *
  * @category    Class
  * @description 
- * @package     VRPay\Sdk
- * @author      VR pay
+ * @package     VRPayment\Sdk
+ * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
@@ -52,17 +52,17 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
         'applicable_for_transaction_processing' => 'bool',
         'conditions' => 'int[]',
         'connector' => 'int',
-        'enabled_sales_channels' => '\VRPay\Sdk\Model\SalesChannel[]',
+        'enabled_sales_channels' => '\VRPayment\Sdk\Model\SalesChannel[]',
         'enabled_space_views' => 'int[]',
         'id' => 'int',
         'image_path' => 'string',
         'linked_space_id' => 'int',
         'name' => 'string',
-        'payment_method_configuration' => '\VRPay\Sdk\Model\PaymentMethodConfiguration',
+        'payment_method_configuration' => '\VRPayment\Sdk\Model\PaymentMethodConfiguration',
         'planned_purge_date' => '\DateTime',
         'priority' => 'int',
-        'processor_configuration' => '\VRPay\Sdk\Model\PaymentProcessorConfiguration',
-        'state' => '\VRPay\Sdk\Model\CreationEntityState',
+        'processor_configuration' => '\VRPayment\Sdk\Model\PaymentProcessorConfiguration',
+        'state' => '\VRPayment\Sdk\Model\CreationEntityState',
         'version' => 'int'
     ];
 
@@ -380,7 +380,7 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
     /**
      * Gets enabled_sales_channels
      *
-     * @return \VRPay\Sdk\Model\SalesChannel[]
+     * @return \VRPayment\Sdk\Model\SalesChannel[]
      */
     public function getEnabledSalesChannels()
     {
@@ -390,7 +390,7 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets enabled_sales_channels
      *
-     * @param \VRPay\Sdk\Model\SalesChannel[] $enabled_sales_channels The sales channels for which the connector configuration is enabled. If empty, it is enabled for all sales channels.
+     * @param \VRPayment\Sdk\Model\SalesChannel[] $enabled_sales_channels The sales channels for which the connector configuration is enabled. If empty, it is enabled for all sales channels.
      *
      * @return $this
      */
@@ -534,7 +534,7 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
     /**
      * Gets payment_method_configuration
      *
-     * @return \VRPay\Sdk\Model\PaymentMethodConfiguration
+     * @return \VRPayment\Sdk\Model\PaymentMethodConfiguration
      */
     public function getPaymentMethodConfiguration()
     {
@@ -544,7 +544,7 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets payment_method_configuration
      *
-     * @param \VRPay\Sdk\Model\PaymentMethodConfiguration $payment_method_configuration The payment method configuration that the connector configuration belongs to.
+     * @param \VRPayment\Sdk\Model\PaymentMethodConfiguration $payment_method_configuration The payment method configuration that the connector configuration belongs to.
      *
      * @return $this
      */
@@ -609,7 +609,7 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
     /**
      * Gets processor_configuration
      *
-     * @return \VRPay\Sdk\Model\PaymentProcessorConfiguration
+     * @return \VRPayment\Sdk\Model\PaymentProcessorConfiguration
      */
     public function getProcessorConfiguration()
     {
@@ -619,7 +619,7 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets processor_configuration
      *
-     * @param \VRPay\Sdk\Model\PaymentProcessorConfiguration $processor_configuration The processor configuration that the connector configuration belongs to.
+     * @param \VRPayment\Sdk\Model\PaymentProcessorConfiguration $processor_configuration The processor configuration that the connector configuration belongs to.
      *
      * @return $this
      */
@@ -634,7 +634,7 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
     /**
      * Gets state
      *
-     * @return \VRPay\Sdk\Model\CreationEntityState
+     * @return \VRPayment\Sdk\Model\CreationEntityState
      */
     public function getState()
     {
@@ -644,7 +644,7 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \VRPay\Sdk\Model\CreationEntityState $state The object's current state.
+     * @param \VRPayment\Sdk\Model\CreationEntityState $state The object's current state.
      *
      * @return $this
      */
