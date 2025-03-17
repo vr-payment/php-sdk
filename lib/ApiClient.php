@@ -1,8 +1,8 @@
 <?php
 /**
- * VR payment SDK
+ * VRPay SDK
  *
- * This library allows to interact with the VR payment payment service.
+ * This library allows to interact with the VRPay payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,7 +50,7 @@ final class ApiClient {
 	private $defaultHeaders = [
         'x-meta-sdk-version' => "4.6.0",
         'x-meta-sdk-language' => 'php',
-        'x-meta-sdk-provider' => "VR payment",
+        'x-meta-sdk-provider' => "VRPay",
     ];
 
 	/**
@@ -597,6 +597,42 @@ final class ApiClient {
         return $this->applicationUserService;
     }
     
+    protected $bankAccountService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\BankAccountService
+     */
+    public function getBankAccountService() {
+        if(is_null($this->bankAccountService)){
+            $this->bankAccountService = new \VRPayment\Sdk\Service\BankAccountService($this);
+        }
+        return $this->bankAccountService;
+    }
+    
+    protected $bankTransactionService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\BankTransactionService
+     */
+    public function getBankTransactionService() {
+        if(is_null($this->bankTransactionService)){
+            $this->bankTransactionService = new \VRPayment\Sdk\Service\BankTransactionService($this);
+        }
+        return $this->bankTransactionService;
+    }
+    
+    protected $cardProcessingService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\CardProcessingService
+     */
+    public function getCardProcessingService() {
+        if(is_null($this->cardProcessingService)){
+            $this->cardProcessingService = new \VRPayment\Sdk\Service\CardProcessingService($this);
+        }
+        return $this->cardProcessingService;
+    }
+    
     protected $chargeAttemptService;
 
     /**
@@ -607,6 +643,18 @@ final class ApiClient {
             $this->chargeAttemptService = new \VRPayment\Sdk\Service\ChargeAttemptService($this);
         }
         return $this->chargeAttemptService;
+    }
+    
+    protected $chargeBankTransactionService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\ChargeBankTransactionService
+     */
+    public function getChargeBankTransactionService() {
+        if(is_null($this->chargeBankTransactionService)){
+            $this->chargeBankTransactionService = new \VRPayment\Sdk\Service\ChargeBankTransactionService($this);
+        }
+        return $this->chargeBankTransactionService;
     }
     
     protected $chargeFlowLevelPaymentLinkService;
@@ -681,6 +729,18 @@ final class ApiClient {
         return $this->countryStateService;
     }
     
+    protected $currencyBankAccountService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\CurrencyBankAccountService
+     */
+    public function getCurrencyBankAccountService() {
+        if(is_null($this->currencyBankAccountService)){
+            $this->currencyBankAccountService = new \VRPayment\Sdk\Service\CurrencyBankAccountService($this);
+        }
+        return $this->currencyBankAccountService;
+    }
+    
     protected $currencyService;
 
     /**
@@ -741,6 +801,42 @@ final class ApiClient {
         return $this->deliveryIndicationService;
     }
     
+    protected $documentTemplateService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\DocumentTemplateService
+     */
+    public function getDocumentTemplateService() {
+        if(is_null($this->documentTemplateService)){
+            $this->documentTemplateService = new \VRPayment\Sdk\Service\DocumentTemplateService($this);
+        }
+        return $this->documentTemplateService;
+    }
+    
+    protected $documentTemplateTypeService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\DocumentTemplateTypeService
+     */
+    public function getDocumentTemplateTypeService() {
+        if(is_null($this->documentTemplateTypeService)){
+            $this->documentTemplateTypeService = new \VRPayment\Sdk\Service\DocumentTemplateTypeService($this);
+        }
+        return $this->documentTemplateTypeService;
+    }
+    
+    protected $externalTransferBankTransactionService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\ExternalTransferBankTransactionService
+     */
+    public function getExternalTransferBankTransactionService() {
+        if(is_null($this->externalTransferBankTransactionService)){
+            $this->externalTransferBankTransactionService = new \VRPayment\Sdk\Service\ExternalTransferBankTransactionService($this);
+        }
+        return $this->externalTransferBankTransactionService;
+    }
+    
     protected $humanUserService;
 
     /**
@@ -751,6 +847,54 @@ final class ApiClient {
             $this->humanUserService = new \VRPayment\Sdk\Service\HumanUserService($this);
         }
         return $this->humanUserService;
+    }
+    
+    protected $internalTransferBankTransactionService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\InternalTransferBankTransactionService
+     */
+    public function getInternalTransferBankTransactionService() {
+        if(is_null($this->internalTransferBankTransactionService)){
+            $this->internalTransferBankTransactionService = new \VRPayment\Sdk\Service\InternalTransferBankTransactionService($this);
+        }
+        return $this->internalTransferBankTransactionService;
+    }
+    
+    protected $invoiceReconciliationRecordInvoiceLinkService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\InvoiceReconciliationRecordInvoiceLinkService
+     */
+    public function getInvoiceReconciliationRecordInvoiceLinkService() {
+        if(is_null($this->invoiceReconciliationRecordInvoiceLinkService)){
+            $this->invoiceReconciliationRecordInvoiceLinkService = new \VRPayment\Sdk\Service\InvoiceReconciliationRecordInvoiceLinkService($this);
+        }
+        return $this->invoiceReconciliationRecordInvoiceLinkService;
+    }
+    
+    protected $invoiceReconciliationRecordService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\InvoiceReconciliationRecordService
+     */
+    public function getInvoiceReconciliationRecordService() {
+        if(is_null($this->invoiceReconciliationRecordService)){
+            $this->invoiceReconciliationRecordService = new \VRPayment\Sdk\Service\InvoiceReconciliationRecordService($this);
+        }
+        return $this->invoiceReconciliationRecordService;
+    }
+    
+    protected $invoiceReimbursementService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\InvoiceReimbursementService
+     */
+    public function getInvoiceReimbursementService() {
+        if(is_null($this->invoiceReimbursementService)){
+            $this->invoiceReimbursementService = new \VRPayment\Sdk\Service\InvoiceReimbursementService($this);
+        }
+        return $this->invoiceReimbursementService;
     }
     
     protected $labelDescriptionGroupService;
@@ -813,6 +957,18 @@ final class ApiClient {
         return $this->manualTaskService;
     }
     
+    protected $merticUsageService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\MerticUsageService
+     */
+    public function getMerticUsageService() {
+        if(is_null($this->merticUsageService)){
+            $this->merticUsageService = new \VRPayment\Sdk\Service\MerticUsageService($this);
+        }
+        return $this->merticUsageService;
+    }
+    
     protected $paymentConnectorConfigurationService;
 
     /**
@@ -835,6 +991,18 @@ final class ApiClient {
             $this->paymentConnectorService = new \VRPayment\Sdk\Service\PaymentConnectorService($this);
         }
         return $this->paymentConnectorService;
+    }
+    
+    protected $paymentLinkService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\PaymentLinkService
+     */
+    public function getPaymentLinkService() {
+        if(is_null($this->paymentLinkService)){
+            $this->paymentLinkService = new \VRPayment\Sdk\Service\PaymentLinkService($this);
+        }
+        return $this->paymentLinkService;
     }
     
     protected $paymentMethodBrandService;
@@ -897,6 +1065,54 @@ final class ApiClient {
         return $this->paymentProcessorService;
     }
     
+    protected $paymentTerminalService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\PaymentTerminalService
+     */
+    public function getPaymentTerminalService() {
+        if(is_null($this->paymentTerminalService)){
+            $this->paymentTerminalService = new \VRPayment\Sdk\Service\PaymentTerminalService($this);
+        }
+        return $this->paymentTerminalService;
+    }
+    
+    protected $paymentTerminalTillService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\PaymentTerminalTillService
+     */
+    public function getPaymentTerminalTillService() {
+        if(is_null($this->paymentTerminalTillService)){
+            $this->paymentTerminalTillService = new \VRPayment\Sdk\Service\PaymentTerminalTillService($this);
+        }
+        return $this->paymentTerminalTillService;
+    }
+    
+    protected $paymentTerminalTransactionSummaryService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\PaymentTerminalTransactionSummaryService
+     */
+    public function getPaymentTerminalTransactionSummaryService() {
+        if(is_null($this->paymentTerminalTransactionSummaryService)){
+            $this->paymentTerminalTransactionSummaryService = new \VRPayment\Sdk\Service\PaymentTerminalTransactionSummaryService($this);
+        }
+        return $this->paymentTerminalTransactionSummaryService;
+    }
+    
+    protected $paymentWebAppService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\PaymentWebAppService
+     */
+    public function getPaymentWebAppService() {
+        if(is_null($this->paymentWebAppService)){
+            $this->paymentWebAppService = new \VRPayment\Sdk\Service\PaymentWebAppService($this);
+        }
+        return $this->paymentWebAppService;
+    }
+    
     protected $permissionService;
 
     /**
@@ -909,6 +1125,18 @@ final class ApiClient {
         return $this->permissionService;
     }
     
+    protected $refundBankTransactionService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\RefundBankTransactionService
+     */
+    public function getRefundBankTransactionService() {
+        if(is_null($this->refundBankTransactionService)){
+            $this->refundBankTransactionService = new \VRPayment\Sdk\Service\RefundBankTransactionService($this);
+        }
+        return $this->refundBankTransactionService;
+    }
+    
     protected $refundCommentService;
 
     /**
@@ -919,6 +1147,18 @@ final class ApiClient {
             $this->refundCommentService = new \VRPayment\Sdk\Service\RefundCommentService($this);
         }
         return $this->refundCommentService;
+    }
+    
+    protected $refundRecoveryBankTransactionService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\RefundRecoveryBankTransactionService
+     */
+    public function getRefundRecoveryBankTransactionService() {
+        if(is_null($this->refundRecoveryBankTransactionService)){
+            $this->refundRecoveryBankTransactionService = new \VRPayment\Sdk\Service\RefundRecoveryBankTransactionService($this);
+        }
+        return $this->refundRecoveryBankTransactionService;
     }
     
     protected $refundService;
@@ -955,6 +1195,246 @@ final class ApiClient {
             $this->staticValueService = new \VRPayment\Sdk\Service\StaticValueService($this);
         }
         return $this->staticValueService;
+    }
+    
+    protected $subscriberService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\SubscriberService
+     */
+    public function getSubscriberService() {
+        if(is_null($this->subscriberService)){
+            $this->subscriberService = new \VRPayment\Sdk\Service\SubscriberService($this);
+        }
+        return $this->subscriberService;
+    }
+    
+    protected $subscriptionAffiliateService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\SubscriptionAffiliateService
+     */
+    public function getSubscriptionAffiliateService() {
+        if(is_null($this->subscriptionAffiliateService)){
+            $this->subscriptionAffiliateService = new \VRPayment\Sdk\Service\SubscriptionAffiliateService($this);
+        }
+        return $this->subscriptionAffiliateService;
+    }
+    
+    protected $subscriptionChargeService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\SubscriptionChargeService
+     */
+    public function getSubscriptionChargeService() {
+        if(is_null($this->subscriptionChargeService)){
+            $this->subscriptionChargeService = new \VRPayment\Sdk\Service\SubscriptionChargeService($this);
+        }
+        return $this->subscriptionChargeService;
+    }
+    
+    protected $subscriptionLedgerEntryService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\SubscriptionLedgerEntryService
+     */
+    public function getSubscriptionLedgerEntryService() {
+        if(is_null($this->subscriptionLedgerEntryService)){
+            $this->subscriptionLedgerEntryService = new \VRPayment\Sdk\Service\SubscriptionLedgerEntryService($this);
+        }
+        return $this->subscriptionLedgerEntryService;
+    }
+    
+    protected $subscriptionMetricService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\SubscriptionMetricService
+     */
+    public function getSubscriptionMetricService() {
+        if(is_null($this->subscriptionMetricService)){
+            $this->subscriptionMetricService = new \VRPayment\Sdk\Service\SubscriptionMetricService($this);
+        }
+        return $this->subscriptionMetricService;
+    }
+    
+    protected $subscriptionMetricUsageService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\SubscriptionMetricUsageService
+     */
+    public function getSubscriptionMetricUsageService() {
+        if(is_null($this->subscriptionMetricUsageService)){
+            $this->subscriptionMetricUsageService = new \VRPayment\Sdk\Service\SubscriptionMetricUsageService($this);
+        }
+        return $this->subscriptionMetricUsageService;
+    }
+    
+    protected $subscriptionPeriodBillService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\SubscriptionPeriodBillService
+     */
+    public function getSubscriptionPeriodBillService() {
+        if(is_null($this->subscriptionPeriodBillService)){
+            $this->subscriptionPeriodBillService = new \VRPayment\Sdk\Service\SubscriptionPeriodBillService($this);
+        }
+        return $this->subscriptionPeriodBillService;
+    }
+    
+    protected $subscriptionProductComponentGroupService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\SubscriptionProductComponentGroupService
+     */
+    public function getSubscriptionProductComponentGroupService() {
+        if(is_null($this->subscriptionProductComponentGroupService)){
+            $this->subscriptionProductComponentGroupService = new \VRPayment\Sdk\Service\SubscriptionProductComponentGroupService($this);
+        }
+        return $this->subscriptionProductComponentGroupService;
+    }
+    
+    protected $subscriptionProductComponentService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\SubscriptionProductComponentService
+     */
+    public function getSubscriptionProductComponentService() {
+        if(is_null($this->subscriptionProductComponentService)){
+            $this->subscriptionProductComponentService = new \VRPayment\Sdk\Service\SubscriptionProductComponentService($this);
+        }
+        return $this->subscriptionProductComponentService;
+    }
+    
+    protected $subscriptionProductFeeTierService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\SubscriptionProductFeeTierService
+     */
+    public function getSubscriptionProductFeeTierService() {
+        if(is_null($this->subscriptionProductFeeTierService)){
+            $this->subscriptionProductFeeTierService = new \VRPayment\Sdk\Service\SubscriptionProductFeeTierService($this);
+        }
+        return $this->subscriptionProductFeeTierService;
+    }
+    
+    protected $subscriptionProductMeteredFeeService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\SubscriptionProductMeteredFeeService
+     */
+    public function getSubscriptionProductMeteredFeeService() {
+        if(is_null($this->subscriptionProductMeteredFeeService)){
+            $this->subscriptionProductMeteredFeeService = new \VRPayment\Sdk\Service\SubscriptionProductMeteredFeeService($this);
+        }
+        return $this->subscriptionProductMeteredFeeService;
+    }
+    
+    protected $subscriptionProductPeriodFeeService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\SubscriptionProductPeriodFeeService
+     */
+    public function getSubscriptionProductPeriodFeeService() {
+        if(is_null($this->subscriptionProductPeriodFeeService)){
+            $this->subscriptionProductPeriodFeeService = new \VRPayment\Sdk\Service\SubscriptionProductPeriodFeeService($this);
+        }
+        return $this->subscriptionProductPeriodFeeService;
+    }
+    
+    protected $subscriptionProductRetirementService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\SubscriptionProductRetirementService
+     */
+    public function getSubscriptionProductRetirementService() {
+        if(is_null($this->subscriptionProductRetirementService)){
+            $this->subscriptionProductRetirementService = new \VRPayment\Sdk\Service\SubscriptionProductRetirementService($this);
+        }
+        return $this->subscriptionProductRetirementService;
+    }
+    
+    protected $subscriptionProductService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\SubscriptionProductService
+     */
+    public function getSubscriptionProductService() {
+        if(is_null($this->subscriptionProductService)){
+            $this->subscriptionProductService = new \VRPayment\Sdk\Service\SubscriptionProductService($this);
+        }
+        return $this->subscriptionProductService;
+    }
+    
+    protected $subscriptionProductSetupFeeService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\SubscriptionProductSetupFeeService
+     */
+    public function getSubscriptionProductSetupFeeService() {
+        if(is_null($this->subscriptionProductSetupFeeService)){
+            $this->subscriptionProductSetupFeeService = new \VRPayment\Sdk\Service\SubscriptionProductSetupFeeService($this);
+        }
+        return $this->subscriptionProductSetupFeeService;
+    }
+    
+    protected $subscriptionProductVersionRetirementService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\SubscriptionProductVersionRetirementService
+     */
+    public function getSubscriptionProductVersionRetirementService() {
+        if(is_null($this->subscriptionProductVersionRetirementService)){
+            $this->subscriptionProductVersionRetirementService = new \VRPayment\Sdk\Service\SubscriptionProductVersionRetirementService($this);
+        }
+        return $this->subscriptionProductVersionRetirementService;
+    }
+    
+    protected $subscriptionProductVersionService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\SubscriptionProductVersionService
+     */
+    public function getSubscriptionProductVersionService() {
+        if(is_null($this->subscriptionProductVersionService)){
+            $this->subscriptionProductVersionService = new \VRPayment\Sdk\Service\SubscriptionProductVersionService($this);
+        }
+        return $this->subscriptionProductVersionService;
+    }
+    
+    protected $subscriptionService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\SubscriptionService
+     */
+    public function getSubscriptionService() {
+        if(is_null($this->subscriptionService)){
+            $this->subscriptionService = new \VRPayment\Sdk\Service\SubscriptionService($this);
+        }
+        return $this->subscriptionService;
+    }
+    
+    protected $subscriptionSuspensionService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\SubscriptionSuspensionService
+     */
+    public function getSubscriptionSuspensionService() {
+        if(is_null($this->subscriptionSuspensionService)){
+            $this->subscriptionSuspensionService = new \VRPayment\Sdk\Service\SubscriptionSuspensionService($this);
+        }
+        return $this->subscriptionSuspensionService;
+    }
+    
+    protected $subscriptionVersionService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\SubscriptionVersionService
+     */
+    public function getSubscriptionVersionService() {
+        if(is_null($this->subscriptionVersionService)){
+            $this->subscriptionVersionService = new \VRPayment\Sdk\Service\SubscriptionVersionService($this);
+        }
+        return $this->subscriptionVersionService;
     }
     
     protected $tokenService;
@@ -1065,6 +1545,30 @@ final class ApiClient {
         return $this->transactionLineItemVersionService;
     }
     
+    protected $transactionMobileSdkService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\TransactionMobileSdkService
+     */
+    public function getTransactionMobileSdkService() {
+        if(is_null($this->transactionMobileSdkService)){
+            $this->transactionMobileSdkService = new \VRPayment\Sdk\Service\TransactionMobileSdkService($this);
+        }
+        return $this->transactionMobileSdkService;
+    }
+    
+    protected $transactionPaymentPageService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\TransactionPaymentPageService
+     */
+    public function getTransactionPaymentPageService() {
+        if(is_null($this->transactionPaymentPageService)){
+            $this->transactionPaymentPageService = new \VRPayment\Sdk\Service\TransactionPaymentPageService($this);
+        }
+        return $this->transactionPaymentPageService;
+    }
+    
     protected $transactionService;
 
     /**
@@ -1075,6 +1579,18 @@ final class ApiClient {
             $this->transactionService = new \VRPayment\Sdk\Service\TransactionService($this);
         }
         return $this->transactionService;
+    }
+    
+    protected $transactionTerminalService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\TransactionTerminalService
+     */
+    public function getTransactionTerminalService() {
+        if(is_null($this->transactionTerminalService)){
+            $this->transactionTerminalService = new \VRPayment\Sdk\Service\TransactionTerminalService($this);
+        }
+        return $this->transactionTerminalService;
     }
     
     protected $transactionVoidService;
@@ -1111,6 +1627,18 @@ final class ApiClient {
             $this->userSpaceRoleService = new \VRPayment\Sdk\Service\UserSpaceRoleService($this);
         }
         return $this->userSpaceRoleService;
+    }
+    
+    protected $webAppService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\WebAppService
+     */
+    public function getWebAppService() {
+        if(is_null($this->webAppService)){
+            $this->webAppService = new \VRPayment\Sdk\Service\WebAppService($this);
+        }
+        return $this->webAppService;
     }
     
     protected $webhookEncryptionService;

@@ -1,8 +1,8 @@
 <?php
 /**
- * VR payment SDK
+ * VRPay SDK
  *
- * This library allows to interact with the VR payment payment service.
+ * This library allows to interact with the VRPay payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -261,7 +261,7 @@ class RenderedDocument implements ModelInterface, ArrayAccess
     /**
      * Sets document_template_type
      *
-     * @param int $document_template_type 
+     * @param int $document_template_type The document's template type
      *
      * @return $this
      */
@@ -286,7 +286,7 @@ class RenderedDocument implements ModelInterface, ArrayAccess
     /**
      * Sets mime_type
      *
-     * @param string $mime_type 
+     * @param string $mime_type The document's content type
      *
      * @return $this
      */
@@ -311,7 +311,7 @@ class RenderedDocument implements ModelInterface, ArrayAccess
     /**
      * Sets title
      *
-     * @param string $title 
+     * @param string $title The title of the rendered document
      *
      * @return $this
      */

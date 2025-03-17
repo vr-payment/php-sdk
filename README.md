@@ -1,11 +1,13 @@
-# VR payment PHP Library
+[![Build Status](https://travis-ci.org/vr-payment/php-sdk.svg?branch=master)](https://travis-ci.org/vr-payment/php-sdk)
 
-The VR payment PHP library wraps around the VR payment API. This library facilitates your interaction with various services such as transactions, accounts, and subscriptions.
+# VRPay PHP Library
+
+The VRPay PHP library wraps around the VRPay API. This library facilitates your interaction with various services such as transactions, accounts, and subscriptions.
 
 
 ## Documentation
 
-[VR payment Web Service API](https://gateway.vr-payment.de/doc/api/web-service)
+[VRPay Web Service API](https://gateway.vr-payment.de/doc/api/web-service)
 
 ## Requirements
 
@@ -38,7 +40,7 @@ require_once '/path/to/php-sdk/autoload.php';
 ```
 
 ## Usage
-The library needs to be configured with your account's space id, user id, and secret key which are available in your [VR payment
+The library needs to be configured with your account's space id, user id, and secret key which are available in your [VRPay
 account dashboard](https://gateway.vr-payment.de/account/select). Set `space_id`, `user_id`, and `api_secret` to their values.
 
 ### Configuring a Service

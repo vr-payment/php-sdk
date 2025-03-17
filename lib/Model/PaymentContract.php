@@ -1,8 +1,8 @@
 <?php
 /**
- * VR payment SDK
+ * VRPay SDK
  *
- * This library allows to interact with the VR payment payment service.
+ * This library allows to interact with the VRPay payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,11 +49,11 @@ class PaymentContract implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'account' => '\VRPayment\Sdk\Model\Account',
+        'account' => 'int',
         'activated_on' => '\DateTime',
         'contract_identifier' => 'string',
         'contract_type' => '\VRPayment\Sdk\Model\PaymentContractType',
-        'created_by' => '\VRPayment\Sdk\Model\User',
+        'created_by' => 'int',
         'created_on' => '\DateTime',
         'external_id' => 'string',
         'id' => 'int',
@@ -62,7 +62,7 @@ class PaymentContract implements ModelInterface, ArrayAccess
         'rejection_reason' => '\VRPayment\Sdk\Model\FailureReason',
         'start_terminating_on' => '\DateTime',
         'state' => '\VRPayment\Sdk\Model\PaymentContractState',
-        'terminated_by' => '\VRPayment\Sdk\Model\User',
+        'terminated_by' => 'int',
         'terminated_on' => '\DateTime',
         'version' => 'int'
     ];
@@ -73,11 +73,11 @@ class PaymentContract implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'account' => null,
+        'account' => 'int64',
         'activated_on' => 'date-time',
         'contract_identifier' => null,
         'contract_type' => null,
-        'created_by' => null,
+        'created_by' => 'int64',
         'created_on' => 'date-time',
         'external_id' => null,
         'id' => 'int64',
@@ -86,7 +86,7 @@ class PaymentContract implements ModelInterface, ArrayAccess
         'rejection_reason' => null,
         'start_terminating_on' => 'date-time',
         'state' => null,
-        'terminated_by' => null,
+        'terminated_by' => 'int64',
         'terminated_on' => 'date-time',
         'version' => 'int32'
     ];
@@ -308,7 +308,7 @@ class PaymentContract implements ModelInterface, ArrayAccess
     /**
      * Gets account
      *
-     * @return \VRPayment\Sdk\Model\Account
+     * @return int
      */
     public function getAccount()
     {
@@ -318,7 +318,7 @@ class PaymentContract implements ModelInterface, ArrayAccess
     /**
      * Sets account
      *
-     * @param \VRPayment\Sdk\Model\Account $account This account that the contract belongs to.
+     * @param int $account This account that the contract belongs to.
      *
      * @return $this
      */
@@ -408,7 +408,7 @@ class PaymentContract implements ModelInterface, ArrayAccess
     /**
      * Gets created_by
      *
-     * @return \VRPayment\Sdk\Model\User
+     * @return int
      */
     public function getCreatedBy()
     {
@@ -418,7 +418,7 @@ class PaymentContract implements ModelInterface, ArrayAccess
     /**
      * Sets created_by
      *
-     * @param \VRPayment\Sdk\Model\User $created_by The ID of the user the contract was created by.
+     * @param int $created_by The ID of the user the contract was created by.
      *
      * @return $this
      */
@@ -633,7 +633,7 @@ class PaymentContract implements ModelInterface, ArrayAccess
     /**
      * Gets terminated_by
      *
-     * @return \VRPayment\Sdk\Model\User
+     * @return int
      */
     public function getTerminatedBy()
     {
@@ -643,7 +643,7 @@ class PaymentContract implements ModelInterface, ArrayAccess
     /**
      * Sets terminated_by
      *
-     * @param \VRPayment\Sdk\Model\User $terminated_by The ID of the user the contract was terminated by.
+     * @param int $terminated_by The ID of the user the contract was terminated by.
      *
      * @return $this
      */
