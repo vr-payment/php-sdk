@@ -1,8 +1,8 @@
 <?php
 /**
- * VRPay SDK
+ * VR Payment SDK
  *
- * This library allows to interact with the VRPay payment service.
+ * This library allows to interact with the VR Payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ use \VRPayment\Sdk\ObjectSerializer;
  * Condition model
  *
  * @category    Class
- * @description A condition allows you to define a criteria that a transaction must fulfill in order for a connector configuration to be considered for processing the payment.
+ * @description A connector condition defines criteria that a transaction must meet for a connector configuration to process the payment.
  * @package     VRPayment\Sdk
  * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2

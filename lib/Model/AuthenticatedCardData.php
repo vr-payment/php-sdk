@@ -1,8 +1,8 @@
 <?php
 /**
- * VRPay SDK
+ * VR Payment SDK
  *
- * This library allows to interact with the VRPay payment service.
+ * This library allows to interact with the VR Payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ use \VRPayment\Sdk\ObjectSerializer;
  * AuthenticatedCardData model
  *
  * @category    Class
- * @description This model holds the card data and optional cardholder authentication details.
+ * @description 
  * @package     VRPayment\Sdk
  * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
@@ -207,7 +207,7 @@ class AuthenticatedCardData extends TokenizedCardData
     /**
      * Sets cardholder_authentication
      *
-     * @param \VRPayment\Sdk\Model\CardholderAuthentication $cardholder_authentication The cardholder authentication information. The authentication is optional and can be provided if the cardholder has been already authenticated (e.g. in 3-D Secure system).
+     * @param \VRPayment\Sdk\Model\CardholderAuthentication $cardholder_authentication Optional authentication details for the cardholder, such as 3D Secure authentication, used when the cardholder has already been verified during the transaction for added security.
      *
      * @return $this
      */

@@ -1,8 +1,8 @@
 <?php
 /**
- * VRPay SDK
+ * VR Payment SDK
  *
- * This library allows to interact with the VRPay payment service.
+ * This library allows to interact with the VR Payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ use \VRPayment\Sdk\ObjectSerializer;
  * CardCryptogramCreate model
  *
  * @category    Class
- * @description This model holds the additional card authentication.
+ * @description 
  * @package     VRPayment\Sdk
  * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
@@ -223,7 +223,7 @@ class CardCryptogramCreate implements ModelInterface, ArrayAccess
     /**
      * Sets eci
      *
-     * @param string $eci 
+     * @param string $eci The Electronic Commerce Indicator (ECI) represents the authentication level and indicates liability shift during online or card-not-present transactions.
      *
      * @return $this
      */
@@ -248,7 +248,7 @@ class CardCryptogramCreate implements ModelInterface, ArrayAccess
     /**
      * Sets value
      *
-     * @param string $value 
+     * @param string $value The cryptogram value used for securing card transactions, format varying based on the PAN type.
      *
      * @return $this
      */

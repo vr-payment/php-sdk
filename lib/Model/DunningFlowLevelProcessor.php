@@ -1,8 +1,8 @@
 <?php
 /**
- * VRPay SDK
+ * VR Payment SDK
  *
- * This library allows to interact with the VRPay payment service.
+ * This library allows to interact with the VR Payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ use \ArrayAccess;
 use \VRPayment\Sdk\ObjectSerializer;
 
 /**
- * TransactionAwareEntity model
+ * DunningFlowLevelProcessor model
  *
  * @category    Class
  * @description 
@@ -32,7 +32,7 @@ use \VRPayment\Sdk\ObjectSerializer;
  * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TransactionAwareEntity implements ModelInterface, ArrayAccess
+class DunningFlowLevelProcessor implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class TransactionAwareEntity implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'TransactionAwareEntity';
+    protected static $swaggerModelName = 'DunningFlowLevelProcessor';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,9 +49,10 @@ class TransactionAwareEntity implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
+        'description' => 'map[string,string]',
+        'feature' => '\VRPayment\Sdk\Model\Feature',
         'id' => 'int',
-        'linked_space_id' => 'int',
-        'linked_transaction' => 'int'
+        'name' => 'map[string,string]'
     ];
 
     /**
@@ -60,9 +61,10 @@ class TransactionAwareEntity implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
+        'description' => null,
+        'feature' => null,
         'id' => 'int64',
-        'linked_space_id' => 'int64',
-        'linked_transaction' => 'int64'
+        'name' => null
     ];
 
     /**
@@ -72,9 +74,10 @@ class TransactionAwareEntity implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
+        'description' => 'description',
+        'feature' => 'feature',
         'id' => 'id',
-        'linked_space_id' => 'linkedSpaceId',
-        'linked_transaction' => 'linkedTransaction'
+        'name' => 'name'
     ];
 
     /**
@@ -83,9 +86,10 @@ class TransactionAwareEntity implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
+        'description' => 'setDescription',
+        'feature' => 'setFeature',
         'id' => 'setId',
-        'linked_space_id' => 'setLinkedSpaceId',
-        'linked_transaction' => 'setLinkedTransaction'
+        'name' => 'setName'
     ];
 
     /**
@@ -94,9 +98,10 @@ class TransactionAwareEntity implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
+        'description' => 'getDescription',
+        'feature' => 'getFeature',
         'id' => 'getId',
-        'linked_space_id' => 'getLinkedSpaceId',
-        'linked_transaction' => 'getLinkedTransaction'
+        'name' => 'getName'
     ];
 
     
@@ -117,11 +122,13 @@ class TransactionAwareEntity implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
+        $this->container['description'] = isset($data['description']) ? $data['description'] : null;
+        
+        $this->container['feature'] = isset($data['feature']) ? $data['feature'] : null;
+        
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
-        
-        $this->container['linked_transaction'] = isset($data['linked_transaction']) ? $data['linked_transaction'] : null;
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         
     }
 
@@ -215,6 +222,56 @@ class TransactionAwareEntity implements ModelInterface, ArrayAccess
     
 
     /**
+     * Gets description
+     *
+     * @return map[string,string]
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /**
+     * Sets description
+     *
+     * @param map[string,string] $description The localized description of the object.
+     *
+     * @return $this
+     */
+    public function setDescription($description)
+    {
+        $this->container['description'] = $description;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets feature
+     *
+     * @return \VRPayment\Sdk\Model\Feature
+     */
+    public function getFeature()
+    {
+        return $this->container['feature'];
+    }
+
+    /**
+     * Sets feature
+     *
+     * @param \VRPayment\Sdk\Model\Feature $feature 
+     *
+     * @return $this
+     */
+    public function setFeature($feature)
+    {
+        $this->container['feature'] = $feature;
+
+        return $this;
+    }
+    
+
+    /**
      * Gets id
      *
      * @return int
@@ -240,50 +297,25 @@ class TransactionAwareEntity implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets linked_space_id
+     * Gets name
      *
-     * @return int
+     * @return map[string,string]
      */
-    public function getLinkedSpaceId()
+    public function getName()
     {
-        return $this->container['linked_space_id'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets linked_space_id
+     * Sets name
      *
-     * @param int $linked_space_id The ID of the space this object belongs to.
+     * @param map[string,string] $name The localized name of the object.
      *
      * @return $this
      */
-    public function setLinkedSpaceId($linked_space_id)
+    public function setName($name)
     {
-        $this->container['linked_space_id'] = $linked_space_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_transaction
-     *
-     * @return int
-     */
-    public function getLinkedTransaction()
-    {
-        return $this->container['linked_transaction'];
-    }
-
-    /**
-     * Sets linked_transaction
-     *
-     * @param int $linked_transaction 
-     *
-     * @return $this
-     */
-    public function setLinkedTransaction($linked_transaction)
-    {
-        $this->container['linked_transaction'] = $linked_transaction;
+        $this->container['name'] = $name;
 
         return $this;
     }

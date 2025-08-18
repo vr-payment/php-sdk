@@ -1,8 +1,8 @@
 <?php
 /**
- * VRPay SDK
+ * VR Payment SDK
  *
- * This library allows to interact with the VRPay payment service.
+ * This library allows to interact with the VR Payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,9 +48,9 @@ final class ApiClient {
 	 * @var array
 	 */
 	private $defaultHeaders = [
-        'x-meta-sdk-version' => "4.8.0",
+        'x-meta-sdk-version' => "4.8.1",
         'x-meta-sdk-language' => 'php',
-        'x-meta-sdk-provider' => "VRPay",
+        'x-meta-sdk-provider' => "VR Payment",
     ];
 
 	/**
@@ -58,7 +58,7 @@ final class ApiClient {
 	 *
 	 * @var string
 	 */
-	private $userAgent = 'PHP-Client/4.8.0/php';
+	private $userAgent = 'PHP-Client/4.8.1/php';
 
 	/**
 	 * The path to the certificate authority file.
@@ -823,6 +823,54 @@ final class ApiClient {
             $this->documentTemplateTypeService = new \VRPayment\Sdk\Service\DocumentTemplateTypeService($this);
         }
         return $this->documentTemplateTypeService;
+    }
+    
+    protected $dunningCaseLevelService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\DunningCaseLevelService
+     */
+    public function getDunningCaseLevelService() {
+        if(is_null($this->dunningCaseLevelService)){
+            $this->dunningCaseLevelService = new \VRPayment\Sdk\Service\DunningCaseLevelService($this);
+        }
+        return $this->dunningCaseLevelService;
+    }
+    
+    protected $dunningCaseService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\DunningCaseService
+     */
+    public function getDunningCaseService() {
+        if(is_null($this->dunningCaseService)){
+            $this->dunningCaseService = new \VRPayment\Sdk\Service\DunningCaseService($this);
+        }
+        return $this->dunningCaseService;
+    }
+    
+    protected $dunningFlowLevelService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\DunningFlowLevelService
+     */
+    public function getDunningFlowLevelService() {
+        if(is_null($this->dunningFlowLevelService)){
+            $this->dunningFlowLevelService = new \VRPayment\Sdk\Service\DunningFlowLevelService($this);
+        }
+        return $this->dunningFlowLevelService;
+    }
+    
+    protected $dunningFlowService;
+
+    /**
+     * @return \VRPayment\Sdk\Service\DunningFlowService
+     */
+    public function getDunningFlowService() {
+        if(is_null($this->dunningFlowService)){
+            $this->dunningFlowService = new \VRPayment\Sdk\Service\DunningFlowService($this);
+        }
+        return $this->dunningFlowService;
     }
     
     protected $externalTransferBankTransactionService;

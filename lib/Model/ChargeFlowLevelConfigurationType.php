@@ -1,8 +1,8 @@
 <?php
 /**
- * VRPay SDK
+ * VR Payment SDK
  *
- * This library allows to interact with the VRPay payment service.
+ * This library allows to interact with the VR Payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -284,7 +284,7 @@ class ChargeFlowLevelConfigurationType implements ModelInterface, ArrayAccess
     /**
      * Sets label
      *
-     * @param map[string,string] $label 
+     * @param map[string,string] $label The localized label that describes the action triggered by the configuration type.
      *
      * @return $this
      */

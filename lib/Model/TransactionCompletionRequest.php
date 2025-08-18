@@ -1,8 +1,8 @@
 <?php
 /**
- * VRPay SDK
+ * VR Payment SDK
  *
- * This library allows to interact with the VRPay payment service.
+ * This library allows to interact with the VR Payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -384,7 +384,7 @@ class TransactionCompletionRequest implements ModelInterface, ArrayAccess
     /**
      * Sets statement_descriptor
      *
-     * @param string $statement_descriptor The statement descriptor explain charges or payments on bank statements.
+     * @param string $statement_descriptor The statement descriptor that appears on a customer's bank statement, providing an explanation for charges or payments, helping customers identify the transaction.
      *
      * @return $this
      */

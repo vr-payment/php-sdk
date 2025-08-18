@@ -1,8 +1,8 @@
 <?php
 /**
- * VRPay SDK
+ * VR Payment SDK
  *
- * This library allows to interact with the VRPay payment service.
+ * This library allows to interact with the VR Payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -284,7 +284,7 @@ class BankAccountType implements ModelInterface, ArrayAccess
     /**
      * Sets identifier_name
      *
-     * @param map[string,string] $identifier_name 
+     * @param map[string,string] $identifier_name The identifier name specifies how the bank account type's identifier is called.
      *
      * @return $this
      */

@@ -1,8 +1,8 @@
 <?php
 /**
- * VRPay SDK
+ * VR Payment SDK
  *
- * This library allows to interact with the VRPay payment service.
+ * This library allows to interact with the VR Payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ use \VRPayment\Sdk\ObjectSerializer;
  * PaymentLinkCreate model
  *
  * @category    Class
- * @description The payment link defines an URL to automatically create transactions.
+ * @description 
  * @package     VRPayment\Sdk
  * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
@@ -256,7 +256,7 @@ class PaymentLinkCreate extends AbstractPaymentLinkUpdate
     /**
      * Sets external_id
      *
-     * @param string $external_id A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+     * @param string $external_id A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
      *
      * @return $this
      */
@@ -281,7 +281,7 @@ class PaymentLinkCreate extends AbstractPaymentLinkUpdate
     /**
      * Sets protection_mode
      *
-     * @param \VRPayment\Sdk\Model\PaymentLinkProtectionMode $protection_mode The protection mode determines if the payment link is protected against tampering and in what way.
+     * @param \VRPayment\Sdk\Model\PaymentLinkProtectionMode $protection_mode The protection mode defines whether the payment link is protected against tampering and specifies the protection method.
      *
      * @return $this
      */

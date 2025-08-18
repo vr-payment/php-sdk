@@ -1,8 +1,8 @@
 <?php
 /**
- * VRPay SDK
+ * VR Payment SDK
  *
- * This library allows to interact with the VRPay payment service.
+ * This library allows to interact with the VR Payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -291,7 +291,7 @@ class InternalTransferBankTransaction implements ModelInterface, ArrayAccess
     /**
      * Sets source_bank_transaction
      *
-     * @param \VRPayment\Sdk\Model\BankTransaction $source_bank_transaction 
+     * @param \VRPayment\Sdk\Model\BankTransaction $source_bank_transaction The bank transaction from which funds are being transferred out.
      *
      * @return $this
      */
@@ -316,7 +316,7 @@ class InternalTransferBankTransaction implements ModelInterface, ArrayAccess
     /**
      * Sets target_bank_transaction
      *
-     * @param \VRPayment\Sdk\Model\BankTransaction $target_bank_transaction 
+     * @param \VRPayment\Sdk\Model\BankTransaction $target_bank_transaction The bank transaction to which funds are being transferred in.
      *
      * @return $this
      */

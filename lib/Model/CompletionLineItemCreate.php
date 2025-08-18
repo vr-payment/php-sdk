@@ -1,8 +1,8 @@
 <?php
 /**
- * VRPay SDK
+ * VR Payment SDK
  *
- * This library allows to interact with the VRPay payment service.
+ * This library allows to interact with the VR Payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -240,7 +240,7 @@ class CompletionLineItemCreate implements ModelInterface, ArrayAccess
     /**
      * Sets amount
      *
-     * @param float $amount The total amount of the line item including any tax.
+     * @param float $amount The total amount of the line item to be captured, including taxes.
      *
      * @return $this
      */
@@ -265,7 +265,7 @@ class CompletionLineItemCreate implements ModelInterface, ArrayAccess
     /**
      * Sets quantity
      *
-     * @param float $quantity The quantity of the line item which should be completed.
+     * @param float $quantity The number of items to be captured.
      *
      * @return $this
      */
@@ -290,7 +290,7 @@ class CompletionLineItemCreate implements ModelInterface, ArrayAccess
     /**
      * Sets unique_id
      *
-     * @param string $unique_id The unique id identifies the line item on which the capture is applied on.
+     * @param string $unique_id The unique identifier of the line item within the set of line items.
      *
      * @return $this
      */

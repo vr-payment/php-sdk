@@ -1,8 +1,8 @@
 <?php
 /**
- * VRPay SDK
+ * VR Payment SDK
  *
- * This library allows to interact with the VRPay payment service.
+ * This library allows to interact with the VR Payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -248,7 +248,7 @@ class RestCountry implements ModelInterface, ArrayAccess
     /**
      * Sets address_format
      *
-     * @param \VRPayment\Sdk\Model\RestAddressFormat $address_format Specifies the country's way of formatting addresses.
+     * @param \VRPayment\Sdk\Model\RestAddressFormat $address_format The country's way of formatting addresses.
      *
      * @return $this
      */

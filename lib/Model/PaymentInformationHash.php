@@ -1,8 +1,8 @@
 <?php
 /**
- * VRPay SDK
+ * VR Payment SDK
  *
- * This library allows to interact with the VRPay payment service.
+ * This library allows to interact with the VR Payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ use \VRPayment\Sdk\ObjectSerializer;
  * PaymentInformationHash model
  *
  * @category    Class
- * @description A payment information hash is calculated based on the information entered by the user. The same input leads to the same hash. The hash is collision free.
+ * @description A payment information hash is generated from user input, ensuring consistent and collision-free results for identical inputs.
  * @package     VRPayment\Sdk
  * @author      VR Payment GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
@@ -252,7 +252,7 @@ class PaymentInformationHash implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param \VRPayment\Sdk\Model\PaymentInformationHashType $type 
+     * @param \VRPayment\Sdk\Model\PaymentInformationHashType $type The type specifies the algorithm used for calculating the hash.
      *
      * @return $this
      */
@@ -277,7 +277,7 @@ class PaymentInformationHash implements ModelInterface, ArrayAccess
     /**
      * Sets value
      *
-     * @param string $value 
+     * @param string $value The hash value generated based on the specified type.
      *
      * @return $this
      */

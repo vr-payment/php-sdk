@@ -1,8 +1,8 @@
 <?php
 /**
- * VRPay SDK
+ * VR Payment SDK
  *
- * This library allows to interact with the VRPay payment service.
+ * This library allows to interact with the VR Payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -284,7 +284,7 @@ class PaymentTerminalTransactionSummaryReference implements ModelInterface, Arra
     /**
      * Sets terminal_id
      *
-     * @param int $terminal_id 
+     * @param int $terminal_id The unique identifier of the terminal.
      *
      * @return $this
      */
@@ -309,7 +309,7 @@ class PaymentTerminalTransactionSummaryReference implements ModelInterface, Arra
     /**
      * Sets terminal_identifier
      *
-     * @param string $terminal_identifier 
+     * @param string $terminal_identifier The unique identifier of the terminal, that is displayed on the device.
      *
      * @return $this
      */

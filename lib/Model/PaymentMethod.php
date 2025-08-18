@@ -1,8 +1,8 @@
 <?php
 /**
- * VRPay SDK
+ * VR Payment SDK
  *
- * This library allows to interact with the VRPay payment service.
+ * This library allows to interact with the VR Payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -255,7 +255,7 @@ class PaymentMethod implements ModelInterface, ArrayAccess
     /**
      * Sets data_collection_types
      *
-     * @param \VRPayment\Sdk\Model\DataCollectionType[] $data_collection_types The data collection types that are supported by the payment method.
+     * @param \VRPayment\Sdk\Model\DataCollectionType[] $data_collection_types The data collection types that payment method supports.
      *
      * @return $this
      */
@@ -330,7 +330,7 @@ class PaymentMethod implements ModelInterface, ArrayAccess
     /**
      * Sets image_path
      *
-     * @param string $image_path The path to the payment method's image which is displayed to the customer.
+     * @param string $image_path The path to the payment method's image.
      *
      * @return $this
      */
@@ -355,7 +355,7 @@ class PaymentMethod implements ModelInterface, ArrayAccess
     /**
      * Sets merchant_description
      *
-     * @param map[string,string] $merchant_description 
+     * @param map[string,string] $merchant_description A merchant-focused, localized description of the payment method, providing its purpose and details.
      *
      * @return $this
      */
@@ -405,7 +405,7 @@ class PaymentMethod implements ModelInterface, ArrayAccess
     /**
      * Sets supported_currencies
      *
-     * @param string[] $supported_currencies The currencies that are supported by the payment method.
+     * @param string[] $supported_currencies The currencies that the payment method supports.
      *
      * @return $this
      */

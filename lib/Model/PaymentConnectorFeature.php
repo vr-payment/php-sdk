@@ -1,8 +1,8 @@
 <?php
 /**
- * VRPay SDK
+ * VR Payment SDK
  *
- * This library allows to interact with the VRPay payment service.
+ * This library allows to interact with the VR Payment payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -220,7 +220,7 @@ class PaymentConnectorFeature implements ModelInterface, ArrayAccess
     /**
      * Sets display_name
      *
-     * @param string $display_name The name of the feature.
+     * @param string $display_name The localized name of the feature.
      *
      * @return $this
      */
