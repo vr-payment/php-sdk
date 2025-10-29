@@ -1,8 +1,12 @@
 <?php
 /**
- * VR Payment SDK
+ * VR Payment Php SDK
  *
  * This library allows to interact with the VR Payment payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://www.vr-payment.de
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace VRPayment\Sdk\Model;
 use \VRPayment\Sdk\ObjectSerializer;
 
@@ -28,17 +31,22 @@ use \VRPayment\Sdk\ObjectSerializer;
  * @description The primary risk taker will have the main loss when one party of the contract does not fulfill the contractual duties.
  * @package     VRPayment\Sdk
  * @author      VR Payment GmbH
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
  */
 class PaymentPrimaryRiskTaker
 {
     /**
      * Possible values of this enum
      */
-    const CUSTOMER = 'CUSTOMER';
-    const MERCHANT = 'MERCHANT';
-    const THIRD_PARTY = 'THIRD_PARTY';
-    
+    public const CUSTOMER = 'CUSTOMER';
+
+    public const MERCHANT = 'MERCHANT';
+
+    public const THIRD_PARTY = 'THIRD_PARTY';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -48,7 +56,7 @@ class PaymentPrimaryRiskTaker
         return [
             self::CUSTOMER,
             self::MERCHANT,
-            self::THIRD_PARTY,
+            self::THIRD_PARTY
         ];
     }
 }

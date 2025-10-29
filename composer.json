@@ -1,35 +1,40 @@
 {
-	"name": "vrpayment/sdk",
-	"version": "4.9.0",
-	"description": "VR Payment SDK for PHP",
-	"keywords": [
-		"vrpayment",
-		"payment",
-		"php",
-		"sdk",
-		"api"
-	],
-	"homepage": "http://github.com/vr-payment/php-sdk",
-	"license": "Apache-2.0",
-	"authors": [
-		{
-			"name": "VR Payment GmbH",
-			"email": "ecommerce@vr-payment.de",
-			"homepage": "https://www.vr-payment.de/"
-		}
-	],
-	"require": {
-		"php": ">=5.6",
-		"ext-json": "*",
-		"ext-mbstring": "*"
-	},
-	"require-dev": {
-		"phpunit/phpunit": "~8"
-	},
-	"autoload": {
-		"psr-4": { "VRPayment\\Sdk\\" : "lib/" }
-	},
-	"autoload-dev": {
-		"psr-4": { "VRPayment\\Sdk\\" : "test/" }
-	}
+    "name": "vrpayment/sdk",
+    "version": "5.0.0",
+    "description": "VR Payment SDK for PHP",
+    "keywords": [
+        "vrpayment",
+        "payment",
+        "php",
+        "sdk",
+        "api"
+    ],
+    "homepage": "https://github.com/vr-payment/php-sdk",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "VR Payment GmbH",
+            "email": "ecommerce@vr-payment.de",
+            "homepage": "https://www.vr-payment.de/"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "firebase/php-jwt": "^6.8",
+        "guzzlehttp/guzzle": "^7.7",
+        "guzzlehttp/psr7": "^2.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5",
+        "friendsofphp/php-cs-fixer": "^3.20"
+    },
+    "autoload": {
+        "psr-4": { "VRPayment\\Sdk\\" : "lib/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "VRPayment\\Sdk\\Test\\" : "test/" }
+    }
 }

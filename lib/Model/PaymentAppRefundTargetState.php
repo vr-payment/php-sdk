@@ -1,8 +1,12 @@
 <?php
 /**
- * VR Payment SDK
+ * VR Payment Php SDK
  *
  * This library allows to interact with the VR Payment payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://www.vr-payment.de
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace VRPayment\Sdk\Model;
 use \VRPayment\Sdk\ObjectSerializer;
 
@@ -28,16 +31,20 @@ use \VRPayment\Sdk\ObjectSerializer;
  * @description The target state indicates the state that should be set on the refund.
  * @package     VRPayment\Sdk
  * @author      VR Payment GmbH
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
  */
 class PaymentAppRefundTargetState
 {
     /**
      * Possible values of this enum
      */
-    const SUCCESSFUL = 'SUCCESSFUL';
-    const FAILED = 'FAILED';
-    
+    public const SUCCESSFUL = 'SUCCESSFUL';
+
+    public const FAILED = 'FAILED';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -46,7 +53,7 @@ class PaymentAppRefundTargetState
     {
         return [
             self::SUCCESSFUL,
-            self::FAILED,
+            self::FAILED
         ];
     }
 }
