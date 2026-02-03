@@ -1,6 +1,6 @@
 <?php
 /**
- * VR Payment Php SDK
+ * VR Payment PHP SDK
  *
  * This library allows to interact with the VR Payment payment service.
  *

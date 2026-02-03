@@ -1,6 +1,6 @@
 <?php
 /**
- * VR Payment Php SDK
+ * VR Payment PHP SDK
  *
  * This library allows to interact with the VR Payment payment service.
  *
@@ -67,7 +67,7 @@ class TransactionCompletionsServiceTest extends TestCase
             'State must be FULFILL'
         );
 
-        $transactionCompletion = self::$transactionsService->postPaymentTransactionsIdCompleteOffline(
+        $transactionCompletion = self::$transactionsService->postPaymentTransactionsIdCompleteOnline(
             $transaction->getId(),
             Constants::$spaceId
         );
