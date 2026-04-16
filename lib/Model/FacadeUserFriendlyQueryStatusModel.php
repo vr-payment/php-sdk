@@ -25,7 +25,7 @@ namespace VRPayment\Sdk\Model;
 use \VRPayment\Sdk\ObjectSerializer;
 
 /**
- * ExpressCheckoutSessionState model
+ * FacadeUserFriendlyQueryStatusModel model
  *
  * @category Class
  * @package     VRPayment\Sdk
@@ -33,22 +33,20 @@ use \VRPayment\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  */
-class ExpressCheckoutSessionState
+class FacadeUserFriendlyQueryStatusModel
 {
     /**
      * Possible values of this enum
      */
-    public const PENDING = 'PENDING';
-
-    public const APPROVED = 'APPROVED';
-
     public const PROCESSING = 'PROCESSING';
 
-    public const AUTHORIZED = 'AUTHORIZED';
+    public const CANCELLED = 'CANCELLED';
 
     public const FAILED = 'FAILED';
+
+    public const SUCCESS = 'SUCCESS';
 
     /**
      * Gets allowable values of the enum
@@ -57,11 +55,10 @@ class ExpressCheckoutSessionState
     public static function getAllowableEnumValues()
     {
         return [
-            self::PENDING,
-            self::APPROVED,
             self::PROCESSING,
-            self::AUTHORIZED,
-            self::FAILED
+            self::CANCELLED,
+            self::FAILED,
+            self::SUCCESS
         ];
     }
 }

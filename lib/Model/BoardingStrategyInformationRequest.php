@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \VRPayment\Sdk\ObjectSerializer;
 
 /**
- * BogusExpressCheckoutApprovalRequest model
+ * BoardingStrategyInformationRequest model
  *
  * @category Class
  * @package     VRPayment\Sdk
@@ -35,10 +35,10 @@ use \VRPayment\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
-class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class BoardingStrategyInformationRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'BogusExpressCheckoutApprovalRequest';
+    protected static $openAPIModelName = 'BoardingStrategyInformationRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,7 +55,7 @@ class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'payment_data' => '\VRPayment\Sdk\Model\BogusExpressCheckoutPaymentData'
+        'billing_address' => '\VRPayment\Sdk\Model\Setter'
     ];
 
     /**
@@ -66,7 +66,7 @@ class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'payment_data' => null
+        'billing_address' => null
     ];
 
     /**
@@ -75,7 +75,7 @@ class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'payment_data' => false
+        'billing_address' => false
     ];
 
     /**
@@ -164,7 +164,7 @@ class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'payment_data' => 'paymentData'
+        'billing_address' => 'billingAddress'
     ];
 
     /**
@@ -173,7 +173,7 @@ class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'payment_data' => 'setPaymentData'
+        'billing_address' => 'setBillingAddress'
     ];
 
     /**
@@ -182,7 +182,7 @@ class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'payment_data' => 'getPaymentData'
+        'billing_address' => 'getBillingAddress'
     ];
 
     /**
@@ -242,7 +242,7 @@ class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('payment_data', $data ?? [], null);
+        $this->setIfExists('billing_address', $data ?? [], null);
     }
 
     /**
@@ -272,6 +272,9 @@ class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['billing_address'] === null) {
+            $invalidProperties[] = "'billing_address' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -288,28 +291,28 @@ class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets payment_data
+     * Gets billing_address
      *
-     * @return \VRPayment\Sdk\Model\BogusExpressCheckoutPaymentData|null
+     * @return \VRPayment\Sdk\Model\Setter
      */
-    public function getPaymentData()
+    public function getBillingAddress()
     {
-        return $this->container['payment_data'];
+        return $this->container['billing_address'];
     }
 
     /**
-     * Sets payment_data
+     * Sets billing_address
      *
-     * @param \VRPayment\Sdk\Model\BogusExpressCheckoutPaymentData|null $payment_data payment_data
+     * @param \VRPayment\Sdk\Model\Setter $billing_address billing_address
      *
      * @return self
      */
-    public function setPaymentData($payment_data)
+    public function setBillingAddress($billing_address)
     {
-        if (is_null($payment_data)) {
-            throw new \InvalidArgumentException('non-nullable payment_data cannot be null');
+        if (is_null($billing_address)) {
+            throw new \InvalidArgumentException('non-nullable billing_address cannot be null');
         }
-        $this->container['payment_data'] = $payment_data;
+        $this->container['billing_address'] = $billing_address;
 
         return $this;
     }

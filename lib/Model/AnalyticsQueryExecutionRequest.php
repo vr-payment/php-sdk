@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \VRPayment\Sdk\ObjectSerializer;
 
 /**
- * ExpressCheckoutSessionCreate model
+ * AnalyticsQueryExecutionRequest model
  *
  * @category Class
  * @package     VRPayment\Sdk
@@ -35,10 +35,10 @@ use \VRPayment\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
-class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \JsonSerializable
+class AnalyticsQueryExecutionRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ExpressCheckoutSession.Create';
+    protected static $openAPIModelName = 'AnalyticsQueryExecutionRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,10 +55,9 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
       * @var string[]
       */
     protected static $openAPITypes = [
-        'line_items' => '\VRPayment\Sdk\Model\LineItem[]',
-        'merchant_shipping_callback_url' => 'string',
-        'currency' => 'string',
-        'shipping_options' => '\VRPayment\Sdk\Model\ExpressCheckoutShippingOption[]'
+        'sftp_dispatch_settings_id' => 'int',
+        'sftp_dispatch_result_file_rename_pattern' => 'string',
+        'sql' => 'string'
     ];
 
     /**
@@ -69,10 +68,9 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'line_items' => null,
-        'merchant_shipping_callback_url' => null,
-        'currency' => null,
-        'shipping_options' => null
+        'sftp_dispatch_settings_id' => 'int64',
+        'sftp_dispatch_result_file_rename_pattern' => null,
+        'sql' => null
     ];
 
     /**
@@ -81,10 +79,9 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'line_items' => false,
-        'merchant_shipping_callback_url' => false,
-        'currency' => false,
-        'shipping_options' => false
+        'sftp_dispatch_settings_id' => false,
+        'sftp_dispatch_result_file_rename_pattern' => false,
+        'sql' => false
     ];
 
     /**
@@ -173,10 +170,9 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $attributeMap = [
-        'line_items' => 'lineItems',
-        'merchant_shipping_callback_url' => 'merchantShippingCallbackUrl',
-        'currency' => 'currency',
-        'shipping_options' => 'shippingOptions'
+        'sftp_dispatch_settings_id' => 'sftpDispatchSettingsId',
+        'sftp_dispatch_result_file_rename_pattern' => 'sftpDispatchResultFileRenamePattern',
+        'sql' => 'sql'
     ];
 
     /**
@@ -185,10 +181,9 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $setters = [
-        'line_items' => 'setLineItems',
-        'merchant_shipping_callback_url' => 'setMerchantShippingCallbackUrl',
-        'currency' => 'setCurrency',
-        'shipping_options' => 'setShippingOptions'
+        'sftp_dispatch_settings_id' => 'setSftpDispatchSettingsId',
+        'sftp_dispatch_result_file_rename_pattern' => 'setSftpDispatchResultFileRenamePattern',
+        'sql' => 'setSql'
     ];
 
     /**
@@ -197,10 +192,9 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $getters = [
-        'line_items' => 'getLineItems',
-        'merchant_shipping_callback_url' => 'getMerchantShippingCallbackUrl',
-        'currency' => 'getCurrency',
-        'shipping_options' => 'getShippingOptions'
+        'sftp_dispatch_settings_id' => 'getSftpDispatchSettingsId',
+        'sftp_dispatch_result_file_rename_pattern' => 'getSftpDispatchResultFileRenamePattern',
+        'sql' => 'getSql'
     ];
 
     /**
@@ -260,10 +254,9 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('line_items', $data ?? [], null);
-        $this->setIfExists('merchant_shipping_callback_url', $data ?? [], null);
-        $this->setIfExists('currency', $data ?? [], null);
-        $this->setIfExists('shipping_options', $data ?? [], null);
+        $this->setIfExists('sftp_dispatch_settings_id', $data ?? [], null);
+        $this->setIfExists('sftp_dispatch_result_file_rename_pattern', $data ?? [], null);
+        $this->setIfExists('sql', $data ?? [], null);
     }
 
     /**
@@ -293,6 +286,14 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['sql']) && (mb_strlen($this->container['sql']) > 100000)) {
+            $invalidProperties[] = "invalid value for 'sql', the character length must be smaller than or equal to 100000.";
+        }
+
+        if (!is_null($this->container['sql']) && (mb_strlen($this->container['sql']) < 3)) {
+            $invalidProperties[] = "invalid value for 'sql', the character length must be bigger than or equal to 3.";
+        }
+
         return $invalidProperties;
     }
 
@@ -309,109 +310,89 @@ class ExpressCheckoutSessionCreate implements ModelInterface, ArrayAccess, \Json
 
 
     /**
-     * Gets line_items
+     * Gets sftp_dispatch_settings_id
      *
-     * @return \VRPayment\Sdk\Model\LineItem[]|null
+     * @return int|null
      */
-    public function getLineItems()
+    public function getSftpDispatchSettingsId()
     {
-        return $this->container['line_items'];
+        return $this->container['sftp_dispatch_settings_id'];
     }
 
     /**
-     * Sets line_items
+     * Sets sftp_dispatch_settings_id
      *
-     * @param \VRPayment\Sdk\Model\LineItem[]|null $line_items line_items
+     * @param int|null $sftp_dispatch_settings_id Optional. ID of the active SFTP configuration to use (associated with the target account). This is only required if the result file is scheduled for delivery to a remote SFTP server.
      *
      * @return self
      */
-    public function setLineItems($line_items)
+    public function setSftpDispatchSettingsId($sftp_dispatch_settings_id)
     {
-        if (is_null($line_items)) {
-            throw new \InvalidArgumentException('non-nullable line_items cannot be null');
+        if (is_null($sftp_dispatch_settings_id)) {
+            throw new \InvalidArgumentException('non-nullable sftp_dispatch_settings_id cannot be null');
         }
-        $this->container['line_items'] = $line_items;
+        $this->container['sftp_dispatch_settings_id'] = $sftp_dispatch_settings_id;
 
         return $this;
     }
 
     /**
-     * Gets merchant_shipping_callback_url
+     * Gets sftp_dispatch_result_file_rename_pattern
      *
      * @return string|null
      */
-    public function getMerchantShippingCallbackUrl()
+    public function getSftpDispatchResultFileRenamePattern()
     {
-        return $this->container['merchant_shipping_callback_url'];
+        return $this->container['sftp_dispatch_result_file_rename_pattern'];
     }
 
     /**
-     * Sets merchant_shipping_callback_url
+     * Sets sftp_dispatch_result_file_rename_pattern
      *
-     * @param string|null $merchant_shipping_callback_url The URL to fetch the shipping options from.
+     * @param string|null $sftp_dispatch_result_file_rename_pattern Optional. Renaming pattern used for the result file during SFTP delivery. You can use a combination of fixed Latin text and timestamp variables (e.g., \"transaction_report_{YYYMMDD_hhmmss}\"). Supported variable formats: DDMMYY, MMDDYY, YYYYMMDD, DD_MM_YY, DD-MM-YY, YYYY-MM-DD, YYYY_MM_DD, YYYYMMDD_hhmmss, YYYY-MM-DD_hh-mm-ss.
      *
      * @return self
      */
-    public function setMerchantShippingCallbackUrl($merchant_shipping_callback_url)
+    public function setSftpDispatchResultFileRenamePattern($sftp_dispatch_result_file_rename_pattern)
     {
-        if (is_null($merchant_shipping_callback_url)) {
-            throw new \InvalidArgumentException('non-nullable merchant_shipping_callback_url cannot be null');
+        if (is_null($sftp_dispatch_result_file_rename_pattern)) {
+            throw new \InvalidArgumentException('non-nullable sftp_dispatch_result_file_rename_pattern cannot be null');
         }
-        $this->container['merchant_shipping_callback_url'] = $merchant_shipping_callback_url;
+        $this->container['sftp_dispatch_result_file_rename_pattern'] = $sftp_dispatch_result_file_rename_pattern;
 
         return $this;
     }
 
     /**
-     * Gets currency
+     * Gets sql
      *
      * @return string|null
      */
-    public function getCurrency()
+    public function getSql()
     {
-        return $this->container['currency'];
+        return $this->container['sql'];
     }
 
     /**
-     * Sets currency
+     * Sets sql
      *
-     * @param string|null $currency The currency of the session.
+     * @param string|null $sql The SQL query (in PrestoDB dialect) to execute on the analytics database. This query defines exactly which data should be retrieved.
      *
      * @return self
      */
-    public function setCurrency($currency)
+    public function setSql($sql)
     {
-        if (is_null($currency)) {
-            throw new \InvalidArgumentException('non-nullable currency cannot be null');
+        if (is_null($sql)) {
+            throw new \InvalidArgumentException('non-nullable sql cannot be null');
         }
-        $this->container['currency'] = $currency;
-
-        return $this;
-    }
-
-    /**
-     * Gets shipping_options
-     *
-     * @return \VRPayment\Sdk\Model\ExpressCheckoutShippingOption[]|null
-     */
-    public function getShippingOptions()
-    {
-        return $this->container['shipping_options'];
-    }
-
-    /**
-     * Sets shipping_options
-     *
-     * @param \VRPayment\Sdk\Model\ExpressCheckoutShippingOption[]|null $shipping_options shipping_options
-     *
-     * @return self
-     */
-    public function setShippingOptions($shipping_options)
-    {
-        if (is_null($shipping_options)) {
-            throw new \InvalidArgumentException('non-nullable shipping_options cannot be null');
+        if ((mb_strlen($sql) > 100000)) {
+            throw new \InvalidArgumentException('invalid length for $sql when calling AnalyticsQueryExecutionRequest., must be smaller than or equal to 100000.');
         }
-        $this->container['shipping_options'] = $shipping_options;
+        if ((mb_strlen($sql) < 3)) {
+            throw new \InvalidArgumentException('invalid length for $sql when calling AnalyticsQueryExecutionRequest., must be bigger than or equal to 3.');
+        }
+
+        $this->container['sql'] = $sql;
 
         return $this;
     }

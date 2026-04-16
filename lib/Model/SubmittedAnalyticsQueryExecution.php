@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \VRPayment\Sdk\ObjectSerializer;
 
 /**
- * ExpressCheckoutShippingOption model
+ * SubmittedAnalyticsQueryExecution model
  *
  * @category Class
  * @package     VRPayment\Sdk
@@ -35,10 +35,10 @@ use \VRPayment\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
-class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \JsonSerializable
+class SubmittedAnalyticsQueryExecution implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \Jso
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ExpressCheckoutShippingOption';
+    protected static $openAPIModelName = 'SubmittedAnalyticsQueryExecution';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,13 +55,16 @@ class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \Jso
       * @var string[]
       */
     protected static $openAPITypes = [
-        'amount' => 'float',
-        'description' => 'string',
-        'currency' => 'string',
-        'id' => 'string',
-        'label' => 'string',
-        'tax_amount' => 'float',
-        'selected' => 'bool'
+        'query_external_id' => 'string',
+        'account_id' => 'int',
+        'total_billed_execution_time_ms' => 'int',
+        'created_timestamp' => '\DateTime',
+        'download_requests' => 'int',
+        'original_query' => 'string',
+        'scanned_bytes' => 'int',
+        'portal_query_token' => 'string',
+        'result_file_bytes' => 'int',
+        'status' => '\VRPayment\Sdk\Model\FacadeUserFriendlyQueryStatusModel'
     ];
 
     /**
@@ -72,13 +75,16 @@ class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \Jso
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'amount' => null,
-        'description' => null,
-        'currency' => null,
-        'id' => null,
-        'label' => null,
-        'tax_amount' => null,
-        'selected' => null
+        'query_external_id' => null,
+        'account_id' => 'int64',
+        'total_billed_execution_time_ms' => null,
+        'created_timestamp' => 'date-time',
+        'download_requests' => 'int64',
+        'original_query' => null,
+        'scanned_bytes' => null,
+        'portal_query_token' => null,
+        'result_file_bytes' => null,
+        'status' => null
     ];
 
     /**
@@ -87,13 +93,16 @@ class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \Jso
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'amount' => false,
-        'description' => false,
-        'currency' => false,
-        'id' => false,
-        'label' => false,
-        'tax_amount' => false,
-        'selected' => false
+        'query_external_id' => false,
+        'account_id' => false,
+        'total_billed_execution_time_ms' => false,
+        'created_timestamp' => false,
+        'download_requests' => false,
+        'original_query' => false,
+        'scanned_bytes' => false,
+        'portal_query_token' => false,
+        'result_file_bytes' => false,
+        'status' => false
     ];
 
     /**
@@ -182,13 +191,16 @@ class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $attributeMap = [
-        'amount' => 'amount',
-        'description' => 'description',
-        'currency' => 'currency',
-        'id' => 'id',
-        'label' => 'label',
-        'tax_amount' => 'taxAmount',
-        'selected' => 'selected'
+        'query_external_id' => 'queryExternalId',
+        'account_id' => 'accountId',
+        'total_billed_execution_time_ms' => 'totalBilledExecutionTimeMs',
+        'created_timestamp' => 'createdTimestamp',
+        'download_requests' => 'downloadRequests',
+        'original_query' => 'originalQuery',
+        'scanned_bytes' => 'scannedBytes',
+        'portal_query_token' => 'portalQueryToken',
+        'result_file_bytes' => 'resultFileBytes',
+        'status' => 'status'
     ];
 
     /**
@@ -197,13 +209,16 @@ class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $setters = [
-        'amount' => 'setAmount',
-        'description' => 'setDescription',
-        'currency' => 'setCurrency',
-        'id' => 'setId',
-        'label' => 'setLabel',
-        'tax_amount' => 'setTaxAmount',
-        'selected' => 'setSelected'
+        'query_external_id' => 'setQueryExternalId',
+        'account_id' => 'setAccountId',
+        'total_billed_execution_time_ms' => 'setTotalBilledExecutionTimeMs',
+        'created_timestamp' => 'setCreatedTimestamp',
+        'download_requests' => 'setDownloadRequests',
+        'original_query' => 'setOriginalQuery',
+        'scanned_bytes' => 'setScannedBytes',
+        'portal_query_token' => 'setPortalQueryToken',
+        'result_file_bytes' => 'setResultFileBytes',
+        'status' => 'setStatus'
     ];
 
     /**
@@ -212,13 +227,16 @@ class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $getters = [
-        'amount' => 'getAmount',
-        'description' => 'getDescription',
-        'currency' => 'getCurrency',
-        'id' => 'getId',
-        'label' => 'getLabel',
-        'tax_amount' => 'getTaxAmount',
-        'selected' => 'getSelected'
+        'query_external_id' => 'getQueryExternalId',
+        'account_id' => 'getAccountId',
+        'total_billed_execution_time_ms' => 'getTotalBilledExecutionTimeMs',
+        'created_timestamp' => 'getCreatedTimestamp',
+        'download_requests' => 'getDownloadRequests',
+        'original_query' => 'getOriginalQuery',
+        'scanned_bytes' => 'getScannedBytes',
+        'portal_query_token' => 'getPortalQueryToken',
+        'result_file_bytes' => 'getResultFileBytes',
+        'status' => 'getStatus'
     ];
 
     /**
@@ -278,13 +296,16 @@ class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \Jso
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('amount', $data ?? [], null);
-        $this->setIfExists('description', $data ?? [], null);
-        $this->setIfExists('currency', $data ?? [], null);
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('label', $data ?? [], null);
-        $this->setIfExists('tax_amount', $data ?? [], null);
-        $this->setIfExists('selected', $data ?? [], null);
+        $this->setIfExists('query_external_id', $data ?? [], null);
+        $this->setIfExists('account_id', $data ?? [], null);
+        $this->setIfExists('total_billed_execution_time_ms', $data ?? [], null);
+        $this->setIfExists('created_timestamp', $data ?? [], null);
+        $this->setIfExists('download_requests', $data ?? [], null);
+        $this->setIfExists('original_query', $data ?? [], null);
+        $this->setIfExists('scanned_bytes', $data ?? [], null);
+        $this->setIfExists('portal_query_token', $data ?? [], null);
+        $this->setIfExists('result_file_bytes', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
     }
 
     /**
@@ -330,190 +351,271 @@ class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \Jso
 
 
     /**
-     * Gets amount
-     *
-     * @return float|null
-     */
-    public function getAmount()
-    {
-        return $this->container['amount'];
-    }
-
-    /**
-     * Sets amount
-     *
-     * @param float|null $amount Total cost of this shipping option.
-     *
-     * @return self
-     */
-    public function setAmount($amount)
-    {
-        if (is_null($amount)) {
-            throw new \InvalidArgumentException('non-nullable amount cannot be null');
-        }
-        $this->container['amount'] = $amount;
-
-        return $this;
-    }
-
-    /**
-     * Gets description
+     * Gets query_external_id
      *
      * @return string|null
      */
-    public function getDescription()
+    public function getQueryExternalId()
     {
-        return $this->container['description'];
+        return $this->container['query_external_id'];
     }
 
     /**
-     * Sets description
+     * Sets query_external_id
      *
-     * @param string|null $description Description of the option
+     * @param string|null $query_external_id The external id associated with this query, if any.
      *
      * @return self
      */
-    public function setDescription($description)
+    public function setQueryExternalId($query_external_id)
     {
-        if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
+        if (is_null($query_external_id)) {
+            throw new \InvalidArgumentException('non-nullable query_external_id cannot be null');
         }
-        $this->container['description'] = $description;
+        $this->container['query_external_id'] = $query_external_id;
 
         return $this;
     }
 
     /**
-     * Gets currency
+     * Gets account_id
+     *
+     * @return int|null
+     */
+    public function getAccountId()
+    {
+        return $this->container['account_id'];
+    }
+
+    /**
+     * Sets account_id
+     *
+     * @param int|null $account_id The ID of the target account for which the analytics query will be executed, determining the data scope for the request.
+     *
+     * @return self
+     */
+    public function setAccountId($account_id)
+    {
+        if (is_null($account_id)) {
+            throw new \InvalidArgumentException('non-nullable account_id cannot be null');
+        }
+        $this->container['account_id'] = $account_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets total_billed_execution_time_ms
+     *
+     * @return int|null
+     */
+    public function getTotalBilledExecutionTimeMs()
+    {
+        return $this->container['total_billed_execution_time_ms'];
+    }
+
+    /**
+     * Sets total_billed_execution_time_ms
+     *
+     * @param int|null $total_billed_execution_time_ms The total execution time, in milliseconds, that has been billed for the query.
+     *
+     * @return self
+     */
+    public function setTotalBilledExecutionTimeMs($total_billed_execution_time_ms)
+    {
+        if (is_null($total_billed_execution_time_ms)) {
+            throw new \InvalidArgumentException('non-nullable total_billed_execution_time_ms cannot be null');
+        }
+        $this->container['total_billed_execution_time_ms'] = $total_billed_execution_time_ms;
+
+        return $this;
+    }
+
+    /**
+     * Gets created_timestamp
+     *
+     * @return \DateTime|null
+     */
+    public function getCreatedTimestamp()
+    {
+        return $this->container['created_timestamp'];
+    }
+
+    /**
+     * Sets created_timestamp
+     *
+     * @param \DateTime|null $created_timestamp The date and time when the query was created.
+     *
+     * @return self
+     */
+    public function setCreatedTimestamp($created_timestamp)
+    {
+        if (is_null($created_timestamp)) {
+            throw new \InvalidArgumentException('non-nullable created_timestamp cannot be null');
+        }
+        $this->container['created_timestamp'] = $created_timestamp;
+
+        return $this;
+    }
+
+    /**
+     * Gets download_requests
+     *
+     * @return int|null
+     */
+    public function getDownloadRequests()
+    {
+        return $this->container['download_requests'];
+    }
+
+    /**
+     * Sets download_requests
+     *
+     * @param int|null $download_requests The number of times the query result file has been downloaded.
+     *
+     * @return self
+     */
+    public function setDownloadRequests($download_requests)
+    {
+        if (is_null($download_requests)) {
+            throw new \InvalidArgumentException('non-nullable download_requests cannot be null');
+        }
+        $this->container['download_requests'] = $download_requests;
+
+        return $this;
+    }
+
+    /**
+     * Gets original_query
      *
      * @return string|null
      */
-    public function getCurrency()
+    public function getOriginalQuery()
     {
-        return $this->container['currency'];
+        return $this->container['original_query'];
     }
 
     /**
-     * Sets currency
+     * Sets original_query
      *
-     * @param string|null $currency Currency code (ISO-4217) of this shipping option.
+     * @param string|null $original_query The SQL query as originally submitted by the user.
      *
      * @return self
      */
-    public function setCurrency($currency)
+    public function setOriginalQuery($original_query)
     {
-        if (is_null($currency)) {
-            throw new \InvalidArgumentException('non-nullable currency cannot be null');
+        if (is_null($original_query)) {
+            throw new \InvalidArgumentException('non-nullable original_query cannot be null');
         }
-        $this->container['currency'] = $currency;
+        $this->container['original_query'] = $original_query;
 
         return $this;
     }
 
     /**
-     * Gets id
+     * Gets scanned_bytes
+     *
+     * @return int|null
+     */
+    public function getScannedBytes()
+    {
+        return $this->container['scanned_bytes'];
+    }
+
+    /**
+     * Sets scanned_bytes
+     *
+     * @param int|null $scanned_bytes The total bytes of data scanned by the submitted query.
+     *
+     * @return self
+     */
+    public function setScannedBytes($scanned_bytes)
+    {
+        if (is_null($scanned_bytes)) {
+            throw new \InvalidArgumentException('non-nullable scanned_bytes cannot be null');
+        }
+        $this->container['scanned_bytes'] = $scanned_bytes;
+
+        return $this;
+    }
+
+    /**
+     * Gets portal_query_token
      *
      * @return string|null
      */
-    public function getId()
+    public function getPortalQueryToken()
     {
-        return $this->container['id'];
+        return $this->container['portal_query_token'];
     }
 
     /**
-     * Sets id
+     * Sets portal_query_token
      *
-     * @param string|null $id Identifier of the option.
+     * @param string|null $portal_query_token The unique query token associated with the analytics query execution.
      *
      * @return self
      */
-    public function setId($id)
+    public function setPortalQueryToken($portal_query_token)
     {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        if (is_null($portal_query_token)) {
+            throw new \InvalidArgumentException('non-nullable portal_query_token cannot be null');
         }
-        $this->container['id'] = $id;
+        $this->container['portal_query_token'] = $portal_query_token;
 
         return $this;
     }
 
     /**
-     * Gets label
+     * Gets result_file_bytes
      *
-     * @return string|null
+     * @return int|null
      */
-    public function getLabel()
+    public function getResultFileBytes()
     {
-        return $this->container['label'];
+        return $this->container['result_file_bytes'];
     }
 
     /**
-     * Sets label
+     * Sets result_file_bytes
      *
-     * @param string|null $label Label of the option.
+     * @param int|null $result_file_bytes The size, in bytes, of the result file generated by the query.
      *
      * @return self
      */
-    public function setLabel($label)
+    public function setResultFileBytes($result_file_bytes)
     {
-        if (is_null($label)) {
-            throw new \InvalidArgumentException('non-nullable label cannot be null');
+        if (is_null($result_file_bytes)) {
+            throw new \InvalidArgumentException('non-nullable result_file_bytes cannot be null');
         }
-        $this->container['label'] = $label;
+        $this->container['result_file_bytes'] = $result_file_bytes;
 
         return $this;
     }
 
     /**
-     * Gets tax_amount
+     * Gets status
      *
-     * @return float|null
+     * @return \VRPayment\Sdk\Model\FacadeUserFriendlyQueryStatusModel|null
      */
-    public function getTaxAmount()
+    public function getStatus()
     {
-        return $this->container['tax_amount'];
+        return $this->container['status'];
     }
 
     /**
-     * Sets tax_amount
+     * Sets status
      *
-     * @param float|null $tax_amount Amount related to taxes.
+     * @param \VRPayment\Sdk\Model\FacadeUserFriendlyQueryStatusModel|null $status status
      *
      * @return self
      */
-    public function setTaxAmount($tax_amount)
+    public function setStatus($status)
     {
-        if (is_null($tax_amount)) {
-            throw new \InvalidArgumentException('non-nullable tax_amount cannot be null');
+        if (is_null($status)) {
+            throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
-        $this->container['tax_amount'] = $tax_amount;
-
-        return $this;
-    }
-
-    /**
-     * Gets selected
-     *
-     * @return bool|null
-     */
-    public function getSelected()
-    {
-        return $this->container['selected'];
-    }
-
-    /**
-     * Sets selected
-     *
-     * @param bool|null $selected Whether it was the option selected by the customer.
-     *
-     * @return self
-     */
-    public function setSelected($selected)
-    {
-        if (is_null($selected)) {
-            throw new \InvalidArgumentException('non-nullable selected cannot be null');
-        }
-        $this->container['selected'] = $selected;
+        $this->container['status'] = $status;
 
         return $this;
     }

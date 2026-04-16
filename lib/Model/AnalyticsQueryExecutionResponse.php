@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \VRPayment\Sdk\ObjectSerializer;
 
 /**
- * ExpressCheckoutShippingMethodChangeRequest model
+ * AnalyticsQueryExecutionResponse model
  *
  * @category Class
  * @package     VRPayment\Sdk
@@ -35,10 +35,10 @@ use \VRPayment\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
-class ExpressCheckoutShippingMethodChangeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class AnalyticsQueryExecutionResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class ExpressCheckoutShippingMethodChangeRequest implements ModelInterface, Arra
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ExpressCheckoutShippingMethodChangeRequest';
+    protected static $openAPIModelName = 'AnalyticsQueryExecutionResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,7 +55,7 @@ class ExpressCheckoutShippingMethodChangeRequest implements ModelInterface, Arra
       * @var string[]
       */
     protected static $openAPITypes = [
-        'shipping_method_id' => 'string'
+        'query_token' => 'string'
     ];
 
     /**
@@ -66,7 +66,7 @@ class ExpressCheckoutShippingMethodChangeRequest implements ModelInterface, Arra
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'shipping_method_id' => null
+        'query_token' => null
     ];
 
     /**
@@ -75,7 +75,7 @@ class ExpressCheckoutShippingMethodChangeRequest implements ModelInterface, Arra
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'shipping_method_id' => false
+        'query_token' => false
     ];
 
     /**
@@ -164,7 +164,7 @@ class ExpressCheckoutShippingMethodChangeRequest implements ModelInterface, Arra
      * @var string[]
      */
     protected static $attributeMap = [
-        'shipping_method_id' => 'shippingMethodId'
+        'query_token' => 'queryToken'
     ];
 
     /**
@@ -173,7 +173,7 @@ class ExpressCheckoutShippingMethodChangeRequest implements ModelInterface, Arra
      * @var string[]
      */
     protected static $setters = [
-        'shipping_method_id' => 'setShippingMethodId'
+        'query_token' => 'setQueryToken'
     ];
 
     /**
@@ -182,7 +182,7 @@ class ExpressCheckoutShippingMethodChangeRequest implements ModelInterface, Arra
      * @var string[]
      */
     protected static $getters = [
-        'shipping_method_id' => 'getShippingMethodId'
+        'query_token' => 'getQueryToken'
     ];
 
     /**
@@ -242,7 +242,7 @@ class ExpressCheckoutShippingMethodChangeRequest implements ModelInterface, Arra
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('shipping_method_id', $data ?? [], null);
+        $this->setIfExists('query_token', $data ?? [], null);
     }
 
     /**
@@ -288,28 +288,28 @@ class ExpressCheckoutShippingMethodChangeRequest implements ModelInterface, Arra
 
 
     /**
-     * Gets shipping_method_id
+     * Gets query_token
      *
      * @return string|null
      */
-    public function getShippingMethodId()
+    public function getQueryToken()
     {
-        return $this->container['shipping_method_id'];
+        return $this->container['query_token'];
     }
 
     /**
-     * Sets shipping_method_id
+     * Sets query_token
      *
-     * @param string|null $shipping_method_id Identifier of the selected shipping option.
+     * @param string|null $query_token The unique query token associated with a submitted analytics query execution. This token can be used to check the execution status of the query.
      *
      * @return self
      */
-    public function setShippingMethodId($shipping_method_id)
+    public function setQueryToken($query_token)
     {
-        if (is_null($shipping_method_id)) {
-            throw new \InvalidArgumentException('non-nullable shipping_method_id cannot be null');
+        if (is_null($query_token)) {
+            throw new \InvalidArgumentException('non-nullable query_token cannot be null');
         }
-        $this->container['shipping_method_id'] = $shipping_method_id;
+        $this->container['query_token'] = $query_token;
 
         return $this;
     }

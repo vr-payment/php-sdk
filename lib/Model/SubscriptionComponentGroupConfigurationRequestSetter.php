@@ -27,18 +27,19 @@ use \ArrayAccess;
 use \VRPayment\Sdk\ObjectSerializer;
 
 /**
- * BogusExpressCheckoutPaymentData model
+ * SubscriptionComponentGroupConfigurationRequestSetter model
  *
  * @category Class
+ * @description Model used to configure the Subscription Product to be assigned to the Account
  * @package     VRPayment\Sdk
  * @author      VR Payment GmbH
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
-class BogusExpressCheckoutPaymentData implements ModelInterface, ArrayAccess, \JsonSerializable
+class SubscriptionComponentGroupConfigurationRequestSetter implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +48,7 @@ class BogusExpressCheckoutPaymentData implements ModelInterface, ArrayAccess, \J
       *
       * @var string
       */
-    protected static $openAPIModelName = 'BogusExpressCheckoutPaymentData';
+    protected static $openAPIModelName = 'SubscriptionComponentGroupConfigurationRequest.Setter';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,8 +56,9 @@ class BogusExpressCheckoutPaymentData implements ModelInterface, ArrayAccess, \J
       * @var string[]
       */
     protected static $openAPITypes = [
-        'payment_token' => 'string',
-        'cryptogram' => 'string'
+        'quantity' => 'float',
+        'subscription_product_component_group_id' => 'int',
+        'subscription_product_component_reference_id' => 'int'
     ];
 
     /**
@@ -67,8 +69,9 @@ class BogusExpressCheckoutPaymentData implements ModelInterface, ArrayAccess, \J
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'payment_token' => null,
-        'cryptogram' => null
+        'quantity' => null,
+        'subscription_product_component_group_id' => 'int64',
+        'subscription_product_component_reference_id' => 'int64'
     ];
 
     /**
@@ -77,8 +80,9 @@ class BogusExpressCheckoutPaymentData implements ModelInterface, ArrayAccess, \J
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'payment_token' => false,
-        'cryptogram' => false
+        'quantity' => false,
+        'subscription_product_component_group_id' => false,
+        'subscription_product_component_reference_id' => false
     ];
 
     /**
@@ -167,8 +171,9 @@ class BogusExpressCheckoutPaymentData implements ModelInterface, ArrayAccess, \J
      * @var string[]
      */
     protected static $attributeMap = [
-        'payment_token' => 'paymentToken',
-        'cryptogram' => 'cryptogram'
+        'quantity' => 'quantity',
+        'subscription_product_component_group_id' => 'subscriptionProductComponentGroupId',
+        'subscription_product_component_reference_id' => 'subscriptionProductComponentReferenceId'
     ];
 
     /**
@@ -177,8 +182,9 @@ class BogusExpressCheckoutPaymentData implements ModelInterface, ArrayAccess, \J
      * @var string[]
      */
     protected static $setters = [
-        'payment_token' => 'setPaymentToken',
-        'cryptogram' => 'setCryptogram'
+        'quantity' => 'setQuantity',
+        'subscription_product_component_group_id' => 'setSubscriptionProductComponentGroupId',
+        'subscription_product_component_reference_id' => 'setSubscriptionProductComponentReferenceId'
     ];
 
     /**
@@ -187,8 +193,9 @@ class BogusExpressCheckoutPaymentData implements ModelInterface, ArrayAccess, \J
      * @var string[]
      */
     protected static $getters = [
-        'payment_token' => 'getPaymentToken',
-        'cryptogram' => 'getCryptogram'
+        'quantity' => 'getQuantity',
+        'subscription_product_component_group_id' => 'getSubscriptionProductComponentGroupId',
+        'subscription_product_component_reference_id' => 'getSubscriptionProductComponentReferenceId'
     ];
 
     /**
@@ -248,8 +255,9 @@ class BogusExpressCheckoutPaymentData implements ModelInterface, ArrayAccess, \J
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('payment_token', $data ?? [], null);
-        $this->setIfExists('cryptogram', $data ?? [], null);
+        $this->setIfExists('quantity', $data ?? [], null);
+        $this->setIfExists('subscription_product_component_group_id', $data ?? [], null);
+        $this->setIfExists('subscription_product_component_reference_id', $data ?? [], null);
     }
 
     /**
@@ -295,55 +303,82 @@ class BogusExpressCheckoutPaymentData implements ModelInterface, ArrayAccess, \J
 
 
     /**
-     * Gets payment_token
+     * Gets quantity
      *
-     * @return string|null
+     * @return float|null
      */
-    public function getPaymentToken()
+    public function getQuantity()
     {
-        return $this->container['payment_token'];
+        return $this->container['quantity'];
     }
 
     /**
-     * Sets payment_token
+     * Sets quantity
      *
-     * @param string|null $payment_token Wallet-generated payment token collected during approval.
+     * @param float|null $quantity quantity
      *
      * @return self
      */
-    public function setPaymentToken($payment_token)
+    public function setQuantity($quantity)
     {
-        if (is_null($payment_token)) {
-            throw new \InvalidArgumentException('non-nullable payment_token cannot be null');
+        if (is_null($quantity)) {
+            throw new \InvalidArgumentException('non-nullable quantity cannot be null');
         }
-        $this->container['payment_token'] = $payment_token;
+        $this->container['quantity'] = $quantity;
 
         return $this;
     }
 
     /**
-     * Gets cryptogram
+     * Gets subscription_product_component_group_id
      *
-     * @return string|null
+     * @return int|null
      */
-    public function getCryptogram()
+    public function getSubscriptionProductComponentGroupId()
     {
-        return $this->container['cryptogram'];
+        return $this->container['subscription_product_component_group_id'];
     }
 
     /**
-     * Sets cryptogram
+     * Sets subscription_product_component_group_id
      *
-     * @param string|null $cryptogram Wallet-generated cryptogram collected during approval.
+     * @param int|null $subscription_product_component_group_id subscription_product_component_group_id
      *
      * @return self
      */
-    public function setCryptogram($cryptogram)
+    public function setSubscriptionProductComponentGroupId($subscription_product_component_group_id)
     {
-        if (is_null($cryptogram)) {
-            throw new \InvalidArgumentException('non-nullable cryptogram cannot be null');
+        if (is_null($subscription_product_component_group_id)) {
+            throw new \InvalidArgumentException('non-nullable subscription_product_component_group_id cannot be null');
         }
-        $this->container['cryptogram'] = $cryptogram;
+        $this->container['subscription_product_component_group_id'] = $subscription_product_component_group_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets subscription_product_component_reference_id
+     *
+     * @return int|null
+     */
+    public function getSubscriptionProductComponentReferenceId()
+    {
+        return $this->container['subscription_product_component_reference_id'];
+    }
+
+    /**
+     * Sets subscription_product_component_reference_id
+     *
+     * @param int|null $subscription_product_component_reference_id subscription_product_component_reference_id
+     *
+     * @return self
+     */
+    public function setSubscriptionProductComponentReferenceId($subscription_product_component_reference_id)
+    {
+        if (is_null($subscription_product_component_reference_id)) {
+            throw new \InvalidArgumentException('non-nullable subscription_product_component_reference_id cannot be null');
+        }
+        $this->container['subscription_product_component_reference_id'] = $subscription_product_component_reference_id;
 
         return $this;
     }

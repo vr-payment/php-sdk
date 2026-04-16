@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \VRPayment\Sdk\ObjectSerializer;
 
 /**
- * ExpressCheckoutWalletType model
+ * PaymentFacilitatorPricingProfileDto model
  *
  * @category Class
  * @package     VRPayment\Sdk
@@ -35,10 +35,10 @@ use \VRPayment\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
-class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSerializable
+class PaymentFacilitatorPricingProfileDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ExpressCheckoutWalletType';
+    protected static $openAPIModelName = 'PaymentFacilitatorPricingProfileDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,8 +55,7 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'array<string,string>',
-        'description' => 'array<string,string>',
+        'name' => 'string',
         'id' => 'int'
     ];
 
@@ -69,7 +68,6 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
       */
     protected static $openAPIFormats = [
         'name' => null,
-        'description' => null,
         'id' => 'int64'
     ];
 
@@ -80,7 +78,6 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
       */
     protected static array $openAPINullables = [
         'name' => false,
-        'description' => false,
         'id' => false
     ];
 
@@ -171,7 +168,6 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
      */
     protected static $attributeMap = [
         'name' => 'name',
-        'description' => 'description',
         'id' => 'id'
     ];
 
@@ -182,7 +178,6 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
      */
     protected static $setters = [
         'name' => 'setName',
-        'description' => 'setDescription',
         'id' => 'setId'
     ];
 
@@ -193,7 +188,6 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
      */
     protected static $getters = [
         'name' => 'getName',
-        'description' => 'getDescription',
         'id' => 'getId'
     ];
 
@@ -255,7 +249,6 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
     public function __construct(?array $data = null)
     {
         $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('description', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
     }
 
@@ -304,7 +297,7 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Gets name
      *
-     * @return array<string,string>|null
+     * @return string|null
      */
     public function getName()
     {
@@ -314,7 +307,7 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets name
      *
-     * @param array<string,string>|null $name The localized name of the object.
+     * @param string|null $name name
      *
      * @return self
      */
@@ -324,33 +317,6 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
             throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
         $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets description
-     *
-     * @return array<string,string>|null
-     */
-    public function getDescription()
-    {
-        return $this->container['description'];
-    }
-
-    /**
-     * Sets description
-     *
-     * @param array<string,string>|null $description The localized description of the object.
-     *
-     * @return self
-     */
-    public function setDescription($description)
-    {
-        if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
-        }
-        $this->container['description'] = $description;
 
         return $this;
     }
@@ -368,7 +334,7 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets id
      *
-     * @param int|null $id A unique identifier for the object.
+     * @param int|null $id id
      *
      * @return self
      */

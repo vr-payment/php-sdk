@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \VRPayment\Sdk\ObjectSerializer;
 
 /**
- * ExpressCheckoutShippingAddressChangeRequest model
+ * WalleejoinCreatePartnershipRequestDto model
  *
  * @category Class
  * @package     VRPayment\Sdk
@@ -35,10 +35,10 @@ use \VRPayment\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
-class ExpressCheckoutShippingAddressChangeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class WalleejoinCreatePartnershipRequestDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class ExpressCheckoutShippingAddressChangeRequest implements ModelInterface, Arr
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ExpressCheckoutShippingAddressChangeRequest';
+    protected static $openAPIModelName = 'WalleejoinCreatePartnershipRequestDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,8 +55,10 @@ class ExpressCheckoutShippingAddressChangeRequest implements ModelInterface, Arr
       * @var string[]
       */
     protected static $openAPITypes = [
-        'shipping_address' => '\VRPayment\Sdk\Model\Address',
-        'billing_address' => '\VRPayment\Sdk\Model\Address'
+        'partner_account_id' => 'int',
+        'pricing_profile_sell_rate_id' => 'int',
+        'subscription_product_id' => 'int',
+        'merchant_email_address' => 'string'
     ];
 
     /**
@@ -67,8 +69,10 @@ class ExpressCheckoutShippingAddressChangeRequest implements ModelInterface, Arr
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'shipping_address' => null,
-        'billing_address' => null
+        'partner_account_id' => 'int64',
+        'pricing_profile_sell_rate_id' => 'int64',
+        'subscription_product_id' => 'int64',
+        'merchant_email_address' => null
     ];
 
     /**
@@ -77,8 +81,10 @@ class ExpressCheckoutShippingAddressChangeRequest implements ModelInterface, Arr
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'shipping_address' => false,
-        'billing_address' => false
+        'partner_account_id' => false,
+        'pricing_profile_sell_rate_id' => false,
+        'subscription_product_id' => false,
+        'merchant_email_address' => false
     ];
 
     /**
@@ -167,8 +173,10 @@ class ExpressCheckoutShippingAddressChangeRequest implements ModelInterface, Arr
      * @var string[]
      */
     protected static $attributeMap = [
-        'shipping_address' => 'shippingAddress',
-        'billing_address' => 'billingAddress'
+        'partner_account_id' => 'partnerAccountId',
+        'pricing_profile_sell_rate_id' => 'pricingProfileSellRateId',
+        'subscription_product_id' => 'subscriptionProductId',
+        'merchant_email_address' => 'merchantEmailAddress'
     ];
 
     /**
@@ -177,8 +185,10 @@ class ExpressCheckoutShippingAddressChangeRequest implements ModelInterface, Arr
      * @var string[]
      */
     protected static $setters = [
-        'shipping_address' => 'setShippingAddress',
-        'billing_address' => 'setBillingAddress'
+        'partner_account_id' => 'setPartnerAccountId',
+        'pricing_profile_sell_rate_id' => 'setPricingProfileSellRateId',
+        'subscription_product_id' => 'setSubscriptionProductId',
+        'merchant_email_address' => 'setMerchantEmailAddress'
     ];
 
     /**
@@ -187,8 +197,10 @@ class ExpressCheckoutShippingAddressChangeRequest implements ModelInterface, Arr
      * @var string[]
      */
     protected static $getters = [
-        'shipping_address' => 'getShippingAddress',
-        'billing_address' => 'getBillingAddress'
+        'partner_account_id' => 'getPartnerAccountId',
+        'pricing_profile_sell_rate_id' => 'getPricingProfileSellRateId',
+        'subscription_product_id' => 'getSubscriptionProductId',
+        'merchant_email_address' => 'getMerchantEmailAddress'
     ];
 
     /**
@@ -248,8 +260,10 @@ class ExpressCheckoutShippingAddressChangeRequest implements ModelInterface, Arr
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('shipping_address', $data ?? [], null);
-        $this->setIfExists('billing_address', $data ?? [], null);
+        $this->setIfExists('partner_account_id', $data ?? [], null);
+        $this->setIfExists('pricing_profile_sell_rate_id', $data ?? [], null);
+        $this->setIfExists('subscription_product_id', $data ?? [], null);
+        $this->setIfExists('merchant_email_address', $data ?? [], null);
     }
 
     /**
@@ -295,55 +309,109 @@ class ExpressCheckoutShippingAddressChangeRequest implements ModelInterface, Arr
 
 
     /**
-     * Gets shipping_address
+     * Gets partner_account_id
      *
-     * @return \VRPayment\Sdk\Model\Address|null
+     * @return int|null
      */
-    public function getShippingAddress()
+    public function getPartnerAccountId()
     {
-        return $this->container['shipping_address'];
+        return $this->container['partner_account_id'];
     }
 
     /**
-     * Sets shipping_address
+     * Sets partner_account_id
      *
-     * @param \VRPayment\Sdk\Model\Address|null $shipping_address shipping_address
+     * @param int|null $partner_account_id partner_account_id
      *
      * @return self
      */
-    public function setShippingAddress($shipping_address)
+    public function setPartnerAccountId($partner_account_id)
     {
-        if (is_null($shipping_address)) {
-            throw new \InvalidArgumentException('non-nullable shipping_address cannot be null');
+        if (is_null($partner_account_id)) {
+            throw new \InvalidArgumentException('non-nullable partner_account_id cannot be null');
         }
-        $this->container['shipping_address'] = $shipping_address;
+        $this->container['partner_account_id'] = $partner_account_id;
 
         return $this;
     }
 
     /**
-     * Gets billing_address
+     * Gets pricing_profile_sell_rate_id
      *
-     * @return \VRPayment\Sdk\Model\Address|null
+     * @return int|null
      */
-    public function getBillingAddress()
+    public function getPricingProfileSellRateId()
     {
-        return $this->container['billing_address'];
+        return $this->container['pricing_profile_sell_rate_id'];
     }
 
     /**
-     * Sets billing_address
+     * Sets pricing_profile_sell_rate_id
      *
-     * @param \VRPayment\Sdk\Model\Address|null $billing_address billing_address
+     * @param int|null $pricing_profile_sell_rate_id pricing_profile_sell_rate_id
      *
      * @return self
      */
-    public function setBillingAddress($billing_address)
+    public function setPricingProfileSellRateId($pricing_profile_sell_rate_id)
     {
-        if (is_null($billing_address)) {
-            throw new \InvalidArgumentException('non-nullable billing_address cannot be null');
+        if (is_null($pricing_profile_sell_rate_id)) {
+            throw new \InvalidArgumentException('non-nullable pricing_profile_sell_rate_id cannot be null');
         }
-        $this->container['billing_address'] = $billing_address;
+        $this->container['pricing_profile_sell_rate_id'] = $pricing_profile_sell_rate_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets subscription_product_id
+     *
+     * @return int|null
+     */
+    public function getSubscriptionProductId()
+    {
+        return $this->container['subscription_product_id'];
+    }
+
+    /**
+     * Sets subscription_product_id
+     *
+     * @param int|null $subscription_product_id subscription_product_id
+     *
+     * @return self
+     */
+    public function setSubscriptionProductId($subscription_product_id)
+    {
+        if (is_null($subscription_product_id)) {
+            throw new \InvalidArgumentException('non-nullable subscription_product_id cannot be null');
+        }
+        $this->container['subscription_product_id'] = $subscription_product_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets merchant_email_address
+     *
+     * @return string|null
+     */
+    public function getMerchantEmailAddress()
+    {
+        return $this->container['merchant_email_address'];
+    }
+
+    /**
+     * Sets merchant_email_address
+     *
+     * @param string|null $merchant_email_address merchant_email_address
+     *
+     * @return self
+     */
+    public function setMerchantEmailAddress($merchant_email_address)
+    {
+        if (is_null($merchant_email_address)) {
+            throw new \InvalidArgumentException('non-nullable merchant_email_address cannot be null');
+        }
+        $this->container['merchant_email_address'] = $merchant_email_address;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 {
     "name": "vrpayment/sdk",
-    "version": "5.2.0",
+    "version": "5.2.2",
     "description": "VR Payment SDK for PHP",
     "keywords": [
         "vrpayment",
@@ -15,7 +15,7 @@
         {
             "name": "VR Payment GmbH",
             "email": "ecommerce@vr-payment.de",
-            "homepage": "https://www.vr-payment.de/"
+            "homepage": "https://www.vr-payment.de"
         }
     ],
     "require": {
@@ -23,7 +23,7 @@
         "ext-curl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "firebase/php-jwt": "^6.8",
+        "firebase/php-jwt": "^7.0",
         "guzzlehttp/guzzle": "^7.7",
         "guzzlehttp/psr7": "^2.5"
     },

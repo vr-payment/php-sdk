@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \VRPayment\Sdk\ObjectSerializer;
 
 /**
- * ExpressCheckoutCreateResponse model
+ * StateListResponse model
  *
  * @category Class
  * @package     VRPayment\Sdk
@@ -35,10 +35,10 @@ use \VRPayment\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
-class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class StateListResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ExpressCheckoutCreateResponse';
+    protected static $openAPIModelName = 'State_List_Response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,9 +55,9 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
       * @var string[]
       */
     protected static $openAPITypes = [
-        'iframe_src' => 'string',
-        'session' => 'int',
-        'session_token' => 'string'
+        'data' => '\VRPayment\Sdk\Model\RestCountryState[]',
+        'has_more' => 'bool',
+        'limit' => 'int'
     ];
 
     /**
@@ -68,9 +68,9 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'iframe_src' => null,
-        'session' => 'int64',
-        'session_token' => null
+        'data' => null,
+        'has_more' => null,
+        'limit' => 'int32'
     ];
 
     /**
@@ -79,9 +79,9 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'iframe_src' => false,
-        'session' => false,
-        'session_token' => false
+        'data' => false,
+        'has_more' => false,
+        'limit' => false
     ];
 
     /**
@@ -170,9 +170,9 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $attributeMap = [
-        'iframe_src' => 'iframeSrc',
-        'session' => 'session',
-        'session_token' => 'sessionToken'
+        'data' => 'data',
+        'has_more' => 'hasMore',
+        'limit' => 'limit'
     ];
 
     /**
@@ -181,9 +181,9 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $setters = [
-        'iframe_src' => 'setIframeSrc',
-        'session' => 'setSession',
-        'session_token' => 'setSessionToken'
+        'data' => 'setData',
+        'has_more' => 'setHasMore',
+        'limit' => 'setLimit'
     ];
 
     /**
@@ -192,9 +192,9 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $getters = [
-        'iframe_src' => 'getIframeSrc',
-        'session' => 'getSession',
-        'session_token' => 'getSessionToken'
+        'data' => 'getData',
+        'has_more' => 'getHasMore',
+        'limit' => 'getLimit'
     ];
 
     /**
@@ -254,9 +254,9 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('iframe_src', $data ?? [], null);
-        $this->setIfExists('session', $data ?? [], null);
-        $this->setIfExists('session_token', $data ?? [], null);
+        $this->setIfExists('data', $data ?? [], null);
+        $this->setIfExists('has_more', $data ?? [], null);
+        $this->setIfExists('limit', $data ?? [], null);
     }
 
     /**
@@ -302,82 +302,82 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
 
 
     /**
-     * Gets iframe_src
+     * Gets data
      *
-     * @return string|null
+     * @return \VRPayment\Sdk\Model\RestCountryState[]|null
      */
-    public function getIframeSrc()
+    public function getData()
     {
-        return $this->container['iframe_src'];
+        return $this->container['data'];
     }
 
     /**
-     * Sets iframe_src
+     * Sets data
      *
-     * @param string|null $iframe_src iframe_src
+     * @param \VRPayment\Sdk\Model\RestCountryState[]|null $data An array containing the actual response objects.
      *
      * @return self
      */
-    public function setIframeSrc($iframe_src)
+    public function setData($data)
     {
-        if (is_null($iframe_src)) {
-            throw new \InvalidArgumentException('non-nullable iframe_src cannot be null');
+        if (is_null($data)) {
+            throw new \InvalidArgumentException('non-nullable data cannot be null');
         }
-        $this->container['iframe_src'] = $iframe_src;
+        $this->container['data'] = $data;
 
         return $this;
     }
 
     /**
-     * Gets session
+     * Gets has_more
+     *
+     * @return bool|null
+     */
+    public function getHasMore()
+    {
+        return $this->container['has_more'];
+    }
+
+    /**
+     * Sets has_more
+     *
+     * @param bool|null $has_more Whether there are more objects available after this set. If false, there are no more objects to retrieve.
+     *
+     * @return self
+     */
+    public function setHasMore($has_more)
+    {
+        if (is_null($has_more)) {
+            throw new \InvalidArgumentException('non-nullable has_more cannot be null');
+        }
+        $this->container['has_more'] = $has_more;
+
+        return $this;
+    }
+
+    /**
+     * Gets limit
      *
      * @return int|null
      */
-    public function getSession()
+    public function getLimit()
     {
-        return $this->container['session'];
+        return $this->container['limit'];
     }
 
     /**
-     * Sets session
+     * Sets limit
      *
-     * @param int|null $session session
+     * @param int|null $limit The applied limit on the number of objects returned.
      *
      * @return self
      */
-    public function setSession($session)
+    public function setLimit($limit)
     {
-        if (is_null($session)) {
-            throw new \InvalidArgumentException('non-nullable session cannot be null');
+        if (is_null($limit)) {
+            throw new \InvalidArgumentException('non-nullable limit cannot be null');
         }
-        $this->container['session'] = $session;
-
-        return $this;
-    }
-
-    /**
-     * Gets session_token
-     *
-     * @return string|null
-     */
-    public function getSessionToken()
-    {
-        return $this->container['session_token'];
-    }
-
-    /**
-     * Sets session_token
-     *
-     * @param string|null $session_token session_token
-     *
-     * @return self
-     */
-    public function setSessionToken($session_token)
-    {
-        if (is_null($session_token)) {
-            throw new \InvalidArgumentException('non-nullable session_token cannot be null');
-        }
-        $this->container['session_token'] = $session_token;
+        $this->container['limit'] = $limit;
 
         return $this;
     }

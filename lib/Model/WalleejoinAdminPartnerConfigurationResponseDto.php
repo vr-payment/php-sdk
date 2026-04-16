@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \VRPayment\Sdk\ObjectSerializer;
 
 /**
- * ExpressCheckoutShippingMethodChangeResponse model
+ * WalleejoinAdminPartnerConfigurationResponseDto model
  *
  * @category Class
  * @package     VRPayment\Sdk
@@ -35,10 +35,10 @@ use \VRPayment\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
-class ExpressCheckoutShippingMethodChangeResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class WalleejoinAdminPartnerConfigurationResponseDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class ExpressCheckoutShippingMethodChangeResponse implements ModelInterface, Arr
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ExpressCheckoutShippingMethodChangeResponse';
+    protected static $openAPIModelName = 'WalleejoinAdminPartnerConfigurationResponseDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,8 +55,14 @@ class ExpressCheckoutShippingMethodChangeResponse implements ModelInterface, Arr
       * @var string[]
       */
     protected static $openAPITypes = [
-        'line_items' => '\VRPayment\Sdk\Model\LineItem[]',
-        'order_total' => 'float'
+        'pricing_profile_sell_rates' => '\VRPayment\Sdk\Model\PaymentFacilitatorPricingProfileDto[]',
+        'revenue_share' => 'float',
+        'subscription_products' => '\VRPayment\Sdk\Model\SubscriptionProductDto[]',
+        'one_off_referral' => 'int',
+        'pricing_profile_buy_rate' => '\VRPayment\Sdk\Model\PaymentFacilitatorPricingProfileDto',
+        'partnership_types' => '\VRPayment\Sdk\Model\WalleejoinPartnershipType[]',
+        'partner_account' => 'int',
+        'pricing_type' => '\VRPayment\Sdk\Model\WalleejoinAdminPricingType'
     ];
 
     /**
@@ -67,8 +73,14 @@ class ExpressCheckoutShippingMethodChangeResponse implements ModelInterface, Arr
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'line_items' => null,
-        'order_total' => null
+        'pricing_profile_sell_rates' => null,
+        'revenue_share' => null,
+        'subscription_products' => null,
+        'one_off_referral' => 'int32',
+        'pricing_profile_buy_rate' => null,
+        'partnership_types' => null,
+        'partner_account' => 'int64',
+        'pricing_type' => null
     ];
 
     /**
@@ -77,8 +89,14 @@ class ExpressCheckoutShippingMethodChangeResponse implements ModelInterface, Arr
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'line_items' => false,
-        'order_total' => false
+        'pricing_profile_sell_rates' => false,
+        'revenue_share' => false,
+        'subscription_products' => false,
+        'one_off_referral' => false,
+        'pricing_profile_buy_rate' => false,
+        'partnership_types' => false,
+        'partner_account' => false,
+        'pricing_type' => false
     ];
 
     /**
@@ -167,8 +185,14 @@ class ExpressCheckoutShippingMethodChangeResponse implements ModelInterface, Arr
      * @var string[]
      */
     protected static $attributeMap = [
-        'line_items' => 'lineItems',
-        'order_total' => 'orderTotal'
+        'pricing_profile_sell_rates' => 'pricingProfileSellRates',
+        'revenue_share' => 'revenueShare',
+        'subscription_products' => 'subscriptionProducts',
+        'one_off_referral' => 'oneOffReferral',
+        'pricing_profile_buy_rate' => 'pricingProfileBuyRate',
+        'partnership_types' => 'partnershipTypes',
+        'partner_account' => 'partnerAccount',
+        'pricing_type' => 'pricingType'
     ];
 
     /**
@@ -177,8 +201,14 @@ class ExpressCheckoutShippingMethodChangeResponse implements ModelInterface, Arr
      * @var string[]
      */
     protected static $setters = [
-        'line_items' => 'setLineItems',
-        'order_total' => 'setOrderTotal'
+        'pricing_profile_sell_rates' => 'setPricingProfileSellRates',
+        'revenue_share' => 'setRevenueShare',
+        'subscription_products' => 'setSubscriptionProducts',
+        'one_off_referral' => 'setOneOffReferral',
+        'pricing_profile_buy_rate' => 'setPricingProfileBuyRate',
+        'partnership_types' => 'setPartnershipTypes',
+        'partner_account' => 'setPartnerAccount',
+        'pricing_type' => 'setPricingType'
     ];
 
     /**
@@ -187,8 +217,14 @@ class ExpressCheckoutShippingMethodChangeResponse implements ModelInterface, Arr
      * @var string[]
      */
     protected static $getters = [
-        'line_items' => 'getLineItems',
-        'order_total' => 'getOrderTotal'
+        'pricing_profile_sell_rates' => 'getPricingProfileSellRates',
+        'revenue_share' => 'getRevenueShare',
+        'subscription_products' => 'getSubscriptionProducts',
+        'one_off_referral' => 'getOneOffReferral',
+        'pricing_profile_buy_rate' => 'getPricingProfileBuyRate',
+        'partnership_types' => 'getPartnershipTypes',
+        'partner_account' => 'getPartnerAccount',
+        'pricing_type' => 'getPricingType'
     ];
 
     /**
@@ -248,8 +284,14 @@ class ExpressCheckoutShippingMethodChangeResponse implements ModelInterface, Arr
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('line_items', $data ?? [], null);
-        $this->setIfExists('order_total', $data ?? [], null);
+        $this->setIfExists('pricing_profile_sell_rates', $data ?? [], null);
+        $this->setIfExists('revenue_share', $data ?? [], null);
+        $this->setIfExists('subscription_products', $data ?? [], null);
+        $this->setIfExists('one_off_referral', $data ?? [], null);
+        $this->setIfExists('pricing_profile_buy_rate', $data ?? [], null);
+        $this->setIfExists('partnership_types', $data ?? [], null);
+        $this->setIfExists('partner_account', $data ?? [], null);
+        $this->setIfExists('pricing_type', $data ?? [], null);
     }
 
     /**
@@ -295,55 +337,223 @@ class ExpressCheckoutShippingMethodChangeResponse implements ModelInterface, Arr
 
 
     /**
-     * Gets line_items
+     * Gets pricing_profile_sell_rates
      *
-     * @return \VRPayment\Sdk\Model\LineItem[]|null
+     * @return \VRPayment\Sdk\Model\PaymentFacilitatorPricingProfileDto[]|null
      */
-    public function getLineItems()
+    public function getPricingProfileSellRates()
     {
-        return $this->container['line_items'];
+        return $this->container['pricing_profile_sell_rates'];
     }
 
     /**
-     * Sets line_items
+     * Sets pricing_profile_sell_rates
      *
-     * @param \VRPayment\Sdk\Model\LineItem[]|null $line_items line_items
+     * @param \VRPayment\Sdk\Model\PaymentFacilitatorPricingProfileDto[]|null $pricing_profile_sell_rates pricing_profile_sell_rates
      *
      * @return self
      */
-    public function setLineItems($line_items)
+    public function setPricingProfileSellRates($pricing_profile_sell_rates)
     {
-        if (is_null($line_items)) {
-            throw new \InvalidArgumentException('non-nullable line_items cannot be null');
+        if (is_null($pricing_profile_sell_rates)) {
+            throw new \InvalidArgumentException('non-nullable pricing_profile_sell_rates cannot be null');
         }
-        $this->container['line_items'] = $line_items;
+
+
+        $this->container['pricing_profile_sell_rates'] = $pricing_profile_sell_rates;
 
         return $this;
     }
 
     /**
-     * Gets order_total
+     * Gets revenue_share
      *
      * @return float|null
      */
-    public function getOrderTotal()
+    public function getRevenueShare()
     {
-        return $this->container['order_total'];
+        return $this->container['revenue_share'];
     }
 
     /**
-     * Sets order_total
+     * Sets revenue_share
      *
-     * @param float|null $order_total order_total
+     * @param float|null $revenue_share revenue_share
      *
      * @return self
      */
-    public function setOrderTotal($order_total)
+    public function setRevenueShare($revenue_share)
     {
-        if (is_null($order_total)) {
-            throw new \InvalidArgumentException('non-nullable order_total cannot be null');
+        if (is_null($revenue_share)) {
+            throw new \InvalidArgumentException('non-nullable revenue_share cannot be null');
         }
-        $this->container['order_total'] = $order_total;
+        $this->container['revenue_share'] = $revenue_share;
+
+        return $this;
+    }
+
+    /**
+     * Gets subscription_products
+     *
+     * @return \VRPayment\Sdk\Model\SubscriptionProductDto[]|null
+     */
+    public function getSubscriptionProducts()
+    {
+        return $this->container['subscription_products'];
+    }
+
+    /**
+     * Sets subscription_products
+     *
+     * @param \VRPayment\Sdk\Model\SubscriptionProductDto[]|null $subscription_products subscription_products
+     *
+     * @return self
+     */
+    public function setSubscriptionProducts($subscription_products)
+    {
+        if (is_null($subscription_products)) {
+            throw new \InvalidArgumentException('non-nullable subscription_products cannot be null');
+        }
+
+
+        $this->container['subscription_products'] = $subscription_products;
+
+        return $this;
+    }
+
+    /**
+     * Gets one_off_referral
+     *
+     * @return int|null
+     */
+    public function getOneOffReferral()
+    {
+        return $this->container['one_off_referral'];
+    }
+
+    /**
+     * Sets one_off_referral
+     *
+     * @param int|null $one_off_referral one_off_referral
+     *
+     * @return self
+     */
+    public function setOneOffReferral($one_off_referral)
+    {
+        if (is_null($one_off_referral)) {
+            throw new \InvalidArgumentException('non-nullable one_off_referral cannot be null');
+        }
+        $this->container['one_off_referral'] = $one_off_referral;
+
+        return $this;
+    }
+
+    /**
+     * Gets pricing_profile_buy_rate
+     *
+     * @return \VRPayment\Sdk\Model\PaymentFacilitatorPricingProfileDto|null
+     */
+    public function getPricingProfileBuyRate()
+    {
+        return $this->container['pricing_profile_buy_rate'];
+    }
+
+    /**
+     * Sets pricing_profile_buy_rate
+     *
+     * @param \VRPayment\Sdk\Model\PaymentFacilitatorPricingProfileDto|null $pricing_profile_buy_rate pricing_profile_buy_rate
+     *
+     * @return self
+     */
+    public function setPricingProfileBuyRate($pricing_profile_buy_rate)
+    {
+        if (is_null($pricing_profile_buy_rate)) {
+            throw new \InvalidArgumentException('non-nullable pricing_profile_buy_rate cannot be null');
+        }
+        $this->container['pricing_profile_buy_rate'] = $pricing_profile_buy_rate;
+
+        return $this;
+    }
+
+    /**
+     * Gets partnership_types
+     *
+     * @return \VRPayment\Sdk\Model\WalleejoinPartnershipType[]|null
+     */
+    public function getPartnershipTypes()
+    {
+        return $this->container['partnership_types'];
+    }
+
+    /**
+     * Sets partnership_types
+     *
+     * @param \VRPayment\Sdk\Model\WalleejoinPartnershipType[]|null $partnership_types partnership_types
+     *
+     * @return self
+     */
+    public function setPartnershipTypes($partnership_types)
+    {
+        if (is_null($partnership_types)) {
+            throw new \InvalidArgumentException('non-nullable partnership_types cannot be null');
+        }
+
+
+        $this->container['partnership_types'] = $partnership_types;
+
+        return $this;
+    }
+
+    /**
+     * Gets partner_account
+     *
+     * @return int|null
+     */
+    public function getPartnerAccount()
+    {
+        return $this->container['partner_account'];
+    }
+
+    /**
+     * Sets partner_account
+     *
+     * @param int|null $partner_account partner_account
+     *
+     * @return self
+     */
+    public function setPartnerAccount($partner_account)
+    {
+        if (is_null($partner_account)) {
+            throw new \InvalidArgumentException('non-nullable partner_account cannot be null');
+        }
+        $this->container['partner_account'] = $partner_account;
+
+        return $this;
+    }
+
+    /**
+     * Gets pricing_type
+     *
+     * @return \VRPayment\Sdk\Model\WalleejoinAdminPricingType|null
+     */
+    public function getPricingType()
+    {
+        return $this->container['pricing_type'];
+    }
+
+    /**
+     * Sets pricing_type
+     *
+     * @param \VRPayment\Sdk\Model\WalleejoinAdminPricingType|null $pricing_type pricing_type
+     *
+     * @return self
+     */
+    public function setPricingType($pricing_type)
+    {
+        if (is_null($pricing_type)) {
+            throw new \InvalidArgumentException('non-nullable pricing_type cannot be null');
+        }
+        $this->container['pricing_type'] = $pricing_type;
 
         return $this;
     }
