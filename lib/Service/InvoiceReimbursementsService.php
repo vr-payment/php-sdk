@@ -23,7 +23,6 @@
 
 namespace VRPayment\Sdk\Service;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
@@ -36,11 +35,12 @@ use VRPayment\Sdk\ApiException;
 use VRPayment\Sdk\Configuration;
 use VRPayment\Sdk\FormDataProcessor;
 use VRPayment\Sdk\HeaderSelector;
+use VRPayment\Sdk\CaBundleFallbackClientFactory;
 use VRPayment\Sdk\ObjectSerializer;
 use VRPayment\Sdk\Auth\HttpBearerAuth;
 
 /**
- * ApplicationUsersRolesService service
+ * InvoiceReimbursementsService service
  *
  * @category Class
  * @package  VRPayment\Sdk
@@ -48,9 +48,9 @@ use VRPayment\Sdk\Auth\HttpBearerAuth;
  * @license  Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version  5.2.2
+ * @version  5.2.3
  */
-class ApplicationUsersRolesService
+class InvoiceReimbursementsService
 {
     /**
      * @var ClientInterface
@@ -79,22 +79,19 @@ class ApplicationUsersRolesService
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'deleteApplicationUsersUserIdAccountRoles' => [
+        'getPaymentInvoiceReimbursements' => [
             'application/json',
         ],
-        'deleteApplicationUsersUserIdSpaceRoles' => [
+        'getPaymentInvoiceReimbursementsId' => [
             'application/json',
         ],
-        'getApplicationUsersUserIdAccountRoles' => [
+        'getPaymentInvoiceReimbursementsSearch' => [
             'application/json',
         ],
-        'getApplicationUsersUserIdSpaceRoles' => [
+        'postPaymentInvoiceReimbursementsIdConnector' => [
             'application/json',
         ],
-        'postApplicationUsersUserIdAccountRoles' => [
-            'application/json',
-        ],
-        'postApplicationUsersUserIdSpaceRoles' => [
+        'postPaymentInvoiceReimbursementsIdIban' => [
             'application/json',
         ],
     ];
@@ -111,7 +108,7 @@ class ApplicationUsersRolesService
         ?ClientInterface $client = null,
         ?HeaderSelector  $selector = null,
     ) {
-        $this->client = $client ?: new Client();
+        $this->client = $client ?: CaBundleFallbackClientFactory::create();
         $this->config = $config ?: Configuration::getDefaultConfiguration();
         $this->headerSelector = $selector ?: new HeaderSelector();
         $this->hostIndex = $hostIndex;
@@ -157,604 +154,48 @@ class ApplicationUsersRolesService
     }
 
     /**
-     * Operation deleteApplicationUsersUserIdAccountRoles
+     * Operation getPaymentInvoiceReimbursements
      *
-     * Unassign a role from an application user for an account
+     * List all invoice reimbursements
      *
-     * @param int $user_id user_id (required)
-     * @param int $role_id role_id (required)
-     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteApplicationUsersUserIdAccountRoles'] to see the possible values for this operation
-     *
-     * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return void
-     */
-    public function deleteApplicationUsersUserIdAccountRoles(int $user_id, int $role_id, int $account, string $contentType = self::contentTypes['deleteApplicationUsersUserIdAccountRoles'][0])
-    {
-        $this->deleteApplicationUsersUserIdAccountRolesWithHttpInfo($user_id, $role_id, $account, $contentType);
-    }
-
-    /**
-     * Operation deleteApplicationUsersUserIdAccountRolesWithHttpInfo
-     *
-     * Unassign a role from an application user for an account
-     *
-     * @param int $user_id user_id (required)
-     * @param int $role_id role_id (required)
-     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteApplicationUsersUserIdAccountRoles'] to see the possible values for this operation
-     *
-     * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function deleteApplicationUsersUserIdAccountRolesWithHttpInfo(int $user_id, int $role_id, int $account, string $contentType = self::contentTypes['deleteApplicationUsersUserIdAccountRoles'][0])
-    {
-        $request = $this->deleteApplicationUsersUserIdAccountRolesRequest($user_id, $role_id, $account, $contentType);
-
-        try {
-            $requestTimeout = $this->config->getRequestTimeout();
-            $options = $this->createHttpClientOption($requestTimeout);
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            return [null, $statusCode, $response->getHeaders()];
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 400:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 403:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 404:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 406:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 415:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 422:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 429:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-            }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
-            throw $e;
-        }
-    }
-
-    /**
-     * Create request for operation 'deleteApplicationUsersUserIdAccountRoles'
-     *
-     * @param int $user_id user_id (required)
-     * @param int $role_id role_id (required)
-     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteApplicationUsersUserIdAccountRoles'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function deleteApplicationUsersUserIdAccountRolesRequest(int $user_id, int $role_id, int $account, string $contentType = self::contentTypes['deleteApplicationUsersUserIdAccountRoles'][0])
-    {
-
-        // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $user_id when calling deleteApplicationUsersUserIdAccountRoles'
-            );
-        }
-
-        // verify the required parameter 'role_id' is set
-        if ($role_id === null || (is_array($role_id) && count($role_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $role_id when calling deleteApplicationUsersUserIdAccountRoles'
-            );
-        }
-
-        // verify the required parameter 'account' is set
-        if ($account === null || (is_array($account) && count($account) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $account when calling deleteApplicationUsersUserIdAccountRoles'
-            );
-        }
-
-
-        $resourcePath = '/application-users/{userId}/account-roles';
-        $httpMethod = 'DELETE';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $role_id,
-            'roleId', // param base name
-            'integer', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-
-        // header params
-        if ($account !== null) {
-            $headerParams['account'] = ObjectSerializer::toHeaderValue($account);
-        }
-
-        // path params
-        if ($user_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'userId' . '}',
-                ObjectSerializer::toPathValue($user_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        $query = ObjectSerializer::buildQuery($queryParams);
-
-        $auth_headers = [];
-        // this endpoint requires Bearer (JWT) authentication (access token)
-        foreach ($this->authentications as $auth) {
-            $auth_headers = $auth->generateAuthParams($resourcePath, $httpMethod, $query);
-        }
-
-        $defaultHeaders = $this->config->getDefaultHeaders();
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $auth_headers,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        return new Request(
-            $httpMethod,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation deleteApplicationUsersUserIdSpaceRoles
-     *
-     * Unassign a role from an application user for a space
-     *
-     * @param int $user_id user_id (required)
-     * @param int $role_id role_id (required)
      * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteApplicationUsersUserIdSpaceRoles'] to see the possible values for this operation
+     * @param int|null $after Set to an object&#39;s ID to retrieve the page of objects coming immediately after the named object. (optional)
+     * @param int|null $before Set to an object&#39;s ID to retrieve the page of objects coming immediately before the named object. (optional)
+     * @param string[]|null $expand expand (optional)
+     * @param int|null $limit A limit on the number of objects to be returned, between 1 and 100. Default is 10. (optional)
+     * @param string|null $order Specify to retrieve objects in chronological (ASC) or reverse chronological (DESC) order. See {@see \VRPayment\Sdk\Model\SortingOrder}. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentInvoiceReimbursements'] to see the possible values for this operation
      *
      * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return void
+     * @return \VRPayment\Sdk\Model\InvoiceReimbursementListResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse
      */
-    public function deleteApplicationUsersUserIdSpaceRoles(int $user_id, int $role_id, int $space, string $contentType = self::contentTypes['deleteApplicationUsersUserIdSpaceRoles'][0])
+    public function getPaymentInvoiceReimbursements(int $space, ?int $after = null, ?int $before = null, ?array $expand = null, ?int $limit = null, ?string $order = null, string $contentType = self::contentTypes['getPaymentInvoiceReimbursements'][0])
     {
-        $this->deleteApplicationUsersUserIdSpaceRolesWithHttpInfo($user_id, $role_id, $space, $contentType);
-    }
-
-    /**
-     * Operation deleteApplicationUsersUserIdSpaceRolesWithHttpInfo
-     *
-     * Unassign a role from an application user for a space
-     *
-     * @param int $user_id user_id (required)
-     * @param int $role_id role_id (required)
-     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteApplicationUsersUserIdSpaceRoles'] to see the possible values for this operation
-     *
-     * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function deleteApplicationUsersUserIdSpaceRolesWithHttpInfo(int $user_id, int $role_id, int $space, string $contentType = self::contentTypes['deleteApplicationUsersUserIdSpaceRoles'][0])
-    {
-        $request = $this->deleteApplicationUsersUserIdSpaceRolesRequest($user_id, $role_id, $space, $contentType);
-
-        try {
-            $requestTimeout = $this->config->getRequestTimeout();
-            $options = $this->createHttpClientOption($requestTimeout);
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            return [null, $statusCode, $response->getHeaders()];
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 400:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 403:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 404:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 406:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 415:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 422:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 429:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-            }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
-            throw $e;
-        }
-    }
-
-    /**
-     * Create request for operation 'deleteApplicationUsersUserIdSpaceRoles'
-     *
-     * @param int $user_id user_id (required)
-     * @param int $role_id role_id (required)
-     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteApplicationUsersUserIdSpaceRoles'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function deleteApplicationUsersUserIdSpaceRolesRequest(int $user_id, int $role_id, int $space, string $contentType = self::contentTypes['deleteApplicationUsersUserIdSpaceRoles'][0])
-    {
-
-        // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $user_id when calling deleteApplicationUsersUserIdSpaceRoles'
-            );
-        }
-
-        // verify the required parameter 'role_id' is set
-        if ($role_id === null || (is_array($role_id) && count($role_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $role_id when calling deleteApplicationUsersUserIdSpaceRoles'
-            );
-        }
-
-        // verify the required parameter 'space' is set
-        if ($space === null || (is_array($space) && count($space) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $space when calling deleteApplicationUsersUserIdSpaceRoles'
-            );
-        }
-
-
-        $resourcePath = '/application-users/{userId}/space-roles';
-        $httpMethod = 'DELETE';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $role_id,
-            'roleId', // param base name
-            'integer', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-
-        // header params
-        if ($space !== null) {
-            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
-        }
-
-        // path params
-        if ($user_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'userId' . '}',
-                ObjectSerializer::toPathValue($user_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        $query = ObjectSerializer::buildQuery($queryParams);
-
-        $auth_headers = [];
-        // this endpoint requires Bearer (JWT) authentication (access token)
-        foreach ($this->authentications as $auth) {
-            $auth_headers = $auth->generateAuthParams($resourcePath, $httpMethod, $query);
-        }
-
-        $defaultHeaders = $this->config->getDefaultHeaders();
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $auth_headers,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        return new Request(
-            $httpMethod,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation getApplicationUsersUserIdAccountRoles
-     *
-     * List all roles of an application user for an account
-     *
-     * @param int $user_id user_id (required)
-     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getApplicationUsersUserIdAccountRoles'] to see the possible values for this operation
-     *
-     * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return \VRPayment\Sdk\Model\UserAccountRoleListResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse
-     */
-    public function getApplicationUsersUserIdAccountRoles(int $user_id, int $account, string $contentType = self::contentTypes['getApplicationUsersUserIdAccountRoles'][0])
-    {
-        list($response) = $this->getApplicationUsersUserIdAccountRolesWithHttpInfo($user_id, $account, $contentType);
+        list($response) = $this->getPaymentInvoiceReimbursementsWithHttpInfo($space, $after, $before, $expand, $limit, $order, $contentType);
         return $response;
     }
 
     /**
-     * Operation getApplicationUsersUserIdAccountRolesWithHttpInfo
+     * Operation getPaymentInvoiceReimbursementsWithHttpInfo
      *
-     * List all roles of an application user for an account
+     * List all invoice reimbursements
      *
-     * @param int $user_id user_id (required)
-     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getApplicationUsersUserIdAccountRoles'] to see the possible values for this operation
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param int|null $after Set to an object&#39;s ID to retrieve the page of objects coming immediately after the named object. (optional)
+     * @param int|null $before Set to an object&#39;s ID to retrieve the page of objects coming immediately before the named object. (optional)
+     * @param string[]|null $expand expand (optional)
+     * @param int|null $limit A limit on the number of objects to be returned, between 1 and 100. Default is 10. (optional)
+     * @param string|null $order Specify to retrieve objects in chronological (ASC) or reverse chronological (DESC) order. See {@see \VRPayment\Sdk\Model\SortingOrder}. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentInvoiceReimbursements'] to see the possible values for this operation
      *
      * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \VRPayment\Sdk\Model\UserAccountRoleListResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \VRPayment\Sdk\Model\InvoiceReimbursementListResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getApplicationUsersUserIdAccountRolesWithHttpInfo(int $user_id, int $account, string $contentType = self::contentTypes['getApplicationUsersUserIdAccountRoles'][0])
+    public function getPaymentInvoiceReimbursementsWithHttpInfo(int $space, ?int $after = null, ?int $before = null, ?array $expand = null, ?int $limit = null, ?string $order = null, string $contentType = self::contentTypes['getPaymentInvoiceReimbursements'][0])
     {
-        $request = $this->getApplicationUsersUserIdAccountRolesRequest($user_id, $account, $contentType);
+        $request = $this->getPaymentInvoiceReimbursementsRequest($space, $after, $before, $expand, $limit, $order, $contentType);
 
         try {
             $requestTimeout = $this->config->getRequestTimeout();
@@ -783,7 +224,7 @@ class ApplicationUsersRolesService
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\UserAccountRoleListResponse',
+                        '\VRPayment\Sdk\Model\InvoiceReimbursementListResponse',
                         $request,
                         $response,
                     );
@@ -866,7 +307,7 @@ class ApplicationUsersRolesService
             }
 
             return $this->handleResponseWithDataType(
-                '\VRPayment\Sdk\Model\UserAccountRoleListResponse',
+                '\VRPayment\Sdk\Model\InvoiceReimbursementListResponse',
                 $request,
                 $response,
             );
@@ -875,7 +316,7 @@ class ApplicationUsersRolesService
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\UserAccountRoleListResponse',
+                        '\VRPayment\Sdk\Model\InvoiceReimbursementListResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -970,34 +411,48 @@ class ApplicationUsersRolesService
     }
 
     /**
-     * Create request for operation 'getApplicationUsersUserIdAccountRoles'
+     * Create request for operation 'getPaymentInvoiceReimbursements'
      *
-     * @param int $user_id user_id (required)
-     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getApplicationUsersUserIdAccountRoles'] to see the possible values for this operation
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param int|null $after Set to an object&#39;s ID to retrieve the page of objects coming immediately after the named object. (optional)
+     * @param int|null $before Set to an object&#39;s ID to retrieve the page of objects coming immediately before the named object. (optional)
+     * @param string[]|null $expand expand (optional)
+     * @param int|null $limit A limit on the number of objects to be returned, between 1 and 100. Default is 10. (optional)
+     * @param string|null $order Specify to retrieve objects in chronological (ASC) or reverse chronological (DESC) order. See {@see \VRPayment\Sdk\Model\SortingOrder}. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentInvoiceReimbursements'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getApplicationUsersUserIdAccountRolesRequest(int $user_id, int $account, string $contentType = self::contentTypes['getApplicationUsersUserIdAccountRoles'][0])
+    public function getPaymentInvoiceReimbursementsRequest(int $space, ?int $after = null, ?int $before = null, ?array $expand = null, ?int $limit = null, ?string $order = null, string $contentType = self::contentTypes['getPaymentInvoiceReimbursements'][0])
     {
 
-        // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+        // verify the required parameter 'space' is set
+        if ($space === null || (is_array($space) && count($space) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $user_id when calling getApplicationUsersUserIdAccountRoles'
+                'Missing the required parameter $space when calling getPaymentInvoiceReimbursements'
             );
         }
 
-        // verify the required parameter 'account' is set
-        if ($account === null || (is_array($account) && count($account) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $account when calling getApplicationUsersUserIdAccountRoles'
-            );
+        if ($after !== null && $after < 1) {
+            throw new \InvalidArgumentException('invalid value for "$after" when calling InvoiceReimbursementsService.getPaymentInvoiceReimbursements, must be bigger than or equal to 1.');
         }
+        
+        if ($before !== null && $before < 1) {
+            throw new \InvalidArgumentException('invalid value for "$before" when calling InvoiceReimbursementsService.getPaymentInvoiceReimbursements, must be bigger than or equal to 1.');
+        }
+        
+        
+        if ($limit !== null && $limit > 100) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling InvoiceReimbursementsService.getPaymentInvoiceReimbursements, must be smaller than or equal to 100.');
+        }
+        if ($limit !== null && $limit < 1) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling InvoiceReimbursementsService.getPaymentInvoiceReimbursements, must be bigger than or equal to 1.');
+        }
+        
 
 
-        $resourcePath = '/application-users/{userId}/account-roles';
+        $resourcePath = '/payment/invoice-reimbursements';
         $httpMethod = 'GET';
         $formParams = [];
         $queryParams = [];
@@ -1005,785 +460,428 @@ class ApplicationUsersRolesService
         $httpBody = '';
         $multipart = false;
 
-
-        // header params
-        if ($account !== null) {
-            $headerParams['account'] = ObjectSerializer::toHeaderValue($account);
-        }
-
-        // path params
-        if ($user_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'userId' . '}',
-                ObjectSerializer::toPathValue($user_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        $query = ObjectSerializer::buildQuery($queryParams);
-
-        $auth_headers = [];
-        // this endpoint requires Bearer (JWT) authentication (access token)
-        foreach ($this->authentications as $auth) {
-            $auth_headers = $auth->generateAuthParams($resourcePath, $httpMethod, $query);
-        }
-
-        $defaultHeaders = $this->config->getDefaultHeaders();
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $auth_headers,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        return new Request(
-            $httpMethod,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation getApplicationUsersUserIdSpaceRoles
-     *
-     * List all roles of an application user for a space
-     *
-     * @param int $user_id user_id (required)
-     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getApplicationUsersUserIdSpaceRoles'] to see the possible values for this operation
-     *
-     * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return \VRPayment\Sdk\Model\UserSpaceRoleListResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse
-     */
-    public function getApplicationUsersUserIdSpaceRoles(int $user_id, int $space, string $contentType = self::contentTypes['getApplicationUsersUserIdSpaceRoles'][0])
-    {
-        list($response) = $this->getApplicationUsersUserIdSpaceRolesWithHttpInfo($user_id, $space, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation getApplicationUsersUserIdSpaceRolesWithHttpInfo
-     *
-     * List all roles of an application user for a space
-     *
-     * @param int $user_id user_id (required)
-     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getApplicationUsersUserIdSpaceRoles'] to see the possible values for this operation
-     *
-     * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of \VRPayment\Sdk\Model\UserSpaceRoleListResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function getApplicationUsersUserIdSpaceRolesWithHttpInfo(int $user_id, int $space, string $contentType = self::contentTypes['getApplicationUsersUserIdSpaceRoles'][0])
-    {
-        $request = $this->getApplicationUsersUserIdSpaceRolesRequest($user_id, $space, $contentType);
-
-        try {
-            $requestTimeout = $this->config->getRequestTimeout();
-            $options = $this->createHttpClientOption($requestTimeout);
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\UserSpaceRoleListResponse',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            return $this->handleResponseWithDataType(
-                '\VRPayment\Sdk\Model\UserSpaceRoleListResponse',
-                $request,
-                $response,
-            );
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\UserSpaceRoleListResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 400:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 403:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 404:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 406:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 415:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 422:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 429:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-            }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
-            throw $e;
-        }
-    }
-
-    /**
-     * Create request for operation 'getApplicationUsersUserIdSpaceRoles'
-     *
-     * @param int $user_id user_id (required)
-     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getApplicationUsersUserIdSpaceRoles'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function getApplicationUsersUserIdSpaceRolesRequest(int $user_id, int $space, string $contentType = self::contentTypes['getApplicationUsersUserIdSpaceRoles'][0])
-    {
-
-        // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $user_id when calling getApplicationUsersUserIdSpaceRoles'
-            );
-        }
-
-        // verify the required parameter 'space' is set
-        if ($space === null || (is_array($space) && count($space) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $space when calling getApplicationUsersUserIdSpaceRoles'
-            );
-        }
-
-
-        $resourcePath = '/application-users/{userId}/space-roles';
-        $httpMethod = 'GET';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-        // header params
-        if ($space !== null) {
-            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
-        }
-
-        // path params
-        if ($user_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'userId' . '}',
-                ObjectSerializer::toPathValue($user_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        $query = ObjectSerializer::buildQuery($queryParams);
-
-        $auth_headers = [];
-        // this endpoint requires Bearer (JWT) authentication (access token)
-        foreach ($this->authentications as $auth) {
-            $auth_headers = $auth->generateAuthParams($resourcePath, $httpMethod, $query);
-        }
-
-        $defaultHeaders = $this->config->getDefaultHeaders();
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $auth_headers,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        return new Request(
-            $httpMethod,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation postApplicationUsersUserIdAccountRoles
-     *
-     * Assign a role to an application user for an account
-     *
-     * @param int $user_id user_id (required)
-     * @param int $role_id role_id (required)
-     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
-     * @param bool|null $applies_on_sub_account Whether the role should be assigned to the user in subaccounts only. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postApplicationUsersUserIdAccountRoles'] to see the possible values for this operation
-     *
-     * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return \VRPayment\Sdk\Model\UserAccountRole|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse
-     */
-    public function postApplicationUsersUserIdAccountRoles(int $user_id, int $role_id, int $account, ?bool $applies_on_sub_account = null, string $contentType = self::contentTypes['postApplicationUsersUserIdAccountRoles'][0])
-    {
-        list($response) = $this->postApplicationUsersUserIdAccountRolesWithHttpInfo($user_id, $role_id, $account, $applies_on_sub_account, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation postApplicationUsersUserIdAccountRolesWithHttpInfo
-     *
-     * Assign a role to an application user for an account
-     *
-     * @param int $user_id user_id (required)
-     * @param int $role_id role_id (required)
-     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
-     * @param bool|null $applies_on_sub_account Whether the role should be assigned to the user in subaccounts only. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postApplicationUsersUserIdAccountRoles'] to see the possible values for this operation
-     *
-     * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of \VRPayment\Sdk\Model\UserAccountRole|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function postApplicationUsersUserIdAccountRolesWithHttpInfo(int $user_id, int $role_id, int $account, ?bool $applies_on_sub_account = null, string $contentType = self::contentTypes['postApplicationUsersUserIdAccountRoles'][0])
-    {
-        $request = $this->postApplicationUsersUserIdAccountRolesRequest($user_id, $role_id, $account, $applies_on_sub_account, $contentType);
-
-        try {
-            $requestTimeout = $this->config->getRequestTimeout();
-            $options = $this->createHttpClientOption($requestTimeout);
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\UserAccountRole',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 409:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            return $this->handleResponseWithDataType(
-                '\VRPayment\Sdk\Model\UserAccountRole',
-                $request,
-                $response,
-            );
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\UserAccountRole',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 400:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 403:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 404:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 406:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 409:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 415:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 422:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 429:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-            }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
-            throw $e;
-        }
-    }
-
-    /**
-     * Create request for operation 'postApplicationUsersUserIdAccountRoles'
-     *
-     * @param int $user_id user_id (required)
-     * @param int $role_id role_id (required)
-     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
-     * @param bool|null $applies_on_sub_account Whether the role should be assigned to the user in subaccounts only. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postApplicationUsersUserIdAccountRoles'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function postApplicationUsersUserIdAccountRolesRequest(int $user_id, int $role_id, int $account, ?bool $applies_on_sub_account = null, string $contentType = self::contentTypes['postApplicationUsersUserIdAccountRoles'][0])
-    {
-
-        // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $user_id when calling postApplicationUsersUserIdAccountRoles'
-            );
-        }
-
-        // verify the required parameter 'role_id' is set
-        if ($role_id === null || (is_array($role_id) && count($role_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $role_id when calling postApplicationUsersUserIdAccountRoles'
-            );
-        }
-
-        // verify the required parameter 'account' is set
-        if ($account === null || (is_array($account) && count($account) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $account when calling postApplicationUsersUserIdAccountRoles'
-            );
-        }
-
-
-
-        $resourcePath = '/application-users/{userId}/account-roles';
-        $httpMethod = 'POST';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $role_id,
-            'roleId', // param base name
+            $after,
+            'after', // param base name
             'integer', // openApiType
             'form', // style
             true, // explode
-            true // required
+            false // required
         ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $applies_on_sub_account,
-            'appliesOnSubAccount', // param base name
-            'boolean', // openApiType
+            $before,
+            'before', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $expand,
+            'expand', // param base name
+            'array', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $order,
+            'order', // param base name
+            'SortingOrder', // openApiType
             'form', // style
             true, // explode
             false // required
         ) ?? []);
 
         // header params
-        if ($account !== null) {
-            $headerParams['account'] = ObjectSerializer::toHeaderValue($account);
+        if ($space !== null) {
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
+        }
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        $query = ObjectSerializer::buildQuery($queryParams);
+
+        $auth_headers = [];
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        foreach ($this->authentications as $auth) {
+            $auth_headers = $auth->generateAuthParams($resourcePath, $httpMethod, $query);
+        }
+
+        $defaultHeaders = $this->config->getDefaultHeaders();
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $auth_headers,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        return new Request(
+            $httpMethod,
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getPaymentInvoiceReimbursementsId
+     *
+     * Retrieve an invoice reimbursement
+     *
+     * @param int $id id (required)
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param string[]|null $expand expand (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentInvoiceReimbursementsId'] to see the possible values for this operation
+     *
+     * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \VRPayment\Sdk\Model\InvoiceReimbursement|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse
+     */
+    public function getPaymentInvoiceReimbursementsId(int $id, int $space, ?array $expand = null, string $contentType = self::contentTypes['getPaymentInvoiceReimbursementsId'][0])
+    {
+        list($response) = $this->getPaymentInvoiceReimbursementsIdWithHttpInfo($id, $space, $expand, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getPaymentInvoiceReimbursementsIdWithHttpInfo
+     *
+     * Retrieve an invoice reimbursement
+     *
+     * @param int $id id (required)
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param string[]|null $expand expand (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentInvoiceReimbursementsId'] to see the possible values for this operation
+     *
+     * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \VRPayment\Sdk\Model\InvoiceReimbursement|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getPaymentInvoiceReimbursementsIdWithHttpInfo(int $id, int $space, ?array $expand = null, string $contentType = self::contentTypes['getPaymentInvoiceReimbursementsId'][0])
+    {
+        $request = $this->getPaymentInvoiceReimbursementsIdRequest($id, $space, $expand, $contentType);
+
+        try {
+            $requestTimeout = $this->config->getRequestTimeout();
+            $options = $this->createHttpClientOption($requestTimeout);
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\InvoiceReimbursement',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 403:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 404:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 406:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 415:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 422:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 429:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                
+                default:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+            }
+
+            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
+                return $this->handleResponseWithDataType(
+                    '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                    $request,
+                    $response,
+                );
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\VRPayment\Sdk\Model\InvoiceReimbursement',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\InvoiceReimbursement',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 406:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 415:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                throw $e;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Create request for operation 'getPaymentInvoiceReimbursementsId'
+     *
+     * @param int $id id (required)
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param string[]|null $expand expand (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentInvoiceReimbursementsId'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getPaymentInvoiceReimbursementsIdRequest(int $id, int $space, ?array $expand = null, string $contentType = self::contentTypes['getPaymentInvoiceReimbursementsId'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling getPaymentInvoiceReimbursementsId'
+            );
+        }
+
+        // verify the required parameter 'space' is set
+        if ($space === null || (is_array($space) && count($space) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $space when calling getPaymentInvoiceReimbursementsId'
+            );
+        }
+
+        
+
+        $resourcePath = '/payment/invoice-reimbursements/{id}';
+        $httpMethod = 'GET';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $expand,
+            'expand', // param base name
+            'array', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+        // header params
+        if ($space !== null) {
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
-        if ($user_id !== null) {
+        if ($id !== null) {
             $resourcePath = str_replace(
-                '{' . 'userId' . '}',
-                ObjectSerializer::toPathValue($user_id),
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
                 $resourcePath
             );
         }
@@ -1850,42 +948,48 @@ class ApplicationUsersRolesService
     }
 
     /**
-     * Operation postApplicationUsersUserIdSpaceRoles
+     * Operation getPaymentInvoiceReimbursementsSearch
      *
-     * Assign a role to an application user for a space
+     * Search invoice reimbursements
      *
-     * @param int $user_id user_id (required)
-     * @param int $role_id role_id (required)
      * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postApplicationUsersUserIdSpaceRoles'] to see the possible values for this operation
+     * @param string[]|null $expand expand (optional)
+     * @param int|null $limit A limit on the number of objects to be returned, between 1 and 100. Default is 10. (optional)
+     * @param int|null $offset A cursor for pagination, specifies the number of objects to skip. (optional)
+     * @param string|null $order The fields and order to sort the objects by. (optional)
+     * @param string|null $query The search query to filter the objects by. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentInvoiceReimbursementsSearch'] to see the possible values for this operation
      *
      * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \VRPayment\Sdk\Model\UserSpaceRole|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse
+     * @return \VRPayment\Sdk\Model\InvoiceReimbursementSearchResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse
      */
-    public function postApplicationUsersUserIdSpaceRoles(int $user_id, int $role_id, int $space, string $contentType = self::contentTypes['postApplicationUsersUserIdSpaceRoles'][0])
+    public function getPaymentInvoiceReimbursementsSearch(int $space, ?array $expand = null, ?int $limit = null, ?int $offset = null, ?string $order = null, ?string $query = null, string $contentType = self::contentTypes['getPaymentInvoiceReimbursementsSearch'][0])
     {
-        list($response) = $this->postApplicationUsersUserIdSpaceRolesWithHttpInfo($user_id, $role_id, $space, $contentType);
+        list($response) = $this->getPaymentInvoiceReimbursementsSearchWithHttpInfo($space, $expand, $limit, $offset, $order, $query, $contentType);
         return $response;
     }
 
     /**
-     * Operation postApplicationUsersUserIdSpaceRolesWithHttpInfo
+     * Operation getPaymentInvoiceReimbursementsSearchWithHttpInfo
      *
-     * Assign a role to an application user for a space
+     * Search invoice reimbursements
      *
-     * @param int $user_id user_id (required)
-     * @param int $role_id role_id (required)
      * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postApplicationUsersUserIdSpaceRoles'] to see the possible values for this operation
+     * @param string[]|null $expand expand (optional)
+     * @param int|null $limit A limit on the number of objects to be returned, between 1 and 100. Default is 10. (optional)
+     * @param int|null $offset A cursor for pagination, specifies the number of objects to skip. (optional)
+     * @param string|null $order The fields and order to sort the objects by. (optional)
+     * @param string|null $query The search query to filter the objects by. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentInvoiceReimbursementsSearch'] to see the possible values for this operation
      *
      * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \VRPayment\Sdk\Model\UserSpaceRole|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \VRPayment\Sdk\Model\InvoiceReimbursementSearchResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function postApplicationUsersUserIdSpaceRolesWithHttpInfo(int $user_id, int $role_id, int $space, string $contentType = self::contentTypes['postApplicationUsersUserIdSpaceRoles'][0])
+    public function getPaymentInvoiceReimbursementsSearchWithHttpInfo(int $space, ?array $expand = null, ?int $limit = null, ?int $offset = null, ?string $order = null, ?string $query = null, string $contentType = self::contentTypes['getPaymentInvoiceReimbursementsSearch'][0])
     {
-        $request = $this->postApplicationUsersUserIdSpaceRolesRequest($user_id, $role_id, $space, $contentType);
+        $request = $this->getPaymentInvoiceReimbursementsSearchRequest($space, $expand, $limit, $offset, $order, $query, $contentType);
 
         try {
             $requestTimeout = $this->config->getRequestTimeout();
@@ -1914,7 +1018,420 @@ class ApplicationUsersRolesService
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\UserSpaceRole',
+                        '\VRPayment\Sdk\Model\InvoiceReimbursementSearchResponse',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 403:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 404:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 406:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 415:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 422:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 429:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                
+                default:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+            }
+
+            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
+                return $this->handleResponseWithDataType(
+                    '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                    $request,
+                    $response,
+                );
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\VRPayment\Sdk\Model\InvoiceReimbursementSearchResponse',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\InvoiceReimbursementSearchResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 406:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 415:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                throw $e;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Create request for operation 'getPaymentInvoiceReimbursementsSearch'
+     *
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param string[]|null $expand expand (optional)
+     * @param int|null $limit A limit on the number of objects to be returned, between 1 and 100. Default is 10. (optional)
+     * @param int|null $offset A cursor for pagination, specifies the number of objects to skip. (optional)
+     * @param string|null $order The fields and order to sort the objects by. (optional)
+     * @param string|null $query The search query to filter the objects by. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentInvoiceReimbursementsSearch'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getPaymentInvoiceReimbursementsSearchRequest(int $space, ?array $expand = null, ?int $limit = null, ?int $offset = null, ?string $order = null, ?string $query = null, string $contentType = self::contentTypes['getPaymentInvoiceReimbursementsSearch'][0])
+    {
+
+        // verify the required parameter 'space' is set
+        if ($space === null || (is_array($space) && count($space) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $space when calling getPaymentInvoiceReimbursementsSearch'
+            );
+        }
+
+        
+        if ($limit !== null && $limit > 100) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling InvoiceReimbursementsService.getPaymentInvoiceReimbursementsSearch, must be smaller than or equal to 100.');
+        }
+        if ($limit !== null && $limit < 1) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling InvoiceReimbursementsService.getPaymentInvoiceReimbursementsSearch, must be bigger than or equal to 1.');
+        }
+        
+        if ($offset !== null && $offset > 10000) {
+            throw new \InvalidArgumentException('invalid value for "$offset" when calling InvoiceReimbursementsService.getPaymentInvoiceReimbursementsSearch, must be smaller than or equal to 10000.');
+        }
+        
+
+
+
+        $resourcePath = '/payment/invoice-reimbursements/search';
+        $httpMethod = 'GET';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $expand,
+            'expand', // param base name
+            'array', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $order,
+            'order', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $query,
+            'query', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+        // header params
+        if ($space !== null) {
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
+        }
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        $query = ObjectSerializer::buildQuery($queryParams);
+
+        $auth_headers = [];
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        foreach ($this->authentications as $auth) {
+            $auth_headers = $auth->generateAuthParams($resourcePath, $httpMethod, $query);
+        }
+
+        $defaultHeaders = $this->config->getDefaultHeaders();
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $auth_headers,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        return new Request(
+            $httpMethod,
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation postPaymentInvoiceReimbursementsIdConnector
+     *
+     * Update payment connector configuration
+     *
+     * @param int $id id (required)
+     * @param int $payment_connector_configuration_id payment_connector_configuration_id (required)
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param string[]|null $expand expand (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentInvoiceReimbursementsIdConnector'] to see the possible values for this operation
+     *
+     * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \VRPayment\Sdk\Model\InvoiceReimbursement|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse
+     */
+    public function postPaymentInvoiceReimbursementsIdConnector(int $id, int $payment_connector_configuration_id, int $space, ?array $expand = null, string $contentType = self::contentTypes['postPaymentInvoiceReimbursementsIdConnector'][0])
+    {
+        list($response) = $this->postPaymentInvoiceReimbursementsIdConnectorWithHttpInfo($id, $payment_connector_configuration_id, $space, $expand, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation postPaymentInvoiceReimbursementsIdConnectorWithHttpInfo
+     *
+     * Update payment connector configuration
+     *
+     * @param int $id id (required)
+     * @param int $payment_connector_configuration_id payment_connector_configuration_id (required)
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param string[]|null $expand expand (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentInvoiceReimbursementsIdConnector'] to see the possible values for this operation
+     *
+     * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \VRPayment\Sdk\Model\InvoiceReimbursement|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function postPaymentInvoiceReimbursementsIdConnectorWithHttpInfo(int $id, int $payment_connector_configuration_id, int $space, ?array $expand = null, string $contentType = self::contentTypes['postPaymentInvoiceReimbursementsIdConnector'][0])
+    {
+        $request = $this->postPaymentInvoiceReimbursementsIdConnectorRequest($id, $payment_connector_configuration_id, $space, $expand, $contentType);
+
+        try {
+            $requestTimeout = $this->config->getRequestTimeout();
+            $options = $this->createHttpClientOption($requestTimeout);
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\InvoiceReimbursement',
                         $request,
                         $response,
                     );
@@ -2003,7 +1520,7 @@ class ApplicationUsersRolesService
             }
 
             return $this->handleResponseWithDataType(
-                '\VRPayment\Sdk\Model\UserSpaceRole',
+                '\VRPayment\Sdk\Model\InvoiceReimbursement',
                 $request,
                 $response,
             );
@@ -2012,7 +1529,7 @@ class ApplicationUsersRolesService
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\UserSpaceRole',
+                        '\VRPayment\Sdk\Model\InvoiceReimbursement',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2115,42 +1632,44 @@ class ApplicationUsersRolesService
     }
 
     /**
-     * Create request for operation 'postApplicationUsersUserIdSpaceRoles'
+     * Create request for operation 'postPaymentInvoiceReimbursementsIdConnector'
      *
-     * @param int $user_id user_id (required)
-     * @param int $role_id role_id (required)
+     * @param int $id id (required)
+     * @param int $payment_connector_configuration_id payment_connector_configuration_id (required)
      * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postApplicationUsersUserIdSpaceRoles'] to see the possible values for this operation
+     * @param string[]|null $expand expand (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentInvoiceReimbursementsIdConnector'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function postApplicationUsersUserIdSpaceRolesRequest(int $user_id, int $role_id, int $space, string $contentType = self::contentTypes['postApplicationUsersUserIdSpaceRoles'][0])
+    public function postPaymentInvoiceReimbursementsIdConnectorRequest(int $id, int $payment_connector_configuration_id, int $space, ?array $expand = null, string $contentType = self::contentTypes['postPaymentInvoiceReimbursementsIdConnector'][0])
     {
 
-        // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $user_id when calling postApplicationUsersUserIdSpaceRoles'
+                'Missing the required parameter $id when calling postPaymentInvoiceReimbursementsIdConnector'
             );
         }
 
-        // verify the required parameter 'role_id' is set
-        if ($role_id === null || (is_array($role_id) && count($role_id) === 0)) {
+        // verify the required parameter 'payment_connector_configuration_id' is set
+        if ($payment_connector_configuration_id === null || (is_array($payment_connector_configuration_id) && count($payment_connector_configuration_id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $role_id when calling postApplicationUsersUserIdSpaceRoles'
+                'Missing the required parameter $payment_connector_configuration_id when calling postPaymentInvoiceReimbursementsIdConnector'
             );
         }
 
         // verify the required parameter 'space' is set
         if ($space === null || (is_array($space) && count($space) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $space when calling postApplicationUsersUserIdSpaceRoles'
+                'Missing the required parameter $space when calling postPaymentInvoiceReimbursementsIdConnector'
             );
         }
 
+        
 
-        $resourcePath = '/application-users/{userId}/space-roles';
+        $resourcePath = '/payment/invoice-reimbursements/{id}/connector';
         $httpMethod = 'POST';
         $formParams = [];
         $queryParams = [];
@@ -2160,12 +1679,21 @@ class ApplicationUsersRolesService
 
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $role_id,
-            'roleId', // param base name
+            $payment_connector_configuration_id,
+            'paymentConnectorConfigurationId', // param base name
             'integer', // openApiType
             'form', // style
             true, // explode
             true // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $expand,
+            'expand', // param base name
+            'array', // openApiType
+            'form', // style
+            true, // explode
+            false // required
         ) ?? []);
 
         // header params
@@ -2174,10 +1702,424 @@ class ApplicationUsersRolesService
         }
 
         // path params
-        if ($user_id !== null) {
+        if ($id !== null) {
             $resourcePath = str_replace(
-                '{' . 'userId' . '}',
-                ObjectSerializer::toPathValue($user_id),
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        $query = ObjectSerializer::buildQuery($queryParams);
+
+        $auth_headers = [];
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        foreach ($this->authentications as $auth) {
+            $auth_headers = $auth->generateAuthParams($resourcePath, $httpMethod, $query);
+        }
+
+        $defaultHeaders = $this->config->getDefaultHeaders();
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $auth_headers,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        return new Request(
+            $httpMethod,
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation postPaymentInvoiceReimbursementsIdIban
+     *
+     * Update IBAN
+     *
+     * @param int $id id (required)
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param string|null $recipient_iban recipient_iban (optional)
+     * @param string|null $sender_iban sender_iban (optional)
+     * @param string[]|null $expand expand (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentInvoiceReimbursementsIdIban'] to see the possible values for this operation
+     *
+     * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \VRPayment\Sdk\Model\InvoiceReimbursement|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse
+     */
+    public function postPaymentInvoiceReimbursementsIdIban(int $id, int $space, ?string $recipient_iban = null, ?string $sender_iban = null, ?array $expand = null, string $contentType = self::contentTypes['postPaymentInvoiceReimbursementsIdIban'][0])
+    {
+        list($response) = $this->postPaymentInvoiceReimbursementsIdIbanWithHttpInfo($id, $space, $recipient_iban, $sender_iban, $expand, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation postPaymentInvoiceReimbursementsIdIbanWithHttpInfo
+     *
+     * Update IBAN
+     *
+     * @param int $id id (required)
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param string|null $recipient_iban recipient_iban (optional)
+     * @param string|null $sender_iban sender_iban (optional)
+     * @param string[]|null $expand expand (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentInvoiceReimbursementsIdIban'] to see the possible values for this operation
+     *
+     * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \VRPayment\Sdk\Model\InvoiceReimbursement|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function postPaymentInvoiceReimbursementsIdIbanWithHttpInfo(int $id, int $space, ?string $recipient_iban = null, ?string $sender_iban = null, ?array $expand = null, string $contentType = self::contentTypes['postPaymentInvoiceReimbursementsIdIban'][0])
+    {
+        $request = $this->postPaymentInvoiceReimbursementsIdIbanRequest($id, $space, $recipient_iban, $sender_iban, $expand, $contentType);
+
+        try {
+            $requestTimeout = $this->config->getRequestTimeout();
+            $options = $this->createHttpClientOption($requestTimeout);
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\InvoiceReimbursement',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 403:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 404:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 406:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 409:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 415:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 422:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 429:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                
+                default:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+            }
+
+            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
+                return $this->handleResponseWithDataType(
+                    '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                    $request,
+                    $response,
+                );
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\VRPayment\Sdk\Model\InvoiceReimbursement',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\InvoiceReimbursement',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 406:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 409:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 415:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                throw $e;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Create request for operation 'postPaymentInvoiceReimbursementsIdIban'
+     *
+     * @param int $id id (required)
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param string|null $recipient_iban recipient_iban (optional)
+     * @param string|null $sender_iban sender_iban (optional)
+     * @param string[]|null $expand expand (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentInvoiceReimbursementsIdIban'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function postPaymentInvoiceReimbursementsIdIbanRequest(int $id, int $space, ?string $recipient_iban = null, ?string $sender_iban = null, ?array $expand = null, string $contentType = self::contentTypes['postPaymentInvoiceReimbursementsIdIban'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling postPaymentInvoiceReimbursementsIdIban'
+            );
+        }
+
+        // verify the required parameter 'space' is set
+        if ($space === null || (is_array($space) && count($space) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $space when calling postPaymentInvoiceReimbursementsIdIban'
+            );
+        }
+
+
+
+        
+
+        $resourcePath = '/payment/invoice-reimbursements/{id}/iban';
+        $httpMethod = 'POST';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $recipient_iban,
+            'recipientIban', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $sender_iban,
+            'senderIban', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $expand,
+            'expand', // param base name
+            'array', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+        // header params
+        if ($space !== null) {
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
+        }
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
                 $resourcePath
             );
         }

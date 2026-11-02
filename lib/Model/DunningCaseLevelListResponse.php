@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \VRPayment\Sdk\ObjectSerializer;
 
 /**
- * UserSpaceRole model
+ * DunningCaseLevelListResponse model
  *
  * @category Class
  * @package     VRPayment\Sdk
@@ -35,10 +35,10 @@ use \VRPayment\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.2
+ * @version     5.2.3
  * @implements \ArrayAccess<string, mixed>
  */
-class UserSpaceRole implements ModelInterface, ArrayAccess, \JsonSerializable
+class DunningCaseLevelListResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class UserSpaceRole implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'UserSpaceRole';
+    protected static $openAPIModelName = 'Dunning_Case_Level_List_Response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,11 +55,9 @@ class UserSpaceRole implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'role' => 'int',
-        'id' => 'int',
-        'user' => 'int',
-        'version' => 'int',
-        'space' => 'int'
+        'data' => '\VRPayment\Sdk\Model\DunningCaseLevel[]',
+        'has_more' => 'bool',
+        'limit' => 'int'
     ];
 
     /**
@@ -70,11 +68,9 @@ class UserSpaceRole implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'role' => 'int64',
-        'id' => 'int64',
-        'user' => 'int64',
-        'version' => 'int32',
-        'space' => 'int64'
+        'data' => null,
+        'has_more' => null,
+        'limit' => 'int32'
     ];
 
     /**
@@ -83,11 +79,9 @@ class UserSpaceRole implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'role' => false,
-        'id' => false,
-        'user' => false,
-        'version' => false,
-        'space' => false
+        'data' => false,
+        'has_more' => false,
+        'limit' => false
     ];
 
     /**
@@ -176,11 +170,9 @@ class UserSpaceRole implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'role' => 'role',
-        'id' => 'id',
-        'user' => 'user',
-        'version' => 'version',
-        'space' => 'space'
+        'data' => 'data',
+        'has_more' => 'hasMore',
+        'limit' => 'limit'
     ];
 
     /**
@@ -189,11 +181,9 @@ class UserSpaceRole implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'role' => 'setRole',
-        'id' => 'setId',
-        'user' => 'setUser',
-        'version' => 'setVersion',
-        'space' => 'setSpace'
+        'data' => 'setData',
+        'has_more' => 'setHasMore',
+        'limit' => 'setLimit'
     ];
 
     /**
@@ -202,11 +192,9 @@ class UserSpaceRole implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'role' => 'getRole',
-        'id' => 'getId',
-        'user' => 'getUser',
-        'version' => 'getVersion',
-        'space' => 'getSpace'
+        'data' => 'getData',
+        'has_more' => 'getHasMore',
+        'limit' => 'getLimit'
     ];
 
     /**
@@ -266,11 +254,9 @@ class UserSpaceRole implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('role', $data ?? [], null);
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('user', $data ?? [], null);
-        $this->setIfExists('version', $data ?? [], null);
-        $this->setIfExists('space', $data ?? [], null);
+        $this->setIfExists('data', $data ?? [], null);
+        $this->setIfExists('has_more', $data ?? [], null);
+        $this->setIfExists('limit', $data ?? [], null);
     }
 
     /**
@@ -316,136 +302,82 @@ class UserSpaceRole implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets role
+     * Gets data
      *
-     * @return int|null
+     * @return \VRPayment\Sdk\Model\DunningCaseLevel[]|null
      */
-    public function getRole()
+    public function getData()
     {
-        return $this->container['role'];
+        return $this->container['data'];
     }
 
     /**
-     * Sets role
+     * Sets data
      *
-     * @param int|null $role The role that is assigned to the user.
+     * @param \VRPayment\Sdk\Model\DunningCaseLevel[]|null $data An array containing the actual response objects.
      *
      * @return self
      */
-    public function setRole($role)
+    public function setData($data)
     {
-        if (is_null($role)) {
-            throw new \InvalidArgumentException('non-nullable role cannot be null');
+        if (is_null($data)) {
+            throw new \InvalidArgumentException('non-nullable data cannot be null');
         }
-        $this->container['role'] = $role;
+        $this->container['data'] = $data;
 
         return $this;
     }
 
     /**
-     * Gets id
+     * Gets has_more
      *
-     * @return int|null
+     * @return bool|null
      */
-    public function getId()
+    public function getHasMore()
     {
-        return $this->container['id'];
+        return $this->container['has_more'];
     }
 
     /**
-     * Sets id
+     * Sets has_more
      *
-     * @param int|null $id A unique identifier for the object.
+     * @param bool|null $has_more Whether there are more objects available after this set. If false, there are no more objects to retrieve.
      *
      * @return self
      */
-    public function setId($id)
+    public function setHasMore($has_more)
     {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        if (is_null($has_more)) {
+            throw new \InvalidArgumentException('non-nullable has_more cannot be null');
         }
-        $this->container['id'] = $id;
+        $this->container['has_more'] = $has_more;
 
         return $this;
     }
 
     /**
-     * Gets user
+     * Gets limit
      *
      * @return int|null
      */
-    public function getUser()
+    public function getLimit()
     {
-        return $this->container['user'];
+        return $this->container['limit'];
     }
 
     /**
-     * Sets user
+     * Sets limit
      *
-     * @param int|null $user The user whose role this defines.
+     * @param int|null $limit The applied limit on the number of objects returned.
      *
      * @return self
      */
-    public function setUser($user)
+    public function setLimit($limit)
     {
-        if (is_null($user)) {
-            throw new \InvalidArgumentException('non-nullable user cannot be null');
+        if (is_null($limit)) {
+            throw new \InvalidArgumentException('non-nullable limit cannot be null');
         }
-        $this->container['user'] = $user;
-
-        return $this;
-    }
-
-    /**
-     * Gets version
-     *
-     * @return int|null
-     */
-    public function getVersion()
-    {
-        return $this->container['version'];
-    }
-
-    /**
-     * Sets version
-     *
-     * @param int|null $version The version is used for optimistic locking and incremented whenever the object is updated.
-     *
-     * @return self
-     */
-    public function setVersion($version)
-    {
-        if (is_null($version)) {
-            throw new \InvalidArgumentException('non-nullable version cannot be null');
-        }
-        $this->container['version'] = $version;
-
-        return $this;
-    }
-
-    /**
-     * Gets space
-     *
-     * @return int|null
-     */
-    public function getSpace()
-    {
-        return $this->container['space'];
-    }
-
-    /**
-     * Sets space
-     *
-     * @param int|null $space The space in which the role is assigned to the user.
-     *
-     * @return self
-     */
-    public function setSpace($space)
-    {
-        if (is_null($space)) {
-            throw new \InvalidArgumentException('non-nullable space cannot be null');
-        }
-        $this->container['space'] = $space;
+        $this->container['limit'] = $limit;
 
         return $this;
     }

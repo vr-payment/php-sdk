@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \VRPayment\Sdk\ObjectSerializer;
 
 /**
- * PaymentTerminalCreate model
+ * PaymentTerminalActivationStatus model
  *
  * @category Class
  * @package     VRPayment\Sdk
@@ -35,10 +35,10 @@ use \VRPayment\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.2
+ * @version     5.2.3
  * @implements \ArrayAccess<string, mixed>
  */
-class PaymentTerminalCreate implements ModelInterface, ArrayAccess, \JsonSerializable
+class PaymentTerminalActivationStatus implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class PaymentTerminalCreate implements ModelInterface, ArrayAccess, \JsonSeriali
       *
       * @var string
       */
-    protected static $openAPIModelName = 'PaymentTerminal.Create';
+    protected static $openAPIModelName = 'PaymentTerminalActivationStatus';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,12 +55,14 @@ class PaymentTerminalCreate implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'identifier' => 'string',
-        'configuration_version' => 'int',
-        'location_version' => 'int',
-        'external_id' => 'string',
-        'type' => 'int'
+        'activation_code_active' => 'bool',
+        'environment' => 'string',
+        'activated_on' => '\DateTime',
+        'location_id' => 'int',
+        'activation_code' => 'string',
+        'configuration_id' => 'int',
+        'terminal_id' => 'string',
+        'space' => 'int'
     ];
 
     /**
@@ -71,12 +73,14 @@ class PaymentTerminalCreate implements ModelInterface, ArrayAccess, \JsonSeriali
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'name' => null,
-        'identifier' => null,
-        'configuration_version' => 'int64',
-        'location_version' => 'int64',
-        'external_id' => null,
-        'type' => 'int64'
+        'activation_code_active' => null,
+        'environment' => null,
+        'activated_on' => 'date-time',
+        'location_id' => 'int64',
+        'activation_code' => null,
+        'configuration_id' => 'int64',
+        'terminal_id' => null,
+        'space' => 'int64'
     ];
 
     /**
@@ -85,12 +89,14 @@ class PaymentTerminalCreate implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'name' => false,
-        'identifier' => false,
-        'configuration_version' => false,
-        'location_version' => false,
-        'external_id' => false,
-        'type' => false
+        'activation_code_active' => false,
+        'environment' => false,
+        'activated_on' => false,
+        'location_id' => false,
+        'activation_code' => false,
+        'configuration_id' => false,
+        'terminal_id' => false,
+        'space' => false
     ];
 
     /**
@@ -179,12 +185,14 @@ class PaymentTerminalCreate implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'identifier' => 'identifier',
-        'configuration_version' => 'configurationVersion',
-        'location_version' => 'locationVersion',
-        'external_id' => 'externalId',
-        'type' => 'type'
+        'activation_code_active' => 'activationCodeActive',
+        'environment' => 'environment',
+        'activated_on' => 'activatedOn',
+        'location_id' => 'locationId',
+        'activation_code' => 'activationCode',
+        'configuration_id' => 'configurationId',
+        'terminal_id' => 'terminalId',
+        'space' => 'space'
     ];
 
     /**
@@ -193,12 +201,14 @@ class PaymentTerminalCreate implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'identifier' => 'setIdentifier',
-        'configuration_version' => 'setConfigurationVersion',
-        'location_version' => 'setLocationVersion',
-        'external_id' => 'setExternalId',
-        'type' => 'setType'
+        'activation_code_active' => 'setActivationCodeActive',
+        'environment' => 'setEnvironment',
+        'activated_on' => 'setActivatedOn',
+        'location_id' => 'setLocationId',
+        'activation_code' => 'setActivationCode',
+        'configuration_id' => 'setConfigurationId',
+        'terminal_id' => 'setTerminalId',
+        'space' => 'setSpace'
     ];
 
     /**
@@ -207,12 +217,14 @@ class PaymentTerminalCreate implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'identifier' => 'getIdentifier',
-        'configuration_version' => 'getConfigurationVersion',
-        'location_version' => 'getLocationVersion',
-        'external_id' => 'getExternalId',
-        'type' => 'getType'
+        'activation_code_active' => 'getActivationCodeActive',
+        'environment' => 'getEnvironment',
+        'activated_on' => 'getActivatedOn',
+        'location_id' => 'getLocationId',
+        'activation_code' => 'getActivationCode',
+        'configuration_id' => 'getConfigurationId',
+        'terminal_id' => 'getTerminalId',
+        'space' => 'getSpace'
     ];
 
     /**
@@ -272,12 +284,14 @@ class PaymentTerminalCreate implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('identifier', $data ?? [], null);
-        $this->setIfExists('configuration_version', $data ?? [], null);
-        $this->setIfExists('location_version', $data ?? [], null);
-        $this->setIfExists('external_id', $data ?? [], null);
-        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('activation_code_active', $data ?? [], null);
+        $this->setIfExists('environment', $data ?? [], null);
+        $this->setIfExists('activated_on', $data ?? [], null);
+        $this->setIfExists('location_id', $data ?? [], null);
+        $this->setIfExists('activation_code', $data ?? [], null);
+        $this->setIfExists('configuration_id', $data ?? [], null);
+        $this->setIfExists('terminal_id', $data ?? [], null);
+        $this->setIfExists('space', $data ?? [], null);
     }
 
     /**
@@ -307,16 +321,6 @@ class PaymentTerminalCreate implements ModelInterface, ArrayAccess, \JsonSeriali
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 100)) {
-            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 100.";
-        }
-
-        if ($this->container['external_id'] === null) {
-            $invalidProperties[] = "'external_id' can't be null";
-        }
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -333,167 +337,217 @@ class PaymentTerminalCreate implements ModelInterface, ArrayAccess, \JsonSeriali
 
 
     /**
-     * Gets name
+     * Gets activation_code_active
+     *
+     * @return bool|null
+     */
+    public function getActivationCodeActive()
+    {
+        return $this->container['activation_code_active'];
+    }
+
+    /**
+     * Sets activation_code_active
+     *
+     * @param bool|null $activation_code_active Whether the activation code is active on the acquirer side
+     *
+     * @return self
+     */
+    public function setActivationCodeActive($activation_code_active)
+    {
+        if (is_null($activation_code_active)) {
+            throw new \InvalidArgumentException('non-nullable activation_code_active cannot be null');
+        }
+        $this->container['activation_code_active'] = $activation_code_active;
+
+        return $this;
+    }
+
+    /**
+     * Gets environment
      *
      * @return string|null
      */
-    public function getName()
+    public function getEnvironment()
     {
-        return $this->container['name'];
+        return $this->container['environment'];
     }
 
     /**
-     * Sets name
+     * Sets environment
      *
-     * @param string|null $name The name used to identify the payment terminal.
+     * @param string|null $environment The environment (TEST/PRODUCTION) the payment terminal belongs to.
      *
      * @return self
      */
-    public function setName($name)
+    public function setEnvironment($environment)
     {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($environment)) {
+            throw new \InvalidArgumentException('non-nullable environment cannot be null');
         }
-        if ((mb_strlen($name) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $name when calling PaymentTerminalCreate., must be smaller than or equal to 100.');
-        }
-
-        $this->container['name'] = $name;
+        $this->container['environment'] = $environment;
 
         return $this;
     }
 
     /**
-     * Gets identifier
+     * Gets activated_on
+     *
+     * @return \DateTime|null
+     */
+    public function getActivatedOn()
+    {
+        return $this->container['activated_on'];
+    }
+
+    /**
+     * Sets activated_on
+     *
+     * @param \DateTime|null $activated_on Time when the payment terminal got activated on acquirer side
+     *
+     * @return self
+     */
+    public function setActivatedOn($activated_on)
+    {
+        if (is_null($activated_on)) {
+            throw new \InvalidArgumentException('non-nullable activated_on cannot be null');
+        }
+        $this->container['activated_on'] = $activated_on;
+
+        return $this;
+    }
+
+    /**
+     * Gets location_id
+     *
+     * @return int|null
+     */
+    public function getLocationId()
+    {
+        return $this->container['location_id'];
+    }
+
+    /**
+     * Sets location_id
+     *
+     * @param int|null $location_id The ID of the location that the payment terminal belongs to
+     *
+     * @return self
+     */
+    public function setLocationId($location_id)
+    {
+        if (is_null($location_id)) {
+            throw new \InvalidArgumentException('non-nullable location_id cannot be null');
+        }
+        $this->container['location_id'] = $location_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets activation_code
      *
      * @return string|null
      */
-    public function getIdentifier()
+    public function getActivationCode()
     {
-        return $this->container['identifier'];
+        return $this->container['activation_code'];
     }
 
     /**
-     * Sets identifier
+     * Sets activation_code
      *
-     * @param string|null $identifier The unique identifier of the terminal, that is displayed on the device.
+     * @param string|null $activation_code Activation code that is used to link the terminal
      *
      * @return self
      */
-    public function setIdentifier($identifier)
+    public function setActivationCode($activation_code)
     {
-        if (is_null($identifier)) {
-            throw new \InvalidArgumentException('non-nullable identifier cannot be null');
+        if (is_null($activation_code)) {
+            throw new \InvalidArgumentException('non-nullable activation_code cannot be null');
         }
-        $this->container['identifier'] = $identifier;
+        $this->container['activation_code'] = $activation_code;
 
         return $this;
     }
 
     /**
-     * Gets configuration_version
+     * Gets configuration_id
      *
      * @return int|null
      */
-    public function getConfigurationVersion()
+    public function getConfigurationId()
     {
-        return $this->container['configuration_version'];
+        return $this->container['configuration_id'];
     }
 
     /**
-     * Sets configuration_version
+     * Sets configuration_id
      *
-     * @param int|null $configuration_version The configuration that is assigned to the terminal and determines how it works.
+     * @param int|null $configuration_id The ID of the configuration that the payment terminal belongs to
      *
      * @return self
      */
-    public function setConfigurationVersion($configuration_version)
+    public function setConfigurationId($configuration_id)
     {
-        if (is_null($configuration_version)) {
-            throw new \InvalidArgumentException('non-nullable configuration_version cannot be null');
+        if (is_null($configuration_id)) {
+            throw new \InvalidArgumentException('non-nullable configuration_id cannot be null');
         }
-        $this->container['configuration_version'] = $configuration_version;
+        $this->container['configuration_id'] = $configuration_id;
 
         return $this;
     }
 
     /**
-     * Gets location_version
+     * Gets terminal_id
+     *
+     * @return string|null
+     */
+    public function getTerminalId()
+    {
+        return $this->container['terminal_id'];
+    }
+
+    /**
+     * Sets terminal_id
+     *
+     * @param string|null $terminal_id The ID of the payment terminal
+     *
+     * @return self
+     */
+    public function setTerminalId($terminal_id)
+    {
+        if (is_null($terminal_id)) {
+            throw new \InvalidArgumentException('non-nullable terminal_id cannot be null');
+        }
+        $this->container['terminal_id'] = $terminal_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets space
      *
      * @return int|null
      */
-    public function getLocationVersion()
+    public function getSpace()
     {
-        return $this->container['location_version'];
+        return $this->container['space'];
     }
 
     /**
-     * Sets location_version
+     * Sets space
      *
-     * @param int|null $location_version The physical location where the terminal is used.
+     * @param int|null $space The ID of the space that the payment terminal belongs to
      *
      * @return self
      */
-    public function setLocationVersion($location_version)
+    public function setSpace($space)
     {
-        if (is_null($location_version)) {
-            throw new \InvalidArgumentException('non-nullable location_version cannot be null');
+        if (is_null($space)) {
+            throw new \InvalidArgumentException('non-nullable space cannot be null');
         }
-        $this->container['location_version'] = $location_version;
-
-        return $this;
-    }
-
-    /**
-     * Gets external_id
-     *
-     * @return string
-     */
-    public function getExternalId()
-    {
-        return $this->container['external_id'];
-    }
-
-    /**
-     * Sets external_id
-     *
-     * @param string $external_id A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
-     *
-     * @return self
-     */
-    public function setExternalId($external_id)
-    {
-        if (is_null($external_id)) {
-            throw new \InvalidArgumentException('non-nullable external_id cannot be null');
-        }
-        $this->container['external_id'] = $external_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets type
-     *
-     * @return int
-     */
-    public function getType()
-    {
-        return $this->container['type'];
-    }
-
-    /**
-     * Sets type
-     *
-     * @param int $type The type of the payment terminal.
-     *
-     * @return self
-     */
-    public function setType($type)
-    {
-        if (is_null($type)) {
-            throw new \InvalidArgumentException('non-nullable type cannot be null');
-        }
-        $this->container['type'] = $type;
+        $this->container['space'] = $space;
 
         return $this;
     }

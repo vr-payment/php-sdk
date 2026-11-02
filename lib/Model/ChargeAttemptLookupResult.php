@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \VRPayment\Sdk\ObjectSerializer;
 
 /**
- * UserAccountRole model
+ * ChargeAttemptLookupResult model
  *
  * @category Class
  * @package     VRPayment\Sdk
@@ -35,10 +35,10 @@ use \VRPayment\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.2
+ * @version     5.2.3
  * @implements \ArrayAccess<string, mixed>
  */
-class UserAccountRole implements ModelInterface, ArrayAccess, \JsonSerializable
+class ChargeAttemptLookupResult implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class UserAccountRole implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'UserAccountRole';
+    protected static $openAPIModelName = 'ChargeAttemptLookupResult';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,12 +55,8 @@ class UserAccountRole implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'role' => 'int',
-        'id' => 'int',
-        'applies_on_sub_account' => 'bool',
-        'user' => 'int',
-        'version' => 'int',
-        'account' => 'int'
+        'successful_charge_attempt' => '\VRPayment\Sdk\Model\ChargeAttemptProjection',
+        'transaction' => '\VRPayment\Sdk\Model\TransactionProjection'
     ];
 
     /**
@@ -71,12 +67,8 @@ class UserAccountRole implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'role' => 'int64',
-        'id' => 'int64',
-        'applies_on_sub_account' => null,
-        'user' => 'int64',
-        'version' => 'int32',
-        'account' => 'int64'
+        'successful_charge_attempt' => null,
+        'transaction' => null
     ];
 
     /**
@@ -85,12 +77,8 @@ class UserAccountRole implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'role' => false,
-        'id' => false,
-        'applies_on_sub_account' => false,
-        'user' => false,
-        'version' => false,
-        'account' => false
+        'successful_charge_attempt' => false,
+        'transaction' => false
     ];
 
     /**
@@ -179,12 +167,8 @@ class UserAccountRole implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'role' => 'role',
-        'id' => 'id',
-        'applies_on_sub_account' => 'appliesOnSubAccount',
-        'user' => 'user',
-        'version' => 'version',
-        'account' => 'account'
+        'successful_charge_attempt' => 'successfulChargeAttempt',
+        'transaction' => 'transaction'
     ];
 
     /**
@@ -193,12 +177,8 @@ class UserAccountRole implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'role' => 'setRole',
-        'id' => 'setId',
-        'applies_on_sub_account' => 'setAppliesOnSubAccount',
-        'user' => 'setUser',
-        'version' => 'setVersion',
-        'account' => 'setAccount'
+        'successful_charge_attempt' => 'setSuccessfulChargeAttempt',
+        'transaction' => 'setTransaction'
     ];
 
     /**
@@ -207,12 +187,8 @@ class UserAccountRole implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'role' => 'getRole',
-        'id' => 'getId',
-        'applies_on_sub_account' => 'getAppliesOnSubAccount',
-        'user' => 'getUser',
-        'version' => 'getVersion',
-        'account' => 'getAccount'
+        'successful_charge_attempt' => 'getSuccessfulChargeAttempt',
+        'transaction' => 'getTransaction'
     ];
 
     /**
@@ -272,12 +248,8 @@ class UserAccountRole implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('role', $data ?? [], null);
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('applies_on_sub_account', $data ?? [], null);
-        $this->setIfExists('user', $data ?? [], null);
-        $this->setIfExists('version', $data ?? [], null);
-        $this->setIfExists('account', $data ?? [], null);
+        $this->setIfExists('successful_charge_attempt', $data ?? [], null);
+        $this->setIfExists('transaction', $data ?? [], null);
     }
 
     /**
@@ -323,163 +295,55 @@ class UserAccountRole implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets role
+     * Gets successful_charge_attempt
      *
-     * @return int|null
+     * @return \VRPayment\Sdk\Model\ChargeAttemptProjection|null
      */
-    public function getRole()
+    public function getSuccessfulChargeAttempt()
     {
-        return $this->container['role'];
+        return $this->container['successful_charge_attempt'];
     }
 
     /**
-     * Sets role
+     * Sets successful_charge_attempt
      *
-     * @param int|null $role The role that is assigned to the user.
+     * @param \VRPayment\Sdk\Model\ChargeAttemptProjection|null $successful_charge_attempt successful_charge_attempt
      *
      * @return self
      */
-    public function setRole($role)
+    public function setSuccessfulChargeAttempt($successful_charge_attempt)
     {
-        if (is_null($role)) {
-            throw new \InvalidArgumentException('non-nullable role cannot be null');
+        if (is_null($successful_charge_attempt)) {
+            throw new \InvalidArgumentException('non-nullable successful_charge_attempt cannot be null');
         }
-        $this->container['role'] = $role;
+        $this->container['successful_charge_attempt'] = $successful_charge_attempt;
 
         return $this;
     }
 
     /**
-     * Gets id
+     * Gets transaction
      *
-     * @return int|null
+     * @return \VRPayment\Sdk\Model\TransactionProjection|null
      */
-    public function getId()
+    public function getTransaction()
     {
-        return $this->container['id'];
+        return $this->container['transaction'];
     }
 
     /**
-     * Sets id
+     * Sets transaction
      *
-     * @param int|null $id A unique identifier for the object.
+     * @param \VRPayment\Sdk\Model\TransactionProjection|null $transaction transaction
      *
      * @return self
      */
-    public function setId($id)
+    public function setTransaction($transaction)
     {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        if (is_null($transaction)) {
+            throw new \InvalidArgumentException('non-nullable transaction cannot be null');
         }
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets applies_on_sub_account
-     *
-     * @return bool|null
-     */
-    public function getAppliesOnSubAccount()
-    {
-        return $this->container['applies_on_sub_account'];
-    }
-
-    /**
-     * Sets applies_on_sub_account
-     *
-     * @param bool|null $applies_on_sub_account Whether the role is assigned to the user in subaccounts only.
-     *
-     * @return self
-     */
-    public function setAppliesOnSubAccount($applies_on_sub_account)
-    {
-        if (is_null($applies_on_sub_account)) {
-            throw new \InvalidArgumentException('non-nullable applies_on_sub_account cannot be null');
-        }
-        $this->container['applies_on_sub_account'] = $applies_on_sub_account;
-
-        return $this;
-    }
-
-    /**
-     * Gets user
-     *
-     * @return int|null
-     */
-    public function getUser()
-    {
-        return $this->container['user'];
-    }
-
-    /**
-     * Sets user
-     *
-     * @param int|null $user The user whose role this defines.
-     *
-     * @return self
-     */
-    public function setUser($user)
-    {
-        if (is_null($user)) {
-            throw new \InvalidArgumentException('non-nullable user cannot be null');
-        }
-        $this->container['user'] = $user;
-
-        return $this;
-    }
-
-    /**
-     * Gets version
-     *
-     * @return int|null
-     */
-    public function getVersion()
-    {
-        return $this->container['version'];
-    }
-
-    /**
-     * Sets version
-     *
-     * @param int|null $version The version is used for optimistic locking and incremented whenever the object is updated.
-     *
-     * @return self
-     */
-    public function setVersion($version)
-    {
-        if (is_null($version)) {
-            throw new \InvalidArgumentException('non-nullable version cannot be null');
-        }
-        $this->container['version'] = $version;
-
-        return $this;
-    }
-
-    /**
-     * Gets account
-     *
-     * @return int|null
-     */
-    public function getAccount()
-    {
-        return $this->container['account'];
-    }
-
-    /**
-     * Sets account
-     *
-     * @param int|null $account The account in which the role is assigned to the user.
-     *
-     * @return self
-     */
-    public function setAccount($account)
-    {
-        if (is_null($account)) {
-            throw new \InvalidArgumentException('non-nullable account cannot be null');
-        }
-        $this->container['account'] = $account;
+        $this->container['transaction'] = $transaction;
 
         return $this;
     }

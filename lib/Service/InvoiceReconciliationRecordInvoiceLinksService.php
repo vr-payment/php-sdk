@@ -23,7 +23,6 @@
 
 namespace VRPayment\Sdk\Service;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
@@ -36,11 +35,12 @@ use VRPayment\Sdk\ApiException;
 use VRPayment\Sdk\Configuration;
 use VRPayment\Sdk\FormDataProcessor;
 use VRPayment\Sdk\HeaderSelector;
+use VRPayment\Sdk\CaBundleFallbackClientFactory;
 use VRPayment\Sdk\ObjectSerializer;
 use VRPayment\Sdk\Auth\HttpBearerAuth;
 
 /**
- * HumanUsersRolesService service
+ * InvoiceReconciliationRecordInvoiceLinksService service
  *
  * @category Class
  * @package  VRPayment\Sdk
@@ -48,9 +48,9 @@ use VRPayment\Sdk\Auth\HttpBearerAuth;
  * @license  Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version  5.2.2
+ * @version  5.2.3
  */
-class HumanUsersRolesService
+class InvoiceReconciliationRecordInvoiceLinksService
 {
     /**
      * @var ClientInterface
@@ -79,22 +79,19 @@ class HumanUsersRolesService
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'deleteHumanUsersUserIdAccountRoles' => [
+        'getPaymentInvoiceReconciliationRecordInvoiceLinks' => [
             'application/json',
         ],
-        'deleteHumanUsersUserIdSpaceRoles' => [
+        'getPaymentInvoiceReconciliationRecordInvoiceLinksId' => [
             'application/json',
         ],
-        'getHumanUsersUserIdAccountRoles' => [
+        'getPaymentInvoiceReconciliationRecordInvoiceLinksSearch' => [
             'application/json',
         ],
-        'getHumanUsersUserIdSpaceRoles' => [
+        'postPaymentInvoiceReconciliationRecordInvoiceLinks' => [
             'application/json',
         ],
-        'postHumanUsersUserIdAccountRoles' => [
-            'application/json',
-        ],
-        'postHumanUsersUserIdSpaceRoles' => [
+        'postPaymentInvoiceReconciliationRecordInvoiceLinksUnlink' => [
             'application/json',
         ],
     ];
@@ -111,7 +108,7 @@ class HumanUsersRolesService
         ?ClientInterface $client = null,
         ?HeaderSelector  $selector = null,
     ) {
-        $this->client = $client ?: new Client();
+        $this->client = $client ?: CaBundleFallbackClientFactory::create();
         $this->config = $config ?: Configuration::getDefaultConfiguration();
         $this->headerSelector = $selector ?: new HeaderSelector();
         $this->hostIndex = $hostIndex;
@@ -157,604 +154,48 @@ class HumanUsersRolesService
     }
 
     /**
-     * Operation deleteHumanUsersUserIdAccountRoles
+     * Operation getPaymentInvoiceReconciliationRecordInvoiceLinks
      *
-     * Unassign a role from a human user for an account
+     * List all invoice reconciliation record invoice links
      *
-     * @param int $user_id user_id (required)
-     * @param int $role_id role_id (required)
-     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteHumanUsersUserIdAccountRoles'] to see the possible values for this operation
-     *
-     * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return void
-     */
-    public function deleteHumanUsersUserIdAccountRoles(int $user_id, int $role_id, int $account, string $contentType = self::contentTypes['deleteHumanUsersUserIdAccountRoles'][0])
-    {
-        $this->deleteHumanUsersUserIdAccountRolesWithHttpInfo($user_id, $role_id, $account, $contentType);
-    }
-
-    /**
-     * Operation deleteHumanUsersUserIdAccountRolesWithHttpInfo
-     *
-     * Unassign a role from a human user for an account
-     *
-     * @param int $user_id user_id (required)
-     * @param int $role_id role_id (required)
-     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteHumanUsersUserIdAccountRoles'] to see the possible values for this operation
-     *
-     * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function deleteHumanUsersUserIdAccountRolesWithHttpInfo(int $user_id, int $role_id, int $account, string $contentType = self::contentTypes['deleteHumanUsersUserIdAccountRoles'][0])
-    {
-        $request = $this->deleteHumanUsersUserIdAccountRolesRequest($user_id, $role_id, $account, $contentType);
-
-        try {
-            $requestTimeout = $this->config->getRequestTimeout();
-            $options = $this->createHttpClientOption($requestTimeout);
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            return [null, $statusCode, $response->getHeaders()];
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 400:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 403:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 404:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 406:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 415:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 422:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 429:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-            }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
-            throw $e;
-        }
-    }
-
-    /**
-     * Create request for operation 'deleteHumanUsersUserIdAccountRoles'
-     *
-     * @param int $user_id user_id (required)
-     * @param int $role_id role_id (required)
-     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteHumanUsersUserIdAccountRoles'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function deleteHumanUsersUserIdAccountRolesRequest(int $user_id, int $role_id, int $account, string $contentType = self::contentTypes['deleteHumanUsersUserIdAccountRoles'][0])
-    {
-
-        // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $user_id when calling deleteHumanUsersUserIdAccountRoles'
-            );
-        }
-
-        // verify the required parameter 'role_id' is set
-        if ($role_id === null || (is_array($role_id) && count($role_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $role_id when calling deleteHumanUsersUserIdAccountRoles'
-            );
-        }
-
-        // verify the required parameter 'account' is set
-        if ($account === null || (is_array($account) && count($account) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $account when calling deleteHumanUsersUserIdAccountRoles'
-            );
-        }
-
-
-        $resourcePath = '/human-users/{userId}/account-roles';
-        $httpMethod = 'DELETE';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $role_id,
-            'roleId', // param base name
-            'integer', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-
-        // header params
-        if ($account !== null) {
-            $headerParams['account'] = ObjectSerializer::toHeaderValue($account);
-        }
-
-        // path params
-        if ($user_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'userId' . '}',
-                ObjectSerializer::toPathValue($user_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        $query = ObjectSerializer::buildQuery($queryParams);
-
-        $auth_headers = [];
-        // this endpoint requires Bearer (JWT) authentication (access token)
-        foreach ($this->authentications as $auth) {
-            $auth_headers = $auth->generateAuthParams($resourcePath, $httpMethod, $query);
-        }
-
-        $defaultHeaders = $this->config->getDefaultHeaders();
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $auth_headers,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        return new Request(
-            $httpMethod,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation deleteHumanUsersUserIdSpaceRoles
-     *
-     * Unassign a role from a human user for a space
-     *
-     * @param int $user_id user_id (required)
-     * @param int $role_id role_id (required)
      * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteHumanUsersUserIdSpaceRoles'] to see the possible values for this operation
+     * @param int|null $after Set to an object&#39;s ID to retrieve the page of objects coming immediately after the named object. (optional)
+     * @param int|null $before Set to an object&#39;s ID to retrieve the page of objects coming immediately before the named object. (optional)
+     * @param string[]|null $expand expand (optional)
+     * @param int|null $limit A limit on the number of objects to be returned, between 1 and 100. Default is 10. (optional)
+     * @param string|null $order Specify to retrieve objects in chronological (ASC) or reverse chronological (DESC) order. See {@see \VRPayment\Sdk\Model\SortingOrder}. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentInvoiceReconciliationRecordInvoiceLinks'] to see the possible values for this operation
      *
      * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return void
+     * @return \VRPayment\Sdk\Model\InvoiceReconciliationRecordInvoiceLinkListResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse
      */
-    public function deleteHumanUsersUserIdSpaceRoles(int $user_id, int $role_id, int $space, string $contentType = self::contentTypes['deleteHumanUsersUserIdSpaceRoles'][0])
+    public function getPaymentInvoiceReconciliationRecordInvoiceLinks(int $space, ?int $after = null, ?int $before = null, ?array $expand = null, ?int $limit = null, ?string $order = null, string $contentType = self::contentTypes['getPaymentInvoiceReconciliationRecordInvoiceLinks'][0])
     {
-        $this->deleteHumanUsersUserIdSpaceRolesWithHttpInfo($user_id, $role_id, $space, $contentType);
-    }
-
-    /**
-     * Operation deleteHumanUsersUserIdSpaceRolesWithHttpInfo
-     *
-     * Unassign a role from a human user for a space
-     *
-     * @param int $user_id user_id (required)
-     * @param int $role_id role_id (required)
-     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteHumanUsersUserIdSpaceRoles'] to see the possible values for this operation
-     *
-     * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function deleteHumanUsersUserIdSpaceRolesWithHttpInfo(int $user_id, int $role_id, int $space, string $contentType = self::contentTypes['deleteHumanUsersUserIdSpaceRoles'][0])
-    {
-        $request = $this->deleteHumanUsersUserIdSpaceRolesRequest($user_id, $role_id, $space, $contentType);
-
-        try {
-            $requestTimeout = $this->config->getRequestTimeout();
-            $options = $this->createHttpClientOption($requestTimeout);
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            return [null, $statusCode, $response->getHeaders()];
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 400:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 403:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 404:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 406:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 415:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 422:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 429:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-            }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
-            throw $e;
-        }
-    }
-
-    /**
-     * Create request for operation 'deleteHumanUsersUserIdSpaceRoles'
-     *
-     * @param int $user_id user_id (required)
-     * @param int $role_id role_id (required)
-     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteHumanUsersUserIdSpaceRoles'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function deleteHumanUsersUserIdSpaceRolesRequest(int $user_id, int $role_id, int $space, string $contentType = self::contentTypes['deleteHumanUsersUserIdSpaceRoles'][0])
-    {
-
-        // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $user_id when calling deleteHumanUsersUserIdSpaceRoles'
-            );
-        }
-
-        // verify the required parameter 'role_id' is set
-        if ($role_id === null || (is_array($role_id) && count($role_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $role_id when calling deleteHumanUsersUserIdSpaceRoles'
-            );
-        }
-
-        // verify the required parameter 'space' is set
-        if ($space === null || (is_array($space) && count($space) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $space when calling deleteHumanUsersUserIdSpaceRoles'
-            );
-        }
-
-
-        $resourcePath = '/human-users/{userId}/space-roles';
-        $httpMethod = 'DELETE';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $role_id,
-            'roleId', // param base name
-            'integer', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-
-        // header params
-        if ($space !== null) {
-            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
-        }
-
-        // path params
-        if ($user_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'userId' . '}',
-                ObjectSerializer::toPathValue($user_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        $query = ObjectSerializer::buildQuery($queryParams);
-
-        $auth_headers = [];
-        // this endpoint requires Bearer (JWT) authentication (access token)
-        foreach ($this->authentications as $auth) {
-            $auth_headers = $auth->generateAuthParams($resourcePath, $httpMethod, $query);
-        }
-
-        $defaultHeaders = $this->config->getDefaultHeaders();
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $auth_headers,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        return new Request(
-            $httpMethod,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation getHumanUsersUserIdAccountRoles
-     *
-     * List all roles of a human user for an account
-     *
-     * @param int $user_id user_id (required)
-     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getHumanUsersUserIdAccountRoles'] to see the possible values for this operation
-     *
-     * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return \VRPayment\Sdk\Model\UserAccountRoleListResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse
-     */
-    public function getHumanUsersUserIdAccountRoles(int $user_id, int $account, string $contentType = self::contentTypes['getHumanUsersUserIdAccountRoles'][0])
-    {
-        list($response) = $this->getHumanUsersUserIdAccountRolesWithHttpInfo($user_id, $account, $contentType);
+        list($response) = $this->getPaymentInvoiceReconciliationRecordInvoiceLinksWithHttpInfo($space, $after, $before, $expand, $limit, $order, $contentType);
         return $response;
     }
 
     /**
-     * Operation getHumanUsersUserIdAccountRolesWithHttpInfo
+     * Operation getPaymentInvoiceReconciliationRecordInvoiceLinksWithHttpInfo
      *
-     * List all roles of a human user for an account
+     * List all invoice reconciliation record invoice links
      *
-     * @param int $user_id user_id (required)
-     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getHumanUsersUserIdAccountRoles'] to see the possible values for this operation
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param int|null $after Set to an object&#39;s ID to retrieve the page of objects coming immediately after the named object. (optional)
+     * @param int|null $before Set to an object&#39;s ID to retrieve the page of objects coming immediately before the named object. (optional)
+     * @param string[]|null $expand expand (optional)
+     * @param int|null $limit A limit on the number of objects to be returned, between 1 and 100. Default is 10. (optional)
+     * @param string|null $order Specify to retrieve objects in chronological (ASC) or reverse chronological (DESC) order. See {@see \VRPayment\Sdk\Model\SortingOrder}. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentInvoiceReconciliationRecordInvoiceLinks'] to see the possible values for this operation
      *
      * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \VRPayment\Sdk\Model\UserAccountRoleListResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \VRPayment\Sdk\Model\InvoiceReconciliationRecordInvoiceLinkListResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getHumanUsersUserIdAccountRolesWithHttpInfo(int $user_id, int $account, string $contentType = self::contentTypes['getHumanUsersUserIdAccountRoles'][0])
+    public function getPaymentInvoiceReconciliationRecordInvoiceLinksWithHttpInfo(int $space, ?int $after = null, ?int $before = null, ?array $expand = null, ?int $limit = null, ?string $order = null, string $contentType = self::contentTypes['getPaymentInvoiceReconciliationRecordInvoiceLinks'][0])
     {
-        $request = $this->getHumanUsersUserIdAccountRolesRequest($user_id, $account, $contentType);
+        $request = $this->getPaymentInvoiceReconciliationRecordInvoiceLinksRequest($space, $after, $before, $expand, $limit, $order, $contentType);
 
         try {
             $requestTimeout = $this->config->getRequestTimeout();
@@ -783,7 +224,7 @@ class HumanUsersRolesService
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\UserAccountRoleListResponse',
+                        '\VRPayment\Sdk\Model\InvoiceReconciliationRecordInvoiceLinkListResponse',
                         $request,
                         $response,
                     );
@@ -866,7 +307,7 @@ class HumanUsersRolesService
             }
 
             return $this->handleResponseWithDataType(
-                '\VRPayment\Sdk\Model\UserAccountRoleListResponse',
+                '\VRPayment\Sdk\Model\InvoiceReconciliationRecordInvoiceLinkListResponse',
                 $request,
                 $response,
             );
@@ -875,7 +316,7 @@ class HumanUsersRolesService
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\UserAccountRoleListResponse',
+                        '\VRPayment\Sdk\Model\InvoiceReconciliationRecordInvoiceLinkListResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -970,34 +411,48 @@ class HumanUsersRolesService
     }
 
     /**
-     * Create request for operation 'getHumanUsersUserIdAccountRoles'
+     * Create request for operation 'getPaymentInvoiceReconciliationRecordInvoiceLinks'
      *
-     * @param int $user_id user_id (required)
-     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getHumanUsersUserIdAccountRoles'] to see the possible values for this operation
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param int|null $after Set to an object&#39;s ID to retrieve the page of objects coming immediately after the named object. (optional)
+     * @param int|null $before Set to an object&#39;s ID to retrieve the page of objects coming immediately before the named object. (optional)
+     * @param string[]|null $expand expand (optional)
+     * @param int|null $limit A limit on the number of objects to be returned, between 1 and 100. Default is 10. (optional)
+     * @param string|null $order Specify to retrieve objects in chronological (ASC) or reverse chronological (DESC) order. See {@see \VRPayment\Sdk\Model\SortingOrder}. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentInvoiceReconciliationRecordInvoiceLinks'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getHumanUsersUserIdAccountRolesRequest(int $user_id, int $account, string $contentType = self::contentTypes['getHumanUsersUserIdAccountRoles'][0])
+    public function getPaymentInvoiceReconciliationRecordInvoiceLinksRequest(int $space, ?int $after = null, ?int $before = null, ?array $expand = null, ?int $limit = null, ?string $order = null, string $contentType = self::contentTypes['getPaymentInvoiceReconciliationRecordInvoiceLinks'][0])
     {
 
-        // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+        // verify the required parameter 'space' is set
+        if ($space === null || (is_array($space) && count($space) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $user_id when calling getHumanUsersUserIdAccountRoles'
+                'Missing the required parameter $space when calling getPaymentInvoiceReconciliationRecordInvoiceLinks'
             );
         }
 
-        // verify the required parameter 'account' is set
-        if ($account === null || (is_array($account) && count($account) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $account when calling getHumanUsersUserIdAccountRoles'
-            );
+        if ($after !== null && $after < 1) {
+            throw new \InvalidArgumentException('invalid value for "$after" when calling InvoiceReconciliationRecordInvoiceLinksService.getPaymentInvoiceReconciliationRecordInvoiceLinks, must be bigger than or equal to 1.');
         }
+        
+        if ($before !== null && $before < 1) {
+            throw new \InvalidArgumentException('invalid value for "$before" when calling InvoiceReconciliationRecordInvoiceLinksService.getPaymentInvoiceReconciliationRecordInvoiceLinks, must be bigger than or equal to 1.');
+        }
+        
+        
+        if ($limit !== null && $limit > 100) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling InvoiceReconciliationRecordInvoiceLinksService.getPaymentInvoiceReconciliationRecordInvoiceLinks, must be smaller than or equal to 100.');
+        }
+        if ($limit !== null && $limit < 1) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling InvoiceReconciliationRecordInvoiceLinksService.getPaymentInvoiceReconciliationRecordInvoiceLinks, must be bigger than or equal to 1.');
+        }
+        
 
 
-        $resourcePath = '/human-users/{userId}/account-roles';
+        $resourcePath = '/payment/invoice-reconciliation-record-invoice-links';
         $httpMethod = 'GET';
         $formParams = [];
         $queryParams = [];
@@ -1005,785 +460,428 @@ class HumanUsersRolesService
         $httpBody = '';
         $multipart = false;
 
-
-        // header params
-        if ($account !== null) {
-            $headerParams['account'] = ObjectSerializer::toHeaderValue($account);
-        }
-
-        // path params
-        if ($user_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'userId' . '}',
-                ObjectSerializer::toPathValue($user_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        $query = ObjectSerializer::buildQuery($queryParams);
-
-        $auth_headers = [];
-        // this endpoint requires Bearer (JWT) authentication (access token)
-        foreach ($this->authentications as $auth) {
-            $auth_headers = $auth->generateAuthParams($resourcePath, $httpMethod, $query);
-        }
-
-        $defaultHeaders = $this->config->getDefaultHeaders();
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $auth_headers,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        return new Request(
-            $httpMethod,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation getHumanUsersUserIdSpaceRoles
-     *
-     * List all roles of a human user for a space
-     *
-     * @param int $user_id user_id (required)
-     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getHumanUsersUserIdSpaceRoles'] to see the possible values for this operation
-     *
-     * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return \VRPayment\Sdk\Model\UserSpaceRoleListResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse
-     */
-    public function getHumanUsersUserIdSpaceRoles(int $user_id, int $space, string $contentType = self::contentTypes['getHumanUsersUserIdSpaceRoles'][0])
-    {
-        list($response) = $this->getHumanUsersUserIdSpaceRolesWithHttpInfo($user_id, $space, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation getHumanUsersUserIdSpaceRolesWithHttpInfo
-     *
-     * List all roles of a human user for a space
-     *
-     * @param int $user_id user_id (required)
-     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getHumanUsersUserIdSpaceRoles'] to see the possible values for this operation
-     *
-     * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of \VRPayment\Sdk\Model\UserSpaceRoleListResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function getHumanUsersUserIdSpaceRolesWithHttpInfo(int $user_id, int $space, string $contentType = self::contentTypes['getHumanUsersUserIdSpaceRoles'][0])
-    {
-        $request = $this->getHumanUsersUserIdSpaceRolesRequest($user_id, $space, $contentType);
-
-        try {
-            $requestTimeout = $this->config->getRequestTimeout();
-            $options = $this->createHttpClientOption($requestTimeout);
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\UserSpaceRoleListResponse',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            return $this->handleResponseWithDataType(
-                '\VRPayment\Sdk\Model\UserSpaceRoleListResponse',
-                $request,
-                $response,
-            );
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\UserSpaceRoleListResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 400:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 403:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 404:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 406:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 415:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 422:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 429:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-            }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
-            throw $e;
-        }
-    }
-
-    /**
-     * Create request for operation 'getHumanUsersUserIdSpaceRoles'
-     *
-     * @param int $user_id user_id (required)
-     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getHumanUsersUserIdSpaceRoles'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function getHumanUsersUserIdSpaceRolesRequest(int $user_id, int $space, string $contentType = self::contentTypes['getHumanUsersUserIdSpaceRoles'][0])
-    {
-
-        // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $user_id when calling getHumanUsersUserIdSpaceRoles'
-            );
-        }
-
-        // verify the required parameter 'space' is set
-        if ($space === null || (is_array($space) && count($space) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $space when calling getHumanUsersUserIdSpaceRoles'
-            );
-        }
-
-
-        $resourcePath = '/human-users/{userId}/space-roles';
-        $httpMethod = 'GET';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-        // header params
-        if ($space !== null) {
-            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
-        }
-
-        // path params
-        if ($user_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'userId' . '}',
-                ObjectSerializer::toPathValue($user_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        $query = ObjectSerializer::buildQuery($queryParams);
-
-        $auth_headers = [];
-        // this endpoint requires Bearer (JWT) authentication (access token)
-        foreach ($this->authentications as $auth) {
-            $auth_headers = $auth->generateAuthParams($resourcePath, $httpMethod, $query);
-        }
-
-        $defaultHeaders = $this->config->getDefaultHeaders();
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $auth_headers,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        return new Request(
-            $httpMethod,
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation postHumanUsersUserIdAccountRoles
-     *
-     * Assign a role to a human user for an account
-     *
-     * @param int $user_id user_id (required)
-     * @param int $role_id role_id (required)
-     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
-     * @param bool|null $applies_on_sub_account Whether the role should be assigned to the user in subaccounts only. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postHumanUsersUserIdAccountRoles'] to see the possible values for this operation
-     *
-     * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return \VRPayment\Sdk\Model\UserAccountRole|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse
-     */
-    public function postHumanUsersUserIdAccountRoles(int $user_id, int $role_id, int $account, ?bool $applies_on_sub_account = null, string $contentType = self::contentTypes['postHumanUsersUserIdAccountRoles'][0])
-    {
-        list($response) = $this->postHumanUsersUserIdAccountRolesWithHttpInfo($user_id, $role_id, $account, $applies_on_sub_account, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation postHumanUsersUserIdAccountRolesWithHttpInfo
-     *
-     * Assign a role to a human user for an account
-     *
-     * @param int $user_id user_id (required)
-     * @param int $role_id role_id (required)
-     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
-     * @param bool|null $applies_on_sub_account Whether the role should be assigned to the user in subaccounts only. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postHumanUsersUserIdAccountRoles'] to see the possible values for this operation
-     *
-     * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of \VRPayment\Sdk\Model\UserAccountRole|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function postHumanUsersUserIdAccountRolesWithHttpInfo(int $user_id, int $role_id, int $account, ?bool $applies_on_sub_account = null, string $contentType = self::contentTypes['postHumanUsersUserIdAccountRoles'][0])
-    {
-        $request = $this->postHumanUsersUserIdAccountRolesRequest($user_id, $role_id, $account, $applies_on_sub_account, $contentType);
-
-        try {
-            $requestTimeout = $this->config->getRequestTimeout();
-            $options = $this->createHttpClientOption($requestTimeout);
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\UserAccountRole',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 409:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            return $this->handleResponseWithDataType(
-                '\VRPayment\Sdk\Model\UserAccountRole',
-                $request,
-                $response,
-            );
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\UserAccountRole',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 400:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 403:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 404:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 406:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 409:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 415:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 422:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                case 429:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-                
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-            }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\VRPayment\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
-            throw $e;
-        }
-    }
-
-    /**
-     * Create request for operation 'postHumanUsersUserIdAccountRoles'
-     *
-     * @param int $user_id user_id (required)
-     * @param int $role_id role_id (required)
-     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
-     * @param bool|null $applies_on_sub_account Whether the role should be assigned to the user in subaccounts only. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postHumanUsersUserIdAccountRoles'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function postHumanUsersUserIdAccountRolesRequest(int $user_id, int $role_id, int $account, ?bool $applies_on_sub_account = null, string $contentType = self::contentTypes['postHumanUsersUserIdAccountRoles'][0])
-    {
-
-        // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $user_id when calling postHumanUsersUserIdAccountRoles'
-            );
-        }
-
-        // verify the required parameter 'role_id' is set
-        if ($role_id === null || (is_array($role_id) && count($role_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $role_id when calling postHumanUsersUserIdAccountRoles'
-            );
-        }
-
-        // verify the required parameter 'account' is set
-        if ($account === null || (is_array($account) && count($account) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $account when calling postHumanUsersUserIdAccountRoles'
-            );
-        }
-
-
-
-        $resourcePath = '/human-users/{userId}/account-roles';
-        $httpMethod = 'POST';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $role_id,
-            'roleId', // param base name
+            $after,
+            'after', // param base name
             'integer', // openApiType
             'form', // style
             true, // explode
-            true // required
+            false // required
         ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $applies_on_sub_account,
-            'appliesOnSubAccount', // param base name
-            'boolean', // openApiType
+            $before,
+            'before', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $expand,
+            'expand', // param base name
+            'array', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $order,
+            'order', // param base name
+            'SortingOrder', // openApiType
             'form', // style
             true, // explode
             false // required
         ) ?? []);
 
         // header params
-        if ($account !== null) {
-            $headerParams['account'] = ObjectSerializer::toHeaderValue($account);
+        if ($space !== null) {
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
+        }
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        $query = ObjectSerializer::buildQuery($queryParams);
+
+        $auth_headers = [];
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        foreach ($this->authentications as $auth) {
+            $auth_headers = $auth->generateAuthParams($resourcePath, $httpMethod, $query);
+        }
+
+        $defaultHeaders = $this->config->getDefaultHeaders();
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $auth_headers,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        return new Request(
+            $httpMethod,
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getPaymentInvoiceReconciliationRecordInvoiceLinksId
+     *
+     * Retrieve an invoice reconciliation record invoice link
+     *
+     * @param int $id id (required)
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param string[]|null $expand expand (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentInvoiceReconciliationRecordInvoiceLinksId'] to see the possible values for this operation
+     *
+     * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \VRPayment\Sdk\Model\InvoiceReconciliationRecordInvoiceLink|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse
+     */
+    public function getPaymentInvoiceReconciliationRecordInvoiceLinksId(int $id, int $space, ?array $expand = null, string $contentType = self::contentTypes['getPaymentInvoiceReconciliationRecordInvoiceLinksId'][0])
+    {
+        list($response) = $this->getPaymentInvoiceReconciliationRecordInvoiceLinksIdWithHttpInfo($id, $space, $expand, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getPaymentInvoiceReconciliationRecordInvoiceLinksIdWithHttpInfo
+     *
+     * Retrieve an invoice reconciliation record invoice link
+     *
+     * @param int $id id (required)
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param string[]|null $expand expand (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentInvoiceReconciliationRecordInvoiceLinksId'] to see the possible values for this operation
+     *
+     * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \VRPayment\Sdk\Model\InvoiceReconciliationRecordInvoiceLink|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getPaymentInvoiceReconciliationRecordInvoiceLinksIdWithHttpInfo(int $id, int $space, ?array $expand = null, string $contentType = self::contentTypes['getPaymentInvoiceReconciliationRecordInvoiceLinksId'][0])
+    {
+        $request = $this->getPaymentInvoiceReconciliationRecordInvoiceLinksIdRequest($id, $space, $expand, $contentType);
+
+        try {
+            $requestTimeout = $this->config->getRequestTimeout();
+            $options = $this->createHttpClientOption($requestTimeout);
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\InvoiceReconciliationRecordInvoiceLink',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 403:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 404:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 406:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 415:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 422:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 429:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                
+                default:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+            }
+
+            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
+                return $this->handleResponseWithDataType(
+                    '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                    $request,
+                    $response,
+                );
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\VRPayment\Sdk\Model\InvoiceReconciliationRecordInvoiceLink',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\InvoiceReconciliationRecordInvoiceLink',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 406:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 415:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                throw $e;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Create request for operation 'getPaymentInvoiceReconciliationRecordInvoiceLinksId'
+     *
+     * @param int $id id (required)
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param string[]|null $expand expand (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentInvoiceReconciliationRecordInvoiceLinksId'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getPaymentInvoiceReconciliationRecordInvoiceLinksIdRequest(int $id, int $space, ?array $expand = null, string $contentType = self::contentTypes['getPaymentInvoiceReconciliationRecordInvoiceLinksId'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling getPaymentInvoiceReconciliationRecordInvoiceLinksId'
+            );
+        }
+
+        // verify the required parameter 'space' is set
+        if ($space === null || (is_array($space) && count($space) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $space when calling getPaymentInvoiceReconciliationRecordInvoiceLinksId'
+            );
+        }
+
+        
+
+        $resourcePath = '/payment/invoice-reconciliation-record-invoice-links/{id}';
+        $httpMethod = 'GET';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $expand,
+            'expand', // param base name
+            'array', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+        // header params
+        if ($space !== null) {
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
         // path params
-        if ($user_id !== null) {
+        if ($id !== null) {
             $resourcePath = str_replace(
-                '{' . 'userId' . '}',
-                ObjectSerializer::toPathValue($user_id),
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
                 $resourcePath
             );
         }
@@ -1850,42 +948,48 @@ class HumanUsersRolesService
     }
 
     /**
-     * Operation postHumanUsersUserIdSpaceRoles
+     * Operation getPaymentInvoiceReconciliationRecordInvoiceLinksSearch
      *
-     * Assign a role to a human user for a space
+     * Search invoice reconciliation record invoice links
      *
-     * @param int $user_id user_id (required)
-     * @param int $role_id role_id (required)
      * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postHumanUsersUserIdSpaceRoles'] to see the possible values for this operation
+     * @param string[]|null $expand expand (optional)
+     * @param int|null $limit A limit on the number of objects to be returned, between 1 and 100. Default is 10. (optional)
+     * @param int|null $offset A cursor for pagination, specifies the number of objects to skip. (optional)
+     * @param string|null $order The fields and order to sort the objects by. (optional)
+     * @param string|null $query The search query to filter the objects by. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentInvoiceReconciliationRecordInvoiceLinksSearch'] to see the possible values for this operation
      *
      * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \VRPayment\Sdk\Model\UserSpaceRole|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse
+     * @return \VRPayment\Sdk\Model\InvoiceReconciliationRecordInvoiceLinkSearchResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse
      */
-    public function postHumanUsersUserIdSpaceRoles(int $user_id, int $role_id, int $space, string $contentType = self::contentTypes['postHumanUsersUserIdSpaceRoles'][0])
+    public function getPaymentInvoiceReconciliationRecordInvoiceLinksSearch(int $space, ?array $expand = null, ?int $limit = null, ?int $offset = null, ?string $order = null, ?string $query = null, string $contentType = self::contentTypes['getPaymentInvoiceReconciliationRecordInvoiceLinksSearch'][0])
     {
-        list($response) = $this->postHumanUsersUserIdSpaceRolesWithHttpInfo($user_id, $role_id, $space, $contentType);
+        list($response) = $this->getPaymentInvoiceReconciliationRecordInvoiceLinksSearchWithHttpInfo($space, $expand, $limit, $offset, $order, $query, $contentType);
         return $response;
     }
 
     /**
-     * Operation postHumanUsersUserIdSpaceRolesWithHttpInfo
+     * Operation getPaymentInvoiceReconciliationRecordInvoiceLinksSearchWithHttpInfo
      *
-     * Assign a role to a human user for a space
+     * Search invoice reconciliation record invoice links
      *
-     * @param int $user_id user_id (required)
-     * @param int $role_id role_id (required)
      * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postHumanUsersUserIdSpaceRoles'] to see the possible values for this operation
+     * @param string[]|null $expand expand (optional)
+     * @param int|null $limit A limit on the number of objects to be returned, between 1 and 100. Default is 10. (optional)
+     * @param int|null $offset A cursor for pagination, specifies the number of objects to skip. (optional)
+     * @param string|null $order The fields and order to sort the objects by. (optional)
+     * @param string|null $query The search query to filter the objects by. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentInvoiceReconciliationRecordInvoiceLinksSearch'] to see the possible values for this operation
      *
      * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \VRPayment\Sdk\Model\UserSpaceRole|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \VRPayment\Sdk\Model\InvoiceReconciliationRecordInvoiceLinkSearchResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function postHumanUsersUserIdSpaceRolesWithHttpInfo(int $user_id, int $role_id, int $space, string $contentType = self::contentTypes['postHumanUsersUserIdSpaceRoles'][0])
+    public function getPaymentInvoiceReconciliationRecordInvoiceLinksSearchWithHttpInfo(int $space, ?array $expand = null, ?int $limit = null, ?int $offset = null, ?string $order = null, ?string $query = null, string $contentType = self::contentTypes['getPaymentInvoiceReconciliationRecordInvoiceLinksSearch'][0])
     {
-        $request = $this->postHumanUsersUserIdSpaceRolesRequest($user_id, $role_id, $space, $contentType);
+        $request = $this->getPaymentInvoiceReconciliationRecordInvoiceLinksSearchRequest($space, $expand, $limit, $offset, $order, $query, $contentType);
 
         try {
             $requestTimeout = $this->config->getRequestTimeout();
@@ -1914,7 +1018,422 @@ class HumanUsersRolesService
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\VRPayment\Sdk\Model\UserSpaceRole',
+                        '\VRPayment\Sdk\Model\InvoiceReconciliationRecordInvoiceLinkSearchResponse',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 403:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 404:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 406:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 415:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 422:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                case 429:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+                
+                default:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $request,
+                        $response,
+                    );
+            }
+
+            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
+                return $this->handleResponseWithDataType(
+                    '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                    $request,
+                    $response,
+                );
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\VRPayment\Sdk\Model\InvoiceReconciliationRecordInvoiceLinkSearchResponse',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\InvoiceReconciliationRecordInvoiceLinkSearchResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 406:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 415:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                throw $e;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Create request for operation 'getPaymentInvoiceReconciliationRecordInvoiceLinksSearch'
+     *
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param string[]|null $expand expand (optional)
+     * @param int|null $limit A limit on the number of objects to be returned, between 1 and 100. Default is 10. (optional)
+     * @param int|null $offset A cursor for pagination, specifies the number of objects to skip. (optional)
+     * @param string|null $order The fields and order to sort the objects by. (optional)
+     * @param string|null $query The search query to filter the objects by. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentInvoiceReconciliationRecordInvoiceLinksSearch'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getPaymentInvoiceReconciliationRecordInvoiceLinksSearchRequest(int $space, ?array $expand = null, ?int $limit = null, ?int $offset = null, ?string $order = null, ?string $query = null, string $contentType = self::contentTypes['getPaymentInvoiceReconciliationRecordInvoiceLinksSearch'][0])
+    {
+
+        // verify the required parameter 'space' is set
+        if ($space === null || (is_array($space) && count($space) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $space when calling getPaymentInvoiceReconciliationRecordInvoiceLinksSearch'
+            );
+        }
+
+        
+        if ($limit !== null && $limit > 100) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling InvoiceReconciliationRecordInvoiceLinksService.getPaymentInvoiceReconciliationRecordInvoiceLinksSearch, must be smaller than or equal to 100.');
+        }
+        if ($limit !== null && $limit < 1) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling InvoiceReconciliationRecordInvoiceLinksService.getPaymentInvoiceReconciliationRecordInvoiceLinksSearch, must be bigger than or equal to 1.');
+        }
+        
+        if ($offset !== null && $offset > 10000) {
+            throw new \InvalidArgumentException('invalid value for "$offset" when calling InvoiceReconciliationRecordInvoiceLinksService.getPaymentInvoiceReconciliationRecordInvoiceLinksSearch, must be smaller than or equal to 10000.');
+        }
+        
+
+
+
+        $resourcePath = '/payment/invoice-reconciliation-record-invoice-links/search';
+        $httpMethod = 'GET';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $expand,
+            'expand', // param base name
+            'array', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $offset,
+            'offset', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $order,
+            'order', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $query,
+            'query', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+        // header params
+        if ($space !== null) {
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
+        }
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        $query = ObjectSerializer::buildQuery($queryParams);
+
+        $auth_headers = [];
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        foreach ($this->authentications as $auth) {
+            $auth_headers = $auth->generateAuthParams($resourcePath, $httpMethod, $query);
+        }
+
+        $defaultHeaders = $this->config->getDefaultHeaders();
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $auth_headers,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        return new Request(
+            $httpMethod,
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation postPaymentInvoiceReconciliationRecordInvoiceLinks
+     *
+     * Link an invoice
+     *
+     * @param int $record_id The ID of the invoice reconciliation record which should be linked. (required)
+     * @param int $completion_id The ID of the completion which should be linked. (required)
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param float|null $amount The amount of the invoice reconciliation record linked completion. When omitted the amount is calculated. (optional)
+     * @param string[]|null $expand expand (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentInvoiceReconciliationRecordInvoiceLinks'] to see the possible values for this operation
+     *
+     * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \VRPayment\Sdk\Model\InvoiceReconciliationRecordInvoiceLink|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse
+     */
+    public function postPaymentInvoiceReconciliationRecordInvoiceLinks(int $record_id, int $completion_id, int $space, ?float $amount = null, ?array $expand = null, string $contentType = self::contentTypes['postPaymentInvoiceReconciliationRecordInvoiceLinks'][0])
+    {
+        list($response) = $this->postPaymentInvoiceReconciliationRecordInvoiceLinksWithHttpInfo($record_id, $completion_id, $space, $amount, $expand, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation postPaymentInvoiceReconciliationRecordInvoiceLinksWithHttpInfo
+     *
+     * Link an invoice
+     *
+     * @param int $record_id The ID of the invoice reconciliation record which should be linked. (required)
+     * @param int $completion_id The ID of the completion which should be linked. (required)
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param float|null $amount The amount of the invoice reconciliation record linked completion. When omitted the amount is calculated. (optional)
+     * @param string[]|null $expand expand (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentInvoiceReconciliationRecordInvoiceLinks'] to see the possible values for this operation
+     *
+     * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \VRPayment\Sdk\Model\InvoiceReconciliationRecordInvoiceLink|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse|\VRPayment\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function postPaymentInvoiceReconciliationRecordInvoiceLinksWithHttpInfo(int $record_id, int $completion_id, int $space, ?float $amount = null, ?array $expand = null, string $contentType = self::contentTypes['postPaymentInvoiceReconciliationRecordInvoiceLinks'][0])
+    {
+        $request = $this->postPaymentInvoiceReconciliationRecordInvoiceLinksRequest($record_id, $completion_id, $space, $amount, $expand, $contentType);
+
+        try {
+            $requestTimeout = $this->config->getRequestTimeout();
+            $options = $this->createHttpClientOption($requestTimeout);
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 201:
+                    return $this->handleResponseWithDataType(
+                        '\VRPayment\Sdk\Model\InvoiceReconciliationRecordInvoiceLink',
                         $request,
                         $response,
                     );
@@ -2003,16 +1522,16 @@ class HumanUsersRolesService
             }
 
             return $this->handleResponseWithDataType(
-                '\VRPayment\Sdk\Model\UserSpaceRole',
+                '\VRPayment\Sdk\Model\InvoiceReconciliationRecordInvoiceLink',
                 $request,
                 $response,
             );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
+                case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\VRPayment\Sdk\Model\UserSpaceRole',
+                        '\VRPayment\Sdk\Model\InvoiceReconciliationRecordInvoiceLink',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2115,42 +1634,46 @@ class HumanUsersRolesService
     }
 
     /**
-     * Create request for operation 'postHumanUsersUserIdSpaceRoles'
+     * Create request for operation 'postPaymentInvoiceReconciliationRecordInvoiceLinks'
      *
-     * @param int $user_id user_id (required)
-     * @param int $role_id role_id (required)
+     * @param int $record_id The ID of the invoice reconciliation record which should be linked. (required)
+     * @param int $completion_id The ID of the completion which should be linked. (required)
      * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postHumanUsersUserIdSpaceRoles'] to see the possible values for this operation
+     * @param float|null $amount The amount of the invoice reconciliation record linked completion. When omitted the amount is calculated. (optional)
+     * @param string[]|null $expand expand (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentInvoiceReconciliationRecordInvoiceLinks'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function postHumanUsersUserIdSpaceRolesRequest(int $user_id, int $role_id, int $space, string $contentType = self::contentTypes['postHumanUsersUserIdSpaceRoles'][0])
+    public function postPaymentInvoiceReconciliationRecordInvoiceLinksRequest(int $record_id, int $completion_id, int $space, ?float $amount = null, ?array $expand = null, string $contentType = self::contentTypes['postPaymentInvoiceReconciliationRecordInvoiceLinks'][0])
     {
 
-        // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+        // verify the required parameter 'record_id' is set
+        if ($record_id === null || (is_array($record_id) && count($record_id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $user_id when calling postHumanUsersUserIdSpaceRoles'
+                'Missing the required parameter $record_id when calling postPaymentInvoiceReconciliationRecordInvoiceLinks'
             );
         }
 
-        // verify the required parameter 'role_id' is set
-        if ($role_id === null || (is_array($role_id) && count($role_id) === 0)) {
+        // verify the required parameter 'completion_id' is set
+        if ($completion_id === null || (is_array($completion_id) && count($completion_id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $role_id when calling postHumanUsersUserIdSpaceRoles'
+                'Missing the required parameter $completion_id when calling postPaymentInvoiceReconciliationRecordInvoiceLinks'
             );
         }
 
         // verify the required parameter 'space' is set
         if ($space === null || (is_array($space) && count($space) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $space when calling postHumanUsersUserIdSpaceRoles'
+                'Missing the required parameter $space when calling postPaymentInvoiceReconciliationRecordInvoiceLinks'
             );
         }
 
 
-        $resourcePath = '/human-users/{userId}/space-roles';
+        
+
+        $resourcePath = '/payment/invoice-reconciliation-record-invoice-links';
         $httpMethod = 'POST';
         $formParams = [];
         $queryParams = [];
@@ -2160,8 +1683,326 @@ class HumanUsersRolesService
 
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $role_id,
-            'roleId', // param base name
+            $record_id,
+            'recordId', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            true // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $completion_id,
+            'completionId', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            true // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $amount,
+            'amount', // param base name
+            'number', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $expand,
+            'expand', // param base name
+            'array', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+        // header params
+        if ($space !== null) {
+            $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
+        }
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        $query = ObjectSerializer::buildQuery($queryParams);
+
+        $auth_headers = [];
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        foreach ($this->authentications as $auth) {
+            $auth_headers = $auth->generateAuthParams($resourcePath, $httpMethod, $query);
+        }
+
+        $defaultHeaders = $this->config->getDefaultHeaders();
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $auth_headers,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        return new Request(
+            $httpMethod,
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation postPaymentInvoiceReconciliationRecordInvoiceLinksUnlink
+     *
+     * Unlink an invoice
+     *
+     * @param int $record_id The ID of the invoice reconciliation record which should be unlinked. (required)
+     * @param int $completion_id The ID of the completion which should be unlinked. (required)
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentInvoiceReconciliationRecordInvoiceLinksUnlink'] to see the possible values for this operation
+     *
+     * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return void
+     */
+    public function postPaymentInvoiceReconciliationRecordInvoiceLinksUnlink(int $record_id, int $completion_id, int $space, string $contentType = self::contentTypes['postPaymentInvoiceReconciliationRecordInvoiceLinksUnlink'][0])
+    {
+        $this->postPaymentInvoiceReconciliationRecordInvoiceLinksUnlinkWithHttpInfo($record_id, $completion_id, $space, $contentType);
+    }
+
+    /**
+     * Operation postPaymentInvoiceReconciliationRecordInvoiceLinksUnlinkWithHttpInfo
+     *
+     * Unlink an invoice
+     *
+     * @param int $record_id The ID of the invoice reconciliation record which should be unlinked. (required)
+     * @param int $completion_id The ID of the completion which should be unlinked. (required)
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentInvoiceReconciliationRecordInvoiceLinksUnlink'] to see the possible values for this operation
+     *
+     * @throws \VRPayment\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function postPaymentInvoiceReconciliationRecordInvoiceLinksUnlinkWithHttpInfo(int $record_id, int $completion_id, int $space, string $contentType = self::contentTypes['postPaymentInvoiceReconciliationRecordInvoiceLinksUnlink'][0])
+    {
+        $request = $this->postPaymentInvoiceReconciliationRecordInvoiceLinksUnlinkRequest($record_id, $completion_id, $space, $contentType);
+
+        try {
+            $requestTimeout = $this->config->getRequestTimeout();
+            $options = $this->createHttpClientOption($requestTimeout);
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            return [null, $statusCode, $response->getHeaders()];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 406:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 409:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 415:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\VRPayment\Sdk\Model\RestApiErrorResponse',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                throw $e;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Create request for operation 'postPaymentInvoiceReconciliationRecordInvoiceLinksUnlink'
+     *
+     * @param int $record_id The ID of the invoice reconciliation record which should be unlinked. (required)
+     * @param int $completion_id The ID of the completion which should be unlinked. (required)
+     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentInvoiceReconciliationRecordInvoiceLinksUnlink'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function postPaymentInvoiceReconciliationRecordInvoiceLinksUnlinkRequest(int $record_id, int $completion_id, int $space, string $contentType = self::contentTypes['postPaymentInvoiceReconciliationRecordInvoiceLinksUnlink'][0])
+    {
+
+        // verify the required parameter 'record_id' is set
+        if ($record_id === null || (is_array($record_id) && count($record_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $record_id when calling postPaymentInvoiceReconciliationRecordInvoiceLinksUnlink'
+            );
+        }
+
+        // verify the required parameter 'completion_id' is set
+        if ($completion_id === null || (is_array($completion_id) && count($completion_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $completion_id when calling postPaymentInvoiceReconciliationRecordInvoiceLinksUnlink'
+            );
+        }
+
+        // verify the required parameter 'space' is set
+        if ($space === null || (is_array($space) && count($space) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $space when calling postPaymentInvoiceReconciliationRecordInvoiceLinksUnlink'
+            );
+        }
+
+
+        $resourcePath = '/payment/invoice-reconciliation-record-invoice-links/unlink';
+        $httpMethod = 'POST';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $record_id,
+            'recordId', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            true // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $completion_id,
+            'completionId', // param base name
             'integer', // openApiType
             'form', // style
             true, // explode
@@ -2173,14 +2014,6 @@ class HumanUsersRolesService
             $headerParams['space'] = ObjectSerializer::toHeaderValue($space);
         }
 
-        // path params
-        if ($user_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'userId' . '}',
-                ObjectSerializer::toPathValue($user_id),
-                $resourcePath
-            );
-        }
 
 
         $headers = $this->headerSelector->selectHeaders(

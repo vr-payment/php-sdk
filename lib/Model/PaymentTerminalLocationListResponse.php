@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \VRPayment\Sdk\ObjectSerializer;
 
 /**
- * PaymentTerminalPreparing model
+ * PaymentTerminalLocationListResponse model
  *
  * @category Class
  * @package     VRPayment\Sdk
@@ -35,10 +35,10 @@ use \VRPayment\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.2
+ * @version     5.2.3
  * @implements \ArrayAccess<string, mixed>
  */
-class PaymentTerminalPreparing implements ModelInterface, ArrayAccess, \JsonSerializable
+class PaymentTerminalLocationListResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class PaymentTerminalPreparing implements ModelInterface, ArrayAccess, \JsonSeri
       *
       * @var string
       */
-    protected static $openAPIModelName = 'PaymentTerminal.Preparing';
+    protected static $openAPIModelName = 'Payment_Terminal_Location_List_Response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,9 +55,9 @@ class PaymentTerminalPreparing implements ModelInterface, ArrayAccess, \JsonSeri
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'version' => 'int',
-        'external_id' => 'string'
+        'data' => '\VRPayment\Sdk\Model\PaymentTerminalLocationCrudModel[]',
+        'has_more' => 'bool',
+        'limit' => 'int'
     ];
 
     /**
@@ -68,9 +68,9 @@ class PaymentTerminalPreparing implements ModelInterface, ArrayAccess, \JsonSeri
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'name' => null,
-        'version' => 'int32',
-        'external_id' => null
+        'data' => null,
+        'has_more' => null,
+        'limit' => 'int32'
     ];
 
     /**
@@ -79,9 +79,9 @@ class PaymentTerminalPreparing implements ModelInterface, ArrayAccess, \JsonSeri
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'name' => false,
-        'version' => false,
-        'external_id' => false
+        'data' => false,
+        'has_more' => false,
+        'limit' => false
     ];
 
     /**
@@ -170,9 +170,9 @@ class PaymentTerminalPreparing implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'version' => 'version',
-        'external_id' => 'externalId'
+        'data' => 'data',
+        'has_more' => 'hasMore',
+        'limit' => 'limit'
     ];
 
     /**
@@ -181,9 +181,9 @@ class PaymentTerminalPreparing implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'version' => 'setVersion',
-        'external_id' => 'setExternalId'
+        'data' => 'setData',
+        'has_more' => 'setHasMore',
+        'limit' => 'setLimit'
     ];
 
     /**
@@ -192,9 +192,9 @@ class PaymentTerminalPreparing implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'version' => 'getVersion',
-        'external_id' => 'getExternalId'
+        'data' => 'getData',
+        'has_more' => 'getHasMore',
+        'limit' => 'getLimit'
     ];
 
     /**
@@ -254,9 +254,9 @@ class PaymentTerminalPreparing implements ModelInterface, ArrayAccess, \JsonSeri
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('version', $data ?? [], null);
-        $this->setIfExists('external_id', $data ?? [], null);
+        $this->setIfExists('data', $data ?? [], null);
+        $this->setIfExists('has_more', $data ?? [], null);
+        $this->setIfExists('limit', $data ?? [], null);
     }
 
     /**
@@ -286,13 +286,6 @@ class PaymentTerminalPreparing implements ModelInterface, ArrayAccess, \JsonSeri
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 100)) {
-            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 100.";
-        }
-
-        if ($this->container['version'] === null) {
-            $invalidProperties[] = "'version' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -309,86 +302,82 @@ class PaymentTerminalPreparing implements ModelInterface, ArrayAccess, \JsonSeri
 
 
     /**
-     * Gets name
+     * Gets data
      *
-     * @return string|null
+     * @return \VRPayment\Sdk\Model\PaymentTerminalLocationCrudModel[]|null
      */
-    public function getName()
+    public function getData()
     {
-        return $this->container['name'];
+        return $this->container['data'];
     }
 
     /**
-     * Sets name
+     * Sets data
      *
-     * @param string|null $name The name used to identify the payment terminal.
+     * @param \VRPayment\Sdk\Model\PaymentTerminalLocationCrudModel[]|null $data An array containing the actual response objects.
      *
      * @return self
      */
-    public function setName($name)
+    public function setData($data)
     {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($data)) {
+            throw new \InvalidArgumentException('non-nullable data cannot be null');
         }
-        if ((mb_strlen($name) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $name when calling PaymentTerminalPreparing., must be smaller than or equal to 100.');
-        }
-
-        $this->container['name'] = $name;
+        $this->container['data'] = $data;
 
         return $this;
     }
 
     /**
-     * Gets version
+     * Gets has_more
      *
-     * @return int
+     * @return bool|null
      */
-    public function getVersion()
+    public function getHasMore()
     {
-        return $this->container['version'];
+        return $this->container['has_more'];
     }
 
     /**
-     * Sets version
+     * Sets has_more
      *
-     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+     * @param bool|null $has_more Whether there are more objects available after this set. If false, there are no more objects to retrieve.
      *
      * @return self
      */
-    public function setVersion($version)
+    public function setHasMore($has_more)
     {
-        if (is_null($version)) {
-            throw new \InvalidArgumentException('non-nullable version cannot be null');
+        if (is_null($has_more)) {
+            throw new \InvalidArgumentException('non-nullable has_more cannot be null');
         }
-        $this->container['version'] = $version;
+        $this->container['has_more'] = $has_more;
 
         return $this;
     }
 
     /**
-     * Gets external_id
+     * Gets limit
      *
-     * @return string|null
+     * @return int|null
      */
-    public function getExternalId()
+    public function getLimit()
     {
-        return $this->container['external_id'];
+        return $this->container['limit'];
     }
 
     /**
-     * Sets external_id
+     * Sets limit
      *
-     * @param string|null $external_id A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
+     * @param int|null $limit The applied limit on the number of objects returned.
      *
      * @return self
      */
-    public function setExternalId($external_id)
+    public function setLimit($limit)
     {
-        if (is_null($external_id)) {
-            throw new \InvalidArgumentException('non-nullable external_id cannot be null');
+        if (is_null($limit)) {
+            throw new \InvalidArgumentException('non-nullable limit cannot be null');
         }
-        $this->container['external_id'] = $external_id;
+        $this->container['limit'] = $limit;
 
         return $this;
     }

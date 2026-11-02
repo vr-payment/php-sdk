@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \VRPayment\Sdk\ObjectSerializer;
 
 /**
- * WalleeJoinPartnershipSearchResponse model
+ * InvoiceReimbursementSearchResponse model
  *
  * @category Class
  * @package     VRPayment\Sdk
@@ -35,10 +35,10 @@ use \VRPayment\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.2
+ * @version     5.2.3
  * @implements \ArrayAccess<string, mixed>
  */
-class WalleeJoinPartnershipSearchResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class InvoiceReimbursementSearchResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class WalleeJoinPartnershipSearchResponse implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Wallee_Join_Partnership_Search_Response';
+    protected static $openAPIModelName = 'Invoice_Reimbursement_Search_Response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,7 +55,7 @@ class WalleeJoinPartnershipSearchResponse implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'data' => '\VRPayment\Sdk\Model\WalleejoinPartnership[]',
+        'data' => '\VRPayment\Sdk\Model\InvoiceReimbursement[]',
         'offset' => 'int',
         'has_more' => 'bool',
         'limit' => 'int'
@@ -311,7 +311,7 @@ class WalleeJoinPartnershipSearchResponse implements ModelInterface, ArrayAccess
     /**
      * Gets data
      *
-     * @return \VRPayment\Sdk\Model\WalleejoinPartnership[]|null
+     * @return \VRPayment\Sdk\Model\InvoiceReimbursement[]|null
      */
     public function getData()
     {
@@ -321,7 +321,7 @@ class WalleeJoinPartnershipSearchResponse implements ModelInterface, ArrayAccess
     /**
      * Sets data
      *
-     * @param \VRPayment\Sdk\Model\WalleejoinPartnership[]|null $data An array containing the actual response objects.
+     * @param \VRPayment\Sdk\Model\InvoiceReimbursement[]|null $data An array containing the actual response objects.
      *
      * @return self
      */

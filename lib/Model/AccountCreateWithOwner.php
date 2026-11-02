@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \VRPayment\Sdk\ObjectSerializer;
 
 /**
- * AbstractPaymentTerminalUpdate model
+ * AccountCreateWithOwner model
  *
  * @category Class
  * @package     VRPayment\Sdk
@@ -35,10 +35,10 @@ use \VRPayment\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.2
+ * @version     5.2.3
  * @implements \ArrayAccess<string, mixed>
  */
-class AbstractPaymentTerminalUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
+class AccountCreateWithOwner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class AbstractPaymentTerminalUpdate implements ModelInterface, ArrayAccess, \Jso
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Abstract.PaymentTerminal.Update';
+    protected static $openAPIModelName = 'Account.CreateWithOwner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,7 +55,11 @@ class AbstractPaymentTerminalUpdate implements ModelInterface, ArrayAccess, \Jso
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'string'
+        'name' => 'string',
+        'subaccount_limit' => 'int',
+        'scope' => 'int',
+        'parent_account' => 'int',
+        'owner_email_address' => 'string'
     ];
 
     /**
@@ -66,7 +70,11 @@ class AbstractPaymentTerminalUpdate implements ModelInterface, ArrayAccess, \Jso
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'name' => null
+        'name' => null,
+        'subaccount_limit' => 'int64',
+        'scope' => 'int64',
+        'parent_account' => 'int64',
+        'owner_email_address' => null
     ];
 
     /**
@@ -75,7 +83,11 @@ class AbstractPaymentTerminalUpdate implements ModelInterface, ArrayAccess, \Jso
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'name' => false
+        'name' => false,
+        'subaccount_limit' => false,
+        'scope' => false,
+        'parent_account' => false,
+        'owner_email_address' => false
     ];
 
     /**
@@ -164,7 +176,11 @@ class AbstractPaymentTerminalUpdate implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name'
+        'name' => 'name',
+        'subaccount_limit' => 'subaccountLimit',
+        'scope' => 'scope',
+        'parent_account' => 'parentAccount',
+        'owner_email_address' => 'ownerEmailAddress'
     ];
 
     /**
@@ -173,7 +189,11 @@ class AbstractPaymentTerminalUpdate implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName'
+        'name' => 'setName',
+        'subaccount_limit' => 'setSubaccountLimit',
+        'scope' => 'setScope',
+        'parent_account' => 'setParentAccount',
+        'owner_email_address' => 'setOwnerEmailAddress'
     ];
 
     /**
@@ -182,7 +202,11 @@ class AbstractPaymentTerminalUpdate implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName'
+        'name' => 'getName',
+        'subaccount_limit' => 'getSubaccountLimit',
+        'scope' => 'getScope',
+        'parent_account' => 'getParentAccount',
+        'owner_email_address' => 'getOwnerEmailAddress'
     ];
 
     /**
@@ -243,6 +267,10 @@ class AbstractPaymentTerminalUpdate implements ModelInterface, ArrayAccess, \Jso
     public function __construct(?array $data = null)
     {
         $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('subaccount_limit', $data ?? [], null);
+        $this->setIfExists('scope', $data ?? [], null);
+        $this->setIfExists('parent_account', $data ?? [], null);
+        $this->setIfExists('owner_email_address', $data ?? [], null);
     }
 
     /**
@@ -272,10 +300,17 @@ class AbstractPaymentTerminalUpdate implements ModelInterface, ArrayAccess, \Jso
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 100)) {
-            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 100.";
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 200)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 200.";
         }
 
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) < 3)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be bigger than or equal to 3.";
+        }
+
+        if ($this->container['scope'] === null) {
+            $invalidProperties[] = "'scope' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -304,7 +339,7 @@ class AbstractPaymentTerminalUpdate implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets name
      *
-     * @param string|null $name The name used to identify the payment terminal.
+     * @param string|null $name The name used to identify the account.
      *
      * @return self
      */
@@ -313,11 +348,122 @@ class AbstractPaymentTerminalUpdate implements ModelInterface, ArrayAccess, \Jso
         if (is_null($name)) {
             throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        if ((mb_strlen($name) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $name when calling AbstractPaymentTerminalUpdate., must be smaller than or equal to 100.');
+        if ((mb_strlen($name) > 200)) {
+            throw new \InvalidArgumentException('invalid length for $name when calling AccountCreateWithOwner., must be smaller than or equal to 200.');
+        }
+        if ((mb_strlen($name) < 3)) {
+            throw new \InvalidArgumentException('invalid length for $name when calling AccountCreateWithOwner., must be bigger than or equal to 3.');
         }
 
         $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets subaccount_limit
+     *
+     * @return int|null
+     */
+    public function getSubaccountLimit()
+    {
+        return $this->container['subaccount_limit'];
+    }
+
+    /**
+     * Sets subaccount_limit
+     *
+     * @param int|null $subaccount_limit The number of sub-accounts that can be created within this account.
+     *
+     * @return self
+     */
+    public function setSubaccountLimit($subaccount_limit)
+    {
+        if (is_null($subaccount_limit)) {
+            throw new \InvalidArgumentException('non-nullable subaccount_limit cannot be null');
+        }
+        $this->container['subaccount_limit'] = $subaccount_limit;
+
+        return $this;
+    }
+
+    /**
+     * Gets scope
+     *
+     * @return int
+     */
+    public function getScope()
+    {
+        return $this->container['scope'];
+    }
+
+    /**
+     * Sets scope
+     *
+     * @param int $scope The scope that the account belongs to.
+     *
+     * @return self
+     */
+    public function setScope($scope)
+    {
+        if (is_null($scope)) {
+            throw new \InvalidArgumentException('non-nullable scope cannot be null');
+        }
+        $this->container['scope'] = $scope;
+
+        return $this;
+    }
+
+    /**
+     * Gets parent_account
+     *
+     * @return int|null
+     */
+    public function getParentAccount()
+    {
+        return $this->container['parent_account'];
+    }
+
+    /**
+     * Sets parent_account
+     *
+     * @param int|null $parent_account The parent account responsible for administering this account.
+     *
+     * @return self
+     */
+    public function setParentAccount($parent_account)
+    {
+        if (is_null($parent_account)) {
+            throw new \InvalidArgumentException('non-nullable parent_account cannot be null');
+        }
+        $this->container['parent_account'] = $parent_account;
+
+        return $this;
+    }
+
+    /**
+     * Gets owner_email_address
+     *
+     * @return string|null
+     */
+    public function getOwnerEmailAddress()
+    {
+        return $this->container['owner_email_address'];
+    }
+
+    /**
+     * Sets owner_email_address
+     *
+     * @param string|null $owner_email_address The email address for the person who will be invited to assume the role of account admin.
+     *
+     * @return self
+     */
+    public function setOwnerEmailAddress($owner_email_address)
+    {
+        if (is_null($owner_email_address)) {
+            throw new \InvalidArgumentException('non-nullable owner_email_address cannot be null');
+        }
+        $this->container['owner_email_address'] = $owner_email_address;
 
         return $this;
     }

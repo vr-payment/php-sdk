@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \VRPayment\Sdk\ObjectSerializer;
 
 /**
- * WalleeJoinPartnershipListResponse model
+ * WalleejoinPartnershipResponseDtoSearchResponse model
  *
  * @category Class
  * @package     VRPayment\Sdk
@@ -35,10 +35,10 @@ use \VRPayment\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.2
+ * @version     5.2.3
  * @implements \ArrayAccess<string, mixed>
  */
-class WalleeJoinPartnershipListResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class WalleejoinPartnershipResponseDtoSearchResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class WalleeJoinPartnershipListResponse implements ModelInterface, ArrayAccess, 
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Wallee_Join_Partnership_List_Response';
+    protected static $openAPIModelName = 'Walleejoin_Partnership_Response_Dto_Search_Response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,7 +55,8 @@ class WalleeJoinPartnershipListResponse implements ModelInterface, ArrayAccess, 
       * @var string[]
       */
     protected static $openAPITypes = [
-        'data' => '\VRPayment\Sdk\Model\WalleejoinPartnership[]',
+        'data' => '\VRPayment\Sdk\Model\WalleejoinPartnershipResponseDto[]',
+        'offset' => 'int',
         'has_more' => 'bool',
         'limit' => 'int'
     ];
@@ -69,6 +70,7 @@ class WalleeJoinPartnershipListResponse implements ModelInterface, ArrayAccess, 
       */
     protected static $openAPIFormats = [
         'data' => null,
+        'offset' => 'int32',
         'has_more' => null,
         'limit' => 'int32'
     ];
@@ -80,6 +82,7 @@ class WalleeJoinPartnershipListResponse implements ModelInterface, ArrayAccess, 
       */
     protected static array $openAPINullables = [
         'data' => false,
+        'offset' => false,
         'has_more' => false,
         'limit' => false
     ];
@@ -171,6 +174,7 @@ class WalleeJoinPartnershipListResponse implements ModelInterface, ArrayAccess, 
      */
     protected static $attributeMap = [
         'data' => 'data',
+        'offset' => 'offset',
         'has_more' => 'hasMore',
         'limit' => 'limit'
     ];
@@ -182,6 +186,7 @@ class WalleeJoinPartnershipListResponse implements ModelInterface, ArrayAccess, 
      */
     protected static $setters = [
         'data' => 'setData',
+        'offset' => 'setOffset',
         'has_more' => 'setHasMore',
         'limit' => 'setLimit'
     ];
@@ -193,6 +198,7 @@ class WalleeJoinPartnershipListResponse implements ModelInterface, ArrayAccess, 
      */
     protected static $getters = [
         'data' => 'getData',
+        'offset' => 'getOffset',
         'has_more' => 'getHasMore',
         'limit' => 'getLimit'
     ];
@@ -255,6 +261,7 @@ class WalleeJoinPartnershipListResponse implements ModelInterface, ArrayAccess, 
     public function __construct(?array $data = null)
     {
         $this->setIfExists('data', $data ?? [], null);
+        $this->setIfExists('offset', $data ?? [], null);
         $this->setIfExists('has_more', $data ?? [], null);
         $this->setIfExists('limit', $data ?? [], null);
     }
@@ -304,7 +311,7 @@ class WalleeJoinPartnershipListResponse implements ModelInterface, ArrayAccess, 
     /**
      * Gets data
      *
-     * @return \VRPayment\Sdk\Model\WalleejoinPartnership[]|null
+     * @return \VRPayment\Sdk\Model\WalleejoinPartnershipResponseDto[]|null
      */
     public function getData()
     {
@@ -314,7 +321,7 @@ class WalleeJoinPartnershipListResponse implements ModelInterface, ArrayAccess, 
     /**
      * Sets data
      *
-     * @param \VRPayment\Sdk\Model\WalleejoinPartnership[]|null $data An array containing the actual response objects.
+     * @param \VRPayment\Sdk\Model\WalleejoinPartnershipResponseDto[]|null $data An array containing the actual response objects.
      *
      * @return self
      */
@@ -324,6 +331,33 @@ class WalleeJoinPartnershipListResponse implements ModelInterface, ArrayAccess, 
             throw new \InvalidArgumentException('non-nullable data cannot be null');
         }
         $this->container['data'] = $data;
+
+        return $this;
+    }
+
+    /**
+     * Gets offset
+     *
+     * @return int|null
+     */
+    public function getOffset()
+    {
+        return $this->container['offset'];
+    }
+
+    /**
+     * Sets offset
+     *
+     * @param int|null $offset The number of skipped objects.
+     *
+     * @return self
+     */
+    public function setOffset($offset)
+    {
+        if (is_null($offset)) {
+            throw new \InvalidArgumentException('non-nullable offset cannot be null');
+        }
+        $this->container['offset'] = $offset;
 
         return $this;
     }

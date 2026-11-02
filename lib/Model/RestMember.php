@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \VRPayment\Sdk\ObjectSerializer;
 
 /**
- * UserAccountRoleListResponse model
+ * RestMember model
  *
  * @category Class
  * @package     VRPayment\Sdk
@@ -35,10 +35,10 @@ use \VRPayment\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.2
+ * @version     5.2.3
  * @implements \ArrayAccess<string, mixed>
  */
-class UserAccountRoleListResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class RestMember implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class UserAccountRoleListResponse implements ModelInterface, ArrayAccess, \JsonS
       *
       * @var string
       */
-    protected static $openAPIModelName = 'User_Account_Role_List_Response';
+    protected static $openAPIModelName = 'RestMember';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,9 +55,10 @@ class UserAccountRoleListResponse implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
-        'data' => '\VRPayment\Sdk\Model\UserAccountRole[]',
-        'has_more' => 'bool',
-        'limit' => 'int'
+        'roles' => '\VRPayment\Sdk\Model\RoleRef[]',
+        'name' => 'string',
+        'id' => 'int',
+        'user_type' => '\VRPayment\Sdk\Model\UserType'
     ];
 
     /**
@@ -68,9 +69,10 @@ class UserAccountRoleListResponse implements ModelInterface, ArrayAccess, \JsonS
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'data' => null,
-        'has_more' => null,
-        'limit' => 'int32'
+        'roles' => null,
+        'name' => null,
+        'id' => 'int64',
+        'user_type' => null
     ];
 
     /**
@@ -79,9 +81,10 @@ class UserAccountRoleListResponse implements ModelInterface, ArrayAccess, \JsonS
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'data' => false,
-        'has_more' => false,
-        'limit' => false
+        'roles' => false,
+        'name' => false,
+        'id' => false,
+        'user_type' => false
     ];
 
     /**
@@ -170,9 +173,10 @@ class UserAccountRoleListResponse implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
-        'data' => 'data',
-        'has_more' => 'hasMore',
-        'limit' => 'limit'
+        'roles' => 'roles',
+        'name' => 'name',
+        'id' => 'id',
+        'user_type' => 'userType'
     ];
 
     /**
@@ -181,9 +185,10 @@ class UserAccountRoleListResponse implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
-        'data' => 'setData',
-        'has_more' => 'setHasMore',
-        'limit' => 'setLimit'
+        'roles' => 'setRoles',
+        'name' => 'setName',
+        'id' => 'setId',
+        'user_type' => 'setUserType'
     ];
 
     /**
@@ -192,9 +197,10 @@ class UserAccountRoleListResponse implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
-        'data' => 'getData',
-        'has_more' => 'getHasMore',
-        'limit' => 'getLimit'
+        'roles' => 'getRoles',
+        'name' => 'getName',
+        'id' => 'getId',
+        'user_type' => 'getUserType'
     ];
 
     /**
@@ -254,9 +260,10 @@ class UserAccountRoleListResponse implements ModelInterface, ArrayAccess, \JsonS
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('data', $data ?? [], null);
-        $this->setIfExists('has_more', $data ?? [], null);
-        $this->setIfExists('limit', $data ?? [], null);
+        $this->setIfExists('roles', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('user_type', $data ?? [], null);
     }
 
     /**
@@ -302,82 +309,109 @@ class UserAccountRoleListResponse implements ModelInterface, ArrayAccess, \JsonS
 
 
     /**
-     * Gets data
+     * Gets roles
      *
-     * @return \VRPayment\Sdk\Model\UserAccountRole[]|null
+     * @return \VRPayment\Sdk\Model\RoleRef[]|null
      */
-    public function getData()
+    public function getRoles()
     {
-        return $this->container['data'];
+        return $this->container['roles'];
     }
 
     /**
-     * Sets data
+     * Sets roles
      *
-     * @param \VRPayment\Sdk\Model\UserAccountRole[]|null $data An array containing the actual response objects.
+     * @param \VRPayment\Sdk\Model\RoleRef[]|null $roles The roles the user holds.
      *
      * @return self
      */
-    public function setData($data)
+    public function setRoles($roles)
     {
-        if (is_null($data)) {
-            throw new \InvalidArgumentException('non-nullable data cannot be null');
+        if (is_null($roles)) {
+            throw new \InvalidArgumentException('non-nullable roles cannot be null');
         }
-        $this->container['data'] = $data;
+        $this->container['roles'] = $roles;
 
         return $this;
     }
 
     /**
-     * Gets has_more
+     * Gets name
      *
-     * @return bool|null
+     * @return string|null
      */
-    public function getHasMore()
+    public function getName()
     {
-        return $this->container['has_more'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets has_more
+     * Sets name
      *
-     * @param bool|null $has_more Whether there are more objects available after this set. If false, there are no more objects to retrieve.
+     * @param string|null $name The name used to identify the user.
      *
      * @return self
      */
-    public function setHasMore($has_more)
+    public function setName($name)
     {
-        if (is_null($has_more)) {
-            throw new \InvalidArgumentException('non-nullable has_more cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        $this->container['has_more'] = $has_more;
+        $this->container['name'] = $name;
 
         return $this;
     }
 
     /**
-     * Gets limit
+     * Gets id
      *
      * @return int|null
      */
-    public function getLimit()
+    public function getId()
     {
-        return $this->container['limit'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets limit
+     * Sets id
      *
-     * @param int|null $limit The applied limit on the number of objects returned.
+     * @param int|null $id A unique identifier for the object.
      *
      * @return self
      */
-    public function setLimit($limit)
+    public function setId($id)
     {
-        if (is_null($limit)) {
-            throw new \InvalidArgumentException('non-nullable limit cannot be null');
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
-        $this->container['limit'] = $limit;
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets user_type
+     *
+     * @return \VRPayment\Sdk\Model\UserType|null
+     */
+    public function getUserType()
+    {
+        return $this->container['user_type'];
+    }
+
+    /**
+     * Sets user_type
+     *
+     * @param \VRPayment\Sdk\Model\UserType|null $user_type user_type
+     *
+     * @return self
+     */
+    public function setUserType($user_type)
+    {
+        if (is_null($user_type)) {
+            throw new \InvalidArgumentException('non-nullable user_type cannot be null');
+        }
+        $this->container['user_type'] = $user_type;
 
         return $this;
     }

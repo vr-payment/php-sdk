@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \VRPayment\Sdk\ObjectSerializer;
 
 /**
- * WalleejoinCreatePartnershipRequestDto model
+ * WalleejoinPartnershipResponseDtoListResponse model
  *
  * @category Class
  * @package     VRPayment\Sdk
@@ -35,10 +35,10 @@ use \VRPayment\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.2
+ * @version     5.2.3
  * @implements \ArrayAccess<string, mixed>
  */
-class WalleejoinCreatePartnershipRequestDto implements ModelInterface, ArrayAccess, \JsonSerializable
+class WalleejoinPartnershipResponseDtoListResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class WalleejoinCreatePartnershipRequestDto implements ModelInterface, ArrayAcce
       *
       * @var string
       */
-    protected static $openAPIModelName = 'WalleejoinCreatePartnershipRequestDto';
+    protected static $openAPIModelName = 'Walleejoin_Partnership_Response_Dto_List_Response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,10 +55,9 @@ class WalleejoinCreatePartnershipRequestDto implements ModelInterface, ArrayAcce
       * @var string[]
       */
     protected static $openAPITypes = [
-        'partner_account_id' => 'int',
-        'pricing_profile_sell_rate_id' => 'int',
-        'subscription_product_id' => 'int',
-        'merchant_email_address' => 'string'
+        'data' => '\VRPayment\Sdk\Model\WalleejoinPartnershipResponseDto[]',
+        'has_more' => 'bool',
+        'limit' => 'int'
     ];
 
     /**
@@ -69,10 +68,9 @@ class WalleejoinCreatePartnershipRequestDto implements ModelInterface, ArrayAcce
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'partner_account_id' => 'int64',
-        'pricing_profile_sell_rate_id' => 'int64',
-        'subscription_product_id' => 'int64',
-        'merchant_email_address' => null
+        'data' => null,
+        'has_more' => null,
+        'limit' => 'int32'
     ];
 
     /**
@@ -81,10 +79,9 @@ class WalleejoinCreatePartnershipRequestDto implements ModelInterface, ArrayAcce
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'partner_account_id' => false,
-        'pricing_profile_sell_rate_id' => false,
-        'subscription_product_id' => false,
-        'merchant_email_address' => false
+        'data' => false,
+        'has_more' => false,
+        'limit' => false
     ];
 
     /**
@@ -173,10 +170,9 @@ class WalleejoinCreatePartnershipRequestDto implements ModelInterface, ArrayAcce
      * @var string[]
      */
     protected static $attributeMap = [
-        'partner_account_id' => 'partnerAccountId',
-        'pricing_profile_sell_rate_id' => 'pricingProfileSellRateId',
-        'subscription_product_id' => 'subscriptionProductId',
-        'merchant_email_address' => 'merchantEmailAddress'
+        'data' => 'data',
+        'has_more' => 'hasMore',
+        'limit' => 'limit'
     ];
 
     /**
@@ -185,10 +181,9 @@ class WalleejoinCreatePartnershipRequestDto implements ModelInterface, ArrayAcce
      * @var string[]
      */
     protected static $setters = [
-        'partner_account_id' => 'setPartnerAccountId',
-        'pricing_profile_sell_rate_id' => 'setPricingProfileSellRateId',
-        'subscription_product_id' => 'setSubscriptionProductId',
-        'merchant_email_address' => 'setMerchantEmailAddress'
+        'data' => 'setData',
+        'has_more' => 'setHasMore',
+        'limit' => 'setLimit'
     ];
 
     /**
@@ -197,10 +192,9 @@ class WalleejoinCreatePartnershipRequestDto implements ModelInterface, ArrayAcce
      * @var string[]
      */
     protected static $getters = [
-        'partner_account_id' => 'getPartnerAccountId',
-        'pricing_profile_sell_rate_id' => 'getPricingProfileSellRateId',
-        'subscription_product_id' => 'getSubscriptionProductId',
-        'merchant_email_address' => 'getMerchantEmailAddress'
+        'data' => 'getData',
+        'has_more' => 'getHasMore',
+        'limit' => 'getLimit'
     ];
 
     /**
@@ -260,10 +254,9 @@ class WalleejoinCreatePartnershipRequestDto implements ModelInterface, ArrayAcce
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('partner_account_id', $data ?? [], null);
-        $this->setIfExists('pricing_profile_sell_rate_id', $data ?? [], null);
-        $this->setIfExists('subscription_product_id', $data ?? [], null);
-        $this->setIfExists('merchant_email_address', $data ?? [], null);
+        $this->setIfExists('data', $data ?? [], null);
+        $this->setIfExists('has_more', $data ?? [], null);
+        $this->setIfExists('limit', $data ?? [], null);
     }
 
     /**
@@ -309,109 +302,82 @@ class WalleejoinCreatePartnershipRequestDto implements ModelInterface, ArrayAcce
 
 
     /**
-     * Gets partner_account_id
+     * Gets data
      *
-     * @return int|null
+     * @return \VRPayment\Sdk\Model\WalleejoinPartnershipResponseDto[]|null
      */
-    public function getPartnerAccountId()
+    public function getData()
     {
-        return $this->container['partner_account_id'];
+        return $this->container['data'];
     }
 
     /**
-     * Sets partner_account_id
+     * Sets data
      *
-     * @param int|null $partner_account_id partner_account_id
+     * @param \VRPayment\Sdk\Model\WalleejoinPartnershipResponseDto[]|null $data An array containing the actual response objects.
      *
      * @return self
      */
-    public function setPartnerAccountId($partner_account_id)
+    public function setData($data)
     {
-        if (is_null($partner_account_id)) {
-            throw new \InvalidArgumentException('non-nullable partner_account_id cannot be null');
+        if (is_null($data)) {
+            throw new \InvalidArgumentException('non-nullable data cannot be null');
         }
-        $this->container['partner_account_id'] = $partner_account_id;
+        $this->container['data'] = $data;
 
         return $this;
     }
 
     /**
-     * Gets pricing_profile_sell_rate_id
+     * Gets has_more
      *
-     * @return int|null
+     * @return bool|null
      */
-    public function getPricingProfileSellRateId()
+    public function getHasMore()
     {
-        return $this->container['pricing_profile_sell_rate_id'];
+        return $this->container['has_more'];
     }
 
     /**
-     * Sets pricing_profile_sell_rate_id
+     * Sets has_more
      *
-     * @param int|null $pricing_profile_sell_rate_id pricing_profile_sell_rate_id
+     * @param bool|null $has_more Whether there are more objects available after this set. If false, there are no more objects to retrieve.
      *
      * @return self
      */
-    public function setPricingProfileSellRateId($pricing_profile_sell_rate_id)
+    public function setHasMore($has_more)
     {
-        if (is_null($pricing_profile_sell_rate_id)) {
-            throw new \InvalidArgumentException('non-nullable pricing_profile_sell_rate_id cannot be null');
+        if (is_null($has_more)) {
+            throw new \InvalidArgumentException('non-nullable has_more cannot be null');
         }
-        $this->container['pricing_profile_sell_rate_id'] = $pricing_profile_sell_rate_id;
+        $this->container['has_more'] = $has_more;
 
         return $this;
     }
 
     /**
-     * Gets subscription_product_id
+     * Gets limit
      *
      * @return int|null
      */
-    public function getSubscriptionProductId()
+    public function getLimit()
     {
-        return $this->container['subscription_product_id'];
+        return $this->container['limit'];
     }
 
     /**
-     * Sets subscription_product_id
+     * Sets limit
      *
-     * @param int|null $subscription_product_id subscription_product_id
+     * @param int|null $limit The applied limit on the number of objects returned.
      *
      * @return self
      */
-    public function setSubscriptionProductId($subscription_product_id)
+    public function setLimit($limit)
     {
-        if (is_null($subscription_product_id)) {
-            throw new \InvalidArgumentException('non-nullable subscription_product_id cannot be null');
+        if (is_null($limit)) {
+            throw new \InvalidArgumentException('non-nullable limit cannot be null');
         }
-        $this->container['subscription_product_id'] = $subscription_product_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets merchant_email_address
-     *
-     * @return string|null
-     */
-    public function getMerchantEmailAddress()
-    {
-        return $this->container['merchant_email_address'];
-    }
-
-    /**
-     * Sets merchant_email_address
-     *
-     * @param string|null $merchant_email_address merchant_email_address
-     *
-     * @return self
-     */
-    public function setMerchantEmailAddress($merchant_email_address)
-    {
-        if (is_null($merchant_email_address)) {
-            throw new \InvalidArgumentException('non-nullable merchant_email_address cannot be null');
-        }
-        $this->container['merchant_email_address'] = $merchant_email_address;
+        $this->container['limit'] = $limit;
 
         return $this;
     }
